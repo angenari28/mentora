@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentora - Plataforma Corporativa de Cursos</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FFFFFF;
+      color: #1E293B;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    /* HEADER */
+    .header {
+      background: #1C2340;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 1.25rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1C2340;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      color: #1C2340;
+    }
+
+    .btn-header {
+      background: #FFF;
+      color: #1C2340;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-header:hover {
+      background: #2D3A5F;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(28, 35, 64, 0.2);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, #1C2340 0%, #2D3A5F 100%);
+      padding: 8rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.1;
+      letter-spacing: -2px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      color: #CBD5E1;
+      margin: 0 0 3rem 0;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #3B82F6;
+      color: #FFFFFF;
+      padding: 1.25rem 3rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .hero-cta:hover {
+      background: #60A5FA;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+    }
+
+    /* STATS SECTION */
+    .stats {
+      background: #FFFFFF;
+      padding: 4rem 3rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .stats-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #1C2340;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: #64748B;
+      margin: 0.75rem 0 0 0;
+      font-weight: 600;
+    }
+
+    /* BENEFITS SECTION */
+    .benefits {
+      background: #F8FAFC;
+      padding: 8rem 3rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 5rem auto;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #1C2340;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -1px;
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: #64748B;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .benefits-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .benefit-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 3rem;
+      border: 1px solid #E2E8F0;
+      transition: all 0.3s;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(28, 35, 64, 0.1);
+      border-color: #3B82F6;
+    }
+
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .benefit-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 1rem 0;
+    }
+
+    .benefit-description {
+      font-size: 1rem;
+      color: #64748B;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* HOW IT WORKS SECTION */
+    .how-it-works {
+      background: #FFFFFF;
+      padding: 8rem 3rem;
+    }
+
+    .steps-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      position: relative;
+    }
+
+    .step-card {
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .step-card:hover {
+      border-color: #3B82F6;
+      transform: translateY(-5px);
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: #1C2340;
+      color: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      font-weight: 900;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .step-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 1rem 0;
+    }
+
+    .step-description {
+      font-size: 1rem;
+      color: #64748B;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* COURSES CATALOG SECTION */
+    .catalog {
+      background: #F8FAFC;
+      padding: 8rem 3rem;
+    }
+
+    .courses-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .course-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      transition: all 0.3s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(28, 35, 64, 0.12);
+    }
+
+    .course-image {
+      height: 200px;
+      background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .course-content {
+      padding: 2rem;
+    }
+
+    .course-category {
+      display: inline-block;
+      background: #DBEAFE;
+      color: #3B82F6;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .course-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.75rem 0;
+    }
+
+    .course-description {
+      font-size: 0.95rem;
+      color: #64748B;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid #E2E8F0;
+    }
+
+    .course-duration {
+      font-size: 0.85rem;
+      color: #64748B;
+      font-weight: 600;
+    }
+
+    .course-level {
+      background: #F1F5F9;
+      color: #334155;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* TESTIMONIALS SECTION */
+    .testimonials {
+      background: #FFFFFF;
+      padding: 8rem 3rem;
+    }
+
+    .testimonials-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .testimonial-card {
+      background: #F8FAFC;
+      border-radius: 16px;
+      padding: 3rem;
+      border: 1px solid #E2E8F0;
+    }
+
+    .testimonial-quote {
+      font-size: 1.1rem;
+      color: #334155;
+      line-height: 1.8;
+      margin: 0 0 2rem 0;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #1C2340 0%, #3B82F6 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .author-info {
+      flex: 1;
+    }
+
+    .author-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .author-role {
+      font-size: 0.9rem;
+      color: #64748B;
+      margin: 0;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: linear-gradient(135deg, #1C2340 0%, #2D3A5F 100%);
+      padding: 8rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.2;
+    }
+
+    .cta-description {
+      font-size: 1.3rem;
+      color: #CBD5E1;
+      margin: 0 0 3rem 0;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #FFFFFF;
+      color: #1C2340;
+      padding: 1.25rem 3rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(255, 255, 255, 0.3);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0F172A;
+      color: #94A3B8;
+      padding: 5rem 3rem 3rem 3rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      max-width: 350px;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 0 0 1rem 0;
+    }
+
+    .footer-description {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0 0 2rem 0;
+      color: #94A3B8;
+    }
+
+    .footer-section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 1.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-link {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 3rem;
+      border-top: 1px solid #1E293B;
+      text-align: center;
+      color: #64748B;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .header-container {
+        padding: 0 2rem;
+      }
+
+      .nav {
+        gap: 2rem;
+      }
+
+      .hero {
+        padding: 6rem 2rem;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 1.5rem;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .benefits-grid,
+      .steps-container,
+      .courses-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- HEADER -->
+  <header class="header">
+   <div class="header-container">
+    <img src="mentora-logo.png" alt="Mentora Logo" width="200" height="200"/>
+    <nav class="nav"><a class="nav-link" onclick="scrollToSection('benefits')">Benefícios</a> <a class="nav-link" onclick="scrollToSection('how-it-works')">Como Funciona</a> <a class="nav-link" onclick="scrollToSection('catalog')">Catálogo</a> <a class="nav-link" onclick="scrollToSection('testimonials')">Depoimentos</a> <button class="btn-header" onclick="scrollToSection('cta')">Criar Conta</button>
+    </nav>
+   </div>
+  </header><!-- HERO SECTION -->
+  <section class="hero">
+   <div class="hero-content">
+    <h1 class="hero-title" id="hero-title">Crie e distribua cursos corporativos com autonomia total</h1>
+    <p class="hero-subtitle" id="hero-subtitle">A plataforma completa para empresas que desejam treinar equipes e parceiros com seus próprios cursos profissionais</p><button class="hero-cta" id="hero-cta" onclick="scrollToSection('cta')">Começar Agora →</button>
+   </div>
+  </section><!-- STATS SECTION -->
+  <section class="stats">
+   <div class="stats-container">
+    <div class="stat-item">
+     <div class="stat-number">
+      500+
+     </div>
+     <div class="stat-label">
+      Empresas Ativas
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      10k+
+     </div>
+     <div class="stat-label">
+      Cursos Criados
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      250k+
+     </div>
+     <div class="stat-label">
+      Alunos Treinados
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      98%
+     </div>
+     <div class="stat-label">
+      Satisfação
+     </div>
+    </div>
+   </div>
+  </section><!-- BENEFITS SECTION -->
+  <section class="benefits" id="benefits">
+   <div class="section-header">
+    <h2 class="section-title" id="benefits-title">Por que escolher a Mentora</h2>
+    <p class="section-description">Tudo o que sua empresa precisa para criar, gerenciar e distribuir treinamentos profissionais</p>
+   </div>
+   <div class="benefits-grid">
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      🎯
+     </div>
+     <h3 class="benefit-title">Autonomia Total</h3>
+     <p class="benefit-description">Crie cursos com sua identidade visual, metodologia própria e controle absoluto sobre conteúdo, preços e distribuição.</p>
+    </div>
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      ⚡
+     </div>
+     <h3 class="benefit-title">Rápido e Intuitivo</h3>
+     <p class="benefit-description">Monte cursos profissionais em minutos com nosso editor visual. Não precisa de conhecimentos técnicos avançados.</p>
+    </div>
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      📊
+     </div>
+     <h3 class="benefit-title">Analytics Completo</h3>
+     <p class="benefit-description">Acompanhe progresso dos alunos, taxas de conclusão, engajamento e métricas detalhadas em tempo real.</p>
+    </div>
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      🔒
+     </div>
+     <h3 class="benefit-title">Segurança Enterprise</h3>
+     <p class="benefit-description">Infraestrutura robusta com certificações de segurança, backups automáticos e proteção de dados LGPD.</p>
+    </div>
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      🌐
+     </div>
+     <h3 class="benefit-title">Multi-tenant</h3>
+     <p class="benefit-description">Gerencie múltiplas unidades, filiais ou clientes em uma única plataforma com ambientes isolados.</p>
+    </div>
+    <div class="benefit-card">
+     <div class="benefit-icon">
+      🎓
+     </div>
+     <h3 class="benefit-title">Certificação Própria</h3>
+     <p class="benefit-description">Emita certificados personalizados com a marca da sua empresa e crie trilhas de aprendizado completas.</p>
+    </div>
+   </div>
+  </section><!-- HOW IT WORKS SECTION -->
+  <section class="how-it-works" id="how-it-works">
+   <div class="section-header">
+    <h2 class="section-title" id="how-title">Como funciona</h2>
+    <p class="section-description">Em três passos simples, sua empresa está pronta para treinar equipes e parceiros</p>
+   </div>
+   <div class="steps-container">
+    <div class="step-card">
+     <div class="step-number">
+      1
+     </div>
+     <h3 class="step-title">Crie seu Curso</h3>
+     <p class="step-description">Use nosso editor visual para montar módulos, adicionar vídeos, PDFs, quizzes e materiais. Organize a estrutura do jeito que fizer sentido para seu negócio.</p>
+    </div>
+    <div class="step-card">
+     <div class="step-number">
+      2
+     </div>
+     <h3 class="step-title">Configure e Publique</h3>
+     <p class="step-description">Defina acessos, prazos, certificação e regras de conclusão. Personalize com sua marca e publique para as audiências certas.</p>
+    </div>
+    <div class="step-card">
+     <div class="step-number">
+      3
+     </div>
+     <h3 class="step-title">Gerencie e Analise</h3>
+     <p class="step-description">Acompanhe métricas, engajamento e performance dos alunos. Melhore continuamente seus treinamentos com dados reais.</p>
+    </div>
+   </div>
+  </section><!-- CATALOG SECTION -->
+  <section class="catalog" id="catalog">
+   <div class="section-header">
+    <h2 class="section-title">Exemplos de Cursos Corporativos</h2>
+    <p class="section-description">Veja o tipo de curso que sua empresa pode criar na Mentora</p>
+   </div>
+   <div class="courses-grid">
+    <div class="course-card">
+     <div class="course-image">
+      📘
+     </div>
+     <div class="course-content"><span class="course-category">Compliance</span>
+      <h3 class="course-title">LGPD para Empresas</h3>
+      <p class="course-description">Treinamento completo sobre proteção de dados, direitos dos titulares e adequação à Lei Geral de Proteção de Dados.</p>
+      <div class="course-meta"><span class="course-duration">4h de conteúdo</span> <span class="course-level">Intermediário</span>
+      </div>
+     </div>
+    </div>
+    <div class="course-card">
+     <div class="course-image" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+      💼
+     </div>
+     <div class="course-content"><span class="course-category">Liderança</span>
+      <h3 class="course-title">Gestão de Equipes Remotas</h3>
+      <p class="course-description">Estratégias e ferramentas para liderar times distribuídos, manter produtividade e engajamento à distância.</p>
+      <div class="course-meta"><span class="course-duration">6h de conteúdo</span> <span class="course-level">Avançado</span>
+      </div>
+     </div>
+    </div>
+    <div class="course-card">
+     <div class="course-image" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+      🔧
+     </div>
+     <div class="course-content"><span class="course-category">Técnico</span>
+      <h3 class="course-title">Operação de Sistemas Internos</h3>
+      <p class="course-description">Capacitação técnica para uso de plataformas corporativas, processos e ferramentas específicas da empresa.</p>
+      <div class="course-meta"><span class="course-duration">3h de conteúdo</span> <span class="course-level">Básico</span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- TESTIMONIALS SECTION -->
+  <section class="testimonials" id="testimonials">
+   <div class="section-header">
+    <h2 class="section-title">O que dizem nossos clientes</h2>
+    <p class="section-description">Empresas de diversos setores confiam na Mentora para treinar suas equipes</p>
+   </div>
+   <div class="testimonials-grid">
+    <div class="testimonial-card">
+     <p class="testimonial-quote">"A Mentora transformou nossa forma de treinar colaboradores. Conseguimos criar uma universidade corporativa completa em semanas, algo que levaria meses com outras soluções."</p>
+     <div class="testimonial-author">
+      <div class="author-avatar">
+       R
+      </div>
+      <div class="author-info">
+       <div class="author-name">
+        Ricardo Santos
+       </div>
+       <div class="author-role">
+        Diretor de RH, TechCorp
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="testimonial-card">
+     <p class="testimonial-quote">"Finalmente temos controle total sobre nossos treinamentos. A facilidade de criar cursos e acompanhar o progresso das equipes aumentou nossa eficiência em 60%."</p>
+     <div class="testimonial-author">
+      <div class="author-avatar">
+       M
+      </div>
+      <div class="author-info">
+       <div class="author-name">
+        Marina Costa
+       </div>
+       <div class="author-role">
+        Gerente de T&amp;D, Consult Group
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="testimonial-card">
+     <p class="testimonial-quote">"A plataforma é intuitiva e poderosa. Nossos gestores criam cursos sem depender de TI, e os alunos adoram a experiência. ROI comprovado em 3 meses."</p>
+     <div class="testimonial-author">
+      <div class="author-avatar">
+       F
+      </div>
+      <div class="author-info">
+       <div class="author-name">
+        Fernando Alves
+       </div>
+       <div class="author-role">
+        CEO, Innovate Solutions
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- CTA SECTION -->
+  <section class="cta-section" id="cta">
+   <div class="cta-content">
+    <h2 class="cta-title" id="cta-title">Pronto para transformar o treinamento da sua empresa?</h2>
+    <p class="cta-description">Comece gratuitamente e descubra como a Mentora pode revolucionar a forma como você treina suas equipes</p><button class="cta-button" id="cta-button">Criar Conta Gratuita →</button>
+   </div>
+  </section><!-- FOOTER -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-brand">
+     <div class="footer-logo">
+      Mentora
+     </div>
+     <p class="footer-description">A plataforma corporativa completa para empresas que desejam criar, gerenciar e distribuir seus próprios cursos profissionais com autonomia total.</p>
+    </div>
+    <div class="footer-section">
+     <h4 class="footer-section-title">Produto</h4>
+     <ul class="footer-links">
+      <li><a class="footer-link">Recursos</a></li>
+      <li><a class="footer-link">Preços</a></li>
+      <li><a class="footer-link">Segurança</a></li>
+      <li><a class="footer-link">Integrações</a></li>
+     </ul>
+    </div>
+    <div class="footer-section">
+     <h4 class="footer-section-title">Empresa</h4>
+     <ul class="footer-links">
+      <li><a class="footer-link">Sobre</a></li>
+      <li><a class="footer-link">Blog</a></li>
+      <li><a class="footer-link">Carreiras</a></li>
+      <li><a class="footer-link">Contato</a></li>
+     </ul>
+    </div>
+    <div class="footer-section">
+     <h4 class="footer-section-title">Suporte</h4>
+     <ul class="footer-links">
+      <li><a class="footer-link">Central de Ajuda</a></li>
+      <li><a class="footer-link">Documentação</a></li>
+      <li><a class="footer-link">API</a></li>
+      <li><a class="footer-link">Status</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 Mentora. Todos os direitos reservados. Plataforma corporativa de educação digital.</p>
+   </div>
+  </footer>
+  <script>
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    const defaultConfig = {
+      hero_title: "Crie e distribua cursos corporativos com autonomia total",
+      hero_subtitle: "A plataforma completa para empresas que desejam treinar equipes e parceiros com seus próprios cursos profissionais",
+      hero_cta: "Começar Agora →",
+      benefits_title: "Por que escolher a Mentora",
+      how_title: "Como funciona",
+      cta_title: "Pronto para transformar o treinamento da sua empresa?",
+      cta_button: "Criar Conta Gratuita →",
+      primary_color: "#1C2340",
+      secondary_color: "#3B82F6",
+      background_color: "#FFFFFF",
+      text_color: "#1E293B",
+      accent_color: "#60A5FA",
+      font_family: "",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = '"Montserrat", -apple-system, BlinkMacSystemFont, sans-serif';
+      const fontFamily = customFont ? `${customFont}, ${baseFontStack}` : baseFontStack;
+
+      document.body.style.fontFamily = fontFamily;
+
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+
+      document.body.style.color = textColor;
+
+      document.querySelectorAll('.logo, .section-title, .benefit-title, .step-title, .course-title, .cta-title').forEach(el => {
+        el.style.color = primaryColor;
+      });
+
+      document.querySelectorAll('.btn-header').forEach(el => {
+        el.style.background = primaryColor;
+      });
+
+      document.querySelectorAll('.hero-cta').forEach(el => {
+        el.style.background = secondaryColor;
+      });
+
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('hero-cta').textContent = config.hero_cta || defaultConfig.hero_cta;
+      document.getElementById('benefits-title').textContent = config.benefits_title || defaultConfig.benefits_title;
+      document.getElementById('how-title').textContent = config.how_title || defaultConfig.how_title;
+      document.getElementById('cta-title').textContent = config.cta_title || defaultConfig.cta_title;
+      document.getElementById('cta-button').textContent = config.cta_button || defaultConfig.cta_button;
+
+      document.querySelector('.hero-title').style.fontSize = `${baseSize * 4}px`;
+      document.querySelector('.hero-subtitle').style.fontSize = `${baseSize * 1.4}px`;
+      document.querySelectorAll('.section-title').forEach(el => {
+        el.style.fontSize = `${baseSize * 3}px`;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+        ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
+        ["benefits_title", config.benefits_title || defaultConfig.benefits_title],
+        ["how_title", config.how_title || defaultConfig.how_title],
+        ["cta_title", config.cta_title || defaultConfig.cta_title],
+        ["cta_button", config.cta_button || defaultConfig.cta_button]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a21d1dda3c20228',t:'MTc2Mzc0NTIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

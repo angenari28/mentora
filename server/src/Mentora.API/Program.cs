@@ -1,0 +1,64 @@
+using Mentora.Application.Interfaces;
+using Mentora.Application.Services;
+using Mentora.Domain.Interfaces;
+using Mentora.Infrastructure.Data;
+using Mentora.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+// Database Configuration
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'DefaultConnection' não configurada.");
+}
+builder.Services.AddDbContext<MentoraDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
+// CORS configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+// Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Application Services
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseCors("AllowFrontend");
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<MentoraDbContext>();
+    dbContext.Database.Migrate();
+}
+
+app.Run();

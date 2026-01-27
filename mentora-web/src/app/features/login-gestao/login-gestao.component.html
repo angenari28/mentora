@@ -1,0 +1,82 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <img
+        src="assets/mentora-logo-transparent.png"
+        alt="Mentora Logo"
+        class="login-logo"
+      />
+      <p class="login-subtitle">Sistema de Gestão</p>
+    </div>
+    <div class="login-form-container">
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label class="form-label" for="emailInput">Email</label>
+          <input
+            type="email"
+            class="form-input"
+            id="emailInput"
+            name="email"
+            placeholder="seu@email.com"
+            required
+            [(ngModel)]="email"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="passwordInput">Senha</label>
+          <input
+            type="password"
+            class="form-input"
+            id="passwordInput"
+            name="password"
+            placeholder="Digite sua senha"
+            required
+            [(ngModel)]="password"
+          />
+        </div>
+        <div class="login-controls">
+          <label class="checkbox-wrapper">
+            <input
+              type="checkbox"
+              class="checkbox-input"
+              name="rememberMe"
+              [(ngModel)]="rememberMe"
+            />
+            <span class="checkbox" [class.checked]="rememberMe"></span>
+            <span class="checkbox-text">Lembrar-me</span>
+          </label>
+          <a href="#" (click)="$event.preventDefault()" class="forgot-password"
+            >Esqueceu a senha?</a
+          >
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loading || loginForm.invalid"
+          style="width: 100%; padding: 1.125rem"
+        >
+          {{ loading ? 'Entrando...' : 'Entrar' }}
+        </button>
+        <p class="login-message error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
+        <p class="login-message success" *ngIf="successMessage">
+          {{ successMessage }}
+        </p>
+      </form>
+      <div class="social-login">
+        <p class="social-login-text">Ou entre com</p>
+        <div class="social-buttons">
+          <button class="btn btn-ghost" type="button">🔵 Google</button>
+          <button class="btn btn-ghost" type="button">🔷 Microsoft</button>
+        </div>
+      </div>
+      <p class="signup-section">
+        Não tem uma conta?
+        <a href="#" (click)="$event.preventDefault()" class="signup-link"
+          >Cadastre-se</a
+        >
+      </p>
+    </div>
+  </div>
+</div>

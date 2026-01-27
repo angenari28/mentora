@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentora - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="login-site-backoffice.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <!-- LOGIN HEADER -->
+        <div class="login-header">
+          <img
+            src="../images/mentora-logo-transparent.png"
+            alt="Mentora Logo"
+            style="width: 179px; height: 50px; margin-bottom: 1rem"
+          />
+          <p class="login-subtitle">Sistema de Gestão</p>
+        </div>
+        <!-- LOGIN FORM -->
+        <div class="login-form-container">
+          <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-input"
+                id="emailInput"
+                placeholder="seu@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Senha</label>
+              <input
+                type="password"
+                class="form-input"
+                placeholder="Digite sua senha"
+                required
+              />
+            </div>
+            <div class="login-controls">
+              <div
+                class="checkbox-wrapper"
+                onclick="
+                  this.querySelector('.checkbox').classList.toggle('checked')
+                "
+              >
+                <div class="checkbox"></div>
+                <span style="font-size: 0.9rem; color: #64748b"
+                  >Lembrar-me</span
+                >
+              </div>
+              <a
+                href="#"
+                onclick="event.preventDefault()"
+                class="forgot-password"
+                >Esqueceu a senha?</a
+              >
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="width: 100%; padding: 1.125rem"
+            >
+              Entrar
+            </button>
+          </form>
+          <div class="social-login">
+            <p class="social-login-text">Ou entre com</p>
+            <div class="social-buttons">
+              <button class="btn btn-ghost">🔵 Google</button>
+              <button class="btn btn-ghost">🔷 Microsoft</button>
+            </div>
+          </div>
+          <p class="signup-section">
+            Não tem uma conta?
+            <a href="#" onclick="event.preventDefault()" class="signup-link"
+              >Cadastre-se</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      function handleLogin(event) {
+        event.preventDefault();
+
+        // Pega o valor do email
+        const email = document
+          .getElementById('emailInput')
+          .value.trim()
+          .toLowerCase();
+
+        // Se o email for master@email.com, redireciona para backoffice
+        // Caso contrário, redireciona para painel de controle
+        if (email === 'master@email.com') {
+          window.location.href =
+            '../backoffice/backoffice.html?authenticated=true';
+        } else {
+          window.location.href =
+            '../painel-de-controle/painel-de-controle.html?authenticated=true';
+        }
+      }
+    </script>
+  </body>
+</html>

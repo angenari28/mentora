@@ -1,0 +1,2579 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentora Design System</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      line-height: 1.6;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .layout {
+      display: flex;
+      min-height: 100%;
+    }
+
+    /* SIDEBAR FIXA */
+    .sidebar {
+      width: 300px;
+      background: #FFFFFF;
+      border-right: 1px solid #E2E8F0;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+      z-index: 100;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.02);
+    }
+
+    .sidebar-header {
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid #E2E8F0;
+      background: linear-gradient(135deg, #1C2340 0%, #2D3A5F 100%);
+    }
+
+    .sidebar-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar-tagline {
+      font-size: 0.875rem;
+      color: #CBD5E1;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .sidebar-nav {
+      padding: 1.5rem 0;
+    }
+
+    .nav-section {
+      margin-bottom: 2rem;
+    }
+
+    .nav-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 0.5rem 2rem;
+      margin: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 2rem;
+      color: #475569;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: #F8FAFC;
+      color: #1C2340;
+    }
+
+    .nav-item.active {
+      background: #EFF6FF;
+      color: #1C2340;
+      border-left-color: #1C2340;
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      margin-left: 300px;
+      flex: 1;
+      min-height: 100%;
+      background: #F8FAFC;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, #1C2340 0%, #2D3A5F 50%, #3F4D7A 100%);
+      padding: 5rem 3rem;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4rem;
+      font-weight: 900;
+      margin: 0 0 1rem 0;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: #CBD5E1;
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* CONTENT WRAPPER */
+    .content-wrapper {
+      padding: 4rem 3rem;
+      max-width: 1400px;
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 6rem;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #F1F5F9;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1C2340;
+      margin: 0 0 0.75rem 0;
+      letter-spacing: -1px;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: #64748B;
+      margin: 0;
+      max-width: 800px;
+      line-height: 1.7;
+    }
+
+    .subsection-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 3rem 0 1.5rem;
+    }
+
+    /* COLOR PALETTE */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .color-swatch {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .color-swatch:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(28, 35, 64, 0.12);
+    }
+
+    .color-preview {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .color-info {
+      padding: 1.25rem;
+    }
+
+    .color-name {
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .color-value {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #64748B;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .color-usage {
+      font-size: 0.8rem;
+      color: #94A3B8;
+      margin: 0;
+    }
+
+    /* TONAL SCALE */
+    .tonal-scale {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .tonal-item {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      transition: transform 0.2s;
+    }
+
+    .tonal-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .tonal-color {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .tonal-label {
+      padding: 1rem 0.75rem;
+      text-align: center;
+      background: #FFFFFF;
+    }
+
+    .tonal-weight {
+      font-weight: 700;
+      color: #1C2340;
+      font-size: 0.9rem;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .tonal-hex {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #64748B;
+      margin: 0;
+    }
+
+    /* TYPOGRAPHY */
+    .typography-sample {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .typography-sample:hover {
+      border-color: #CBD5E1;
+    }
+
+    .typography-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .typography-specs {
+      display: inline-flex;
+      gap: 1.5rem;
+      margin-left: auto;
+      font-size: 0.75rem;
+    }
+
+    .type-spec {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .type-h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #1C2340;
+      margin: 0;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    .type-h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: #1C2340;
+      margin: 0;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+    }
+
+    .type-h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .type-h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0;
+    }
+
+    .type-body {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: #475569;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .type-small {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #64748B;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .type-caption {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #94A3B8;
+      margin: 0;
+    }
+
+    /* BUTTONS */
+    .button-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .button-group-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: #1C2340;
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: #2D3A5F;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(28, 35, 64, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: #3B82F6;
+      color: #FFFFFF;
+    }
+
+    .btn-secondary:hover {
+      background: #2563EB;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #1C2340;
+      color: #1C2340;
+    }
+
+    .btn-outline:hover {
+      background: #1C2340;
+      color: #FFFFFF;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #1C2340;
+    }
+
+    .btn-ghost:hover {
+      background: #F1F5F9;
+    }
+
+    .btn-success {
+      background: #10B981;
+      color: #FFFFFF;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-danger {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
+
+    .btn-danger:hover {
+      background: #DC2626;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-warning {
+      background: #F59E0B;
+      color: #FFFFFF;
+    }
+
+    .btn-warning:hover {
+      background: #D97706;
+    }
+
+    .btn-disabled {
+      background: #E2E8F0;
+      color: #94A3B8;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-sm {
+      padding: 0.625rem 1.25rem;
+      font-size: 0.875rem;
+    }
+
+    .btn-lg {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    /* FORM COMPONENTS */
+    .form-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .form-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-label-required {
+      color: #EF4444;
+    }
+
+    .form-input {
+      padding: 1rem 1.25rem;
+      border: 2px solid #E2E8F0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: #FFFFFF;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #1C2340;
+      box-shadow: 0 0 0 4px rgba(28, 35, 64, 0.1);
+    }
+
+    .form-input:disabled {
+      background: #F8FAFC;
+      color: #94A3B8;
+      cursor: not-allowed;
+    }
+
+    .form-input::placeholder {
+      color: #CBD5E1;
+    }
+
+    .form-select {
+      padding: 1rem 1.25rem;
+      border: 2px solid #E2E8F0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: #1C2340;
+      box-shadow: 0 0 0 4px rgba(28, 35, 64, 0.1);
+    }
+
+    .form-textarea {
+      padding: 1rem 1.25rem;
+      border: 2px solid #E2E8F0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 140px;
+      transition: all 0.2s;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: #1C2340;
+      box-shadow: 0 0 0 4px rgba(28, 35, 64, 0.1);
+    }
+
+    .form-hint {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin: 0;
+    }
+
+    .form-error {
+      font-size: 0.85rem;
+      color: #EF4444;
+      margin: 0;
+    }
+
+    /* CARDS */
+    .cards-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(28, 35, 64, 0.12);
+      border-color: #CBD5E1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1C2340 0%, #3B82F6 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0;
+    }
+
+    .card-content {
+      font-size: 1rem;
+      color: #64748B;
+      line-height: 1.7;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .card-footer {
+      display: flex;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    /* BADGES & CHIPS */
+    .badge-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.25rem;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-primary {
+      background: #1C2340;
+      color: #FFFFFF;
+    }
+
+    .badge-secondary {
+      background: #EFF6FF;
+      color: #3B82F6;
+      border: 1px solid #DBEAFE;
+    }
+
+    .badge-success {
+      background: #D1FAE5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+
+    .badge-warning {
+      background: #FEF3C7;
+      color: #D97706;
+      border: 1px solid #FDE68A;
+    }
+
+    .badge-danger {
+      background: #FEE2E2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+    }
+
+    .badge-info {
+      background: #DBEAFE;
+      color: #2563EB;
+      border: 1px solid #BFDBFE;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+
+    .chip-close {
+      width: 18px;
+      height: 18px;
+      background: #CBD5E1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: background 0.2s;
+    }
+
+    .chip-close:hover {
+      background: #94A3B8;
+    }
+
+    /* ALERTS */
+    .alerts-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .alert {
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid;
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    .alert-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .alert-content {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.05rem;
+    }
+
+    .alert-message {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .alert-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .alert-success {
+      background: #D1FAE5;
+      border-left-color: #10B981;
+      color: #065F46;
+    }
+
+    .alert-warning {
+      background: #FEF3C7;
+      border-left-color: #F59E0B;
+      color: #92400E;
+    }
+
+    .alert-danger {
+      background: #FEE2E2;
+      border-left-color: #EF4444;
+      color: #991B1B;
+    }
+
+    .alert-info {
+      background: #DBEAFE;
+      border-left-color: #3B82F6;
+      color: #1E40AF;
+    }
+
+    /* TABLE */
+    .table-container {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+
+    .table-header {
+      padding: 1.5rem 2rem;
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th {
+      background: #F8FAFC;
+      padding: 1.25rem 2rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #E2E8F0;
+    }
+
+    .table td {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid #F1F5F9;
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    .table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table tbody tr:hover {
+      background: #F8FAFC;
+    }
+
+    .table-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1C2340 0%, #3B82F6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* TOGGLE SWITCH */
+    .toggle-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: #F8FAFC;
+      border-radius: 12px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .toggle {
+      position: relative;
+      width: 56px;
+      height: 30px;
+      background: #CBD5E1;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .toggle.active {
+      background: #1C2340;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .toggle.active .toggle-slider {
+      transform: translateX(26px);
+    }
+
+    .toggle-label {
+      flex: 1;
+    }
+
+    .toggle-title {
+      font-weight: 600;
+      color: #1C2340;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .toggle-description {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin: 0;
+    }
+
+    /* SPACING TOKENS */
+    .spacing-showcase {
+      display: grid;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .spacing-item {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      background: #FFFFFF;
+      padding: 1.75rem;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+    }
+
+    .spacing-label {
+      font-weight: 700;
+      color: #1C2340;
+      min-width: 120px;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+    }
+
+    .spacing-visual {
+      height: 32px;
+      background: linear-gradient(90deg, #1C2340 0%, #3B82F6 100%);
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .spacing-item:hover .spacing-visual {
+      background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
+    }
+
+    .spacing-value {
+      font-family: 'Courier New', monospace;
+      color: #64748B;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* SHADOW SAMPLES */
+    .shadow-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .shadow-sample {
+      background: #FFFFFF;
+      padding: 2.5rem;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid #E2E8F0;
+    }
+
+    .shadow-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .shadow-name {
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .shadow-description {
+      font-size: 0.9rem;
+      color: #64748B;
+      margin: 0;
+    }
+
+    .shadow-sm {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-md {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .shadow-lg {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .shadow-xl {
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .shadow-2xl {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #FFFFFF;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 2rem 2rem 1rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .modal-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-footer {
+      padding: 1rem 2rem 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+
+    /* DROPDOWN */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-trigger {
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.5rem;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      min-width: 200px;
+      z-index: 100;
+      padding: 0.5rem 0;
+    }
+
+    .dropdown-menu.active {
+      display: block;
+      animation: dropdownFadeIn 0.2s ease-out;
+    }
+
+    @keyframes dropdownFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-item {
+      padding: 0.875rem 1.25rem;
+      color: #475569;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+      background: #F8FAFC;
+      color: #1C2340;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #E2E8F0;
+      margin: 0.5rem 0;
+    }
+
+    /* TOOLTIP */
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 0.5rem;
+      padding: 0.625rem 1rem;
+      background: #1E293B;
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 1000;
+    }
+
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #1E293B;
+    }
+
+    .tooltip-container:hover .tooltip {
+      opacity: 1;
+    }
+
+    /* PROGRESS BAR */
+    .progress-container {
+      background: #E2E8F0;
+      border-radius: 50px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #1C2340 0%, #3B82F6 100%);
+      border-radius: 50px;
+      transition: width 0.3s;
+    }
+
+    /* BREADCRUMBS */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb-item {
+      color: #64748B;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb-item:hover {
+      color: #1C2340;
+    }
+
+    .breadcrumb-item.active {
+      color: #1C2340;
+      font-weight: 600;
+    }
+
+    .breadcrumb-separator {
+      color: #CBD5E1;
+    }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .pagination-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      color: #475569;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pagination-item:hover {
+      border-color: #1C2340;
+      color: #1C2340;
+    }
+
+    .pagination-item.active {
+      background: #1C2340;
+      color: #FFFFFF;
+      border-color: #1C2340;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content-wrapper {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+      }
+
+      .section {
+        padding: 2rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .color-grid,
+      .button-showcase,
+      .form-showcase,
+      .cards-showcase,
+      .shadow-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="layout"><!-- SIDEBAR -->
+   <aside class="sidebar">
+    <div class="sidebar-header">
+     <h1 class="sidebar-logo" id="system-title">Mentora DS</h1>
+     <p class="sidebar-tagline" id="system-tagline">Sistema de Design v1.0</p>
+    </div>
+    <nav class="sidebar-nav">
+     <div class="nav-section">
+      <h3 class="nav-section-title">Visão Geral</h3><a class="nav-item active" onclick="scrollToSection('hero')"> <span class="nav-icon">🏠</span> Início </a>
+     </div>
+     <div class="nav-section">
+      <h3 class="nav-section-title">Fundamentos</h3><a class="nav-item" onclick="scrollToSection('colors')"> <span class="nav-icon">🎨</span> Cores </a> <a class="nav-item" onclick="scrollToSection('typography')"> <span class="nav-icon">📝</span> Tipografia </a> <a class="nav-item" onclick="scrollToSection('spacing')"> <span class="nav-icon">📏</span> Espaçamento </a> <a class="nav-item" onclick="scrollToSection('shadows')"> <span class="nav-icon">💎</span> Sombras </a>
+     </div>
+     <div class="nav-section">
+      <h3 class="nav-section-title">Componentes</h3><a class="nav-item" onclick="scrollToSection('buttons')"> <span class="nav-icon">🔘</span> Botões </a> <a class="nav-item" onclick="scrollToSection('forms')"> <span class="nav-icon">📋</span> Formulários </a> <a class="nav-item" onclick="scrollToSection('cards')"> <span class="nav-icon">🃏</span> Cards </a> <a class="nav-item" onclick="scrollToSection('badges')"> <span class="nav-icon">🏷️</span> Badges &amp; Chips </a> <a class="nav-item" onclick="scrollToSection('alerts')"> <span class="nav-icon">⚠️</span> Alertas </a> <a class="nav-item" onclick="scrollToSection('tables')"> <span class="nav-icon">📊</span> Tabelas </a> <a class="nav-item" onclick="scrollToSection('toggles')"> <span class="nav-icon">🎚️</span> Toggles </a> <a class="nav-item" onclick="scrollToSection('modals')"> <span class="nav-icon">🪟</span> Modais </a> <a class="nav-item" onclick="scrollToSection('dropdowns')"> <span class="nav-icon">▼</span> Dropdowns </a> <a class="nav-item" onclick="scrollToSection('navigation')"> <span class="nav-icon">🧭</span> Navegação </a>
+     </div>
+     <div class="nav-section">
+      <h3 class="nav-section-title">Harmonias</h3><a class="nav-item" onclick="scrollToSection('monochromatic')"> <span class="nav-icon">⚫</span> Monocromática </a> <a class="nav-item" onclick="scrollToSection('analogous')"> <span class="nav-icon">🔵</span> Análoga </a> <a class="nav-item" onclick="scrollToSection('complementary')"> <span class="nav-icon">🟡</span> Complementar </a> <a class="nav-item" onclick="scrollToSection('triadic')"> <span class="nav-icon">🔺</span> Tríade </a>
+     </div>
+    </nav>
+   </aside><!-- MAIN CONTENT -->
+   <main class="main-content"><!-- HERO SECTION -->
+    <section class="hero" id="hero">
+     <div class="hero-content">
+      <h1 class="hero-title" id="hero-title">Design System Completo</h1>
+      <p class="hero-subtitle" id="hero-subtitle">Baseado na cor primária #1C2340 · Profissional · Moderno · Tecnológico</p>
+      <div class="hero-badges"><span class="hero-badge">✓ 100+ Componentes</span> <span class="hero-badge">✓ Tokens Completos</span> <span class="hero-badge">✓ 4 Harmonias</span> <span class="hero-badge">✓ Responsivo</span>
+      </div>
+     </div>
+    </section>
+    <div class="content-wrapper"><!-- COLORS SECTION -->
+     <section class="section" id="colors">
+      <div class="section-header">
+       <h2 class="section-title">Paleta de Cores</h2>
+       <p class="section-description">Sistema cromático completo incluindo cores primárias, secundárias, terciárias, neutras e de feedback para construção de interfaces consistentes e acessíveis.</p>
+      </div>
+      <h3 class="subsection-title">Cores Primárias</h3>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C2340;"><span>Navy Premium</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Premium</p>
+         <p class="color-value">#1C2340</p>
+         <p class="color-usage">Cor primária principal</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #2D3A5F;"><span>Navy Medium</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Medium</p>
+         <p class="color-value">#2D3A5F</p>
+         <p class="color-usage">Estados hover e active</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #3F4D7A;"><span>Navy Light</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Light</p>
+         <p class="color-value">#3F4D7A</p>
+         <p class="color-usage">Variante mais clara</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title">Cores Secundárias</h3>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #3B82F6;"><span>Blue Tech</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Blue Tech</p>
+         <p class="color-value">#3B82F6</p>
+         <p class="color-usage">Botões secundários</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #8B5CF6;"><span>Purple</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Purple</p>
+         <p class="color-value">#8B5CF6</p>
+         <p class="color-usage">Destaques e acentos</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #06B6D4;"><span>Cyan</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Cyan</p>
+         <p class="color-value">#06B6D4</p>
+         <p class="color-usage">Links e informações</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title">Cores de Feedback</h3>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #10B981;"><span>Success</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Success</p>
+         <p class="color-value">#10B981</p>
+         <p class="color-usage">Mensagens de sucesso</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #F59E0B;"><span>Warning</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Warning</p>
+         <p class="color-value">#F59E0B</p>
+         <p class="color-usage">Avisos e alertas</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #EF4444;"><span>Error</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Error</p>
+         <p class="color-value">#EF4444</p>
+         <p class="color-usage">Erros e validações</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #3B82F6;"><span>Info</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Info</p>
+         <p class="color-value">#3B82F6</p>
+         <p class="color-usage">Informações gerais</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title">Escala Tonal Navy (#1C2340)</h3>
+      <p class="section-description">Variações tonais de 50 a 900 baseadas na cor primária.</p>
+      <div class="tonal-scale">
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #EEF2F6; color: #1C2340;">
+         50
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">50</p>
+         <p class="tonal-hex">#EEF2F6</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #D5DDE8; color: #1C2340;">
+         100
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">100</p>
+         <p class="tonal-hex">#D5DDE8</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #AAB8CE; color: #1C2340;">
+         200
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">200</p>
+         <p class="tonal-hex">#AAB8CE</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #8093B5; color: #FFFFFF;">
+         300
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">300</p>
+         <p class="tonal-hex">#8093B5</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #566E9C; color: #FFFFFF;">
+         400
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">400</p>
+         <p class="tonal-hex">#566E9C</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #1C2340; color: #FFFFFF;">
+         500
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">500</p>
+         <p class="tonal-hex">#1C2340</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #161C33; color: #FFFFFF;">
+         600
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">600</p>
+         <p class="tonal-hex">#161C33</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #111626; color: #FFFFFF;">
+         700
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">700</p>
+         <p class="tonal-hex">#111626</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #0B0F1A; color: #FFFFFF;">
+         800
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">800</p>
+         <p class="tonal-hex">#0B0F1A</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #06090D; color: #FFFFFF;">
+         900
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">900</p>
+         <p class="tonal-hex">#06090D</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title">Neutros</h3>
+      <div class="tonal-scale">
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #FFFFFF; border: 1px solid #E2E8F0; color: #1C2340;">
+         White
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">White</p>
+         <p class="tonal-hex">#FFFFFF</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #F8FAFC; color: #1C2340;">
+         50
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">50</p>
+         <p class="tonal-hex">#F8FAFC</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #F1F5F9; color: #1C2340;">
+         100
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">100</p>
+         <p class="tonal-hex">#F1F5F9</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #E2E8F0; color: #1C2340;">
+         200
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">200</p>
+         <p class="tonal-hex">#E2E8F0</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #CBD5E1; color: #1C2340;">
+         300
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">300</p>
+         <p class="tonal-hex">#CBD5E1</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #94A3B8; color: #FFFFFF;">
+         400
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">400</p>
+         <p class="tonal-hex">#94A3B8</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #64748B; color: #FFFFFF;">
+         500
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">500</p>
+         <p class="tonal-hex">#64748B</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #475569; color: #FFFFFF;">
+         600
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">600</p>
+         <p class="tonal-hex">#475569</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #334155; color: #FFFFFF;">
+         700
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">700</p>
+         <p class="tonal-hex">#334155</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #1E293B; color: #FFFFFF;">
+         800
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">800</p>
+         <p class="tonal-hex">#1E293B</p>
+        </div>
+       </div>
+       <div class="tonal-item">
+        <div class="tonal-color" style="background: #0F172A; color: #FFFFFF;">
+         900
+        </div>
+        <div class="tonal-label">
+         <p class="tonal-weight">900</p>
+         <p class="tonal-hex">#0F172A</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- TYPOGRAPHY SECTION -->
+     <section class="section" id="typography">
+      <div class="section-header">
+       <h2 class="section-title">Tipografia</h2>
+       <p class="section-description">Hierarquia tipográfica completa combinando Montserrat para títulos e Inter para corpo de texto, garantindo legibilidade e impacto visual.</p>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Heading 1 
+        <div class="typography-specs"><span class="type-spec">Montserrat 900</span> <span class="type-spec">56px / 3.5rem</span>
+        </div>
+       </div>
+       <h1 class="type-h1">The quick brown fox jumps over the lazy dog</h1>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Heading 2 
+        <div class="typography-specs"><span class="type-spec">Montserrat 800</span> <span class="type-spec">44px / 2.75rem</span>
+        </div>
+       </div>
+       <h2 class="type-h2">The quick brown fox jumps over the lazy dog</h2>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Heading 3 
+        <div class="typography-specs"><span class="type-spec">Montserrat 700</span> <span class="type-spec">32px / 2rem</span>
+        </div>
+       </div>
+       <h3 class="type-h3">The quick brown fox jumps over the lazy dog</h3>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Heading 4 
+        <div class="typography-specs"><span class="type-spec">Inter 700</span> <span class="type-spec">24px / 1.5rem</span>
+        </div>
+       </div>
+       <h4 class="type-h4">The quick brown fox jumps over the lazy dog</h4>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Body Text 
+        <div class="typography-specs"><span class="type-spec">Inter 400</span> <span class="type-spec">18px / 1.125rem</span>
+        </div>
+       </div>
+       <p class="type-body">The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Small Text 
+        <div class="typography-specs"><span class="type-spec">Inter 500</span> <span class="type-spec">15px / 0.95rem</span>
+        </div>
+       </div>
+       <p class="type-small">The quick brown fox jumps over the lazy dog. Supporting text and descriptions.</p>
+      </div>
+      <div class="typography-sample">
+       <div class="typography-label">
+        Caption 
+        <div class="typography-specs"><span class="type-spec">Inter 500</span> <span class="type-spec">14px / 0.85rem</span>
+        </div>
+       </div>
+       <p class="type-caption">The quick brown fox jumps over the lazy dog. Captions and metadata.</p>
+      </div>
+     </section><!-- BUTTONS SECTION -->
+     <section class="section" id="buttons">
+      <div class="section-header">
+       <h2 class="section-title">Botões</h2>
+       <p class="section-description">Sistema completo de botões com variações de estilo, tamanho e estado para todas as ações de interface.</p>
+      </div>
+      <h3 class="subsection-title">Estilos de Botões</h3>
+      <div class="button-showcase">
+       <div class="button-group">
+        <p class="button-group-title">Primary</p><button class="btn btn-primary">Primary Button</button> <button class="btn btn-primary btn-sm">Small Primary</button> <button class="btn btn-primary btn-lg">Large Primary</button>
+       </div>
+       <div class="button-group">
+        <p class="button-group-title">Secondary</p><button class="btn btn-secondary">Secondary Button</button> <button class="btn btn-outline">Outline Button</button> <button class="btn btn-ghost">Ghost Button</button>
+       </div>
+       <div class="button-group">
+        <p class="button-group-title">Feedback</p><button class="btn btn-success">Success</button> <button class="btn btn-warning">Warning</button> <button class="btn btn-danger">Danger</button>
+       </div>
+       <div class="button-group">
+        <p class="button-group-title">States</p><button class="btn btn-primary">Normal</button> <button class="btn btn-disabled">Disabled</button>
+       </div>
+      </div>
+      <h3 class="subsection-title">Botões com Ícones</h3>
+      <div class="button-showcase"><button class="btn btn-primary"> <span>✓</span> Save Changes </button> <button class="btn btn-secondary"> <span>↓</span> Download </button> <button class="btn btn-outline"> <span>⚙</span> Settings </button> <button class="btn btn-danger"> <span>🗑</span> Delete </button>
+      </div>
+     </section><!-- FORMS SECTION -->
+     <section class="section" id="forms">
+      <div class="section-header">
+       <h2 class="section-title">Formulários</h2>
+       <p class="section-description">Componentes de entrada completos com estados, validações e variações para coleta de dados do usuário.</p>
+      </div>
+      <div class="form-showcase">
+       <div class="form-group"><label for="input-text" class="form-label"> Nome Completo <span class="form-label-required">*</span> </label> <input type="text" id="input-text" class="form-input" placeholder="Digite seu nome completo">
+        <p class="form-hint">Digite seu nome como aparece no documento.</p>
+       </div>
+       <div class="form-group"><label for="input-email" class="form-label">Email</label> <input type="email" id="input-email" class="form-input" placeholder="seu@email.com">
+       </div>
+       <div class="form-group"><label for="input-phone" class="form-label">Telefone</label> <input type="tel" id="input-phone" class="form-input" placeholder="(00) 00000-0000">
+       </div>
+       <div class="form-group"><label for="select-country" class="form-label">País</label> <select id="select-country" class="form-select"> <option>Selecione um país</option> <option>Brasil</option> <option>Portugal</option> <option>Estados Unidos</option> <option>Canadá</option> </select>
+       </div>
+       <div class="form-group"><label for="input-disabled" class="form-label">Campo Desabilitado</label> <input type="text" id="input-disabled" class="form-input" value="Campo bloqueado" disabled>
+       </div>
+       <div class="form-group"><label for="input-error" class="form-label">Campo com Erro</label> <input type="text" id="input-error" class="form-input" value="email invalido" style="border-color: #EF4444;">
+        <p class="form-error">Por favor, insira um email válido.</p>
+       </div>
+      </div>
+      <div class="form-group"><label for="textarea-message" class="form-label">Mensagem</label> <textarea id="textarea-message" class="form-textarea" placeholder="Digite sua mensagem aqui..."></textarea>
+      </div>
+     </section><!-- CARDS SECTION -->
+     <section class="section" id="cards">
+      <div class="section-header">
+       <h2 class="section-title">Cards</h2>
+       <p class="section-description">Containers versáteis para agrupar conteúdo relacionado com suporte a cabeçalhos, ícones e ações.</p>
+      </div>
+      <div class="cards-showcase">
+       <div class="card">
+        <div class="card-header">
+         <div class="card-icon">
+          📊
+         </div>
+         <h3 class="card-title">Analytics</h3>
+        </div>
+        <p class="card-content">Visualize métricas detalhadas sobre o desempenho do seu produto e comportamento dos usuários em tempo real.</p>
+        <div class="card-footer"><button class="btn btn-primary btn-sm">Ver Relatório</button> <button class="btn btn-ghost btn-sm">Exportar</button>
+        </div>
+       </div>
+       <div class="card">
+        <div class="card-header">
+         <div class="card-icon">
+          🎨
+         </div>
+         <h3 class="card-title">Design System</h3>
+        </div>
+        <p class="card-content">Acesse todos os componentes, tokens e guidelines para criar interfaces consistentes e profissionais.</p>
+        <div class="card-footer"><button class="btn btn-primary btn-sm">Explorar</button> <button class="btn btn-ghost btn-sm">Documentação</button>
+        </div>
+       </div>
+       <div class="card">
+        <div class="card-header">
+         <div class="card-icon">
+          ⚙️
+         </div>
+         <h3 class="card-title">Configurações</h3>
+        </div>
+        <p class="card-content">Personalize sua experiência ajustando preferências, notificações e configurações de segurança.</p>
+        <div class="card-footer"><button class="btn btn-primary btn-sm">Configurar</button> <button class="btn btn-ghost btn-sm">Ajuda</button>
+        </div>
+       </div>
+       <div class="card">
+        <div class="card-header">
+         <div class="card-icon">
+          👥
+         </div>
+         <h3 class="card-title">Equipe</h3>
+        </div>
+        <p class="card-content">Gerencie membros da equipe, permissões e colaboração em projetos compartilhados.</p>
+        <div class="card-footer"><button class="btn btn-primary btn-sm">Gerenciar</button> <button class="btn btn-ghost btn-sm">Convidar</button>
+        </div>
+       </div>
+      </div>
+     </section><!-- BADGES & CHIPS SECTION -->
+     <section class="section" id="badges">
+      <div class="section-header">
+       <h2 class="section-title">Badges &amp; Chips</h2>
+       <p class="section-description">Indicadores visuais compactos para status, categorias, tags e informações auxiliares.</p>
+      </div>
+      <h3 class="subsection-title">Badges</h3>
+      <div class="badge-showcase"><span class="badge badge-primary">Primary</span> <span class="badge badge-secondary">Secondary</span> <span class="badge badge-success">Success</span> <span class="badge badge-warning">Warning</span> <span class="badge badge-danger">Danger</span> <span class="badge badge-info">Info</span>
+      </div>
+      <h3 class="subsection-title">Badges em Contexto</h3>
+      <div class="badge-showcase"><span class="badge badge-success">✓ Ativo</span> <span class="badge badge-warning">⏳ Pendente</span> <span class="badge badge-danger">✕ Cancelado</span> <span class="badge badge-info">📋 Em Análise</span> <span class="badge badge-primary">🔒 Premium</span> <span class="badge badge-secondary">🆕 Novo</span>
+      </div>
+      <h3 class="subsection-title">Chips</h3>
+      <div class="badge-showcase"><span class="chip"> JavaScript <span class="chip-close">✕</span> </span> <span class="chip"> React <span class="chip-close">✕</span> </span> <span class="chip"> TypeScript <span class="chip-close">✕</span> </span> <span class="chip"> Design System <span class="chip-close">✕</span> </span> <span class="chip"> UI/UX <span class="chip-close">✕</span> </span>
+      </div>
+     </section><!-- ALERTS SECTION -->
+     <section class="section" id="alerts">
+      <div class="section-header">
+       <h2 class="section-title">Alertas</h2>
+       <p class="section-description">Mensagens contextuais para comunicar feedback, status e informações importantes ao usuário.</p>
+      </div>
+      <div class="alerts-showcase">
+       <div class="alert alert-success">
+        <div class="alert-icon">
+         ✓
+        </div>
+        <div class="alert-content">
+         <p class="alert-title">Operação concluída com sucesso!</p>
+         <p class="alert-message">Suas alterações foram salvas e já estão disponíveis para todos os usuários.</p>
+        </div>
+       </div>
+       <div class="alert alert-info">
+        <div class="alert-icon">
+         ℹ
+        </div>
+        <div class="alert-content">
+         <p class="alert-title">Nova atualização disponível</p>
+         <p class="alert-message">A versão 2.0 do sistema está disponível com novos recursos e melhorias de performance.</p>
+         <div class="alert-actions"><button class="btn btn-primary btn-sm">Atualizar Agora</button> <button class="btn btn-ghost btn-sm">Mais Tarde</button>
+         </div>
+        </div>
+       </div>
+       <div class="alert alert-warning">
+        <div class="alert-icon">
+         ⚠
+        </div>
+        <div class="alert-content">
+         <p class="alert-title">Atenção necessária</p>
+         <p class="alert-message">Seu plano atual está próximo do limite de uso. Considere fazer um upgrade para evitar interrupções.</p>
+        </div>
+       </div>
+       <div class="alert alert-danger">
+        <div class="alert-icon">
+         ✕
+        </div>
+        <div class="alert-content">
+         <p class="alert-title">Erro ao processar solicitação</p>
+         <p class="alert-message">Não foi possível completar a operação. Por favor, verifique sua conexão e tente novamente.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- TABLES SECTION -->
+     <section class="section" id="tables">
+      <div class="section-header">
+       <h2 class="section-title">Tabelas</h2>
+       <p class="section-description">Apresentação estruturada de dados em formato tabular com suporte a ordenação e ações.</p>
+      </div>
+      <div class="table-container">
+       <div class="table-header">
+        <h3 class="table-title">Membros da Equipe</h3><button class="btn btn-primary btn-sm">+ Adicionar Membro</button>
+       </div>
+       <table class="table">
+        <thead>
+         <tr>
+          <th>Usuário</th>
+          <th>Email</th>
+          <th>Cargo</th>
+          <th>Departamento</th>
+          <th>Status</th>
+          <th>Ações</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td>
+           <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="table-avatar">
+             JS
+            </div><span style="font-weight: 600;">João Silva</span>
+           </div></td>
+          <td>joao.silva@empresa.com</td>
+          <td>Desenvolvedor Senior</td>
+          <td>Engenharia</td>
+          <td><span class="badge badge-success">Ativo</span></td>
+          <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+         </tr>
+         <tr>
+          <td>
+           <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="table-avatar">
+             MS
+            </div><span style="font-weight: 600;">Maria Santos</span>
+           </div></td>
+          <td>maria.santos@empresa.com</td>
+          <td>Product Designer</td>
+          <td>Design</td>
+          <td><span class="badge badge-success">Ativo</span></td>
+          <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+         </tr>
+         <tr>
+          <td>
+           <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="table-avatar">
+             PC
+            </div><span style="font-weight: 600;">Pedro Costa</span>
+           </div></td>
+          <td>pedro.costa@empresa.com</td>
+          <td>Product Manager</td>
+          <td>Produto</td>
+          <td><span class="badge badge-warning">Férias</span></td>
+          <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+         </tr>
+         <tr>
+          <td>
+           <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="table-avatar">
+             AO
+            </div><span style="font-weight: 600;">Ana Oliveira</span>
+           </div></td>
+          <td>ana.oliveira@empresa.com</td>
+          <td>UX Researcher</td>
+          <td>Design</td>
+          <td><span class="badge badge-success">Ativo</span></td>
+          <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+         </tr>
+         <tr>
+          <td>
+           <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="table-avatar">
+             RF
+            </div><span style="font-weight: 600;">Ricardo Ferreira</span>
+           </div></td>
+          <td>ricardo.f@empresa.com</td>
+          <td>DevOps Engineer</td>
+          <td>Engenharia</td>
+          <td><span class="badge badge-danger">Inativo</span></td>
+          <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </section><!-- TOGGLES SECTION -->
+     <section class="section" id="toggles">
+      <div class="section-header">
+       <h2 class="section-title">Toggles</h2>
+       <p class="section-description">Interruptores para ativar ou desativar funcionalidades e preferências do sistema.</p>
+      </div>
+      <div class="toggle-showcase">
+       <div class="toggle-container">
+        <div class="toggle active" onclick="this.classList.toggle('active')">
+         <div class="toggle-slider"></div>
+        </div>
+        <div class="toggle-label">
+         <p class="toggle-title">Notificações por Email</p>
+         <p class="toggle-description">Receba atualizações e notificações importantes via email</p>
+        </div>
+       </div>
+       <div class="toggle-container">
+        <div class="toggle active" onclick="this.classList.toggle('active')">
+         <div class="toggle-slider"></div>
+        </div>
+        <div class="toggle-label">
+         <p class="toggle-title">Autenticação de Dois Fatores</p>
+         <p class="toggle-description">Adicione uma camada extra de segurança à sua conta</p>
+        </div>
+       </div>
+       <div class="toggle-container">
+        <div class="toggle" onclick="this.classList.toggle('active')">
+         <div class="toggle-slider"></div>
+        </div>
+        <div class="toggle-label">
+         <p class="toggle-title">Modo Escuro</p>
+         <p class="toggle-description">Ative o tema escuro para reduzir o cansaço visual</p>
+        </div>
+       </div>
+       <div class="toggle-container">
+        <div class="toggle" onclick="this.classList.toggle('active')">
+         <div class="toggle-slider"></div>
+        </div>
+        <div class="toggle-label">
+         <p class="toggle-title">Atualizações Automáticas</p>
+         <p class="toggle-description">Mantenha o sistema sempre atualizado automaticamente</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- MODALS SECTION -->
+     <section class="section" id="modals">
+      <div class="section-header">
+       <h2 class="section-title">Modais</h2>
+       <p class="section-description">Janelas sobrepostas para interações focadas que requerem atenção do usuário.</p>
+      </div><button class="btn btn-primary" onclick="document.getElementById('modal-demo').classList.add('active')"> Abrir Modal de Exemplo </button>
+      <div class="modal-overlay" id="modal-demo" onclick="if(event.target === this) this.classList.remove('active')">
+       <div class="modal">
+        <div class="modal-header">
+         <h3 class="modal-title">Confirmar Ação</h3>
+        </div>
+        <div class="modal-body">
+         <p style="margin: 0; color: #475569; line-height: 1.7;">Você tem certeza que deseja continuar com esta ação? Esta operação não pode ser desfeita e todas as alterações serão permanentes.</p>
+        </div>
+        <div class="modal-footer"><button class="btn btn-ghost" onclick="document.getElementById('modal-demo').classList.remove('active')">Cancelar</button> <button class="btn btn-primary" onclick="document.getElementById('modal-demo').classList.remove('active')">Confirmar</button>
+        </div>
+       </div>
+      </div>
+     </section><!-- DROPDOWNS SECTION -->
+     <section class="section" id="dropdowns">
+      <div class="section-header">
+       <h2 class="section-title">Dropdowns</h2>
+       <p class="section-description">Menus suspensos para apresentar opções e ações contextuais.</p>
+      </div>
+      <div class="dropdown"><button class="btn btn-primary dropdown-trigger" onclick="document.getElementById('dropdown-menu').classList.toggle('active')"> Menu de Opções ▼ </button>
+       <div class="dropdown-menu" id="dropdown-menu"><a class="dropdown-item" href="#" onclick="event.preventDefault()"> <span>👤</span> Perfil </a> <a class="dropdown-item" href="#" onclick="event.preventDefault()"> <span>⚙️</span> Configurações </a> <a class="dropdown-item" href="#" onclick="event.preventDefault()"> <span>📊</span> Analytics </a>
+        <div class="dropdown-divider"></div><a class="dropdown-item" href="#" onclick="event.preventDefault()"> <span>🚪</span> Sair </a>
+       </div>
+      </div>
+     </section><!-- NAVIGATION SECTION -->
+     <section class="section" id="navigation">
+      <div class="section-header">
+       <h2 class="section-title">Componentes de Navegação</h2>
+       <p class="section-description">Elementos para estruturar navegação e orientação do usuário na interface.</p>
+      </div>
+      <h3 class="subsection-title">Breadcrumbs</h3>
+      <nav class="breadcrumbs"><a href="#" class="breadcrumb-item" onclick="event.preventDefault()">Home</a> <span class="breadcrumb-separator">›</span> <a href="#" class="breadcrumb-item" onclick="event.preventDefault()">Produtos</a> <span class="breadcrumb-separator">›</span> <a href="#" class="breadcrumb-item" onclick="event.preventDefault()">Eletrônicos</a> <span class="breadcrumb-separator">›</span> <span class="breadcrumb-item active">Smartphones</span>
+      </nav>
+      <h3 class="subsection-title">Paginação</h3>
+      <nav class="pagination"><button class="pagination-item">‹</button> <button class="pagination-item active">1</button> <button class="pagination-item">2</button> <button class="pagination-item">3</button> <button class="pagination-item">4</button> <button class="pagination-item">5</button> <button class="pagination-item">›</button>
+      </nav>
+      <h3 class="subsection-title">Progress Bar</h3>
+      <div class="progress-container">
+       <div class="progress-bar" style="width: 65%;"></div>
+      </div>
+      <h3 class="subsection-title">Tooltips</h3>
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+       <div class="tooltip-container"><button class="btn btn-primary">Hover para ver tooltip</button>
+        <div class="tooltip">
+         Esta é uma dica útil!
+        </div>
+       </div>
+       <div class="tooltip-container"><button class="btn btn-secondary">Informação adicional</button>
+        <div class="tooltip">
+         Clique para mais detalhes
+        </div>
+       </div>
+      </div>
+     </section><!-- SPACING SECTION -->
+     <section class="section" id="spacing">
+      <div class="section-header">
+       <h2 class="section-title">Tokens de Espaçamento</h2>
+       <p class="section-description">Sistema de espaçamento baseado em múltiplos de 4px para criar layouts consistentes e bem proporcionados.</p>
+      </div>
+      <div class="spacing-showcase">
+       <div class="spacing-item"><span class="spacing-label">xs (0.25rem)</span>
+        <div class="spacing-visual" style="width: 4px;"></div><span class="spacing-value">4px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">sm (0.5rem)</span>
+        <div class="spacing-visual" style="width: 8px;"></div><span class="spacing-value">8px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">md (1rem)</span>
+        <div class="spacing-visual" style="width: 16px;"></div><span class="spacing-value">16px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">lg (1.5rem)</span>
+        <div class="spacing-visual" style="width: 24px;"></div><span class="spacing-value">24px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">xl (2rem)</span>
+        <div class="spacing-visual" style="width: 32px;"></div><span class="spacing-value">32px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">2xl (3rem)</span>
+        <div class="spacing-visual" style="width: 48px;"></div><span class="spacing-value">48px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">3xl (4rem)</span>
+        <div class="spacing-visual" style="width: 64px;"></div><span class="spacing-value">64px</span>
+       </div>
+       <div class="spacing-item"><span class="spacing-label">4xl (5rem)</span>
+        <div class="spacing-visual" style="width: 80px;"></div><span class="spacing-value">80px</span>
+       </div>
+      </div>
+     </section><!-- SHADOWS SECTION -->
+     <section class="section" id="shadows">
+      <div class="section-header">
+       <h2 class="section-title">Sistema de Elevação</h2>
+       <p class="section-description">Níveis de sombra para criar hierarquia visual e profundidade na interface.</p>
+      </div>
+      <div class="shadow-showcase">
+       <div class="shadow-sample shadow-sm">
+        <div class="shadow-icon">
+         1
+        </div>
+        <p class="shadow-name">Shadow SM</p>
+        <p class="shadow-description">Elevação sutil para elementos discretos</p>
+       </div>
+       <div class="shadow-sample shadow-md">
+        <div class="shadow-icon">
+         2
+        </div>
+        <p class="shadow-name">Shadow MD</p>
+        <p class="shadow-description">Elevação média para cards e containers</p>
+       </div>
+       <div class="shadow-sample shadow-lg">
+        <div class="shadow-icon">
+         3
+        </div>
+        <p class="shadow-name">Shadow LG</p>
+        <p class="shadow-description">Elevação alta para modais e overlays</p>
+       </div>
+       <div class="shadow-sample shadow-xl">
+        <div class="shadow-icon">
+         4
+        </div>
+        <p class="shadow-name">Shadow XL</p>
+        <p class="shadow-description">Elevação muito alta para destaques</p>
+       </div>
+       <div class="shadow-sample shadow-2xl">
+        <div class="shadow-icon">
+         5
+        </div>
+        <p class="shadow-name">Shadow 2XL</p>
+        <p class="shadow-description">Máxima elevação para elementos críticos</p>
+       </div>
+      </div>
+     </section><!-- COLOR HARMONIES -->
+     <section class="section" id="monochromatic">
+      <div class="section-header">
+       <h2 class="section-title">Harmonias Cromáticas</h2>
+       <p class="section-description">Combinações de cores harmônicas baseadas na teoria das cores para criar paletas coesas e profissionais.</p>
+      </div>
+      <h3 class="subsection-title">Harmonia Monocromática</h3>
+      <p class="section-description">Variações de saturação e luminosidade da mesma cor base, criando uma paleta elegante e coesa.</p>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #06090D;"><span>Navy 900</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy 900</p>
+         <p class="color-value">#06090D</p>
+         <p class="color-usage">Mais escuro</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #111626;"><span>Navy 700</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy 700</p>
+         <p class="color-value">#111626</p>
+         <p class="color-usage">Escuro</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C2340;"><span>Navy 500</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy 500 (Base)</p>
+         <p class="color-value">#1C2340</p>
+         <p class="color-usage">Cor primária</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #566E9C;"><span>Navy 300</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy 300</p>
+         <p class="color-value">#566E9C</p>
+         <p class="color-usage">Claro</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #AAB8CE; color: #1C2340;"><span>Navy 100</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy 100</p>
+         <p class="color-value">#AAB8CE</p>
+         <p class="color-usage">Mais claro</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title" id="analogous">Harmonia Análoga</h3>
+      <p class="section-description">Cores adjacentes no círculo cromático, criando transições suaves e naturais.</p>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C2340;"><span>Navy Base</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Base</p>
+         <p class="color-value">#1C2340</p>
+         <p class="color-usage">Cor primária</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C3240;"><span>Teal Dark</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Teal Dark</p>
+         <p class="color-value">#1C3240</p>
+         <p class="color-usage">Análoga 1</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C1D40;"><span>Deep Purple</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Deep Purple</p>
+         <p class="color-value">#1C1D40</p>
+         <p class="color-usage">Análoga 2</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #3B82F6;"><span>Blue Tech</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Blue Tech</p>
+         <p class="color-value">#3B82F6</p>
+         <p class="color-usage">Acento análogo</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title" id="complementary">Harmonia Complementar</h3>
+      <p class="section-description">Cores opostas no círculo cromático, criando máximo contraste e vibrância.</p>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C2340;"><span>Navy Base</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Base</p>
+         <p class="color-value">#1C2340</p>
+         <p class="color-usage">Cor primária</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #F59E0B;"><span>Warm Orange</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Warm Orange</p>
+         <p class="color-value">#F59E0B</p>
+         <p class="color-usage">Complementar</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #FBBF24;"><span>Golden</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Golden</p>
+         <p class="color-value">#FBBF24</p>
+         <p class="color-usage">Complementar claro</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #D97706;"><span>Amber Dark</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Amber Dark</p>
+         <p class="color-value">#D97706</p>
+         <p class="color-usage">Complementar escuro</p>
+        </div>
+       </div>
+      </div>
+      <h3 class="subsection-title" id="triadic">Harmonia Tríade</h3>
+      <p class="section-description">Três cores equidistantes no círculo cromático, criando equilíbrio vibrante e dinâmico.</p>
+      <div class="color-grid">
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #1C2340;"><span>Navy Base</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Navy Base</p>
+         <p class="color-value">#1C2340</p>
+         <p class="color-usage">Cor primária</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #10B981;"><span>Emerald</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Emerald</p>
+         <p class="color-value">#10B981</p>
+         <p class="color-usage">Tríade 1</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #EF4444;"><span>Crimson</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Crimson</p>
+         <p class="color-value">#EF4444</p>
+         <p class="color-usage">Tríade 2</p>
+        </div>
+       </div>
+       <div class="color-swatch">
+        <div class="color-preview" style="background: #8B5CF6;"><span>Purple</span>
+        </div>
+        <div class="color-info">
+         <p class="color-name">Purple</p>
+         <p class="color-value">#8B5CF6</p>
+         <p class="color-usage">Acento tríade</p>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main>
+  </div>
+  <script>
+    // Navigation
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        event.target.classList.add('active');
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          menu.classList.remove('active');
+        });
+      }
+    });
+
+    // Element SDK Integration
+    const defaultConfig = {
+      system_title: "Mentora DS",
+      system_tagline: "Sistema de Design v1.0",
+      hero_title: "Design System Completo",
+      hero_subtitle: "Baseado na cor primária #1C2340 · Profissional · Moderno · Tecnológico",
+      primary_color: "#1C2340",
+      secondary_color: "#3B82F6",
+      background_color: "#F8FAFC",
+      text_color: "#1E293B",
+      accent_color: "#10B981",
+      font_family: "",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
+      const headingFontStack = "'Montserrat', sans-serif";
+      const fontFamily = customFont ? `${customFont}, ${baseFontStack}` : baseFontStack;
+      const headingFont = customFont ? `${customFont}, ${headingFontStack}` : headingFontStack;
+
+      document.body.style.fontFamily = fontFamily;
+
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+
+      document.body.style.background = backgroundColor;
+      document.body.style.color = textColor;
+
+      document.querySelectorAll('.sidebar-logo, .section-title, .card-title, .alert-title, .table-title').forEach(el => {
+        el.style.color = primaryColor;
+        el.style.fontFamily = headingFont;
+      });
+
+      document.querySelectorAll('.btn-primary').forEach(el => {
+        el.style.background = primaryColor;
+      });
+
+      document.querySelectorAll('.badge-primary').forEach(el => {
+        el.style.background = primaryColor;
+      });
+
+      document.getElementById('system-title').textContent = config.system_title || defaultConfig.system_title;
+      document.getElementById('system-tagline').textContent = config.system_tagline || defaultConfig.system_tagline;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+
+      document.querySelector('.hero-title').style.fontSize = `${baseSize * 4}px`;
+      document.querySelectorAll('.section-title').forEach(el => {
+        el.style.fontSize = `${baseSize * 2.5}px`;
+      });
+      document.body.style.fontSize = `${baseSize}px`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["system_title", config.system_title || defaultConfig.system_title],
+        ["system_tagline", config.system_tagline || defaultConfig.system_tagline],
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a2243ad70311b33',t:'MTc2Mzc0OTg5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
