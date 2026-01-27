@@ -15,6 +15,12 @@ builder.Services.AddOpenApi();
 
 // Database Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+Console.WriteLine("=== DEBUG CONNECTION STRING ===");
+Console.WriteLine($"Connection String: {(string.IsNullOrEmpty(connectionString) ? "VAZIA!" : "OK")}");
+Console.WriteLine($"Connection String Length: {connectionString?.Length ?? 0}");
+Console.WriteLine("===============================");
+
 if (string.IsNullOrWhiteSpace(connectionString))
 {
     throw new InvalidOperationException("Connection string 'DefaultConnection' não configurada.");
