@@ -14,6 +14,8 @@ builder.Services.AddOpenApi();
 // Database Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+Console.WriteLine("connectionString after conversion: " + connectionString);
+
 // Converter URL do PostgreSQL para formato Npgsql
 if (!string.IsNullOrEmpty(connectionString) &&
     (connectionString.StartsWith("postgres://") || connectionString.StartsWith("postgresql://")))
