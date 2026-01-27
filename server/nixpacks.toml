@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['...', 'dotnet-sdk_9']
+
+[phases.build]
+cmds = [
+    'dotnet restore',
+    'dotnet publish src/Mentora.API/Mentora.API.csproj -c Release -o /app/publish'
+]
+
+[start]
+cmd = 'cd /app/publish && dotnet Mentora.API.dll'
