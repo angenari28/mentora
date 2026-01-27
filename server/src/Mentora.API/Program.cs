@@ -17,9 +17,20 @@ builder.Services.AddOpenApi();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 Console.WriteLine("=== DEBUG CONNECTION STRING ===");
+Console.WriteLine($"Connection String: {connectionString}");
 Console.WriteLine($"Connection String: {(string.IsNullOrEmpty(connectionString) ? "VAZIA!" : "OK")}");
 Console.WriteLine($"Connection String Length: {connectionString?.Length ?? 0}");
 Console.WriteLine("===============================");
+
+if (connectionString?.StartsWith("postgres://") == true || connectionString?.StartsWith("postgresql://") == true)
+{
+    var uri = new Uri(connectionString);
+    var npgsqlConnectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={uri.UserInfo.Split(':')[0]};Password={uri.UserInfo.Split(':')[1]}";
+    connectionString = npgsqlConnectionString;
+
+    Console.WriteLine("=== Connection String convertida de URL para Npgsql ===");
+    Console.WriteLine($"Connection String: {connectionString}");
+}
 
 if (string.IsNullOrWhiteSpace(connectionString))
 {
