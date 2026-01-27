@@ -8,34 +8,35 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 // Database Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-Console.WriteLine("=== DEBUG CONNECTION STRING ===");
-Console.WriteLine($"Connection String: {connectionString}");
-Console.WriteLine($"Connection String: {(string.IsNullOrEmpty(connectionString) ? "VAZIA!" : "OK")}");
-Console.WriteLine($"Connection String Length: {connectionString?.Length ?? 0}");
-Console.WriteLine("===============================");
-
-if (connectionString?.StartsWith("postgres://") == true || connectionString?.StartsWith("postgresql://") == true)
+// Converter URL do PostgreSQL para formato Npgsql
+if (!string.IsNullOrEmpty(connectionString) &&
+    (connectionString.StartsWith("postgres://") || connectionString.StartsWith("postgresql://")))
 {
-    var uri = new Uri(connectionString);
-    var npgsqlConnectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={uri.UserInfo.Split(':')[0]};Password={uri.UserInfo.Split(':')[1]}";
-    connectionString = npgsqlConnectionString;
-
-    Console.WriteLine("=== Connection String convertida de URL para Npgsql ===");
-    Console.WriteLine($"Connection String: {connectionString}");
+    try
+    {
+        var uri = new Uri(connectionString);
+        var userInfo = uri.UserInfo.Split(':');
+        connectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+        Console.WriteLine("✓ Connection string convertida de URL para Npgsql format");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"✗ Erro ao converter connection string: {ex.Message}");
+        throw;
+    }
 }
 
 if (string.IsNullOrWhiteSpace(connectionString))
 {
     throw new InvalidOperationException("Connection string 'DefaultConnection' não configurada.");
 }
+
 builder.Services.AddDbContext<MentoraDbContext>(options =>
     options.UseNpgsql(connectionString));
 
@@ -44,9 +45,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        policy.WithOrigins(
+            "http://localhost:4200",
+            "https://mentora.vercel.app",
+            "https://*.vercel.app"
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
     });
 });
 
@@ -65,17 +71,25 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowFrontend");
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
+// Apply migrations
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<MentoraDbContext>();
-    dbContext.Database.Migrate();
+    try
+    {
+        Console.WriteLine("Aplicando migrations...");
+        dbContext.Database.Migrate();
+        Console.WriteLine("✓ Migrations aplicadas com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"✗ Erro ao aplicar migrations: {ex.Message}");
+        throw;
+    }
 }
 
 app.Run();
