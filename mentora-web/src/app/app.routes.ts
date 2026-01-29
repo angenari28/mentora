@@ -5,7 +5,7 @@ import { LoginAlunoComponent } from './features/login-aluno/login-aluno.componen
 import { LoginGestaoComponent } from './features/login-gestao/login-gestao.component';
 
 export const routes: Routes = [
-	{ path: '', pathMatch: 'full', redirectTo: 'login-gestao' },
+	{ path: '', pathMatch: 'full', redirectTo: 'login-aluno' },
 	{ path: 'login-gestao', component: LoginGestaoComponent },
 	{ path: 'login-aluno', component: LoginAlunoComponent },
 	{ path: 'backoffice', component: BackofficeComponent },
