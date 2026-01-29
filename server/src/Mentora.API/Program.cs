@@ -50,7 +50,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "http://localhost:4200",
-            "https://mentora.vercel.app",
+            "https://mentora-cyan.vercel.app",
             "https://*.vercel.app"
         )
         .AllowAnyMethod()
