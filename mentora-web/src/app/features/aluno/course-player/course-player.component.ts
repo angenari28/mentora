@@ -1,18 +1,15 @@
-import { Component } from '@angular/core';
-import { HeaderComponent } from './layout/header/header.component';
-import { CoursePlayerComponent } from './course-player/course-player.component';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-aluno',
+  selector: 'app-course-player',
   standalone: true,
-  imports: [HeaderComponent, CoursePlayerComponent],
-  templateUrl: './aluno.component.html',
-  styleUrl: './aluno.component.css'
+  templateUrl: './course-player.component.html',
+  styleUrl: './course-player.component.css'
 })
-export class AlunoComponent {
+export class CoursePlayerComponent implements OnInit, OnDestroy {
+  private currentSlide = 1;
+  private readonly totalSlides = 5;
 
-  public currentSlide = 0;
-  public totalSlides = 5;
   ngOnInit(): void {
     const win = window as unknown as Record<string, any>;
 
@@ -84,7 +81,6 @@ export class AlunoComponent {
       }, 300);
     };
 
-    // Inicializar progress circle
     this.updateSlideDisplay();
   }
 
@@ -100,7 +96,6 @@ export class AlunoComponent {
   }
 
   private updateSlideDisplay(): void {
-    // Update slides
     document.querySelectorAll('.slide').forEach((slide, index) => {
       slide.classList.remove('active');
       if (index + 1 === this.currentSlide) {
@@ -108,7 +103,6 @@ export class AlunoComponent {
       }
     });
 
-    // Update indicators
     document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
       dot.classList.remove('active');
       if (index + 1 === this.currentSlide) {
@@ -116,7 +110,6 @@ export class AlunoComponent {
       }
     });
 
-    // Update buttons
     const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
     const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
 
@@ -130,7 +123,6 @@ export class AlunoComponent {
       }
     }
 
-    // Update progress
     const progress = Math.round((this.currentSlide / this.totalSlides) * 100);
     const progressCircle = document.getElementById('progress-circle');
     if (progressCircle) {
@@ -139,7 +131,6 @@ export class AlunoComponent {
       progressCircle.style.background = `conic-gradient(#1C2340 ${degrees}deg, #E5E9F0 ${degrees}deg)`;
     }
 
-    // Update slide counter
     const currentSlideNum = document.getElementById('current-slide-number');
     const totalSlidesNum = document.getElementById('total-slides');
     if (currentSlideNum) currentSlideNum.textContent = this.currentSlide.toString();

@@ -1,0 +1,25 @@
+<header class="platform-header">
+  <div class="header-logo-section">
+    <div class="header-brand"></div>
+  </div>
+  <div class="header-user-section">
+    <div class="header-notification">
+      🔔 <span class="notification-badge">{{ notificationCount }}</span>
+    </div>
+    <div class="header-user" (click)="toggleUserDropdown()">
+      <div class="user-avatar">
+        {{ getStudentInitials() }}
+      </div>
+      <div class="user-info">
+        <p class="user-name" id="student-name-header">{{ studentName }}</p>
+        <p class="user-role">Aluno</p>
+      </div>
+    </div>
+    <div class="user-dropdown-menu" id="user-dropdown-menu">
+      <button class="dropdown-item logout-btn" (click)="logout()">
+        <span class="dropdown-icon">🚪</span>
+        Sair
+      </button>
+    </div>
+  </div>
+</header>
