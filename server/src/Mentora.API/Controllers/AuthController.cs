@@ -23,10 +23,4 @@ public class AuthController(IAuthService _authService) : ControllerBase
         var response = await _authService.LoginAsync(request);
         return Ok(response);
     }
-
-    [HttpGet("check")]
-    public ActionResult Check()
-    {
-        return Ok(new { Message = "API is running." });
-    }
 }
