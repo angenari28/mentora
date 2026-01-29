@@ -1,0 +1,341 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <nav class="breadcrumb">
+      <a
+        href="#"
+        class="breadcrumb-item"
+        (click)="switchScreen('dashboard'); $event.preventDefault()"
+        >Home</a
+      >
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">Usuários</span>
+    </nav>
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">Gestão de Usuários</h1>
+        <p class="page-subtitle">Gerencie todos os usuários do sistema</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost">🔽 Filtros</button>
+        <button class="btn btn-primary">➕ Novo Usuário</button>
+      </div>
+    </div>
+  </div>
+  <!-- FILTERS -->
+  <div class="card" style="margin-bottom: 2rem">
+    <div class="card-body">
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;"
+      >
+        <div class="form-group" style="margin: 0">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Todos</option>
+            <option>Ativos</option>
+            <option>Inativos</option>
+            <option>Bloqueados</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin: 0">
+          <label class="form-label">Função</label>
+          <select class="form-select">
+            <option>Todas</option>
+            <option>Administrador</option>
+            <option>Editor</option>
+            <option>Usuário</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin: 0">
+          <label class="form-label">Período</label>
+          <select class="form-select">
+            <option>Último mês</option>
+            <option>Últimos 3 meses</option>
+            <option>Último ano</option>
+            <option>Todos</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: flex-end">
+          <button class="btn btn-primary" style="width: 100%">Aplicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- USERS TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">👥 Lista de Usuários (248)</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </th>
+              <th>Usuário</th>
+              <th>Função</th>
+              <th>Status</th>
+              <th>Último Acesso</th>
+              <th>Cadastro</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">AS</div>
+                  <div class="user-details">
+                    <p class="user-name">Admin Silva</p>
+                    <p class="user-email">admin@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-danger">🔑 Admin</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>Agora</td>
+              <td>15/01/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost" (click)="switchScreen('details')">
+                    Ver
+                  </button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">MS</div>
+                  <div class="user-details">
+                    <p class="user-name">Maria Santos</p>
+                    <p class="user-email">maria.santos@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-info">✏️ Editor</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>há 2 horas</td>
+              <td>20/03/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">PC</div>
+                  <div class="user-details">
+                    <p class="user-name">Pedro Costa</p>
+                    <p class="user-email">pedro.costa@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-neutral">👤 Usuário</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>há 5 horas</td>
+              <td>10/05/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">AO</div>
+                  <div class="user-details">
+                    <p class="user-name">Ana Oliveira</p>
+                    <p class="user-email">ana.oliveira@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-info">✏️ Editor</span></td>
+              <td><span class="badge badge-warning">⏸ Inativo</span></td>
+              <td>há 2 dias</td>
+              <td>28/06/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">RF</div>
+                  <div class="user-details">
+                    <p class="user-name">Ricardo Ferreira</p>
+                    <p class="user-email">ricardo.f@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-neutral">👤 Usuário</span></td>
+              <td><span class="badge badge-danger">🚫 Bloqueado</span></td>
+              <td>há 1 semana</td>
+              <td>12/08/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">CS</div>
+                  <div class="user-details">
+                    <p class="user-name">Carla Souza</p>
+                    <p class="user-email">carla.souza@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-neutral">👤 Usuário</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>há 1 hora</td>
+              <td>03/09/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">FL</div>
+                  <div class="user-details">
+                    <p class="user-name">Fernando Lima</p>
+                    <p class="user-email">fernando.lima@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-info">✏️ Editor</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>há 30 min</td>
+              <td>18/10/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">JA</div>
+                  <div class="user-details">
+                    <p class="user-name">Juliana Alves</p>
+                    <p class="user-email">juliana.alves@empresa.com</p>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-neutral">👤 Usuário</span></td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>há 3 horas</td>
+              <td>25/11/2023</td>
+              <td>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-sm btn-ghost">Ver</button>
+                  <button class="btn btn-sm btn-ghost">Editar</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="pagination-btn" disabled>‹</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">...</button>
+        <button class="pagination-btn">12</button>
+        <button class="pagination-btn">›</button>
+      </div>
+    </div>
+  </div>
+</div>

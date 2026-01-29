@@ -1,0 +1,66 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <div class="logo-text">
+        <img
+          src="/assets/mentora-logo.png"
+          alt="Mentora Logo"
+          style="width: 179px; height: 50px"
+        />
+        <p class="logo-subtitle" id="company-name">Backoffice</p>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <h3 class="nav-section-title">Principal</h3>
+      <a class="nav-item active" (click)="switchScreen('dashboard')">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a class="nav-item" (click)="switchScreen('users')">
+        <span class="nav-icon">👥</span> Usuários
+        <span class="nav-badge">12</span>
+      </a>
+      <a class="nav-item" (click)="switchScreen('details')">
+        <span class="nav-icon">📄</span> Detalhes
+      </a>
+    </div>
+    <div class="nav-section">
+      <h3 class="nav-section-title">Gestão</h3>
+      <a class="nav-item">
+        <span class="nav-icon">📈</span> Relatórios
+      </a>
+    </div>
+    <div class="nav-section">
+      <h3 class="nav-section-title">Configurações</h3>
+      <a class="nav-item">
+        <span class="nav-icon">⚙️</span> Configurações
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">🔔</span> Notificações
+        <span class="nav-badge">3</span>
+      </a>
+      <a class="nav-item"> <span class="nav-icon">🔒</span> Segurança </a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div
+      class="user-profile"
+      (click)="toggleUserMenu($event)"
+      style="cursor: pointer; position: relative;"
+    >
+      <div class="user-avatar">AS</div>
+      <div class="user-info">
+        <p class="user-name">Admin Silva</p>
+        <p class="user-role">Administrador</p>
+      </div>
+      <!-- User Menu Dropdown -->
+      <div class="user-menu-dropdown" id="userMenuDropdown">
+        <a href="#" class="user-menu-item" (click)="logout($event)">
+          <span style="font-size: 1.1rem; margin-right: 0.5rem;">🚪</span>
+          Sair
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>

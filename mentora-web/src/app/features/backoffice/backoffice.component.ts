@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { DetailsScreenComponent } from './details-screen/details-screen.component';
 
 @Component({
   selector: 'app-backoffice',
   standalone: true,
+  imports: [SidebarComponent, DashboardComponent, UsersComponent, NavbarComponent, DetailsScreenComponent],
   templateUrl: './backoffice.component.html',
   styleUrl: './backoffice.component.css',
   encapsulation: ViewEncapsulation.None
@@ -23,37 +29,6 @@ export class BackofficeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const win = window as unknown as Record<string, any>;
-
-    win["switchScreen"] = (screenId: string) => {
-      document.querySelectorAll('.screen').forEach((screen) => {
-        screen.classList.remove('active');
-      });
-
-      const targetScreen = document.getElementById(`${screenId}-screen`);
-      targetScreen?.classList.add('active');
-
-      document.querySelectorAll('.nav-item').forEach((item) => {
-        item.classList.remove('active');
-      });
-
-      const eventTarget = (window as any).event?.target as HTMLElement | undefined;
-      eventTarget?.classList.add('active');
-
-      window.scrollTo(0, 0);
-    };
-
-    win["logout"] = (event?: Event) => {
-      event?.preventDefault();
-      localStorage.removeItem('user_authenticated');
-      sessionStorage.clear();
-      this.router.navigate(['/login-gestao']);
-    };
-
-    win["toggleUserMenu"] = (event?: Event) => {
-      event?.stopPropagation();
-      const userMenuDropdown = document.getElementById('userMenuDropdown');
-      userMenuDropdown?.classList.toggle('active');
-    };
 
     win["switchTab"] = (event: Event, tabId: string) => {
       const target = event.target as HTMLElement;

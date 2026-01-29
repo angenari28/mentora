@@ -1,0 +1,292 @@
+<div class="content-wrapper">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <nav class="breadcrumb">
+      <a href="#" class="breadcrumb-item" onclick="event.preventDefault()"
+        >Home</a
+      >
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">Dashboard</span>
+    </nav>
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title" id="dashboard-title">
+          Painel de Controle
+        </h1>
+        <p class="page-subtitle" id="welcome-message">
+          Bem-vindo de volta! Aqui está o resumo de hoje.
+        </p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost">📥 Exportar</button>
+        <button class="btn btn-primary" (click)="openModal()">
+          ➕ Novo Registro
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- STATS CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-icon">👥</div>
+        <div class="stat-trend up">↑ 12.5%</div>
+      </div>
+      <p class="stat-label">Usuários Ativos</p>
+      <h3 class="stat-value">2,847</h3>
+      <p class="stat-footer">+324 novos usuários este mês</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-icon">💰</div>
+        <div class="stat-trend up">↑ 8.2%</div>
+      </div>
+      <p class="stat-label">Receita Total</p>
+      <h3 class="stat-value">R$ 48.2K</h3>
+      <p class="stat-footer">+R$ 3.8K vs. mês anterior</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-icon">🛒</div>
+        <div class="stat-trend down">↓ 3.1%</div>
+      </div>
+      <p class="stat-label">Pedidos</p>
+      <h3 class="stat-value">1,249</h3>
+      <p class="stat-footer">387 pedidos pendentes</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-icon">📈</div>
+        <div class="stat-trend up">↑ 15.3%</div>
+      </div>
+      <p class="stat-label">Taxa de Conversão</p>
+      <h3 class="stat-value">3.24%</h3>
+      <p class="stat-footer">Acima da média mensal</p>
+    </div>
+  </div>
+  <!-- MAIN CONTENT GRID -->
+  <div class="content-grid">
+    <!-- CHART CARD -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">📊 Visão Geral de Vendas</h3>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-ghost">Hoje</button>
+          <button class="btn btn-sm btn-ghost">Semana</button>
+          <button class="btn btn-sm btn-primary">Mês</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="chart-container">
+          <div class="chart-placeholder">
+            <div class="chart-placeholder-icon">📊</div>
+            <p class="chart-placeholder-text">
+              Gráfico de vendas interativo
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ACTIVITY CARD -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">🔔 Atividades Recentes</h3>
+      </div>
+      <div class="card-body card-body-compact">
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">👤</div>
+            <div class="activity-content">
+              <p class="activity-title">Novo usuário registrado</p>
+              <p class="activity-description">
+                Maria Silva criou uma conta
+              </p>
+              <span class="activity-time">há 5 minutos</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">🛒</div>
+            <div class="activity-content">
+              <p class="activity-title">Pedido realizado</p>
+              <p class="activity-description">
+                Pedido #4582 no valor de R$ 458,90
+              </p>
+              <span class="activity-time">há 12 minutos</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">💰</div>
+            <div class="activity-content">
+              <p class="activity-title">Pagamento aprovado</p>
+              <p class="activity-description">
+                Transação #9821 confirmada
+              </p>
+              <span class="activity-time">há 28 minutos</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">📦</div>
+            <div class="activity-content">
+              <p class="activity-title">Produto atualizado</p>
+              <p class="activity-description">
+                Estoque do produto SKU-1234 atualizado
+              </p>
+              <span class="activity-time">há 1 hora</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">⚠️</div>
+            <div class="activity-content">
+              <p class="activity-title">Alerta de estoque baixo</p>
+              <p class="activity-description">
+                3 produtos com estoque crítico
+              </p>
+              <span class="activity-time">há 2 horas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- RECENT ORDERS TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🛒 Pedidos Recentes</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">Ver Todos</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Produto</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#4589</td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">JS</div>
+                  <div class="user-details">
+                    <p class="user-name">João Silva</p>
+                    <p class="user-email">joao@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td>Notebook Dell XPS</td>
+              <td>R$ 7.499,00</td>
+              <td>
+                <span class="badge badge-success">✓ Entregue</span>
+              </td>
+              <td>22/12/2024</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Ver</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#4588</td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">MS</div>
+                  <div class="user-details">
+                    <p class="user-name">Maria Santos</p>
+                    <p class="user-email">maria@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td>iPhone 15 Pro</td>
+              <td>R$ 8.999,00</td>
+              <td>
+                <span class="badge badge-warning">⏳ Processando</span>
+              </td>
+              <td>22/12/2024</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Ver</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#4587</td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">PC</div>
+                  <div class="user-details">
+                    <p class="user-name">Pedro Costa</p>
+                    <p class="user-email">pedro@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td>Smart TV 55"</td>
+              <td>R$ 2.899,00</td>
+              <td>
+                <span class="badge badge-info">📦 Enviado</span>
+              </td>
+              <td>21/12/2024</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Ver</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#4586</td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">AO</div>
+                  <div class="user-details">
+                    <p class="user-name">Ana Oliveira</p>
+                    <p class="user-email">ana@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td>Fone AirPods Pro</td>
+              <td>R$ 2.199,00</td>
+              <td>
+                <span class="badge badge-danger">✕ Cancelado</span>
+              </td>
+              <td>21/12/2024</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Ver</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#4585</td>
+              <td>
+                <div class="user-cell">
+                  <div class="table-avatar">RF</div>
+                  <div class="user-details">
+                    <p class="user-name">Ricardo Ferreira</p>
+                    <p class="user-email">ricardo@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td>Console PlayStation 5</td>
+              <td>R$ 4.299,00</td>
+              <td>
+                <span class="badge badge-success">✓ Entregue</span>
+              </td>
+              <td>20/12/2024</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Ver</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="pagination-btn" disabled>‹</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">4</button>
+        <button class="pagination-btn">›</button>
+      </div>
+    </div>
+  </div>
+</div>
