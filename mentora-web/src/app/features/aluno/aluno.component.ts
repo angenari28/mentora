@@ -1,14 +1,98 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CourseCarouselComponent, Course } from './course-carousel/course-carousel.component';
+import { CoursePlayerComponent } from './course-player/course-player.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 @Component({
   selector: 'app-aluno',
   standalone: true,
+  imports: [CourseCarouselComponent, CoursePlayerComponent, HeaderComponent],
   templateUrl: './aluno.component.html',
-  styleUrl: './aluno.component.css',
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './aluno.component.css'
 })
 export class AlunoComponent implements OnInit, OnDestroy {
+  leadershipCourses: Course[] = [
+    {
+      id: 'leadership-1',
+      title: 'Fundamentos de Liderança',
+      description: 'Desenvolva habilidades essenciais para se tornar um líder inspirador e eficaz em sua organização.',
+      category: 'Liderança',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #1C2340 0%, #6366F1 100%)',
+        emoji: '💼'
+      },
+      duration: '4h 30min',
+      progress: 65
+    },
+    {
+      id: 'leadership-2',
+      title: 'Gestão de Equipes Ágeis',
+      description: 'Aprenda metodologias ágeis e técnicas modernas para liderar equipes de alto desempenho.',
+      category: 'Liderança',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+        emoji: '🎯'
+      },
+      duration: '3h 15min',
+      progress: 30
+    }
+  ];
+
+  technologyCourses: Course[] = [
+    {
+      id: 'python-1',
+      title: 'Python para Iniciantes',
+      description: 'Domine os conceitos fundamentais de programação com Python e crie seus primeiros projetos.',
+      category: 'Tecnologia',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+        emoji: '🐍'
+      },
+      duration: '8h 00min',
+      progress: 15
+    },
+    {
+      id: 'complete',
+      title: 'Fundamentos de Cloud Computing',
+      description: 'Entenda os conceitos essenciais de computação em nuvem e serviços cloud modernos.',
+      category: 'Tecnologia',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+        emoji: '☁️'
+      },
+      duration: '6h 45min',
+      progress: 100,
+      isCompleted: true
+    },
+    {
+      id: 'security-1',
+      title: 'Segurança da Informação',
+      description: 'Aprenda práticas essenciais para proteger dados e sistemas contra ameaças digitais.',
+      category: 'Tecnologia',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+        emoji: '🔒'
+      },
+      duration: '5h 20min',
+      progress: 0
+    }
+  ];
+
+  complianceCourses: Course[] = [
+    {
+      id: 'lgpd-1',
+      title: 'LGPD na Prática',
+      description: 'Compreenda a Lei Geral de Proteção de Dados e como aplicá-la em seu dia a dia profissional.',
+      category: 'Compliance',
+      thumbnail: {
+        gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+        emoji: '📋'
+      },
+      duration: '2h 30min',
+      progress: 45
+    }
+  ];
   private currentSlide = 1;
   private readonly totalSlides = 5;
   private onDocumentClick = (event: MouseEvent) => {

@@ -1,0 +1,44 @@
+<div class="course-carousel">
+  <div class="carousel-track">
+    <div
+      *ngFor="let course of courses"
+      class="course-card"
+      (click)="onCourseClick(course.id)"
+    >
+      <div
+        class="course-thumbnail"
+        [style.background]="course.thumbnail.gradient"
+      >
+        {{ course.thumbnail.emoji }}
+        <div class="course-duration">⏱ {{ course.duration }}</div>
+      </div>
+      <div class="course-body">
+        <span class="course-category-badge">{{ course.category }}</span>
+        <h4 class="course-title">{{ course.title }}</h4>
+        <p class="course-description">
+          {{ course.description }}
+        </p>
+        <div class="course-progress-section">
+          <div class="progress-header">
+            <span class="progress-label">Seu progresso</span>
+            <span class="progress-percentage">{{ course.progress }}%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" [style.width.%]="course.progress"></div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <button class="btn btn-primary" *ngIf="!course.isCompleted">
+            {{ course.progress > 0 ? '▶️ Continuar' : '▶️ Iniciar' }}
+          </button>
+          <button class="btn btn-primary" *ngIf="course.isCompleted">
+            🏆 Certificado
+          </button>
+          <button class="btn btn-secondary" (click)="onStatsClick($event)">
+            {{ course.isCompleted ? '🔁' : '📊' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
