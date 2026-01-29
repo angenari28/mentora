@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CertificateComponent } from './certificate/certificate.component';
 
 @Component({
   selector: 'app-course-player',
   standalone: true,
+  imports: [CertificateComponent],
   templateUrl: './course-player.component.html',
   styleUrl: './course-player.component.css'
 })
@@ -27,11 +29,6 @@ export class CoursePlayerComponent implements OnInit, OnDestroy {
 
     win["closeCourse"] = () => {
       document.getElementById('course-player')?.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    };
-
-    win["closeCertificate"] = () => {
-      document.getElementById('certificate-view')?.classList.remove('active');
       document.body.style.overflow = 'auto';
     };
 
@@ -88,7 +85,6 @@ export class CoursePlayerComponent implements OnInit, OnDestroy {
     const win = window as unknown as Record<string, any>;
     delete win["openCourse"];
     delete win["closeCourse"];
-    delete win["closeCertificate"];
     delete win["nextSlide"];
     delete win["previousSlide"];
     delete win["selectQuizOption"];
