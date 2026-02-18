@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Mentora.Infrastructure.Migrations
 {
     [DbContext(typeof(MentoraDbContext))]
-    [Migration("20260218214443_Incremental_0001")]
+    [Migration("20260218214939_Incremental_0001")]
     partial class Incremental_0001
     {
         /// <inheritdoc />
