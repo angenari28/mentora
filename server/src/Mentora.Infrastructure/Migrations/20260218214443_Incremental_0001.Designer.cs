@@ -12,18 +12,49 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Mentora.Infrastructure.Migrations
 {
     [DbContext(typeof(MentoraDbContext))]
-    [Migration("20260123172457_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260218214443_Incremental_0001")]
+    partial class Incremental_0001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.12")
+                .HasAnnotation("ProductVersion", "9.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Mentora.Domain.Entities.Class", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classes", (string)null);
+                });
 
             modelBuilder.Entity("Mentora.Domain.Entities.User", b =>
                 {

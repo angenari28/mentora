@@ -17,10 +17,41 @@ namespace Mentora.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.12")
+                .HasAnnotation("ProductVersion", "9.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Mentora.Domain.Entities.Class", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classes", (string)null);
+                });
 
             modelBuilder.Entity("Mentora.Domain.Entities.User", b =>
                 {

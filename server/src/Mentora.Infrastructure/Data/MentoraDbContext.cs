@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Mentora.Domain.Entities;
-using Mentora.Domain.Enums;
+using Mentora.Infrastructure.Data.Initializer;
 
 namespace Mentora.Infrastructure.Data;
 
 public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Class> Classes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,19 +43,31 @@ public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbCo
                 .IsUnique();
         });
 
-        // Seed Data - Usuário Master
-        modelBuilder.Entity<User>().HasData(
-            new User
-            {
-                Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                Email = "master@email.com",
-                Name = "Master Administrador",
-                Role = UserRole.Master,
-                IsActive = true,
-                CreatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),
-                UpdatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),
-                LastLoginAt = null
-            }
-        );
+        modelBuilder.Entity<Class>(entity =>
+        {
+            entity.ToTable("Classes");
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(e => e.DateStart)
+                .IsRequired();
+
+            entity.Property(e => e.DateEnd)
+                .IsRequired();
+
+            entity.Property(e => e.Active)
+                .IsRequired();
+
+            entity.Property(e => e.CreatedAt)
+                .IsRequired();
+
+            entity.Property(e => e.UpdatedAt)
+                .IsRequired();
+        });
+
+        UserInitializer.Initialize(modelBuilder);
     }
 }

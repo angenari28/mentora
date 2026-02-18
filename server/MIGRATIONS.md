@@ -16,7 +16,14 @@ Edite o arquivo `appsettings.json` ou `appsettings.Development.json` no projeto 
 }
 ```
 
-## 3. Execute a migration para criar o banco de dados
+## 3. Criacao automatica de migrations (desenvolvimento)
+
+- Auto ativado em `Development` por padrao. Para desativar, defina `AUTO_MIGRATIONS=false` no ambiente.
+- A verificacao usa o estado atual do banco (`__EFMigrationsHistory`) para calcular o proximo sequencial.
+- Nome gerado: `TIMESTAMP_SEQUENCIAL` (sem descricao). Ex.: `20260218201500_0002`.
+- Se o EF detectar que nao ha mudancas no modelo, nenhuma migration e criada.
+
+## 4. Execute a migration para criar o banco de dados
 
 Na raiz do projeto server, execute:
 
@@ -24,15 +31,15 @@ Na raiz do projeto server, execute:
 dotnet ef database update --project src/Mentora.Infrastructure --startup-project src/Mentora.API
 ```
 
-Isso irá:
-- Criar o banco de dados `mentora_db` (se não existir)
+Isso ira:
+- Criar o banco de dados `mentora_db` (se nao existir)
 - Criar a tabela `Users`
-- Inserir o usuário Master seed:
+- Inserir o usuario Master seed:
   - Email: master@email.com
   - Nome: Master Administrador
   - Role: Master
 
-## 4. Verificar a migration
+## 5. Verificar a migration
 
 Para verificar se a migration foi criada corretamente:
 
@@ -40,7 +47,7 @@ Para verificar se a migration foi criada corretamente:
 dotnet ef migrations list --project src/Mentora.Infrastructure --startup-project src/Mentora.API
 ```
 
-## 5. Remover migration (se necessário)
+## 6. Remover migration (se necessario)
 
 Para remover a última migration:
 
