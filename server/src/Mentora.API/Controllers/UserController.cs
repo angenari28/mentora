@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Mentora.Application.Interfaces;
+using Mentora.Domain.Common;
 
 namespace Mentora.API.Controllers;
 
@@ -8,11 +9,11 @@ namespace Mentora.API.Controllers;
 public class UserController(IUserService _userService) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult> GetAll([FromQuery] PaginationParams pagination)
     {
         try
         {
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetPagedResult(pagination);
             return Ok(new
             {
                 success = true,

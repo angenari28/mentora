@@ -1,8 +1,9 @@
 using Mentora.Domain.Entities;
+using Mentora.Domain.Common;
 
 namespace Mentora.Domain.Interfaces;
 
-public interface IUserRepository
+public interface IUserRepository : IPagedRepository<User>
 {
     Task<User?> GetByEmailAsync(string email);
     Task<User?> GetByIdAsync(Guid id);

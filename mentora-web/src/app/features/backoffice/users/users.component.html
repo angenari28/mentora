@@ -61,7 +61,7 @@
   <!-- USERS TABLE -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">👥 Lista de Usuários ({{ users().length }})</h3>
+      <h3 class="card-title">👥 Lista de Usuários ({{ users().totalCount }})</h3>
       <div class="card-actions">
         <button class="btn btn-sm btn-ghost">📥 Exportar</button>
       </div>
@@ -101,14 +101,14 @@
                 </td>
               </tr>
             }
-            @if (!loading() && !error() && users().length === 0) {
+            @if (!loading() && !error() && users().totalCount === 0) {
               <tr>
                 <td colspan="6" class="table-state">
                   <p>Nenhum usuário encontrado</p>
                 </td>
               </tr>
             }
-            @for (user of users(); track $index) {
+            @for (user of users().items; track $index) {
               <tr>
                 <td>
                   <div
@@ -174,13 +174,17 @@
         </table>
       </div>
       <div class="pagination">
-        <button class="pagination-btn" disabled>‹</button>
-        <button class="pagination-btn active">1</button>
-        <button class="pagination-btn">2</button>
-        <button class="pagination-btn">3</button>
-        <button class="pagination-btn">...</button>
-        <button class="pagination-btn">12</button>
-        <button class="pagination-btn">›</button>
+        <button class="pagination-btn" [disabled]="!users().hasPrevious">‹</button>
+        @for (page of pageNumbers; track page) {
+          <button
+            class="pagination-btn"
+            [class.active]="page === users().pageNumber"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+        <button class="pagination-btn" [disabled]="!users().hasNext">›</button>
       </div>
     </div>
   </div>

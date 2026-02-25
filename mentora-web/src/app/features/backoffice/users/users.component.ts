@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../services/responses/user.response';
+import { ListItem } from '@services/responses/shared/list-item.response';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +14,7 @@ import { User } from '../../../services/responses/user.response';
 export class UsersComponent {
   private readonly userService = inject(UserService);
 
-  users = signal<User[]>([]);
+  users = signal<ListItem<User>>({ items: [], totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false });
   loading = signal(false);
   error = signal('');
 
@@ -51,5 +52,15 @@ export class UsersComponent {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  get pageNumbers(): number[] {
+    const total = this.users().totalPages;
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  goToPage(page: number): void {
+    console.log('Navegar para página:', page);
+    // TODO: Implementar navegação de página com paginationParams
   }
 }

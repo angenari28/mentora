@@ -1,3 +1,5 @@
+import { ListItem } from './shared/list-item.response';
+
 export interface User {
   id: string;
   email: string;

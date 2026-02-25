@@ -40,7 +40,7 @@ public class AuthService(IUserRepository _userRepository) : IAuthService
             Success = true,
             Message = "Login realizado com sucesso",
             Token = "mock-token-" + Guid.NewGuid().ToString(),
-            User = new UserData
+            User = new UserResponse
             {
                 Id = user.Id,
                 Email = user.Email,

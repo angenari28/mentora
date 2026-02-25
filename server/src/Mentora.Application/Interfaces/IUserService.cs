@@ -1,10 +1,11 @@
 using Mentora.Application.DTOs;
+using Mentora.Domain.Common;
 
 namespace Mentora.Application.Interfaces;
 
 public interface IUserService
 {
-    Task<IEnumerable<UserData>> GetAllUsersAsync();
-    Task<UserData?> GetUserByIdAsync(Guid id);
+    Task<PagedResult<UserResponse>> GetPagedResult(PaginationParams pagination);
+    Task<UserResponse?> GetUserByIdAsync(Guid id);
 }
 
