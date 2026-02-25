@@ -6,11 +6,6 @@ using Mentora.Infrastructure.Data;
 
 namespace Mentora.Infrastructure.Repositories;
 
-public interface IWorkspaceRepository : IPagedRepository<Workspace>
-{
-    Task<Workspace?> GetByIdAsync(Guid id);
-}
-
 public class WorkspaceRepository(MentoraDbContext _context) : IWorkspaceRepository
 {
     public async Task<Workspace?> GetByIdAsync(Guid id)

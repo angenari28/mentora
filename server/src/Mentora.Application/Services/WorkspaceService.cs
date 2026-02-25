@@ -1,7 +1,7 @@
 using Mentora.Application.Interfaces;
 using Mentora.Domain.Common;
 using Mentora.Domain.Entities;
-using Mentora.Infrastructure.Repositories;
+using Mentora.Domain.Interfaces;
 
 namespace Mentora.Application.Services;
 
