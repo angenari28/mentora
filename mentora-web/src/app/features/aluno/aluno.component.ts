@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { HeaderComponent } from './layout/header/header.component';
 import { CoursePlayerComponent } from './course-player/course-player.component';
 
@@ -7,13 +8,17 @@ import { CoursePlayerComponent } from './course-player/course-player.component';
   standalone: true,
   imports: [HeaderComponent, CoursePlayerComponent],
   templateUrl: './aluno.component.html',
-  styleUrl: './aluno.component.css'
+  styleUrls: ['./aluno.component.css']
 })
-export class AlunoComponent {
+export class AlunoComponent implements OnInit {
 
   public currentSlide = 0;
   public totalSlides = 5;
+
+  private readonly titleService = inject(Title);
+
   ngOnInit(): void {
+    this.titleService.setTitle('Aluno');
     const win = window as unknown as Record<string, any>;
 
     win["openCourse"] = (courseId: string) => {

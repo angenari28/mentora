@@ -25,7 +25,11 @@
   <div class="card" style="margin-bottom: 2rem">
     <div class="card-body">
       <div
-        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;"
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1.5rem;
+        "
       >
         <div class="form-group" style="margin: 0">
           <label class="form-label">Status</label>
@@ -63,7 +67,7 @@
   <!-- USERS TABLE -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">👥 Lista de Usuários (248)</h3>
+      <h3 class="card-title">👥 Lista de Usuários ({{ users().length }})</h3>
       <div class="card-actions">
         <button class="btn btn-sm btn-ghost">📥 Exportar</button>
       </div>
@@ -84,246 +88,85 @@
               <th>Usuário</th>
               <th>Função</th>
               <th>Status</th>
-              <th>Último Acesso</th>
               <th>Cadastro</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">AS</div>
-                  <div class="user-details">
-                    <p class="user-name">Admin Silva</p>
-                    <p class="user-email">admin@empresa.com</p>
+            @if (loading()) {
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 2rem">
+                  <p>Carregando usuários...</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && error()) {
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 2rem; color: red">
+                  <p>{{ error() }}</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && !error() && users().length === 0) {
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 2rem">
+                  <p>Nenhum usuário encontrado</p>
+                </td>
+              </tr>
+            }
+            @for (user of users(); track $index) {
+              <tr>
+                <td>
+                  <div
+                    class="checkbox-wrapper"
+                    onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                  >
+                    <div class="checkbox"></div>
                   </div>
-                </div>
-              </td>
-              <td><span class="badge badge-danger">🔑 Admin</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>Agora</td>
-              <td>15/01/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost" (click)="switchScreen('details')">
-                    Ver
-                  </button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">MS</div>
-                  <div class="user-details">
-                    <p class="user-name">Maria Santos</p>
-                    <p class="user-email">maria.santos@empresa.com</p>
+                </td>
+                <td>
+                  <div class="user-cell">
+                    <div class="table-avatar">{{ user.name.substring(0, 2).toUpperCase() }}</div>
+                    <div class="user-details">
+                      <p class="user-name">{{ user.name }}</p>
+                      <p class="user-email">{{ user.email }}</p>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td><span class="badge badge-info">✏️ Editor</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>há 2 horas</td>
-              <td>20/03/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">PC</div>
-                  <div class="user-details">
-                    <p class="user-name">Pedro Costa</p>
-                    <p class="user-email">pedro.costa@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-neutral">👤 Usuário</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>há 5 horas</td>
-              <td>10/05/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">AO</div>
-                  <div class="user-details">
-                    <p class="user-name">Ana Oliveira</p>
-                    <p class="user-email">ana.oliveira@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-info">✏️ Editor</span></td>
-              <td><span class="badge badge-warning">⏸ Inativo</span></td>
-              <td>há 2 dias</td>
-              <td>28/06/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">RF</div>
-                  <div class="user-details">
-                    <p class="user-name">Ricardo Ferreira</p>
-                    <p class="user-email">ricardo.f@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-neutral">👤 Usuário</span></td>
-              <td><span class="badge badge-danger">🚫 Bloqueado</span></td>
-              <td>há 1 semana</td>
-              <td>12/08/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">CS</div>
-                  <div class="user-details">
-                    <p class="user-name">Carla Souza</p>
-                    <p class="user-email">carla.souza@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-neutral">👤 Usuário</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>há 1 hora</td>
-              <td>03/09/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">FL</div>
-                  <div class="user-details">
-                    <p class="user-name">Fernando Lima</p>
-                    <p class="user-email">fernando.lima@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-info">✏️ Editor</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>há 30 min</td>
-              <td>18/10/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="checkbox-wrapper"
-                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
-                >
-                  <div class="checkbox"></div>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">JA</div>
-                  <div class="user-details">
-                    <p class="user-name">Juliana Alves</p>
-                    <p class="user-email">juliana.alves@empresa.com</p>
-                  </div>
-                </div>
-              </td>
-              <td><span class="badge badge-neutral">👤 Usuário</span></td>
-              <td><span class="badge badge-success">✓ Ativo</span></td>
-              <td>há 3 horas</td>
-              <td>25/11/2023</td>
-              <td>
-                <div style="display: flex; gap: 0.5rem">
-                  <button class="btn btn-sm btn-ghost">Ver</button>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
-                </div>
-              </td>
-            </tr>
+                </td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'badge-danger': user.role === 'Master' || user.role === 'Admin',
+                      'badge-info': user.role === 'Editor',
+                      'badge-neutral': user.role === 'Student',
+                    }"
+                  >
+                    {{ user.role }}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'badge-success': user.isActive === true,
+                      'badge-warning': user.isActive === false,
+                    }"
+                  >
+                    {{ user.isActive ? '✓ Ativo' : '⏸ Inativo' }}
+                  </span>
+                </td>
+                <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem">
+                      <button class="btn btn-sm btn-ghost" [disabled]="user.role === 'Master' || !user.isActive" (click)="switchScreen('details')">
+                        Ver
+                      </button>
+                      <button class="btn btn-sm btn-ghost" [disabled]="user.role === 'Master' || !user.isActive">Editar</button>
+                    </div>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,7 +13,7 @@ import { AuthService } from '@services/auth.service';
   templateUrl: './login-gestao.component.html',
   styleUrl: './login-gestao.component.css'
 })
-export class LoginGestaoComponent {
+export class LoginGestaoComponent implements OnInit {
   email = '';
   password = '';
   rememberMe = false;
@@ -22,6 +23,11 @@ export class LoginGestaoComponent {
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly titleService = inject(Title);
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Login Gestão');
+  }
 
   onSubmit(): void {
     if (!this.email || !this.password) {

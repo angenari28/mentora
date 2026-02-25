@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -11,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login-aluno.component.html',
   styleUrl: './login-aluno.component.css'
 })
-export class LoginAlunoComponent {
+export class LoginAlunoComponent implements OnInit {
   email = '';
   password = '';
   loading = false;
@@ -20,8 +21,13 @@ export class LoginAlunoComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Login Aluno');
+  }
 
   onSubmit(): void {
     if (!this.email || !this.password) {

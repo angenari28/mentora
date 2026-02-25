@@ -75,7 +75,7 @@ html, body {
 	border: 1px solid #E5E9F0;
 }
 
-.btn-ghost:hover {
+.btn-ghost:not(:disabled):hover {
 	background: #FFFFFF;
 	color: #1C2340;
 	border-color: #CBD5E1;

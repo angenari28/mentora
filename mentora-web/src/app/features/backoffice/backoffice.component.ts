@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
@@ -11,7 +11,7 @@ import { DetailsScreenComponent } from './details-screen/details-screen.componen
   standalone: true,
   imports: [SidebarComponent, DashboardComponent, UsersComponent, NavbarComponent, DetailsScreenComponent],
   templateUrl: './backoffice.component.html',
-  styleUrl: './backoffice.component.css',
+  styleUrls: ['./backoffice.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class BackofficeComponent implements OnInit, OnDestroy {
@@ -24,10 +24,10 @@ export class BackofficeComponent implements OnInit, OnDestroy {
       userMenuDropdown.classList.remove('active');
     }
   };
-
-  constructor(private router: Router) {}
+  private readonly titleService = inject(Title);
 
   ngOnInit(): void {
+    this.titleService.setTitle('Backoffice');
     const win = window as unknown as Record<string, any>;
 
     win["switchTab"] = (event: Event, tabId: string) => {
