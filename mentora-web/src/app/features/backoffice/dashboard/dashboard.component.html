@@ -11,10 +11,10 @@
     <div class="page-title-row">
       <div>
         <h1 class="page-title" id="dashboard-title">
-          Painel de Controle
+          Backoffice Dashboard
         </h1>
         <p class="page-subtitle" id="welcome-message">
-          Bem-vindo de volta! Aqui está o resumo de hoje.
+          Mentora - Plataforma de Mentoria Online
         </p>
       </div>
       <div class="page-actions">
@@ -25,45 +25,7 @@
       </div>
     </div>
   </div>
-  <!-- STATS CARDS -->
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-header">
-        <div class="stat-icon">👥</div>
-        <div class="stat-trend up">↑ 12.5%</div>
-      </div>
-      <p class="stat-label">Usuários Ativos</p>
-      <h3 class="stat-value">2,847</h3>
-      <p class="stat-footer">+324 novos usuários este mês</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-header">
-        <div class="stat-icon">💰</div>
-        <div class="stat-trend up">↑ 8.2%</div>
-      </div>
-      <p class="stat-label">Receita Total</p>
-      <h3 class="stat-value">R$ 48.2K</h3>
-      <p class="stat-footer">+R$ 3.8K vs. mês anterior</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-header">
-        <div class="stat-icon">🛒</div>
-        <div class="stat-trend down">↓ 3.1%</div>
-      </div>
-      <p class="stat-label">Pedidos</p>
-      <h3 class="stat-value">1,249</h3>
-      <p class="stat-footer">387 pedidos pendentes</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-header">
-        <div class="stat-icon">📈</div>
-        <div class="stat-trend up">↑ 15.3%</div>
-      </div>
-      <p class="stat-label">Taxa de Conversão</p>
-      <h3 class="stat-value">3.24%</h3>
-      <p class="stat-footer">Acima da média mensal</p>
-    </div>
-  </div>
+  <app-stats-grid [items]="stats"></app-stats-grid>
   <!-- MAIN CONTENT GRID -->
   <div class="content-grid">
     <!-- CHART CARD -->
@@ -148,12 +110,12 @@
       </div>
     </div>
   </div>
-  <!-- RECENT ORDERS TABLE -->
+  <!-- TURMAS TABLE -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">🛒 Pedidos Recentes</h3>
+      <h3 class="card-title">📚 Turmas</h3>
       <div class="card-actions">
-        <button class="btn btn-sm btn-ghost">Ver Todos</button>
+        <button class="btn btn-sm btn-ghost">Ver Todas</button>
       </div>
     </div>
     <div class="card-body card-body-compact">
@@ -161,119 +123,62 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Cliente</th>
-              <th>Produto</th>
-              <th>Valor</th>
+              <th>Nome</th>
+              <th>Data Início</th>
+              <th>Data Fim</th>
               <th>Status</th>
-              <th>Data</th>
+              <th>Criado em</th>
+              <th>Alterado em</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>#4589</td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">JS</div>
-                  <div class="user-details">
-                    <p class="user-name">João Silva</p>
-                    <p class="user-email">joao@email.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Notebook Dell XPS</td>
-              <td>R$ 7.499,00</td>
-              <td>
-                <span class="badge badge-success">✓ Entregue</span>
-              </td>
-              <td>22/12/2024</td>
+              <td>Turma Fundamentos 01</td>
+              <td>05/02/2025</td>
+              <td>20/04/2025</td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>15/01/2025</td>
+              <td>10/02/2025</td>
               <td>
                 <button class="btn btn-sm btn-ghost">Ver</button>
+                <button class="btn btn-sm btn-ghost">Editar</button>
               </td>
             </tr>
             <tr>
-              <td>#4588</td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">MS</div>
-                  <div class="user-details">
-                    <p class="user-name">Maria Santos</p>
-                    <p class="user-email">maria@email.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>iPhone 15 Pro</td>
-              <td>R$ 8.999,00</td>
-              <td>
-                <span class="badge badge-warning">⏳ Processando</span>
-              </td>
-              <td>22/12/2024</td>
+              <td>Turma Avançado 02</td>
+              <td>18/03/2025</td>
+              <td>30/06/2025</td>
+              <td><span class="badge badge-success">✓ Ativo</span></td>
+              <td>22/02/2025</td>
+              <td>01/03/2025</td>
               <td>
                 <button class="btn btn-sm btn-ghost">Ver</button>
+                <button class="btn btn-sm btn-ghost">Editar</button>
               </td>
             </tr>
             <tr>
-              <td>#4587</td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">PC</div>
-                  <div class="user-details">
-                    <p class="user-name">Pedro Costa</p>
-                    <p class="user-email">pedro@email.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Smart TV 55"</td>
-              <td>R$ 2.899,00</td>
-              <td>
-                <span class="badge badge-info">📦 Enviado</span>
-              </td>
-              <td>21/12/2024</td>
+              <td>Turma Bootcamp 03</td>
+              <td>10/01/2025</td>
+              <td>10/03/2025</td>
+              <td><span class="badge badge-danger">⏸ Inativo</span></td>
+              <td>02/12/2024</td>
+              <td>11/03/2025</td>
               <td>
                 <button class="btn btn-sm btn-ghost">Ver</button>
+                <button class="btn btn-sm btn-ghost">Editar</button>
               </td>
             </tr>
             <tr>
-              <td>#4586</td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">AO</div>
-                  <div class="user-details">
-                    <p class="user-name">Ana Oliveira</p>
-                    <p class="user-email">ana@email.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Fone AirPods Pro</td>
-              <td>R$ 2.199,00</td>
-              <td>
-                <span class="badge badge-danger">✕ Cancelado</span>
-              </td>
-              <td>21/12/2024</td>
+              <td>Turma Intensivo 04</td>
+              <td>01/04/2025</td>
+              <td>15/05/2025</td>
+              <td><span class="badge badge-danger">⏸ Inativo</span></td>
+              <td>05/03/2025</td>
+              <td>06/03/2025</td>
               <td>
                 <button class="btn btn-sm btn-ghost">Ver</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#4585</td>
-              <td>
-                <div class="user-cell">
-                  <div class="table-avatar">RF</div>
-                  <div class="user-details">
-                    <p class="user-name">Ricardo Ferreira</p>
-                    <p class="user-email">ricardo@email.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Console PlayStation 5</td>
-              <td>R$ 4.299,00</td>
-              <td>
-                <span class="badge badge-success">✓ Entregue</span>
-              </td>
-              <td>20/12/2024</td>
-              <td>
-                <button class="btn btn-sm btn-ghost">Ver</button>
+                <button class="btn btn-sm btn-ghost">Editar</button>
               </td>
             </tr>
           </tbody>
