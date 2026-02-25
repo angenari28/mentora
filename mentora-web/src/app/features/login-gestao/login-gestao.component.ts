@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-login-gestao',
@@ -19,10 +20,8 @@ export class LoginGestaoComponent {
   errorMessage = '';
   successMessage = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   onSubmit(): void {
     if (!this.email || !this.password) {
