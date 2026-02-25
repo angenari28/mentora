@@ -1,0 +1,162 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <nav class="breadcrumb">
+      <a
+        href="#"
+        class="breadcrumb-item"
+        (click)="switchScreen('dashboard'); $event.preventDefault()"
+        >Home</a
+      >
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">Workspaces</span>
+    </nav>
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">Gestão de Workspaces</h1>
+        <p class="page-subtitle">Gerencie todos os workspaces do sistema</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost">🔽 Filtros</button>
+        <button class="btn btn-primary">➕ Novo Workspace</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="card filters-card">
+    <div class="card-body">
+      <div class="filters-grid">
+        <div class="form-group form-group-compact">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Todos</option>
+            <option>Ativos</option>
+            <option>Inativos</option>
+          </select>
+        </div>
+        <div class="form-group form-group-compact">
+          <label class="form-label">Período</label>
+          <select class="form-select">
+            <option>Último mês</option>
+            <option>Últimos 3 meses</option>
+            <option>Último ano</option>
+            <option>Todos</option>
+          </select>
+        </div>
+        <div class="filters-apply">
+          <button class="btn btn-primary btn-block">Aplicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACES TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🏢 Lista de Workspaces ({{ workspaces().totalCount }})</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </th>
+              <th>Workspace</th>
+              <th>URL</th>
+              <th>Status</th>
+              <th>Cadastro</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (loading()) {
+              <tr>
+                <td colspan="6" class="table-state">
+                  <p>Carregando workspaces...</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && error()) {
+              <tr>
+                <td colspan="6" class="table-state table-state-error">
+                  <p>{{ error() }}</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && !error() && workspaces().totalCount === 0) {
+              <tr>
+                <td colspan="6" class="table-state">
+                  <p>Nenhum workspace encontrado</p>
+                </td>
+              </tr>
+            }
+            @for (workspace of workspaces().items; track $index) {
+              <tr>
+                <td>
+                  <div
+                    class="checkbox-wrapper"
+                    onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                  >
+                    <div class="checkbox"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="workspace-cell">
+                    <div class="table-avatar" [style.background]="workspace.primaryColor">
+                      {{ workspace.name.substring(0, 2).toUpperCase() }}
+                    </div>
+                    <div class="workspace-details">
+                      <p class="workspace-name">{{ workspace.name }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ workspace.url }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'badge-success': workspace.active === true,
+                      'badge-warning': workspace.active === false,
+                    }"
+                  >
+                    {{ workspace.active ? '✓ Ativo' : '⏸ Inativo' }}
+                  </span>
+                </td>
+                <td>{{ workspace.createdAt | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <div class="workspace-actions">
+                    <button class="btn btn-sm btn-ghost">Ver</button>
+                    <button class="btn btn-sm btn-ghost">Editar</button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="pagination-btn" [disabled]="!workspaces().hasPrevious">‹</button>
+        @for (page of pageNumbers; track page) {
+          <button
+            class="pagination-btn"
+            [class.active]="page === workspaces().pageNumber"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+        <button class="pagination-btn" [disabled]="!workspaces().hasNext">›</button>
+      </div>
+    </div>
+  </div>
+</div>

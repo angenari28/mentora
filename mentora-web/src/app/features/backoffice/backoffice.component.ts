@@ -3,13 +3,14 @@ import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
+import { WorkspacesComponent } from './workspaces/workspaces.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { DetailsScreenComponent } from './details-screen/details-screen.component';
 
 @Component({
   selector: 'app-backoffice',
   standalone: true,
-  imports: [SidebarComponent, DashboardComponent, UsersComponent, NavbarComponent, DetailsScreenComponent],
+  imports: [SidebarComponent, DashboardComponent, UsersComponent, WorkspacesComponent, NavbarComponent, DetailsScreenComponent],
   templateUrl: './backoffice.component.html',
   styleUrls: ['./backoffice.component.css'],
   encapsulation: ViewEncapsulation.None
