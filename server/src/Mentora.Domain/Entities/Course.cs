@@ -5,6 +5,7 @@ namespace Mentora.Domain.Entities;
 public class Course : EntityGuidBase
 {
     public Guid CategoryId { get; set; }
+    public Guid WorkspaceId { get; set; }
     public string Name { get; set; } = string.Empty;
     public bool ShowCertificate { get; set; }
     public bool Active { get; set; }
@@ -13,4 +14,5 @@ public class Course : EntityGuidBase
     public int WorkloadHours { get; set; }
 
     public Category Category { get; set; } = null!;
+    public Workspace Workspace { get; set; } = null!;
 }

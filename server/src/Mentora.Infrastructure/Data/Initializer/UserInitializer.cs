@@ -6,19 +6,20 @@ namespace Mentora.Infrastructure.Data.Initializer;
 
 public static class UserInitializer
 {
-    public static void Initialize(ModelBuilder modelBuilder)
+    public static void Initialize(ModelBuilder modelBuilder, Guid WorkspaceId = default)
     {
         modelBuilder.Entity<User>().HasData(
             new User
             {
-                Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                Id = new Guid("935580d8-2fd7-4113-ba2b-b5034bf64112"),
                 Email = "master@email.com",
                 Name = "Master Administrador",
                 Role = UserRole.Master,
                 IsActive = true,
                 CreatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),
                 UpdatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),
-                LastLoginAt = null
+                LastLoginAt = null,
+                WorkspaceId = WorkspaceId
             }
         );
     }

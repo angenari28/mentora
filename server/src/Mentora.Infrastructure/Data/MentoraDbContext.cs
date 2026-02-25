@@ -10,6 +10,10 @@ public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbCo
     public DbSet<Class> Classes { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Course> Courses { get; set; }
+    public DbSet<Workspace> Workspaces { get; set; }
+    public DbSet<ClassStudent> ClassStudents { get; set; }
+    public DbSet<CourseSlide> CourseSlides { get; set; }
+    public DbSet<SlideType> SlideTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -17,6 +21,7 @@ public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbCo
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MentoraDbContext).Assembly);
 
-        UserInitializer.Initialize(modelBuilder);
+        var workspace = WorkspaceInitializer.Initialize(modelBuilder);
+        UserInitializer.Initialize(modelBuilder, workspace.Id);
     }
 }
