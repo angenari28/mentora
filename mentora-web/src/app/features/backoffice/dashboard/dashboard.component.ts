@@ -9,6 +9,12 @@ import { StatItem, StatsGridComponent } from './shared/stats-grid/stats-grid.com
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  courseCompletionChart = [
+    { name: 'Fundamentos de Mentoria', completion: 78 },
+    { name: 'Comunicação Estratégica', completion: 64 },
+    { name: 'Liderança Prática', completion: 91 }
+  ];
+
   stats: StatItem[] = [
     {
       icon: '👥',
