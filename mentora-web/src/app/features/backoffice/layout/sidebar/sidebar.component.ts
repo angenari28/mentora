@@ -1,32 +1,16 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, input } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
+  imports: [RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  constructor(private router: Router) {}
-
-  switchScreen(screenId: string): void {
-    document.querySelectorAll('.screen').forEach((screen) => {
-      screen.classList.remove('active');
-    });
-
-    const targetScreen = document.getElementById(`${screenId}-screen`);
-    targetScreen?.classList.add('active');
-
-    document.querySelectorAll('.nav-item').forEach((item) => {
-      item.classList.remove('active');
-    });
-
-    const eventTarget = (window as any).event?.target as HTMLElement | undefined;
-    eventTarget?.classList.add('active');
-
-    window.scrollTo(0, 0);
-  }
+  public subtitle = input<string>('');
+  private readonly router = inject(Router);
 
   toggleUserMenu(event: Event): void {
     event.stopPropagation();

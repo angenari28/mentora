@@ -18,5 +18,5 @@ export interface StatItem {
   styleUrl: './stats-grid.component.css'
 })
 export class StatsGridComponent {
-  @Input() items: StatItem[] = [];
+  @Input() stats: StatItem[] = [];
 }

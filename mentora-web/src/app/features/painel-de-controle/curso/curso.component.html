@@ -1,0 +1,53 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Cursos</h1>
+    <p class="page-subtitle">Gestão de cursos do painel de controle.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">📚 Lista de Cursos</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary">➕ Novo Curso</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Categoria</th>
+              <th>Ativo</th>
+              <th>Mostrar certificado</th>
+              <th>Carga horária</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let curso of cursos; trackBy: trackByNome">
+              <td>{{ curso.nome }}</td>
+              <td>{{ curso.categoria }}</td>
+              <td>
+                <span class="badge" [ngClass]="curso.ativo ? 'badge-success' : 'badge-warning'">
+                  {{ curso.ativo ? '✓ Ativo' : '⏸ Inativo' }}
+                </span>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="curso.mostrarCertificado ? 'badge-success' : 'badge-warning'">
+                  {{ curso.mostrarCertificado ? 'Sim' : 'Não' }}
+                </span>
+              </td>
+              <td>{{ curso.cargaHoraria }}</td>
+              <td>
+                <button class="btn btn-sm btn-ghost" [disabled]="!curso.ativo">Ver</button>
+                <button class="btn btn-sm btn-ghost" [disabled]="!curso.ativo">Editar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

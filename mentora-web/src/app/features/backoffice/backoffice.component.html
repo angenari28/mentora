@@ -1,29 +1,10 @@
 <div class="admin-layout">
-  <!-- SIDEBAR -->
-  <app-sidebar></app-sidebar>
-  <!-- MAIN CONTENT -->
+  <app-sidebar [subtitle]="'Backoffice'"></app-sidebar>
   <main class="main-content">
-    <!-- TOP NAVBAR -->
     <app-navbar></app-navbar>
-    <!-- DASHBOARD SCREEN -->
-    <div class="screen active" id="dashboard-screen">
-      <app-dashboard></app-dashboard>
-    </div>
-    <!-- USERS LIST SCREEN -->
-    <div class="screen" id="users-screen">
-      <app-users></app-users>
-    </div>
-    <!-- WORKSPACES LIST SCREEN -->
-    <div class="screen" id="workspaces-screen">
-      <app-workspaces></app-workspaces>
-    </div>
-    <!-- DETAILS SCREEN -->
-    <div class="screen" id="details-screen">
-      <app-details-screen></app-details-screen>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 </div>
-<!-- MODAL -->
 <div
   class="modal-overlay"
   id="demo-modal"

@@ -1,20 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { StatItem, StatsGridComponent } from '@components/stats/stats-grid.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-painel-dashboard',
   standalone: true,
-  imports: [StatsGridComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  imports: [CommonModule, StatsGridComponent],
+  templateUrl: './painel-dashboard.component.html',
+  styleUrls: ['./painel-dashboard.component.css']
 })
-export class DashboardComponent {
-  courseCompletionChart = [
-    { name: 'Fundamentos de Mentoria', completion: 78 },
-    { name: 'Comunicação Estratégica', completion: 64 },
-    { name: 'Liderança Prática', completion: 91 }
-  ];
-
+export class PainelDashboardComponent {
   stats: StatItem[] = [
     {
       icon: '👥',
@@ -50,7 +45,12 @@ export class DashboardComponent {
     }
   ];
 
-  openModal(): void {
-    document.getElementById('demo-modal')?.classList.add('active');
-  }
+  activities = [
+    {
+      icon: '👤',
+      title: 'Novo usuário registrado',
+      description: 'Maria Silva criou uma conta',
+      time: 'há 5 minutos'
+    }
+  ];
 }

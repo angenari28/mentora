@@ -46,10 +46,10 @@ export class LoginGestaoComponent implements OnInit {
           if (response.success) {
             this.successMessage = response.message;
             const role = response.user?.role?.toLowerCase();
-            if (role === 'master' || role === 'admin') {
+            if (role === 'master') {
               this.router.navigate(['/backoffice']);
-            } else {
-              this.router.navigate(['/aluno']);
+            } else if (role === 'administrator') {
+              this.router.navigate(['/painel-de-controle']);
             }
           } else {
             this.errorMessage = response.message || 'Falha ao autenticar.';

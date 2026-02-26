@@ -131,8 +131,8 @@
                   <span
                     class="badge"
                     [ngClass]="{
-                      'badge-danger': user.role === 'Master' || user.role === 'Admin',
-                      'badge-info': user.role === 'Editor',
+                      'badge-danger': user.role === 'Master',
+                      'badge-info': user.role === 'Administrator',
                       'badge-neutral': user.role === 'Student',
                     }"
                   >

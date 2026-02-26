@@ -1,0 +1,56 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-text">
+        <img
+          src="/assets/mentora-logo.png"
+          alt="Mentora Logo"
+          style="width: 179px; height: 50px"
+        />
+        <p class="logo-subtitle">Painel de Controle</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <h3 class="nav-section-title">Principal</h3>
+        <a class="nav-item" routerLink="." routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a class="nav-item" routerLink="curso" routerLinkActive="active">
+          <span class="nav-icon">📘</span> Curso
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar">AS</div>
+        <div class="user-info">
+          <p class="user-name">Admin Silva</p>
+          <p class="user-role">Administrador</p>
+        </div>
+        <a href="#" class="logout-link" (click)="logout($event)">Sair</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-navbar">
+      <div class="navbar-search">
+        <span class="search-icon">🔍</span>
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Buscar alunos, pedidos, produtos..."
+        />
+      </div>
+      <div class="navbar-actions">
+        <button class="navbar-btn">🔔</button>
+        <button class="navbar-btn">⚙️</button>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </main>
+</div>

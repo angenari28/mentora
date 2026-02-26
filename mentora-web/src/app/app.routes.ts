@@ -1,14 +1,38 @@
 import { Routes } from '@angular/router';
 import { AlunoComponent } from './features/aluno/aluno.component';
 import { BackofficeComponent } from './features/backoffice/backoffice.component';
+import { DashboardComponent } from './features/backoffice/dashboard/dashboard.component';
+import { UsersComponent } from './features/backoffice/users/users.component';
+import { DetailsScreenComponent } from './features/backoffice/details-screen/details-screen.component';
+import { WorkspacesComponent } from './features/backoffice/workspaces/workspaces.component';
 import { LoginAlunoComponent } from './features/login-aluno/login-aluno.component';
 import { LoginGestaoComponent } from './features/login-gestao/login-gestao.component';
+import { PainelDeControleComponent } from './features/painel-de-controle/painel-de-controle.component';
+import { PainelDashboardComponent } from './features/painel-de-controle/dashboard/painel-dashboard.component';
+import { CursoComponent } from './features/painel-de-controle/curso/curso.component';
 
 export const routes: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: 'login-aluno' },
 	{ path: 'login-gestao', component: LoginGestaoComponent },
 	{ path: 'login-aluno', component: LoginAlunoComponent },
-	{ path: 'backoffice', component: BackofficeComponent },
+	{
+		path: 'backoffice',
+		component: BackofficeComponent,
+		children: [
+			{ path: '', pathMatch: 'full', component: DashboardComponent },
+			{ path: 'usuarios', component: UsersComponent },
+			{ path: 'detalhes', component: DetailsScreenComponent },
+			{ path: 'workspaces', component: WorkspacesComponent }
+		]
+	},
+	{
+		path: 'painel-de-controle',
+		component: PainelDeControleComponent,
+		children: [
+			{ path: '', pathMatch: 'full', component: PainelDashboardComponent },
+			{ path: 'curso', component: CursoComponent }
+		]
+	},
 	{ path: 'aluno', component: AlunoComponent },
 	{ path: '**', redirectTo: 'login-gestao' }
 ];
