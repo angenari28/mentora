@@ -4,18 +4,18 @@ import { Title } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-painel-de-controle',
+  selector: 'app-control-panel',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './painel-de-controle.component.html',
-  styleUrl: './painel-de-controle.component.css'
+  templateUrl: './control-panel.component.html',
+  styleUrl: './control-panel.component.css'
 })
-export class PainelDeControleComponent implements OnInit {
+export class ControlPanelComponent implements OnInit {
   private readonly titleService = inject(Title);
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Painel de Controle');
+    this.titleService.setTitle('Control Panel');
   }
 
   logout(event: Event): void {

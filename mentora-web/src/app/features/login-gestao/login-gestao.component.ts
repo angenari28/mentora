@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@services/auth.service';
+import { WorkspaceService } from '@services/workspace.service';
+import { Workspace } from '@services/responses/workspace.response';
 
 @Component({
   selector: 'app-login-gestao',
@@ -22,6 +24,7 @@ export class LoginGestaoComponent implements OnInit {
   successMessage = '';
 
   private readonly authService = inject(AuthService);
+  private readonly workspaceService = inject(WorkspaceService);
   private readonly router = inject(Router);
   private readonly titleService = inject(Title);
 
@@ -49,7 +52,8 @@ export class LoginGestaoComponent implements OnInit {
             if (role === 'master') {
               this.router.navigate(['/backoffice']);
             } else if (role === 'administrator') {
-              this.router.navigate(['/painel-de-controle']);
+              this.addWorkspaceToLocalStorage(response.user!.workspace!);
+              this.router.navigate(['/control-panel']);
             }
           } else {
             this.errorMessage = response.message || 'Falha ao autenticar.';
@@ -61,5 +65,9 @@ export class LoginGestaoComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  addWorkspaceToLocalStorage(workspace: Workspace): void {
+    this.workspaceService.addLocalStorage(workspace);
   }
 }

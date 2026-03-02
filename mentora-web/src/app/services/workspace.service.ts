@@ -23,4 +23,8 @@ export class WorkspaceService {
   getById(id: string): Observable<{ success: boolean; message: string; data: Workspace }> {
     return this.http.get<{ success: boolean; message: string; data: Workspace }>(`${this.baseUrl}/${id}`);
   }
+
+  addLocalStorage(workspace: Workspace): void {
+    localStorage.setItem('current_workspace', JSON.stringify(workspace));
+  }
 }

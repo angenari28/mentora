@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 interface Course {
   nome: string;
@@ -10,14 +11,14 @@ interface Course {
 }
 
 @Component({
-  selector: 'app-curso',
+  selector: 'app-course',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './curso.component.html',
-  styleUrl: './curso.component.css'
+  imports: [CommonModule, RouterModule],
+  templateUrl: './course.component.html',
+  styleUrl: './course.component.css'
 })
-export class CursoComponent {
-  cursos: Course[] = [
+export class CourseComponent {
+  courses: Course[] = [
     {
       nome: 'Fundamentos de Mentoria',
       categoria: 'Mentoria',
@@ -48,7 +49,7 @@ export class CursoComponent {
     }
   ];
 
-  trackByNome(_: number, curso: Course): string {
-    return curso.nome;
+  trackByNome(_: number, course: Course): string {
+    return course.nome;
   }
 }

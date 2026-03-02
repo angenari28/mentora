@@ -1,0 +1,53 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Cursos</h1>
+    <p class="page-subtitle">Gerencie os cursos do painel de controle.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">📚 Lista de Cursos</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/course/create">➕ Novo Curso</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Categoria</th>
+              <th>Ativo</th>
+              <th>Mostrar Certificado</th>
+              <th>Duração</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses; trackBy: trackByNome">
+              <td>{{ course.nome }}</td>
+              <td>{{ course.categoria }}</td>
+              <td>
+                <span class="badge" [ngClass]="course.ativo ? 'badge-success' : 'badge-warning'">
+                  {{ course.ativo ? '✓ Ativo' : '⏸ Inativo' }}
+                </span>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="course.mostrarCertificado ? 'badge-success' : 'badge-warning'">
+                  {{ course.mostrarCertificado ? '✓ Sim' : '⏸ Não' }}
+                </span>
+              </td>
+              <td>{{ course.cargaHoraria }}</td>
+              <td>
+                <button class="btn btn-sm btn-ghost" [disabled]="!course.ativo">Visualizar</button>
+                <button class="btn btn-sm btn-ghost" [disabled]="!course.ativo">Editar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

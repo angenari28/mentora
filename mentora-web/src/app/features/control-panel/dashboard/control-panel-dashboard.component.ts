@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { StatItem, StatsGridComponent } from '@components/stats/stats-grid.component';
 
 @Component({
-  selector: 'app-painel-dashboard',
+  selector: 'app-control-panel-dashboard',
   standalone: true,
   imports: [CommonModule, StatsGridComponent],
-  templateUrl: './painel-dashboard.component.html',
-  styleUrls: ['./painel-dashboard.component.css']
+  templateUrl: './control-panel-dashboard.component.html',
+  styleUrls: ['./control-panel-dashboard.component.css']
 })
-export class PainelDashboardComponent {
+export class ControlPanelDashboardComponent {
   stats: StatItem[] = [
     {
       icon: '👥',

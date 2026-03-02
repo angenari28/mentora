@@ -1,0 +1,46 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Categorias</h1>
+    <p class="page-subtitle">Gerencie as categorias dos cursos.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🏷️ Lista de Categorias</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/category/create">➕ Nova Categoria</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Ativa</th>
+              <th>Total de Cursos</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories; trackBy: trackByNome">
+              <td>{{ category.nome }}</td>
+              <td>{{ category.descricao }}</td>
+              <td>
+                <span class="badge" [ngClass]="category.ativa ? 'badge-success' : 'badge-warning'">
+                  {{ category.ativa ? '✓ Ativa' : '⏸ Inativa' }}
+                </span>
+              </td>
+              <td>{{ category.totalCursos }}</td>
+              <td>
+                <button class="btn btn-sm btn-ghost">Editar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

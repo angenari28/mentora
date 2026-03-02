@@ -1,3 +1,5 @@
+import { Workspace } from './workspace.response';
+
 export interface LoginResponse {
   success: boolean;
   message: string;
@@ -11,5 +13,6 @@ export interface LoginResponse {
     createdAt: string;
     updatedAt: string;
     lastLoginAt?: string | null;
+    workspace?: Workspace;
   };
 }

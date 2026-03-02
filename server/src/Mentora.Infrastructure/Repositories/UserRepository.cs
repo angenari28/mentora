@@ -11,6 +11,7 @@ public class UserRepository(MentoraDbContext _context) : IUserRepository
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await _context.Users
+            .Include(u => u.Workspace)
             .FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
     }
 

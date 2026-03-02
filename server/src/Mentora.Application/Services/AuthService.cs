@@ -39,7 +39,6 @@ public class AuthService(IUserRepository _userRepository) : IAuthService
         {
             Success = true,
             Message = "Login realizado com sucesso",
-            Token = "mock-token-" + Guid.NewGuid().ToString(),
             User = new UserResponse
             {
                 Id = user.Id,
@@ -49,7 +48,12 @@ public class AuthService(IUserRepository _userRepository) : IAuthService
                 IsActive = user.IsActive,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt,
-                LastLoginAt = user.LastLoginAt
+                LastLoginAt = user.LastLoginAt,
+                Workspace = new()
+                {
+                    Id = user.Workspace.Id,
+                    Name = user.Workspace.Name
+                }
             }
         };
     }
