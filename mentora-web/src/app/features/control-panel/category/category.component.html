@@ -20,24 +20,24 @@
               <th>Nome</th>
               <th>Descrição</th>
               <th>Ativa</th>
-              <th>Total de Cursos</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of categories; trackBy: trackByNome">
-              <td>{{ category.nome }}</td>
-              <td>{{ category.descricao }}</td>
+            @for (category of categories(); track trackById($index, category)) {
+            <tr>
+              <td>{{ category.name }}</td>
+              <td>{{ category.description }}</td>
               <td>
-                <span class="badge" [ngClass]="category.ativa ? 'badge-success' : 'badge-warning'">
-                  {{ category.ativa ? '✓ Ativa' : '⏸ Inativa' }}
+                <span class="badge" [ngClass]="category.active ? 'badge-success' : 'badge-warning'">
+                  {{ category.active ? '✓ Ativa' : '⏸ Inativa' }}
                 </span>
               </td>
-              <td>{{ category.totalCursos }}</td>
               <td>
                 <button class="btn btn-sm btn-ghost">Editar</button>
               </td>
             </tr>
+          }
           </tbody>
         </table>
       </div>

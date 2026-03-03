@@ -13,7 +13,7 @@ public class CategoryService(ICategoryRepository _categoryRepository) : ICategor
         var paged = await _categoryRepository.GetPagedAsync(pagination);
         return new PagedResult<CategoryResponse>
         {
-            Items = (IReadOnlyList<CategoryResponse>)paged.Items.Select(ToResponse),
+            Items = [.. paged.Items.Select(ToResponse)],
             TotalCount = paged.TotalCount,
             PageNumber = paged.PageNumber,
             PageSize = paged.PageSize
@@ -29,7 +29,7 @@ public class CategoryService(ICategoryRepository _categoryRepository) : ICategor
     public async Task<IEnumerable<CategoryResponse>> GetByWorkspaceIdAsync(Guid workspaceId)
     {
         var categories = await _categoryRepository.GetByWorkspaceIdAsync(workspaceId);
-        return categories.Select(ToResponse);
+        return categories.Select(ToResponse).ToList();
     }
 
     public async Task<CategoryResponse> CreateAsync(CategoryRequest request)

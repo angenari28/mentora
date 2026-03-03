@@ -1,13 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-interface Category {
-  nome: string;
-  descricao: string;
-  ativa: boolean;
-  totalCursos: number;
-}
+import { CategoryService } from 'app/services/category.service';
+import { CategoryResponse } from 'app/services/responses/category.response';
 
 @Component({
   selector: 'app-category',
@@ -16,15 +11,35 @@ interface Category {
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
-export class CategoryComponent {
-  categories: Category[] = [
-    { nome: 'Mentoria', descricao: 'Conteúdos sobre processos de mentoria', ativa: true, totalCursos: 4 },
-    { nome: 'Soft Skills', descricao: 'Habilidades interpessoais e comunicação', ativa: true, totalCursos: 6 },
-    { nome: 'Gestão', descricao: 'Liderança, gestão de equipes e projetos', ativa: true, totalCursos: 3 },
-    { nome: 'Produto', descricao: 'Product management e discovery', ativa: false, totalCursos: 2 },
-  ];
+export class CategoryComponent implements OnInit {
+  private readonly categoryService = inject(CategoryService);
 
-  trackByNome(_: number, category: Category): string {
-    return category.nome;
+  readonly categories = signal<CategoryResponse[]>([]);
+  readonly loading = signal(false);
+  readonly error = signal<string | null>(null);
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories(page: number = 1, pageSize: number = 10): void {
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.categoryService.getAll(page, pageSize).subscribe({
+      next: (res) => {
+        this.categories.set(res.data.items);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        this.error.set('Erro ao carregar categorias.');
+        this.loading.set(false);
+        console.error(err);
+      },
+    });
+  }
+
+  trackById(_: number, category: CategoryResponse): string {
+    return category.id;
   }
 }
