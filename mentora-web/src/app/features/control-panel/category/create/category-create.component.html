@@ -1,49 +1,55 @@
-<div class="modal-overlay active" (click)="close()">
+<div class="modal-overlay active">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h3 class="modal-title">Nova Categoria</h3>
       <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
     </div>
 
-    <form (ngSubmit)="submit(categoryForm)" #categoryForm="ngForm" novalidate>
+    <form [formRoot]="categoryForm">
       <div class="modal-body">
+        @if (categoryForm().pending()) {
+          <div class="loading-overlay">
+            <div class="spinner">carregando...</div>
+          </div>
+        }
         <div class="form-group">
-          <label class="form-label" for="nome">Nome <span class="required">*</span></label>
+          <label class="form-label" for="nome"
+            >Nome
+            @if (categoryForm.name().required()) {
+              <span class="required">*</span>
+            }
+          </label>
           <input
             id="nome"
-            name="nome"
             type="text"
             class="form-input"
-            [class.input-error]="nomeField.invalid && nomeField.touched"
+            [class.input-error]="categoryForm.name().invalid() && categoryForm.name().touched()"
             placeholder="Digite o nome da categoria"
-            [(ngModel)]="form.nome"
-            required
-            #nomeField="ngModel"
+            [formField]="categoryForm.name"
           />
-          <span class="error-msg" *ngIf="nomeField.invalid && nomeField.touched">Nome é obrigatório.</span>
+          @if (categoryForm.name().invalid() && categoryForm.name().touched()) {
+            @for (error of categoryForm.name().errors(); track $index) {
+              <span class="error-msg">{{ error.message }}</span>
+            }
+          }
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="descricao">Descrição <span class="required">*</span></label>
+          <label class="form-label" for="descricao">Descrição</label>
           <textarea
             id="descricao"
-            name="descricao"
             class="form-input form-textarea"
-            [class.input-error]="descricaoField.invalid && descricaoField.touched"
             placeholder="Descreva a categoria"
-            [(ngModel)]="form.descricao"
-            required
+            [formField]="categoryForm.description"
             rows="4"
-            #descricaoField="ngModel"
           ></textarea>
-          <span class="error-msg" *ngIf="descricaoField.invalid && descricaoField.touched">Descrição é obrigatória.</span>
         </div>
 
         <div class="form-group form-group-inline">
           <label class="form-label">Opções</label>
           <div class="options-grid">
             <label class="checkbox">
-              <input type="checkbox" name="ativa" [(ngModel)]="form.ativa" />
+              <input type="checkbox" [formField]="categoryForm.active" />
               <span>Categoria ativa</span>
             </label>
           </div>
@@ -52,7 +58,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Criar</button>
+        <button type="submit" class="btn btn-primary">Criar</button>
       </div>
     </form>
   </div>
