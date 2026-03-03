@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../services/responses/user.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
@@ -7,12 +8,13 @@ import { ListItem } from '@services/responses/shared/list-item.response';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
   private readonly userService = inject(UserService);
+  private readonly router = inject(Router);
 
   users = signal<ListItem<User>>({ items: [], totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false });
   loading = signal(false);
@@ -37,6 +39,10 @@ export class UsersComponent {
         console.error('Erro ao buscar usuários:', err);
       }
     });
+  }
+
+  navigateToCreate(): void {
+    this.router.navigate(['/backoffice/usuarios/create']);
   }
 
   switchScreen(screenId: string): void {

@@ -14,6 +14,7 @@ public static class UserInitializer
                 Id = new Guid("935580d8-2fd7-4113-ba2b-b5034bf64112"),
                 Email = "master@email.com",
                 Name = "Master Administrador",
+                PasswordHash = "AAAAAAAAAAAAAAAAAAAAAA==.Su9Ho03CNSLtGNeCDZyJlSdYk1UEJ0BXEy5uTE8cKXo=",
                 Role = UserRole.Master,
                 IsActive = true,
                 CreatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),

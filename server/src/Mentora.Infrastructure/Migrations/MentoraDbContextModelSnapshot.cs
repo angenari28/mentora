@@ -272,6 +272,10 @@ namespace Mentora.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
@@ -298,6 +302,7 @@ namespace Mentora.Infrastructure.Migrations
                             Email = "master@email.com",
                             IsActive = true,
                             Name = "Master Administrador",
+                            PasswordHash = "AAAAAAAAAAAAAAAAAAAAAA==.Su9Ho03CNSLtGNeCDZyJlSdYk1UEJ0BXEy5uTE8cKXo=",
                             Role = 3,
                             UpdatedAt = new DateTime(2026, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc),
                             WorkspaceId = new Guid("0097e236-eb5d-4858-9f23-4522833c865c")

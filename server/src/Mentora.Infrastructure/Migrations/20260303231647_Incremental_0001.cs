@@ -77,6 +77,7 @@ namespace Mentora.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<int>(type: "integer", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     LastLoginAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -225,8 +226,8 @@ namespace Mentora.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "Email", "IsActive", "LastLoginAt", "Name", "Role", "UpdatedAt", "WorkspaceId" },
-                values: new object[] { new Guid("935580d8-2fd7-4113-ba2b-b5034bf64112"), new DateTime(2026, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc), "master@email.com", true, null, "Master Administrador", 3, new DateTime(2026, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("0097e236-eb5d-4858-9f23-4522833c865c") });
+                columns: new[] { "Id", "CreatedAt", "Email", "IsActive", "LastLoginAt", "Name", "PasswordHash", "Role", "UpdatedAt", "WorkspaceId" },
+                values: new object[] { new Guid("935580d8-2fd7-4113-ba2b-b5034bf64112"), new DateTime(2026, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc), "master@email.com", true, null, "Master Administrador", "AAAAAAAAAAAAAAAAAAAAAA==.Su9Ho03CNSLtGNeCDZyJlSdYk1UEJ0BXEy5uTE8cKXo=", 3, new DateTime(2026, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("0097e236-eb5d-4858-9f23-4522833c865c") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_WorkspaceId",

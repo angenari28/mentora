@@ -1,3 +1,4 @@
+using Mentora.Application.Common;
 using Mentora.Application.DTOs;
 using Mentora.Application.Interfaces;
 using Mentora.Domain.Interfaces;
@@ -29,7 +30,16 @@ public class AuthService(IUserRepository _userRepository) : IAuthService
             };
         }
 
-        // Por enquanto, sempre aceita qualquer senha (validação será implementada posteriormente)
+        // Valida a senha
+        if (string.IsNullOrWhiteSpace(user.PasswordHash) || !PasswordHasher.Verify(request.Password, user.PasswordHash))
+        {
+            return new LoginResponse
+            {
+                Success = false,
+                Message = "Senha incorreta"
+            };
+        }
+
         // Atualiza o último login
         user.LastLoginAt = DateTime.UtcNow;
         user.UpdatedAt = DateTime.UtcNow;
