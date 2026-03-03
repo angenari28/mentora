@@ -14,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.Services.AddProblemDetails();
+
 // Database Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -90,6 +92,8 @@ if (!app.Environment.IsProduction())
 
 app.UseAuthorization();
 app.MapControllers();
+
+app.UseStatusCodePages();
 
 if (ShouldAutoCreateMigrations(app.Environment))
 {
