@@ -1,0 +1,35 @@
+<div class="table-container">
+  <ng-content />
+</div>
+
+@if (meta()) {
+  <div class="pagination">
+    @if (loading()) {
+      <ngx-skeleton-loader [theme]="{ height: '32px', width: '120px', margin: '0 4px' }" count="1" />
+    } @else {
+      <button
+        class="pagination-btn"
+        [disabled]="!meta()!.hasPrevious"
+        (click)="goToPage(meta()!.pageNumber - 1)"
+      >
+        ‹
+      </button>
+      @for (page of pageNumbers(); track page) {
+        <button
+          class="pagination-btn"
+          [class.active]="page === meta()!.pageNumber"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </button>
+      }
+      <button
+        class="pagination-btn"
+        [disabled]="!meta()!.hasNext"
+        (click)="goToPage(meta()!.pageNumber + 1)"
+      >
+        ›
+      </button>
+    }
+  </div>
+}

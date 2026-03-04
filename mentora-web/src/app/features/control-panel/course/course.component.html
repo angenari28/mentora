@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="card-body card-body-compact">
-      <div class="table-container">
-        <table class="table">
+      <app-table [meta]="pagedCourses().meta" [loading]="loading()" (pageChange)="goToPage($event)">
+        <table>
           <thead>
             <tr>
               <th>Nome</th>
@@ -73,20 +73,7 @@
             }
           </tbody>
         </table>
-      </div>
-      <div class="pagination">
-        <button class="pagination-btn" [disabled]="!pagedCourses().meta.hasPrevious" (click)="goToPage(currentPage() - 1)">‹</button>
-        @for (page of pageNumbers; track page) {
-          <button
-            class="pagination-btn"
-            [class.active]="page === pagedCourses().meta.pageNumber"
-            (click)="goToPage(page)"
-          >
-            {{ page }}
-          </button>
-        }
-        <button class="pagination-btn" [disabled]="!pagedCourses().meta.hasNext" (click)="goToPage(currentPage() + 1)">›</button>
-      </div>
+      </app-table>
     </div>
   </div>
 </div>

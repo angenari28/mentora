@@ -6,11 +6,12 @@ import { CourseService } from 'app/services/course.service';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { ListItem } from 'app/services/responses/shared/list-item.response';
 import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
+import { TableComponent } from '@components/table/table.component';
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [CommonModule, RouterModule, WorkloadHoursPipe, NgxSkeletonLoaderModule],
+  imports: [CommonModule, RouterModule, WorkloadHoursPipe, NgxSkeletonLoaderModule, TableComponent],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
@@ -50,10 +51,6 @@ export class CourseComponent implements OnInit {
     if (page < 1 || page > this.pagedCourses().meta.totalPages) return;
     this.currentPage.set(page);
     this.loadCourses();
-  }
-
-  get pageNumbers(): number[] {
-    return Array.from({ length: this.pagedCourses().meta.totalPages }, (_, i) => i + 1);
   }
 
   trackById(_: number, course: CourseResponse): string {

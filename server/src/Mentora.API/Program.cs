@@ -69,6 +69,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
 
 // Application Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -76,6 +77,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWorkspaceService, WorkspaceService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IClassService, ClassService>();
 
 var app = builder.Build();
 

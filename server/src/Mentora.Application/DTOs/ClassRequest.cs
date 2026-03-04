@@ -1,0 +1,11 @@
+namespace Mentora.Application.DTOs;
+
+public record ClassRequest
+{
+    public Guid WorkspaceId { get; set; }
+    public Guid CourseId { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public DateTime DateStart { get; set; }
+    public DateTime DateEnd { get; set; }
+    public bool Active { get; set; } = true;
+}

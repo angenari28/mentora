@@ -1,0 +1,93 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Turmas</h1>
+    <p class="page-subtitle">Gerencie as turmas dos cursos.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🎓 Lista de Turmas ({{ pagedClasses().meta.totalCount }})</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/class/create">
+          ➕ Nova Turma
+        </button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <app-table [meta]="pagedClasses().meta" [loading]="loading()" (pageChange)="goToPage($event)">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Curso</th>
+              <th>Início</th>
+              <th>Término</th>
+              <th>Ativa</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (loading()) {
+              @for (i of [1, 2, 3, 4]; track i) {
+                <tr>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', margin: '0' }" /></td>
+                  <td>
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '60px', margin: '0' }" />
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '60px', margin: '0' }" />
+                  </td>
+                </tr>
+              }
+            }
+            @if (!loading() && error()) {
+              <tr>
+                <td colspan="6" class="table-state table-state-error">
+                  <p>{{ error() }}</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && !error() && pagedClasses().meta.totalCount === 0) {
+              <tr>
+                <td colspan="6" class="table-state">
+                  <p>Nenhuma turma encontrada</p>
+                </td>
+              </tr>
+            }
+            @for (item of pagedClasses().items; track trackById($index, item)) {
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.courseName }}</td>
+                <td>{{ formatDate(item.dateStart) }}</td>
+                <td>{{ formatDate(item.dateEnd) }}</td>
+                <td>
+                  <span class="badge" [ngClass]="item.active ? 'badge-success' : 'badge-warning'">
+                    {{ item.active ? '✓ Ativa' : '⏸ Inativa' }}
+                  </span>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-ghost"
+                    [routerLink]="['/control-panel/class/edit', item.id]"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    [disabled]="deletingId() === item.id"
+                    (click)="deleteClass(item.id)"
+                  >
+                    {{ deletingId() === item.id ? '...' : 'Excluir' }}
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </app-table>
+    </div>
+  </div>
+</div>

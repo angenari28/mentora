@@ -5,11 +5,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CategoryService } from 'app/services/category.service';
 import { CategoryResponse } from 'app/services/responses/category.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
+import { TableComponent } from '@components/table/table.component';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule],
+  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule, TableComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
@@ -50,10 +51,6 @@ export class CategoryComponent implements OnInit {
     if (page < 1 || page > this.pagedCategories().meta.totalPages) return;
     this.currentPage.set(page);
     this.loadCategories();
-  }
-
-  get pageNumbers(): number[] {
-    return Array.from({ length: this.pagedCategories().meta.totalPages }, (_, i) => i + 1);
   }
 
   trackById(_: number, category: CategoryResponse): string {

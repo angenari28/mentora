@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="card-body card-body-compact">
-      <div class="table-container">
-        <table class="table">
+      <app-table [meta]="pagedCategories().meta" [loading]="loading()" (pageChange)="goToPage($event)">
+        <table>
           <thead>
             <tr>
               <th>Nome</th>
@@ -69,39 +69,7 @@
             }
           </tbody>
         </table>
-      </div>
-      <div class="pagination">
-        @if (loading()) {
-          <ngx-skeleton-loader
-            [theme]="{ height: '32px', width: '120px', margin: '0 4px' }"
-            count="1"
-          />
-        } @else {
-          <button
-            class="pagination-btn"
-            [disabled]="!pagedCategories().meta.hasPrevious"
-            (click)="goToPage(currentPage() - 1)"
-          >
-            ‹
-          </button>
-          @for (page of pageNumbers; track page) {
-            <button
-              class="pagination-btn"
-              [class.active]="page === pagedCategories().meta.pageNumber"
-              (click)="goToPage(page)"
-            >
-              {{ page }}
-            </button>
-          }
-          <button
-            class="pagination-btn"
-            [disabled]="!pagedCategories().meta.hasNext"
-            (click)="goToPage(currentPage() + 1)"
-          >
-            ›
-          </button>
-        }
-      </div>
+      </app-table>
     </div>
   </div>
 </div>

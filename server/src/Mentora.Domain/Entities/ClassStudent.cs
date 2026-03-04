@@ -1,5 +1,3 @@
-using Mentora.Domain;
-
 namespace Mentora.Domain.Entities;
 
 public class ClassStudent : EntityGuidBase
