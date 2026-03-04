@@ -16,7 +16,7 @@ export class UsersComponent {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
 
-  users = signal<ListItem<User>>({ items: [], totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false });
+  users = signal<ListItem<User>>({ items: [], meta: { totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false } });
   loading = signal(false);
   error = signal('');
 
@@ -61,7 +61,7 @@ export class UsersComponent {
   }
 
   get pageNumbers(): number[] {
-    const total = this.users().totalPages;
+    const total = this.users().meta.totalPages;
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 

@@ -53,7 +53,7 @@
   <!-- WORKSPACES TABLE -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">🏢 Lista de Workspaces ({{ workspaces().totalCount }})</h3>
+      <h3 class="card-title">🏢 Lista de Workspaces ({{ workspaces().meta.totalCount }})</h3>
       <div class="card-actions">
         <button class="btn btn-sm btn-ghost">📥 Exportar</button>
       </div>
@@ -93,7 +93,7 @@
                 </td>
               </tr>
             }
-            @if (!loading() && !error() && workspaces().totalCount === 0) {
+            @if (!loading() && !error() && workspaces().meta.totalCount === 0) {
               <tr>
                 <td colspan="6" class="table-state">
                   <p>Nenhum workspace encontrado</p>
@@ -145,17 +145,17 @@
         </table>
       </div>
       <div class="pagination">
-        <button class="pagination-btn" [disabled]="!workspaces().hasPrevious">‹</button>
+        <button class="pagination-btn" [disabled]="!workspaces().meta.hasPrevious">‹</button>
         @for (page of pageNumbers; track page) {
           <button
             class="pagination-btn"
-            [class.active]="page === workspaces().pageNumber"
+            [class.active]="page === workspaces().meta.pageNumber"
             (click)="goToPage(page)"
           >
             {{ page }}
           </button>
         }
-        <button class="pagination-btn" [disabled]="!workspaces().hasNext">›</button>
+        <button class="pagination-btn" [disabled]="!workspaces().meta.hasNext">›</button>
       </div>
     </div>
   </div>

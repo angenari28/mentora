@@ -44,9 +44,12 @@ public class UserRepository(MentoraDbContext _context) : IUserRepository
         return new PagedResult<User>
         {
             Items = items,
-            TotalCount = totalCount,
-            PageNumber = pagination.PageNumber,
-            PageSize = pagination.PageSize
+            Meta = new PaginationMeta
+            {
+                TotalCount = totalCount,
+                PageNumber = pagination.PageNumber,
+                PageSize = pagination.PageSize
+            }
         };
     }
 

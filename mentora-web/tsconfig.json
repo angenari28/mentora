@@ -17,7 +17,7 @@
     "baseUrl": "./src",
     "paths": {
       "@services/*": ["app/services/*"],
-      "@components/*": ["app/components/*"]
+      "@components/*": ["app/components/*"],
     }
   },
   "angularCompilerOptions": {

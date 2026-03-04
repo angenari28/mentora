@@ -6,10 +6,12 @@
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">📚 Lista de Cursos</h3>
+      <h3 class="card-title">📚 Lista de Cursos ({{ pagedCourses().meta.totalCount }})</h3>
       <div class="card-actions">
         <button class="btn btn-sm btn-ghost">📥 Exportar</button>
-        <button class="btn btn-sm btn-primary" routerLink="/control-panel/course/create">➕ Novo Curso</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/course/create">
+          ➕ Novo Curso
+        </button>
       </div>
     </div>
     <div class="card-body card-body-compact">
@@ -26,27 +28,57 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let course of courses; trackBy: trackByNome">
-              <td>{{ course.nome }}</td>
-              <td>{{ course.categoria }}</td>
-              <td>
-                <span class="badge" [ngClass]="course.ativo ? 'badge-success' : 'badge-warning'">
-                  {{ course.ativo ? '✓ Ativo' : '⏸ Inativo' }}
-                </span>
-              </td>
-              <td>
-                <span class="badge" [ngClass]="course.mostrarCertificado ? 'badge-success' : 'badge-warning'">
-                  {{ course.mostrarCertificado ? '✓ Sim' : '⏸ Não' }}
-                </span>
-              </td>
-              <td>{{ course.cargaHoraria }}</td>
-              <td>
-                <button class="btn btn-sm btn-ghost" [disabled]="!course.ativo">Visualizar</button>
-                <button class="btn btn-sm btn-ghost" [disabled]="!course.ativo">Editar</button>
-              </td>
-            </tr>
+            @if (loading()) {
+              <tr>
+                <td colspan="6" class="table-state"><p>Carregando cursos...</p></td>
+              </tr>
+            }
+            @if (!loading() && error()) {
+              <tr>
+                <td colspan="6" class="table-state table-state-error"><p>{{ error() }}</p></td>
+              </tr>
+            }
+            @if (!loading() && !error() && pagedCourses().meta.totalCount === 0) {
+              <tr>
+                <td colspan="6" class="table-state"><p>Nenhum curso encontrado.</p></td>
+              </tr>
+            }
+            @for (course of pagedCourses().items; track trackById($index, course)) {
+              <tr>
+                <td>{{ course.name }}</td>
+                <td>{{ course.categoryName }}</td>
+                <td>
+                  <span class="badge" [ngClass]="course.active ? 'badge-success' : 'badge-warning'">
+                    {{ course.active ? '✓ Ativo' : '⏸ Inativo' }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge" [ngClass]="course.showCertificate ? 'badge-success' : 'badge-warning'">
+                    {{ course.showCertificate ? '✓ Sim' : '⏸ Não' }}
+                  </span>
+                </td>
+                <td>{{ course.workloadHours | workloadHours }}</td>
+                <td>
+                  <button class="btn btn-sm btn-ghost" [disabled]="!course.active">Visualizar</button>
+                  <button class="btn btn-sm btn-ghost" [disabled]="!course.active">Editar</button>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
+      </div>
+      <div class="pagination">
+        <button class="pagination-btn" [disabled]="!pagedCourses().meta.hasPrevious" (click)="goToPage(currentPage() - 1)">‹</button>
+        @for (page of pageNumbers; track page) {
+          <button
+            class="pagination-btn"
+            [class.active]="page === pagedCourses().meta.pageNumber"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+        <button class="pagination-btn" [disabled]="!pagedCourses().meta.hasNext" (click)="goToPage(currentPage() + 1)">›</button>
       </div>
     </div>
   </div>

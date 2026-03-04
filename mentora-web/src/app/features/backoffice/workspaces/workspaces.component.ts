@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WorkspaceService } from '../../../services/workspace.service';
-import { Workspace } from '../../../services/responses/workspace.response';
+
+import { WorkspaceService } from '@services/workspace.service';
+import { Workspace } from '@services/responses/workspace.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
 
 @Component({
@@ -9,12 +10,12 @@ import { ListItem } from '@services/responses/shared/list-item.response';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './workspaces.component.html',
-  styleUrl: './workspaces.component.css'
+  styleUrls: ['./workspaces.component.css']
 })
 export class WorkspacesComponent {
   private readonly workspaceService = inject(WorkspaceService);
 
-  workspaces = signal<ListItem<Workspace>>({ items: [], totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false });
+  workspaces = signal<ListItem<Workspace>>({ items: [], meta: {totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false }});
   loading = signal(false);
   error = signal('');
   currentPage = signal(1);
@@ -41,7 +42,7 @@ export class WorkspacesComponent {
   }
 
   get pageNumbers(): number[] {
-    const total = this.workspaces().totalPages;
+    const total = this.workspaces().meta.totalPages;
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 

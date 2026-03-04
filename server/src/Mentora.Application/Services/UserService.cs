@@ -16,10 +16,8 @@ public class UserService(IUserRepository _userRepository) : IUserService
 
         return new PagedResult<UserResponse>
         {
-            TotalCount = users.TotalCount,
-            PageNumber = users.PageNumber,
-            PageSize = users.PageSize,
-            Items = [.. users.Items.Select(MapToResponse)]
+            Items = [.. users.Items.Select(MapToResponse)],
+            Meta = users.Meta
         };
     }
 

@@ -11,12 +11,10 @@ public class CourseService(ICourseRepository _courseRepository) : ICourseService
     public async Task<PagedResult<CourseResponse>> GetPagedAsync(PaginationParams pagination)
     {
         var paged = await _courseRepository.GetPagedAsync(pagination);
-        return new PagedResult<CourseResponse>
+        return new ()
         {
-            Items = (IReadOnlyList<CourseResponse>)paged.Items.Select(ToResponse),
-            TotalCount = paged.TotalCount,
-            PageNumber = paged.PageNumber,
-            PageSize = paged.PageSize
+            Items = [..paged.Items.Select(ToResponse)],
+            Meta = paged.Meta
         };
     }
 

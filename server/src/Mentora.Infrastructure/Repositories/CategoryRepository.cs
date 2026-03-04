@@ -46,9 +46,12 @@ public class CategoryRepository(MentoraDbContext _context) : ICategoryRepository
         return new PagedResult<Category>
         {
             Items = items,
-            TotalCount = totalCount,
-            PageNumber = pagination.PageNumber,
-            PageSize = pagination.PageSize
+            Meta = new PaginationMeta
+            {
+                TotalCount = totalCount,
+                PageNumber = pagination.PageNumber,
+                PageSize = pagination.PageSize
+            }
         };
     }
 

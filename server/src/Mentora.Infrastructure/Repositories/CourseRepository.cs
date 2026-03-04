@@ -55,9 +55,12 @@ public class CourseRepository(MentoraDbContext _context) : ICourseRepository
         return new PagedResult<Course>
         {
             Items = items,
-            TotalCount = totalCount,
-            PageNumber = pagination.PageNumber,
-            PageSize = pagination.PageSize
+            Meta = new PaginationMeta
+            {
+                TotalCount = totalCount,
+                PageNumber = pagination.PageNumber,
+                PageSize = pagination.PageSize
+            }
         };
     }
 

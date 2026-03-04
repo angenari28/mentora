@@ -11,12 +11,10 @@ public class CategoryService(ICategoryRepository _categoryRepository) : ICategor
     public async Task<PagedResult<CategoryResponse>> GetPagedAsync(PaginationParams pagination)
     {
         var paged = await _categoryRepository.GetPagedAsync(pagination);
-        return new PagedResult<CategoryResponse>
+        return new ()
         {
             Items = [.. paged.Items.Select(ToResponse)],
-            TotalCount = paged.TotalCount,
-            PageNumber = paged.PageNumber,
-            PageSize = paged.PageSize
+            Meta = paged.Meta
         };
     }
 

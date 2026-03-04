@@ -37,9 +37,12 @@ public class WorkspaceRepository(MentoraDbContext _context) : IWorkspaceReposito
         return new PagedResult<Workspace>
         {
             Items = items,
+            Meta = new PaginationMeta
+            {
             TotalCount = totalCount,
-            PageNumber = pagination.PageNumber,
-            PageSize = pagination.PageSize
+                PageNumber = pagination.PageNumber,
+                PageSize = pagination.PageSize
+            }
         };
     }
 }
