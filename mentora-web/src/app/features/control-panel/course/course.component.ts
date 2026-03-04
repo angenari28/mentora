@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CourseService } from 'app/services/course.service';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { ListItem } from 'app/services/responses/shared/list-item.response';
@@ -9,7 +10,7 @@ import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [CommonModule, RouterModule, WorkloadHoursPipe],
+  imports: [CommonModule, RouterModule, WorkloadHoursPipe, NgxSkeletonLoaderModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })

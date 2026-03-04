@@ -9,7 +9,9 @@
       <h3 class="card-title">🏷️ Lista de Categorias ({{ pagedCategories().meta.totalCount }})</h3>
       <div class="card-actions">
         <button class="btn btn-sm btn-ghost">📥 Exportar</button>
-        <button class="btn btn-sm btn-primary" routerLink="/control-panel/category/create">➕ Nova Categoria</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/category/create">
+          ➕ Nova Categoria
+        </button>
       </div>
     </div>
     <div class="card-body card-body-compact">
@@ -24,11 +26,16 @@
           </thead>
           <tbody>
             @if (loading()) {
-              <tr>
-                <td colspan="4" class="table-state">
-                  <p>Carregando categorias...</p>
-                </td>
-              </tr>
+              @for (i of [1, 2, 3, 4]; track i) {
+                <tr>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '100' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', margin: '0' }" /></td>
+                  <td>
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '60px', margin: '0' }" count="1" />
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '60px', margin: '0' }" count="1" />
+                  </td>
+                </tr>
+              }
             }
             @if (!loading() && error()) {
               <tr>
@@ -48,7 +55,10 @@
               <tr>
                 <td>{{ category.name }}</td>
                 <td>
-                  <span class="badge" [ngClass]="category.active ? 'badge-success' : 'badge-warning'">
+                  <span
+                    class="badge"
+                    [ngClass]="category.active ? 'badge-success' : 'badge-warning'"
+                  >
                     {{ category.active ? '✓ Ativa' : '⏸ Inativa' }}
                   </span>
                 </td>
@@ -61,17 +71,36 @@
         </table>
       </div>
       <div class="pagination">
-        <button class="pagination-btn" [disabled]="!pagedCategories().meta.hasPrevious" (click)="goToPage(currentPage() - 1)">‹</button>
-        @for (page of pageNumbers; track page) {
+        @if (loading()) {
+          <ngx-skeleton-loader
+            [theme]="{ height: '32px', width: '120px', margin: '0 4px' }"
+            count="1"
+          />
+        } @else {
           <button
             class="pagination-btn"
-            [class.active]="page === pagedCategories().meta.pageNumber"
-            (click)="goToPage(page)"
+            [disabled]="!pagedCategories().meta.hasPrevious"
+            (click)="goToPage(currentPage() - 1)"
           >
-            {{ page }}
+            ‹
+          </button>
+          @for (page of pageNumbers; track page) {
+            <button
+              class="pagination-btn"
+              [class.active]="page === pagedCategories().meta.pageNumber"
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          }
+          <button
+            class="pagination-btn"
+            [disabled]="!pagedCategories().meta.hasNext"
+            (click)="goToPage(currentPage() + 1)"
+          >
+            ›
           </button>
         }
-        <button class="pagination-btn" [disabled]="!pagedCategories().meta.hasNext" (click)="goToPage(currentPage() + 1)">›</button>
       </div>
     </div>
   </div>

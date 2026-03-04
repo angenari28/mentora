@@ -29,9 +29,16 @@
           </thead>
           <tbody>
             @if (loading()) {
-              <tr>
-                <td colspan="6" class="table-state"><p>Carregando cursos...</p></td>
-              </tr>
+              @for (i of [1, 2, 3, 4, 5]; track i) {
+                <tr>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '80px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '80px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '40px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '100px', margin: '0' }" /></td>
+                </tr>
+              }
             }
             @if (!loading() && error()) {
               <tr>

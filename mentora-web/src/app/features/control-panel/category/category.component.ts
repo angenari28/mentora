@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CategoryService } from 'app/services/category.service';
 import { CategoryResponse } from 'app/services/responses/category.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
@@ -8,7 +9,7 @@ import { ListItem } from '@services/responses/shared/list-item.response';
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
