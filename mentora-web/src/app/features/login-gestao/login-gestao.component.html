@@ -57,12 +57,12 @@
         >
           {{ loading ? 'Entrando...' : 'Entrar' }}
         </button>
-        <p class="login-message error" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </p>
-        <p class="login-message success" *ngIf="successMessage">
-          {{ successMessage }}
-        </p>
+        @if(errorMessage) {
+          <p class="login-message error">{{ errorMessage }}</p>
+        }
+        @if(successMessage) {
+          <p class="login-message success">{{ successMessage }}</p>
+        }
       </form>
       <div class="social-login">
         <p class="social-login-text">Ou entre com</p>

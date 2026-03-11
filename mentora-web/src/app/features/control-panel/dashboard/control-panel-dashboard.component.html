@@ -25,14 +25,16 @@
       </div>
       <div class="card-body card-body-compact">
         <div class="activity-list">
-          <div class="activity-item" *ngFor="let activity of activities">
-            <div class="activity-icon">{{ activity.icon }}</div>
-            <div class="activity-content">
-              <p class="activity-title">{{ activity.title }}</p>
-              <p class="activity-description">{{ activity.description }}</p>
-              <span class="activity-time">{{ activity.time }}</span>
+          @for (activity of activities; track $index) {
+            <div class="activity-item">
+              <div class="activity-icon">{{ activity.icon }}</div>
+              <div class="activity-content">
+                <p class="activity-title">{{ activity.title }}</p>
+                <p class="activity-description">{{ activity.description }}</p>
+                <span class="activity-time">{{ activity.time }}</span>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </div>
     </div>
