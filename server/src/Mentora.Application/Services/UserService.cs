@@ -21,6 +21,17 @@ public class UserService(IUserRepository _userRepository) : IUserService
         };
     }
 
+    public async Task<PagedResult<UserResponse>> GetStudentsPagedResult(PaginationParams pagination)
+    {
+        var users = await _userRepository.GetPagedByRoleAsync(pagination, UserRoleEnum.Student);
+
+        return new PagedResult<UserResponse>
+        {
+            Items = [.. users.Items.Select(MapToResponse)],
+            Meta = users.Meta
+        };
+    }
+
     public async Task<UserResponse?> GetUserByIdAsync(Guid id)
     {
         var user = await _userRepository.GetByIdAsync(id);
@@ -31,9 +42,9 @@ public class UserService(IUserRepository _userRepository) : IUserService
 
     public async Task<UserResponse> CreateAsync(UserRequest request)
     {
-        var role = Enum.TryParse<UserRole>(request.Role, true, out var parsedRole)
+        var role = Enum.TryParse<UserRoleEnum>(request.Role, true, out var parsedRole)
             ? parsedRole
-            : UserRole.Student;
+            : UserRoleEnum.Student;
 
         var user = new User
         {
@@ -57,9 +68,9 @@ public class UserService(IUserRepository _userRepository) : IUserService
         var user = await _userRepository.GetByIdAsync(id);
         if (user is null) return null;
 
-        var role = Enum.TryParse<UserRole>(request.Role, true, out var parsedRole)
+        var role = Enum.TryParse<UserRoleEnum>(request.Role, true, out var parsedRole)
             ? parsedRole
-            : UserRole.Student;
+            : UserRoleEnum.Student;
 
         user.Name = request.Name;
         user.Email = request.Email;

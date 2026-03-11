@@ -1,11 +1,16 @@
 <div class="table-container">
-  <ng-content />
+  <table>
+    <ng-content />
+  </table>
 </div>
 
 @if (meta()) {
   <div class="pagination">
     @if (loading()) {
-      <ngx-skeleton-loader [theme]="{ height: '32px', width: '120px', margin: '0 4px' }" count="1" />
+      <ngx-skeleton-loader
+        [theme]="{ height: '32px', width: '120px', margin: '0 4px' }"
+        count="1"
+      />
     } @else {
       <button
         class="pagination-btn"

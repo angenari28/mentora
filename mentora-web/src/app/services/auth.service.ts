@@ -13,7 +13,7 @@ export class AuthService {
 
   private readonly http = inject(HttpClient);
 
-  login(payload: LoginRequest): Observable<LoginResponse> {
+  login(payload: LoginRequest): Observable<LoginResponse | Pick<LoginResponse, 'message' | 'success'>> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, payload);
   }
 }

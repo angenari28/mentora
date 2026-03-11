@@ -23,6 +23,20 @@ public class UserController(IUserService _userService) : ControllerBase
         }
     }
 
+    [HttpGet("students")]
+    public async Task<ActionResult> GetStudents([FromQuery] PaginationParams pagination)
+    {
+        try
+        {
+            var students = await _userService.GetStudentsPagedResult(pagination);
+            return Ok(new { success = true, message = "Alunos recuperados com sucesso", data = students });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao recuperar alunos", error = ex.Message });
+        }
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> GetById(Guid id)
     {

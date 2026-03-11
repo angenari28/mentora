@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+
+import { AuthService } from '@services/auth.service';
+import { LoginAllowedRoles } from '@services/requests/login.request';
+import { LoginResponse } from '@services/responses/login.response';
 
 @Component({
   selector: 'app-login-aluno',
@@ -40,9 +43,9 @@ export class LoginAlunoComponent implements OnInit {
     this.successMessage = '';
 
     this.authService
-      .login({ email: this.email.trim(), password: this.password })
+      .login({ email: this.email.trim(), password: this.password, role: LoginAllowedRoles.Student })
       .subscribe({
-        next: (response) => {
+        next: (response: LoginResponse) => {
           if (response.success) {
             this.successMessage = response.message;
             this.router.navigate(['/aluno']);
@@ -51,8 +54,8 @@ export class LoginAlunoComponent implements OnInit {
           }
           this.loading = false;
         },
-        error: () => {
-          this.errorMessage = 'Erro ao conectar com o servidor.';
+        error: (error) => {
+          this.errorMessage = error.error?.message || 'Erro ao conectar com o servidor.';
           this.loading = false;
         }
       });

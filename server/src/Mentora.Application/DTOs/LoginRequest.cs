@@ -1,7 +1,10 @@
+using Mentora.Domain.Enums;
+
 namespace Mentora.Application.DTOs;
 
 public record LoginRequest
 {
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
+    public LoginAllowedRoles Role { get; set; }
 }

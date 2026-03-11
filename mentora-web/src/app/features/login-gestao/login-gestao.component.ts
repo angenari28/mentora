@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { WorkspaceService } from '@services/workspace.service';
 import { Workspace } from '@services/responses/workspace.response';
+import { LoginAllowedRoles } from '@services/requests/login.request';
+import { LoginResponse } from '@services/responses/login.response';
 
 @Component({
   selector: 'app-login-gestao',
@@ -43,9 +45,9 @@ export class LoginGestaoComponent implements OnInit {
     this.successMessage = '';
 
     this.authService
-      .login({ email: this.email.trim(), password: this.password })
+      .login({ email: this.email.trim(), password: this.password, role: LoginAllowedRoles.Management })
       .subscribe({
-        next: (response) => {
+        next: (response: LoginResponse) => {
           if (response.success) {
             this.successMessage = response.message;
             const role = response.user?.role?.toLowerCase();
@@ -60,8 +62,8 @@ export class LoginGestaoComponent implements OnInit {
           }
           this.loading = false;
         },
-        error: () => {
-          this.errorMessage = 'Erro ao conectar com o servidor.';
+        error: (error) => {
+          this.errorMessage = error.error?.message || 'Erro ao conectar com o servidor.';
           this.loading = false;
         }
       });

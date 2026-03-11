@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mentora.Domain.Common;
 using Mentora.Domain.Entities;
+using Mentora.Domain.Enums;
 using Mentora.Domain.Interfaces;
 using Mentora.Infrastructure.Data;
 
@@ -37,6 +38,40 @@ public class UserRepository(MentoraDbContext _context) : IUserRepository
         var totalCount = await query.CountAsync(cancellationToken);
         var items = await query
         .Include(u => u.Workspace)
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .ToListAsync(cancellationToken);
+
+        return new PagedResult<User>
+        {
+            Items = items,
+            Meta = new PaginationMeta
+            {
+                TotalCount = totalCount,
+                PageNumber = pagination.PageNumber,
+                PageSize = pagination.PageSize
+            }
+        };
+    }
+
+    public async Task<PagedResult<User>> GetPagedByRoleAsync(PaginationParams pagination, UserRoleEnum role, CancellationToken cancellationToken = default)
+    {
+        var query = _context.Users.AsNoTracking().Where(u => u.Role == role);
+
+        query = (pagination.SortBy?.ToLowerInvariant(), pagination.SortDescending) switch
+        {
+            ("name", false) => query.OrderBy(u => u.Name),
+            ("name", true) => query.OrderByDescending(u => u.Name),
+            ("email", false) => query.OrderBy(u => u.Email),
+            ("email", true) => query.OrderByDescending(u => u.Email),
+            ("createdat", false) => query.OrderBy(u => u.CreatedAt),
+            ("createdat", true) => query.OrderByDescending(u => u.CreatedAt),
+            _ => query.OrderBy(u => u.Name)
+        };
+
+        var totalCount = await query.CountAsync(cancellationToken);
+        var items = await query
+            .Include(u => u.Workspace)
             .Skip((pagination.PageNumber - 1) * pagination.PageSize)
             .Take(pagination.PageSize)
             .ToListAsync(cancellationToken);

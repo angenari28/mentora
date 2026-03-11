@@ -1,6 +1,6 @@
 namespace Mentora.Domain.Enums;
 
-public enum UserRole
+public enum UserRoleEnum
 {
     Student = 1,
     Administrator = 2,

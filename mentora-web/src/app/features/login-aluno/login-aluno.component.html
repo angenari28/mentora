@@ -1,26 +1,24 @@
 <div class="login-container">
   <div class="logo-background">
-    <img
-      src="assets/mentora-logo.png"
-      alt="Mentora Logo"
-      class="login-logo"
-    />
+    <img src="assets/mentora-logo.png" alt="Mentora Logo" class="login-logo" />
   </div>
   <div class="login-card">
     <div class="login-header">
       <h1 class="login-title">Plataforma de aprendizagem</h1>
-      <p class="login-subtitle">
-        Entre na sua conta para continuar aprendendo
-      </p>
+      <p class="login-subtitle">Entre na sua conta para continuar aprendendo</p>
     </div>
 
-    <div class="error-message" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
 
-    <div class="success-message" *ngIf="successMessage">
-      {{ successMessage }}
-    </div>
+    @if (successMessage) {
+      <div class="success-message">
+        {{ successMessage }}
+      </div>
+    }
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
@@ -49,23 +47,15 @@
         />
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="loading || loginForm.invalid"
-      >
-        {{ loading ? 'Entrando...' : 'Entrar na Plataforma' }}
+      <button type="submit" class="btn btn-primary" [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Entrando...' : 'Entrar' }}
       </button>
     </form>
 
     <div class="login-links">
-      <a href="#" (click)="$event.preventDefault()" class="login-link"
-        >Esqueceu a senha?</a
-      >
+      <a href="#" (click)="$event.preventDefault()" class="login-link">Esqueceu a senha?</a>
       <span class="login-divider">•</span>
-      <a href="#" (click)="$event.preventDefault()" class="login-link"
-        >Criar nova conta</a
-      >
+      <a href="#" (click)="$event.preventDefault()" class="login-link">Criar nova conta</a>
     </div>
   </div>
 </div>

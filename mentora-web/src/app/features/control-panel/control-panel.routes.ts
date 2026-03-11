@@ -7,6 +7,8 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryCreateComponent } from './category/create/category-create.component';
 import { ClassComponent } from './class/class.component';
 import { ClassCreateComponent } from './class/create/class-create.component';
+import { StudentComponent } from './student/student.component';
+import { StudentCreateComponent } from './student/create/student-create.component';
 
 export const CONTROL_PANEL_ROUTES: Routes = [
   {
@@ -19,7 +21,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'category/create', component: CategoryCreateComponent },
       { path: 'category', pathMatch: 'full', component: CategoryComponent },
       { path: 'class/create', component: ClassCreateComponent },
-      { path: 'class', pathMatch: 'full', component: ClassComponent }
+      { path: 'class', pathMatch: 'full', component: ClassComponent },
+      { path: 'student/create', component: StudentCreateComponent },
+      { path: 'student', pathMatch: 'full', component: StudentComponent }
     ]
   }
 ];

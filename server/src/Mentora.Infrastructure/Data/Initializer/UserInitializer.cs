@@ -15,7 +15,7 @@ public static class UserInitializer
                 Email = "master@email.com",
                 Name = "Master Administrador",
                 PasswordHash = "AAAAAAAAAAAAAAAAAAAAAA==.Su9Ho03CNSLtGNeCDZyJlSdYk1UEJ0BXEy5uTE8cKXo=",
-                Role = UserRole.Master,
+                Role = UserRoleEnum.Master,
                 IsActive = true,
                 CreatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),
                 UpdatedAt = new DateTime(2026, 1, 23, 0, 0, 0, DateTimeKind.Utc),

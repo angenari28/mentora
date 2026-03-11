@@ -12,15 +12,13 @@ public class AuthController(IAuthService _authService) : ControllerBase
     public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Email))
-        {
-            return BadRequest(new LoginResponse
-            {
-                Success = false,
-                Message = "Email é obrigatório"
-            });
-        }
+            return BadRequest(new());
 
         var response = await _authService.LoginAsync(request);
+
+        if (!response.Success)
+            return Unauthorized(response);
+
         return Ok(response);
     }
 }

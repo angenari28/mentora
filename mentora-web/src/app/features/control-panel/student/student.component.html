@@ -1,0 +1,161 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <nav class="breadcrumb">
+      <a routerLink="/control-panel" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">Alunos</span>
+    </nav>
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">Alunos</h1>
+        <p class="page-subtitle">Gerencie todos os alunos do sistema</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost">🔽 Filtros</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="card filters-card">
+    <div class="card-body">
+      <div class="filters-grid">
+        <div class="form-group form-group-compact">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Todos</option>
+            <option>Ativos</option>
+            <option>Inativos</option>
+          </select>
+        </div>
+        <div class="form-group form-group-compact">
+          <label class="form-label">Período</label>
+          <select class="form-select">
+            <option>Último mês</option>
+            <option>Últimos 3 meses</option>
+            <option>Último ano</option>
+            <option>Todos</option>
+          </select>
+        </div>
+        <div class="filters-apply">
+          <button class="btn btn-primary btn-block">Aplicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENTS TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🎓 Lista de Alunos ({{ students().meta.totalCount }})</h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/student/create">➕ Novo Aluno</button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <app-table [meta]="students().meta" [loading]="loading()" (pageChange)="goToPage($event)">
+          <thead>
+            <tr>
+              <th>
+                <div
+                  class="checkbox-wrapper"
+                  onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                >
+                  <div class="checkbox"></div>
+                </div>
+              </th>
+              <th>Aluno</th>
+              <th>Status</th>
+              <th>Cadastro</th>
+              <th>Último Acesso</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (loading()) {
+              @for (i of [1, 2, 3, 4]; track i) {
+                <tr>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '20px', margin: '0' }" /></td>
+                  <td>
+                    <ngx-skeleton-loader [theme]="{ height: '36px', width: '200px', margin: '0' }" />
+                  </td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '80px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '90px', margin: '0' }" /></td>
+                  <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '110px', margin: '0' }" /></td>
+                  <td>
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '50px', margin: '0 4px' }" />
+                    <ngx-skeleton-loader [theme]="{ height: '24px', width: '60px', margin: '0' }" />
+                  </td>
+                </tr>
+              }
+            }
+            @if (!loading() && error()) {
+              <tr>
+                <td colspan="6" class="table-state table-state-error">
+                  <p>{{ error() }}</p>
+                </td>
+              </tr>
+            }
+            @if (!loading() && !error() && students().meta.totalCount === 0) {
+              <tr>
+                <td colspan="6" class="table-state">
+                  <p>Nenhum aluno encontrado</p>
+                </td>
+              </tr>
+            }
+            @for (student of students().items; track $index) {
+              <tr>
+                <td>
+                  <div
+                    class="checkbox-wrapper"
+                    onclick="this.querySelector('.checkbox').classList.toggle('checked')"
+                  >
+                    <div class="checkbox"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="user-cell">
+                    <div class="table-avatar">{{ student.name.substring(0, 2).toUpperCase() }}</div>
+                    <div class="user-details">
+                      <p class="user-name">{{ student.name }}</p>
+                      <p class="user-email">{{ student.email }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'badge-success': student.isActive === true,
+                      'badge-warning': student.isActive === false,
+                    }"
+                  >
+                    {{ student.isActive ? '✓ Ativo' : '⏸ Inativo' }}
+                  </span>
+                </td>
+                <td>{{ student.createdAt | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ student.lastLoginAt ? (student.lastLoginAt | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+                <td>
+                  <div class="user-actions">
+                    <button
+                      class="btn btn-sm btn-ghost"
+                      [disabled]="!student.isActive"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn btn-sm btn-ghost"
+                      [disabled]="!student.isActive"
+                    >
+                      Editar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+      </app-table>
+    </div>
+  </div>
+</div>
