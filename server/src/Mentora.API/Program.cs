@@ -5,8 +5,6 @@ using Mentora.Infrastructure.Data;
 using Mentora.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +69,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IClassRepository, ClassRepository>();
 builder.Services.AddScoped<IClassStudentRepository, ClassStudentRepository>();
+builder.Services.AddScoped<ICourseSlideRepository, CourseSlideRepository>();
+builder.Services.AddScoped<ISlideTypeRepository, SlideTypeRepository>();
 
 // Application Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -80,6 +80,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<IClassStudentService, ClassStudentService>();
+builder.Services.AddScoped<ICourseSlideService, CourseSlideService>();
+builder.Services.AddScoped<ISlideTypeService, SlideTypeService>();
 
 var app = builder.Build();
 

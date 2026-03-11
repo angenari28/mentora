@@ -1,0 +1,7 @@
+.btn-danger {
+  color: var(--color-error, #dc2626);
+}
+
+.btn-danger:hover {
+  background-color: rgba(220, 38, 38, 0.08);
+}

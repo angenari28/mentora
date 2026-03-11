@@ -245,6 +245,44 @@ namespace Mentora.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SlideTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-0001-0000-0000-000000000001"),
+                            Active = true,
+                            CreatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Icon = "",
+                            Name = "Texto",
+                            UpdatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-0001-0000-0000-000000000002"),
+                            Active = true,
+                            CreatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Icon = "",
+                            Name = "Imagem",
+                            UpdatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-0001-0000-0000-000000000003"),
+                            Active = true,
+                            CreatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Icon = "",
+                            Name = "PPT",
+                            UpdatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-0001-0000-0000-000000000004"),
+                            Active = true,
+                            CreatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Icon = "",
+                            Name = "Vídeo",
+                            UpdatedAt = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
                 });
 
             modelBuilder.Entity("Mentora.Domain.Entities.User", b =>

@@ -11,6 +11,8 @@ import { StudentComponent } from './student/student.component';
 import { StudentCreateComponent } from './student/create/student-create.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { RegistrationCreateComponent } from './registration/create/registration-create.component';
+import { CourseSlideComponent } from './course-slide/course-slide.component';
+import { CourseSlideCreateComponent } from './course-slide/create/course-slide-create.component';
 
 export const CONTROL_PANEL_ROUTES: Routes = [
   {
@@ -27,7 +29,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'student/create', component: StudentCreateComponent },
       { path: 'student', pathMatch: 'full', component: StudentComponent },
       { path: 'registration/create', component: RegistrationCreateComponent },
-      { path: 'registration', pathMatch: 'full', component: RegistrationComponent }
+      { path: 'registration', pathMatch: 'full', component: RegistrationComponent },
+      { path: 'course-slide/create', component: CourseSlideCreateComponent },
+      { path: 'course-slide', pathMatch: 'full', component: CourseSlideComponent }
     ]
   }
 ];

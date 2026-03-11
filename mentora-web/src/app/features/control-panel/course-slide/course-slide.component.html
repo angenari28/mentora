@@ -1,0 +1,99 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Slides</h1>
+    <p class="page-subtitle">Gerencie os slides dos cursos.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">🖼️ Slides ({{ slides().length }})</h3>
+      <div class="card-actions">
+        <button
+          class="btn btn-sm btn-primary"
+          [disabled]="!selectedCourseId()"
+          [routerLink]="['/control-panel/course-slide/create']"
+          [queryParams]="{ courseId: selectedCourseId() }"
+        >
+          ➕ Novo Slide
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body card-body-compact">
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label class="form-label" for="courseFilter">Filtrar por Curso</label>
+        <select
+          id="courseFilter"
+          class="form-input"
+          (change)="onCourseChange($event)"
+        >
+          <option value="">
+            {{ loadingCourses() ? 'Carregando cursos...' : 'Selecione um curso' }}
+          </option>
+          @for (course of courses(); track course.id) {
+            <option [value]="course.id">{{ course.name }}</option>
+          }
+        </select>
+      </div>
+
+      @if (selectedCourseId()) {
+        <app-table [meta]="{ totalCount: slides().length, pageNumber: 1, pageSize: slides().length, totalPages: 1, hasPrevious: false, hasNext: false }" [loading]="loading()">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (loading()) {
+                @for (i of [1, 2, 3]; track i) {
+                  <tr>
+                    <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '30px', margin: '0' }" /></td>
+                    <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                    <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '80px', margin: '0' }" /></td>
+                    <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '80px', margin: '0' }" /></td>
+                    <td><ngx-skeleton-loader [theme]="{ height: '24px', width: '100px', margin: '0' }" /></td>
+                  </tr>
+                }
+              }
+              @if (!loading() && error()) {
+                <tr>
+                  <td colspan="5" class="table-state table-state-error"><p>{{ error() }}</p></td>
+                </tr>
+              }
+              @if (!loading() && !error() && slides().length === 0) {
+                <tr>
+                  <td colspan="5" class="table-state"><p>Nenhum slide encontrado para este curso.</p></td>
+                </tr>
+              }
+              @for (slide of slides(); track trackById($index, slide)) {
+                <tr>
+                  <td>{{ slide.ordering }}</td>
+                  <td>{{ slide.title }}</td>
+                  <td>{{ slide.slideTypeName }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="slide.active ? 'badge-success' : 'badge-warning'">
+                      {{ slide.active ? '✓ Ativo' : '⏸ Inativo' }}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-ghost"
+                      [routerLink]="['/control-panel/course-slide/create']"
+                      [queryParams]="{ courseId: slide.courseId, editId: slide.id }"
+                    >Editar</button>
+                    <button class="btn btn-sm btn-ghost btn-danger" (click)="deleteSlide(slide.id)">Remover</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+        </app-table>
+      } @else {
+        <p class="table-state">Selecione um curso para visualizar os slides.</p>
+      }
+    </div>
+  </div>
+</div>

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Mentora.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -217,6 +219,17 @@ namespace Mentora.Infrastructure.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "SlideTypes",
+                columns: new[] { "Id", "Active", "CreatedAt", "Icon", "Name", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { new Guid("a1b2c3d4-0001-0000-0000-000000000001"), true, new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc), "", "Texto", new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("a1b2c3d4-0001-0000-0000-000000000002"), true, new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc), "", "Imagem", new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("a1b2c3d4-0001-0000-0000-000000000003"), true, new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc), "", "PPT", new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("a1b2c3d4-0001-0000-0000-000000000004"), true, new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc), "", "Vídeo", new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(

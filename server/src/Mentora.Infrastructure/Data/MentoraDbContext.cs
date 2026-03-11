@@ -23,5 +23,6 @@ public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbCo
 
         var workspace = WorkspaceInitializer.Initialize(modelBuilder);
         UserInitializer.Initialize(modelBuilder, workspace.Id);
+        SlideTypeInitializer.Initialize(modelBuilder);
     }
 }

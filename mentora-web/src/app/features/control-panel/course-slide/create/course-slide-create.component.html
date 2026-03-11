@@ -1,0 +1,191 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h3 class="modal-title">{{ formTitle() }}</h3>
+        @if (selectedCourseName()) {
+          <p class="modal-subtitle">{{ 'Curso: '  + selectedCourseName() }}</p>
+        }
+      </div>
+      <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
+    </div>
+
+    <form [formRoot]="slideForm" #formEl>
+      <div class="modal-body">
+        @if (slideForm().pending()) {
+          <div class="loading-overlay">
+            <div class="spinner">carregando...</div>
+          </div>
+        }
+
+        @if (submitError()) {
+          <div class="alert alert-error">{{ submitError() }}</div>
+        }
+
+        @if (slideBreadcrumbs().length > 0) {
+          <div class="slide-breadcrumb">
+            <span class="breadcrumb-label">Slides:</span>
+            <div class="breadcrumb-items">
+              @if (loadingBreadcrumb()) {
+                <span class="breadcrumb-loading">Carregando...</span>
+              } @else {
+                @for (slide of slideBreadcrumbs(); track slide.id) {
+                  <button
+                    type="button"
+                    class="breadcrumb-item"
+                    [class.active]="activeBreadcrumbId() === slide.id"
+                    (click)="selectBreadcrumb(slide)"
+                    [title]="slide.title"
+                  >{{ slide.ordering }}</button>
+                }
+                <button
+                  type="button"
+                  class="breadcrumb-item breadcrumb-new"
+                  [class.active]="activeBreadcrumbId() === null"
+                  (click)="newSlide()"
+                  title="Novo slide"
+                >+</button>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="form-row form-row-full">
+          <div class="form-group">
+            <label class="form-label" for="title">
+              Título
+              @if (slideForm.title().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <input
+              id="title"
+              type="text"
+              class="form-input"
+              [class.input-error]="slideForm.title().invalid() && slideForm.title().touched()"
+              placeholder="Digite o título do slide"
+              [formField]="slideForm.title"
+            />
+            @if (slideForm.title().invalid() && slideForm.title().touched()) {
+              @for (error of slideForm.title().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="ordering">
+              Ordenação
+              @if (slideForm.ordering().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <input
+              id="ordering"
+              type="number"
+              class="form-input"
+              [class.input-error]="slideForm.ordering().invalid() && slideForm.ordering().touched()"
+              placeholder="Ex.: 1"
+              [formField]="slideForm.ordering"
+            />
+            @if (slideForm.ordering().invalid() && slideForm.ordering().touched()) {
+              @for (error of slideForm.ordering().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="slideTypeId">
+              Tipo de Slide
+              @if (slideForm.slideTypeId().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <select
+              id="slideTypeId"
+              class="form-input"
+              [class.input-error]="slideForm.slideTypeId().invalid() && slideForm.slideTypeId().touched()"
+              [formField]="slideForm.slideTypeId"
+            >
+              <option value="">{{ loadingSlideTypes() ? 'Carregando...' : 'Selecione um tipo' }}</option>
+              @for (type of slideTypes(); track type.id) {
+                <option [value]="type.id">{{ type.name }}</option>
+              }
+            </select>
+            @if (slideForm.slideTypeId().invalid() && slideForm.slideTypeId().touched()) {
+              @for (error of slideForm.slideTypeId().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="form-row form-row-full">
+          <div class="form-group">
+            <label class="form-label" for="content">
+              Conteúdo
+              @if (slideForm.content().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <textarea
+              id="content"
+              class="form-input"
+              rows="8"
+              [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
+              placeholder="Digite o conteúdo do slide"
+              [formField]="slideForm.content"
+            ></textarea>
+            @if (slideForm.content().invalid() && slideForm.content().touched()) {
+              @for (error of slideForm.content().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="form-group form-group-inline">
+          <label class="form-label">Opções</label>
+          <div class="options-grid">
+            <label class="checkbox">
+              <input type="checkbox" [formField]="slideForm.active" />
+              <span>Slide ativo</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+
+        @if (isEdit()) {
+          <div class="save-dropdown" [class.open]="saveMenuOpen()">
+            <div class="save-menu">
+              <button type="submit" class="save-menu-item" [disabled]="submitting()" (click)="closeSaveMenu()">
+                Salvar
+              </button>
+              <button type="button" class="save-menu-item" [disabled]="submitting()" (click)="saveAndClose()">
+                Salvar e fechar
+              </button>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary save-dropdown-trigger"
+              [disabled]="submitting()"
+              (click)="toggleSaveMenu()"
+            >
+              Salvar <span class="save-dropdown-arrow">&#9650;</span>
+            </button>
+          </div>
+        } @else {
+          <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+            Criar
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
