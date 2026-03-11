@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Matrículas</h1>
+    <p class="page-subtitle">Gerencie as matrículas de alunos nas turmas.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        📋 Lista de Matrículas ({{ pagedRegistrations().meta.totalCount }})
+      </h3>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/registration/create">
+          ➕ Nova Matrícula
+        </button>
+      </div>
+    </div>
+    <div class="card-body card-body-compact">
+      <app-table
+        [meta]="pagedRegistrations().meta"
+        [loading]="loading()"
+        (pageChange)="goToPage($event)"
+      >
+        <thead>
+          <tr>
+            <th>Aluno</th>
+            <th>E-mail</th>
+            <th>Turma</th>
+            <th>Curso</th>
+            <th>Ativa</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (loading()) {
+            @for (i of [1, 2, 3, 4]; track i) {
+              <tr>
+                <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
+                <td><ngx-skeleton-loader [theme]="{ height: '24px', margin: '0' }" /></td>
+                <td>
+                  <ngx-skeleton-loader [theme]="{ height: '24px', width: '80px', margin: '0' }" />
+                </td>
+              </tr>
+            }
+          }
+          @if (!loading() && error()) {
+            <tr>
+              <td colspan="6" class="table-state table-state-error">
+                <p>{{ error() }}</p>
+              </td>
+            </tr>
+          }
+          @if (!loading() && !error() && pagedRegistrations().meta.totalCount === 0) {
+            <tr>
+              <td colspan="6" class="table-state">
+                <p>Nenhuma matrícula encontrada</p>
+              </td>
+            </tr>
+          }
+          @for (item of pagedRegistrations().items; track trackById($index, item)) {
+            <tr>
+              <td>{{ item.userName }}</td>
+              <td>{{ item.userEmail }}</td>
+              <td>{{ item.className }}</td>
+              <td>{{ item.courseName }}</td>
+              <td>
+                <span class="badge" [ngClass]="item.active ? 'badge-success' : 'badge-warning'">
+                  {{ item.active ? '✓ Ativa' : '⏸ Inativa' }}
+                </span>
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-danger"
+                  [disabled]="deletingId() === item.id"
+                  (click)="deleteRegistration(item.id)"
+                >
+                  {{ deletingId() === item.id ? 'Excluindo...' : 'Excluir' }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </app-table>
+    </div>
+  </div>
+</div>

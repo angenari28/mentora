@@ -1,0 +1,96 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Nova Matrícula</h3>
+      <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
+    </div>
+
+    <form [formRoot]="registrationForm">
+      <div class="modal-body">
+        @if (registrationForm().pending()) {
+          <div class="loading-overlay">
+            <div class="spinner">carregando...</div>
+          </div>
+        }
+
+        <!-- Turma -->
+        <div class="form-group">
+          <label class="form-label" for="classId">
+            Turma
+            @if (registrationForm.classId().required()) {
+              <span class="required">*</span>
+            }
+          </label>
+          <select
+            id="classId"
+            class="form-input"
+            [class.input-error]="registrationForm.classId().invalid() && registrationForm.classId().touched()"
+            [formField]="registrationForm.classId"
+          >
+            <option value="">
+              {{ loadingClasses() ? 'Carregando turmas...' : 'Selecione uma turma' }}
+            </option>
+            @for (class of classes(); track class.id) {
+              <option [value]="class.id">{{ class.name }} — {{ class.courseName }}</option>
+            }
+          </select>
+          @if (registrationForm.classId().invalid() && registrationForm.classId().touched()) {
+            @for (error of registrationForm.classId().errors(); track $index) {
+              <span class="error-msg">{{ error.message }}</span>
+            }
+          }
+        </div>
+
+        <!-- Aluno -->
+        <div class="form-group">
+          <label class="form-label" for="userId">
+            Aluno
+            @if (registrationForm.userId().required()) {
+              <span class="required">*</span>
+            }
+          </label>
+          <select
+            id="userId"
+            class="form-input"
+            [class.input-error]="registrationForm.userId().invalid() && registrationForm.userId().touched()"
+            [formField]="registrationForm.userId"
+          >
+            <option value="">
+              {{ loadingStudents() ? 'Carregando alunos...' : 'Selecione um aluno' }}
+            </option>
+            @for (student of students(); track student.id) {
+              <option [value]="student.id">{{ student.name }} — {{ student.email }}</option>
+            }
+          </select>
+          @if (registrationForm.userId().invalid() && registrationForm.userId().touched()) {
+            @for (error of registrationForm.userId().errors(); track $index) {
+              <span class="error-msg">{{ error.message }}</span>
+            }
+          }
+        </div>
+
+        <!-- Opções -->
+        <div class="form-group form-group-inline">
+          <label class="form-label">Opções</label>
+          <div class="options-grid">
+            <label class="checkbox">
+              <input type="checkbox" [formField]="registrationForm.active" />
+              <span>Matrícula ativa</span>
+            </label>
+          </div>
+        </div>
+
+        @if (submitError()) {
+          <div class="alert alert-error">{{ submitError() }}</div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+          {{ submitting() ? 'Matriculando...' : 'Matricular' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

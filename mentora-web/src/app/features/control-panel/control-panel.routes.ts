@@ -9,6 +9,8 @@ import { ClassComponent } from './class/class.component';
 import { ClassCreateComponent } from './class/create/class-create.component';
 import { StudentComponent } from './student/student.component';
 import { StudentCreateComponent } from './student/create/student-create.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationCreateComponent } from './registration/create/registration-create.component';
 
 export const CONTROL_PANEL_ROUTES: Routes = [
   {
@@ -23,7 +25,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'class/create', component: ClassCreateComponent },
       { path: 'class', pathMatch: 'full', component: ClassComponent },
       { path: 'student/create', component: StudentCreateComponent },
-      { path: 'student', pathMatch: 'full', component: StudentComponent }
+      { path: 'student', pathMatch: 'full', component: StudentComponent },
+      { path: 'registration/create', component: RegistrationCreateComponent },
+      { path: 'registration', pathMatch: 'full', component: RegistrationComponent }
     ]
   }
 ];
