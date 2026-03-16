@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { form, required, FormRoot, FormField, maxLength } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { CategoryService } from 'app/services/category.service';
 import { CategoryResponse } from 'app/services/responses/category.response';
 import { CourseService } from 'app/services/course.service';
@@ -10,17 +11,18 @@ import { Workspace } from 'app/services/responses/workspace.response';
 import { courseModel, IFormReadonly } from '../shared/course.model';
 
 @Component({
-  selector: 'app-course-create',
+  selector: 'app-course-update',
   standalone: true,
   imports: [CommonModule, FormsModule, FormRoot, FormField],
   templateUrl: '../shared/course-shared.component.html',
   styleUrls: ['../shared/course-shared.component.css']
 })
-export class CourseCreateComponent implements OnInit, IFormReadonly {
+export class CourseUpdateComponent implements OnInit, IFormReadonly {
   readonly = signal(false);
   @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
 
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly categoryService = inject(CategoryService);
   private readonly courseService = inject(CourseService);
 
@@ -30,8 +32,11 @@ export class CourseCreateComponent implements OnInit, IFormReadonly {
   readonly submitError = signal<string | null>(null);
   readonly faceImagePreview = signal<string>('');
   readonly faceImageBase64 = signal<string>('');
-  readonly modalTitle = signal('Novo Curso');
-  readonly submitLabel = signal('Criar');
+  readonly modalTitle = signal('Editar Curso');
+  readonly submitLabel = signal('Salvar');
+
+  private courseId = '';
+
   private readonly model = courseModel;
 
   protected readonly courseForm = form(
@@ -53,7 +58,7 @@ export class CourseCreateComponent implements OnInit, IFormReadonly {
           const value = f().value();
 
           return new Promise<void>((resolve, reject) => {
-            this.courseService.create({
+            this.courseService.update(this.courseId, {
               name: value.name,
               categoryId: value.categoryId,
               workspaceId,
@@ -70,7 +75,7 @@ export class CourseCreateComponent implements OnInit, IFormReadonly {
               },
               error: (err) => {
                 this.submitting.set(false);
-                this.submitError.set('Erro ao criar curso. Tente novamente.');
+                this.submitError.set('Erro ao atualizar curso. Tente novamente.');
                 console.error(err);
                 reject(err);
               }
@@ -85,6 +90,8 @@ export class CourseCreateComponent implements OnInit, IFormReadonly {
   );
 
   ngOnInit(): void {
+    this.courseId = this.route.snapshot.paramMap.get('id') ?? '';
+
     this.loadingCategories.set(true);
     this.categoryService.getAll(1, 100).subscribe({
       next: (res) => {
@@ -92,6 +99,25 @@ export class CourseCreateComponent implements OnInit, IFormReadonly {
         this.loadingCategories.set(false);
       },
       error: () => this.loadingCategories.set(false)
+    });
+
+    this.courseService.getById(this.courseId).subscribe({
+      next: (res) => {
+        if (res.success) {
+          const c = res.data;
+          this.model.set({
+            name: c.name,
+            categoryId: c.categoryId,
+            workloadHours: c.workloadHours,
+            active: c.active,
+            showCertificate: c.showCertificate
+          });
+          if (c.faceImage) {
+            this.faceImagePreview.set(c.faceImage);
+            this.faceImageBase64.set(c.faceImage);
+          }
+        }
+      }
     });
   }
 

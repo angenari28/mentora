@@ -138,16 +138,14 @@ namespace Mentora.Infrastructure.Migrations
 
                     b.Property<string>("CertificateImage")
                         .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FaceImage")
                         .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Name")
                         .IsRequired()

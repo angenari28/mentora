@@ -10,4 +10,5 @@ public interface ICourseService
     Task<IEnumerable<CourseResponse>> GetByCategoryIdAsync(Guid categoryId);
     Task<CourseResponse> CreateAsync(CourseRequest request);
     Task<CourseResponse?> UpdateAsync(Guid id, CourseRequest request);
+    Task<bool> DeleteAsync(Guid id);
 }

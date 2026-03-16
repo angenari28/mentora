@@ -70,6 +70,11 @@ public class CourseService(ICourseRepository _courseRepository) : ICourseService
         return ToResponse(updated);
     }
 
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        return await _courseRepository.DeleteAsync(id);
+    }
+
     private static CourseResponse ToResponse(Course c) => new()
     {
         Id = c.Id,

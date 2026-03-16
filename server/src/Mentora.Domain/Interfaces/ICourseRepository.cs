@@ -9,4 +9,5 @@ public interface ICourseRepository : IPagedRepository<Course>
     Task<IEnumerable<Course>> GetByCategoryIdAsync(Guid categoryId);
     Task<Course> CreateAsync(Course course);
     Task<Course> UpdateAsync(Course course);
+    Task<bool> DeleteAsync(Guid id);
 }

@@ -1,8 +1,11 @@
 import { Routes } from '@angular/router';
+
 import { ControlPanelDashboardComponent } from './dashboard/control-panel-dashboard.component';
 import { ControlPanelComponent } from './control-panel.component';
 import { CourseCreateComponent } from './course/create/course-create.component';
-import { CourseComponent } from './course/course.component';
+import { CourseUpdateComponent } from './course/update/course-update.component';
+import { CourseDeleteComponent } from './course/delete/course-delete.component';
+import { CourseListComponent } from './course/list/course.list.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryCreateComponent } from './category/create/category-create.component';
 import { ClassComponent } from './class/class.component';
@@ -21,7 +24,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: ControlPanelDashboardComponent },
       { path: 'course/create', component: CourseCreateComponent },
-      { path: 'course', pathMatch: 'full', component: CourseComponent },
+      { path: 'course/:id/edit', component: CourseUpdateComponent },
+      { path: 'course/:id/delete', component: CourseDeleteComponent },
+      { path: 'course', pathMatch: 'full', component: CourseListComponent },
       { path: 'category/create', component: CategoryCreateComponent },
       { path: 'category', pathMatch: 'full', component: CategoryComponent },
       { path: 'class/create', component: ClassCreateComponent },

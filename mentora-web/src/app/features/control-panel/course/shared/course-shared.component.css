@@ -141,6 +141,68 @@ form {
   margin-left: 2px;
 }
 
+.form-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 0;
+}
+
+.form-col-left,
+.form-col-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-picker {
+  width: 340px;
+  height: 180px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  transition: border-color 0.2s;
+}
+
+.image-picker:hover {
+  border-color: #1c2340;
+}
+
+.image-preview {
+  width: 340px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #94a3b8;
+  user-select: none;
+}
+
+.image-placeholder-icon {
+  font-size: 2rem;
+}
+
+.image-placeholder-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.image-size-hint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
 .form-group-inline {
   margin-bottom: 0.5rem;
 }
@@ -188,4 +250,15 @@ form {
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+img.image-preview.readonly {
+  cursor: not-allowed;
+  opacity: 0.1;
+  border: none;
+}
+
+img.image-preview.readonly:hover {
+  cursor: not-allowed;
+  opacity: 0.1;
 }

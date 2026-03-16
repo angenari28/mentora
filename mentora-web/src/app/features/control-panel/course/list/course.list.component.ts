@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 import { CourseService } from 'app/services/course.service';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { ListItem } from 'app/services/responses/shared/list-item.response';
@@ -9,13 +11,13 @@ import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
 import { TableComponent } from '@components/table/table.component';
 
 @Component({
-  selector: 'app-course',
+  selector: 'app-course-list',
   standalone: true,
   imports: [CommonModule, RouterModule, WorkloadHoursPipe, NgxSkeletonLoaderModule, TableComponent],
-  templateUrl: './course.component.html',
-  styleUrl: './course.component.css'
+  templateUrl: './course.list.component.html',
+  styleUrls: ['./course.list.component.css']
 })
-export class CourseComponent implements OnInit {
+export class CourseListComponent implements OnInit {
   private readonly courseService = inject(CourseService);
 
   pagedCourses = signal<ListItem<CourseResponse>>({

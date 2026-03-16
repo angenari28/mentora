@@ -85,4 +85,21 @@ public class CourseController(ICourseService _courseService) : ControllerBase
             return StatusCode(500, new { success = false, message = "Erro ao atualizar curso", error = ex.Message });
         }
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        try
+        {
+            var deleted = await _courseService.DeleteAsync(id);
+            if (!deleted)
+                return NotFound(new { success = false, message = "Curso não encontrado" });
+
+            return Ok(new { success = true, message = "Curso excluído com sucesso" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao excluir curso", error = ex.Message });
+        }
+    }
 }

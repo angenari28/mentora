@@ -67,7 +67,8 @@
                 <td>{{ course.workloadHours | workloadHours }}</td>
                 <td>
                   <button class="btn btn-sm btn-ghost" [disabled]="!course.active">Visualizar</button>
-                  <button class="btn btn-sm btn-ghost" [disabled]="!course.active">Editar</button>
+                  <button class="btn btn-sm btn-ghost" [routerLink]="['/control-panel/course', course.id, 'edit']">Editar</button>
+                  <button class="btn btn-sm btn-danger" [routerLink]="['/control-panel/course', course.id, 'delete']">Excluir</button>
                 </td>
               </tr>
             }

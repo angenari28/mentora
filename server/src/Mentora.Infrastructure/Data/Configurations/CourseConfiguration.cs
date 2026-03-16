@@ -23,11 +23,11 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         entity.Property(e => e.FaceImage)
             .IsRequired()
-            .HasMaxLength(45);
+            .HasColumnType("varchar");
 
         entity.Property(e => e.CertificateImage)
             .IsRequired()
-            .HasMaxLength(45);
+            .HasColumnType("varchar");
 
         entity.Property(e => e.WorkloadHours)
             .IsRequired();

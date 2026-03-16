@@ -50,6 +50,19 @@ public class CourseRepository(MentoraDbContext _context) : ICourseRepository
         var items = await ordered
             .Skip((pagination.PageNumber - 1) * pagination.PageSize)
             .Take(pagination.PageSize)
+            .Select(c => new Course
+            {
+                Id = c.Id,
+                CategoryId = c.CategoryId,
+                WorkspaceId = c.WorkspaceId,
+                Name = c.Name,
+                ShowCertificate = c.ShowCertificate,
+                Active = c.Active,
+                WorkloadHours = c.WorkloadHours,
+                CreatedAt = c.CreatedAt,
+                UpdatedAt = c.UpdatedAt,
+                Category = c.Category
+            })
             .ToListAsync(cancellationToken);
 
         return new PagedResult<Course>
@@ -76,5 +89,14 @@ public class CourseRepository(MentoraDbContext _context) : ICourseRepository
         _context.Courses.Update(course);
         await _context.SaveChangesAsync();
         return course;
+    }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
+        if (course is null) return false;
+        _context.Courses.Remove(course);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

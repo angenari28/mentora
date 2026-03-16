@@ -27,4 +27,12 @@ export class CourseService {
   create(request: CourseRequest): Observable<{ success: boolean; message: string; data: CourseResponse }> {
     return this.http.post<{ success: boolean; message: string; data: CourseResponse }>(this.baseUrl, request);
   }
+
+  update(id: string, request: CourseRequest): Observable<{ success: boolean; message: string; data: CourseResponse }> {
+    return this.http.put<{ success: boolean; message: string; data: CourseResponse }>(`${this.baseUrl}/${id}`, request);
+  }
+
+  delete(id: string): Observable<{ success: boolean; message: string }> {
+    return this.http.delete<{ success: boolean; message: string }>(`${this.baseUrl}/${id}`);
+  }
 }

@@ -108,8 +108,8 @@ namespace Mentora.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     ShowCertificate = table.Column<bool>(type: "boolean", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    FaceImage = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    CertificateImage = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
+                    FaceImage = table.Column<string>(type: "varchar", nullable: false),
+                    CertificateImage = table.Column<string>(type: "varchar", nullable: false),
                     WorkloadHours = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
