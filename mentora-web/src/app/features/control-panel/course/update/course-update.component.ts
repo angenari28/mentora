@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { form, required, FormRoot, FormField, maxLength } from '@angular/forms/signals';
+import { form, FormRoot, FormField } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CategoryService } from 'app/services/category.service';
@@ -9,6 +9,7 @@ import { CategoryResponse } from 'app/services/responses/category.response';
 import { CourseService } from 'app/services/course.service';
 import { Workspace } from 'app/services/responses/workspace.response';
 import { courseModel, IFormReadonly } from '../shared/course.model';
+import { validate }  from '../shared/course.validation';
 
 @Component({
   selector: 'app-course-update',
@@ -41,12 +42,7 @@ export class CourseUpdateComponent implements OnInit, IFormReadonly {
 
   protected readonly courseForm = form(
     this.model,
-    (s) => {
-      required(s.name, { message: 'O campo Nome é obrigatório.' });
-      maxLength(s.name, 100);
-      required(s.categoryId, { message: 'O campo Categoria é obrigatório.' });
-      required(s.workloadHours, { message: 'O campo Duração é obrigatório.' });
-    },
+    validate,
     {
       submission: {
         action: async (f) => {

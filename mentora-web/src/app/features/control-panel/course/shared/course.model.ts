@@ -1,6 +1,7 @@
 import { signal, WritableSignal } from '@angular/core';
+import { required, maxLength, SchemaFn } from '@angular/forms/signals';
 
-interface ICourse {
+export interface ICourse {
   name: string;
   categoryId: string;
   workloadHours: number;
@@ -16,6 +17,6 @@ export const courseModel = signal<ICourse>({
     showCertificate: true
   });
 
-  export interface IFormReadonly {
-    readonly: WritableSignal<boolean>;
-  }
+export interface IFormReadonly {
+  readonly: WritableSignal<boolean>;
+}

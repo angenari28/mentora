@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { form, required, FormRoot, FormField, maxLength, disabled } from '@angular/forms/signals';
+import { form, FormRoot, FormField, disabled } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'app/services/category.service';
 import { CategoryResponse } from 'app/services/responses/category.response';
 import { CourseService } from 'app/services/course.service';
 import { courseModel, IFormReadonly } from '../shared/course.model';
+import { readonly } from '../shared/course.validation';
 
 @Component({
   selector: 'app-course-delete',
   standalone: true,
   imports: [CommonModule, FormsModule, FormRoot, FormField],
   templateUrl: '../shared/course-shared.component.html',
-  styleUrls: ['../shared/course-shared.component.css']
+  styleUrls: ['../shared/course-shared.component.css'],
 })
 export class CourseDeleteComponent implements OnInit, IFormReadonly {
   readonly = signal(true);
@@ -37,43 +38,33 @@ export class CourseDeleteComponent implements OnInit, IFormReadonly {
 
   private readonly model = courseModel;
 
-  protected readonly courseForm = form(
-    this.model,
-    (s) => {
-      disabled(s.name);
-      disabled(s.showCertificate);
-      disabled(s.workloadHours);
-      disabled(s.categoryId);
-      disabled(s.active);
-    },
-    {
-      submission: {
-        action: async () => {
-          this.submitError.set(null);
-          this.submitting.set(true);
+  protected readonly courseForm = form(this.model, readonly, {
+    submission: {
+      action: async () => {
+        this.submitError.set(null);
+        this.submitting.set(true);
 
-          return new Promise<void>((resolve, reject) => {
-            this.courseService.delete(this.courseId).subscribe({
-              next: () => {
-                this.submitting.set(false);
-                this.router.navigate(['/control-panel/course']);
-                resolve();
-              },
-              error: (err) => {
-                this.submitting.set(false);
-                this.submitError.set('Erro ao excluir curso. Tente novamente.');
-                console.error(err);
-                reject(err);
-              }
-            });
+        return new Promise<void>((resolve, reject) => {
+          this.courseService.delete(this.courseId).subscribe({
+            next: () => {
+              this.submitting.set(false);
+              this.router.navigate(['/control-panel/course']);
+              resolve();
+            },
+            error: (err) => {
+              this.submitting.set(false);
+              this.submitError.set('Erro ao excluir curso. Tente novamente.');
+              console.error(err);
+              reject(err);
+            },
           });
-        },
-        onInvalid: () => {
-          console.warn('Formulário inválido.');
-        },
+        });
+      },
+      onInvalid: () => {
+        console.warn('Formulário inválido.');
       },
     },
-  );
+  });
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id') ?? '';
@@ -84,7 +75,7 @@ export class CourseDeleteComponent implements OnInit, IFormReadonly {
         if (res.success) this.categories.set(res.data.items);
         this.loadingCategories.set(false);
       },
-      error: () => this.loadingCategories.set(false)
+      error: () => this.loadingCategories.set(false),
     });
 
     this.courseService.getById(this.courseId).subscribe({
@@ -96,14 +87,14 @@ export class CourseDeleteComponent implements OnInit, IFormReadonly {
             categoryId: c.categoryId,
             workloadHours: c.workloadHours,
             active: c.active,
-            showCertificate: c.showCertificate
+            showCertificate: c.showCertificate,
           });
           if (c.faceImage) {
             this.faceImagePreview.set(c.faceImage);
             this.faceImageBase64.set(c.faceImage);
           }
         }
-      }
+      },
     });
   }
 
