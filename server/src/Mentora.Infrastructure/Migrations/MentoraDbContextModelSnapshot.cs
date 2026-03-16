@@ -189,6 +189,9 @@ namespace Mentora.Infrastructure.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CourseId1")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -209,6 +212,8 @@ namespace Mentora.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseId1");
 
                     b.HasIndex("SlideTypeId");
 
@@ -491,6 +496,10 @@ namespace Mentora.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Mentora.Domain.Entities.Course", null)
+                        .WithMany("Slides")
+                        .HasForeignKey("CourseId1");
+
                     b.HasOne("Mentora.Domain.Entities.SlideType", "SlideType")
                         .WithMany()
                         .HasForeignKey("SlideTypeId")
@@ -511,6 +520,11 @@ namespace Mentora.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("Mentora.Domain.Entities.Course", b =>
+                {
+                    b.Navigation("Slides");
                 });
 #pragma warning restore 612, 618
         }

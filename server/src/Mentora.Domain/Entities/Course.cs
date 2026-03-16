@@ -15,4 +15,5 @@ public class Course : EntityGuidBase
 
     public Category Category { get; set; } = null!;
     public Workspace Workspace { get; set; } = null!;
+    public ICollection<CourseSlide> Slides { get; set; } = [];
 }

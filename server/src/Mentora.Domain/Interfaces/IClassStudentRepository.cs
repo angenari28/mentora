@@ -8,6 +8,7 @@ public interface IClassStudentRepository : IPagedRepository<ClassStudent>
     Task<ClassStudent?> GetByIdAsync(Guid id);
     Task<IEnumerable<ClassStudent>> GetByClassIdAsync(Guid classId);
     Task<IEnumerable<ClassStudent>> GetByUserIdAsync(Guid userId);
+    Task<IEnumerable<ClassStudent>> GetClassesWithDetailsByUserIdAsync(Guid userId);
     Task<ClassStudent> CreateAsync(ClassStudent classStudent);
     Task<bool> DeleteAsync(Guid id);
 }

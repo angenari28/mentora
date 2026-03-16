@@ -5,16 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class CacheService {
 
-  addLocalStorage(key: string, value: {} | string): void {
+  addLocalStorage(key: cacheToken, value: {} | string): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getLocalStorage(key: string): {} | string | null {
+  getLocalStorage(key: cacheToken): {} | string | null {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) : null;
   }
 
-  removeLocalStorage(key: string): void {
+  removeLocalStorage(key: cacheToken): void {
     localStorage.removeItem(key);
   }
+}
+
+export const enum cacheToken {
+  student_name = 'student_name',
 }

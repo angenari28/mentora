@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { LoginAllowedRoles } from '@services/requests/login.request';
 import { LoginResponse } from '@services/responses/login.response';
+import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
   selector: 'app-login-aluno',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login-aluno.component.html',
-  styleUrl: './login-aluno.component.css'
+  styleUrls: ['./login-aluno.component.css']
 })
 export class LoginAlunoComponent implements OnInit {
   email = '';
@@ -22,11 +23,10 @@ export class LoginAlunoComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private titleService: Title
-  ) {}
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly titleService = inject(Title);
+  private readonly cacheService = inject(CacheService);
 
   ngOnInit(): void {
     this.titleService.setTitle('Login Aluno');
@@ -48,7 +48,8 @@ export class LoginAlunoComponent implements OnInit {
         next: (response: LoginResponse) => {
           if (response.success) {
             this.successMessage = response.message;
-            this.router.navigate(['/aluno']);
+            this.saveNameUserLocalStorage(response.user?.name || '');
+            this.router.navigate([`/aluno/${response.user?.id}`]);
           } else {
             this.errorMessage = response.message || 'Falha ao autenticar.';
           }
@@ -59,5 +60,9 @@ export class LoginAlunoComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  saveNameUserLocalStorage(name: string): void {
+    this.cacheService.addLocalStorage(cacheToken.student_name, name);
   }
 }

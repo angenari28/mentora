@@ -1,0 +1,295 @@
+<div class="learning-platform">
+  <!-- HEADER -->
+  <app-header />
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- WELCOME SECTION -->
+    <section class="welcome-section">
+      <h2 class="welcome-title">Olá, <span id="student-name-welcome">{{ studentName() }}</span> !</h2>
+      <p class="welcome-subtitle" id="welcome-message">
+        Continue sua jornada de aprendizado de onde você parou
+      </p>
+    </section>
+    <!-- LEADERSHIP CATEGORY -->
+    <!-- <section class="category-section">
+      <div class="category-header">
+        <h3 class="category-title">
+          <span class="category-icon">💼</span> Liderança <span class="category-badge">2</span>
+        </h3>
+        <a href="#" class="view-all-link" onclick="event.preventDefault()"> Ver todos → </a>
+      </div>
+      <div class="course-carousel">
+        <div class="carousel-track">
+          <div class="course-card" onclick="openCourse('leadership-1')">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #1c2340 0%, #6366f1 100%)"
+            >
+              💼
+              <div class="course-duration">⏱ 4h 30min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Liderança</span>
+              <h4 class="course-title" id="course-title-1">Fundamentos de Liderança</h4>
+              <p class="course-description">
+                Desenvolva habilidades essenciais para se tornar um líder inspirador e eficaz em sua
+                organização.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">65%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 65%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">▶️ Continuar</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">📊</button>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #10b981 0%, #059669 100%)"
+            >
+              🎯
+              <div class="course-duration">⏱ 3h 15min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Liderança</span>
+              <h4 class="course-title">Gestão de Equipes Ágeis</h4>
+              <p class="course-description">
+                Aprenda metodologias ágeis e técnicas modernas para liderar equipes de alto
+                desempenho.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">30%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 30%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">▶️ Continuar</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">📊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- TECHNOLOGY CATEGORY -->
+    <!-- <section class="category-section">
+      <div class="category-header">
+        <h3 class="category-title">
+          <span class="category-icon">💻</span> Tecnologia <span class="category-badge">3</span>
+        </h3>
+        <a href="#" class="view-all-link" onclick="event.preventDefault()"> Ver todos → </a>
+      </div>
+      <div class="course-carousel">
+        <div class="carousel-track">
+          <div class="course-card">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)"
+            >
+              🐍
+              <div class="course-duration">⏱ 8h 00min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Tecnologia</span>
+              <h4 class="course-title" id="course-title-2">Python para Iniciantes</h4>
+              <p class="course-description">
+                Domine os conceitos fundamentais de programação com Python e crie seus primeiros
+                projetos.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">15%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 15%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">▶️ Continuar</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">📊</button>
+              </div>
+            </div>
+          </div>
+          <div class="course-card" onclick="openCourse('complete')">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)"
+            >
+              ☁️
+              <div class="course-duration">⏱ 6h 45min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Tecnologia</span>
+              <h4 class="course-title">Fundamentos de Cloud Computing</h4>
+              <p class="course-description">
+                Entenda os conceitos essenciais de computação em nuvem e serviços cloud modernos.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">100%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 100%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">🏆 Certificado</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">🔁</button>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
+            >
+              🔒
+              <div class="course-duration">⏱ 5h 20min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Tecnologia</span>
+              <h4 class="course-title">Segurança da Informação</h4>
+              <p class="course-description">
+                Aprenda práticas essenciais para proteger dados e sistemas contra ameaças digitais.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">▶️ Iniciar</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">📊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- COMPLIANCE CATEGORY -->
+    <!-- <section class="category-section">
+      <div class="category-header">
+        <h3 class="category-title">
+          <span class="category-icon">⚖️</span> Compliance <span class="category-badge">1</span>
+        </h3>
+        <a href="#" class="view-all-link" onclick="event.preventDefault()"> Ver todos → </a>
+      </div>
+      <div class="course-carousel">
+        <div class="carousel-track">
+          <div class="course-card">
+            <div
+              class="course-thumbnail"
+              style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%)"
+            >
+              📋
+              <div class="course-duration">⏱ 2h 30min</div>
+            </div>
+            <div class="course-body">
+              <span class="course-category-badge">Compliance</span>
+              <h4 class="course-title" id="course-title-3">LGPD na Prática</h4>
+              <p class="course-description">
+                Compreenda a Lei Geral de Proteção de Dados e como aplicá-la em seu dia a dia
+                profissional.
+              </p>
+              <div class="course-progress-section">
+                <div class="progress-header">
+                  <span class="progress-label">Seu progresso</span>
+                  <span class="progress-percentage">45%</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 45%"></div>
+                </div>
+              </div>
+              <div class="course-footer">
+                <button class="btn btn-primary">▶️ Continuar</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation()">📊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- TURMAS ATIVAS DO ALUNO -->
+    @if (loadingClasses()) {
+      <div class="classes-loading"><p>Carregando cursos...</p></div>
+    } @else if (loadError()) {
+      <div class="classes-error">
+        <p>{{ loadError() }}</p>
+      </div>
+    } @else {
+      @for (category of classesByCategory(); track category.name) {
+        <section class="category-section">
+          <div class="category-header">
+            <h3 class="category-title">
+              {{ category.name }} <span class="category-badge">{{ category.classes.length }}</span>
+            </h3>
+          </div>
+          <div class="course-carousel">
+            <div class="carousel-track">
+              @for (item of category.classes; track item.classId) {
+                <div class="course-card">
+                  <div
+                    class="course-thumbnail"
+                    [class.has-image]="!!item.course.faceImage"
+                    [style.backgroundImage]="
+                      item.course.faceImage ? 'url(' + item.course.faceImage + ')' : null
+                    "
+                  >
+                    @if (!item.course.faceImage) {
+                      <span>📚</span>
+                    }
+                    <div class="course-duration">
+                      ⏱ {{ item.course.workloadHours | workloadHours }}
+                    </div>
+                  </div>
+                  <div class="course-body">
+                    <span class="course-category-badge">{{ item.course.category.name }}</span>
+                    <h4 class="course-title">{{ item.course.name }}</h4>
+                    <p class="course-description">Curso</p>
+                    @if (item.course.slides.length > 0) {
+                      <div class="course-progress-section">
+                        <div class="progress-header">
+                          <span class="progress-label">Seu progresso</span>
+                          <span class="progress-percentage">45%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                          <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                      </div>
+                    }
+                    <div class="course-footer">
+                      <button class="btn btn-primary">▶️ Iniciar</button>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </section>
+      }
+    }
+  </main>
+</div>
+
+<!-- COURSE PLAYER MODAL -->
+<app-course-player />

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Mentora.Infrastructure.Migrations
 {
     [DbContext(typeof(MentoraDbContext))]
-    [Migration("20260316133159_Incremental_0001")]
+    [Migration("20260316170218_Incremental_0001")]
     partial class Incremental_0001
     {
         /// <inheritdoc />
@@ -192,6 +192,9 @@ namespace Mentora.Infrastructure.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CourseId1")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -212,6 +215,8 @@ namespace Mentora.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseId1");
 
                     b.HasIndex("SlideTypeId");
 
@@ -494,6 +499,10 @@ namespace Mentora.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Mentora.Domain.Entities.Course", null)
+                        .WithMany("Slides")
+                        .HasForeignKey("CourseId1");
+
                     b.HasOne("Mentora.Domain.Entities.SlideType", "SlideType")
                         .WithMany()
                         .HasForeignKey("SlideTypeId")
@@ -514,6 +523,11 @@ namespace Mentora.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("Mentora.Domain.Entities.Course", b =>
+                {
+                    b.Navigation("Slides");
                 });
 #pragma warning restore 612, 618
         }

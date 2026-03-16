@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  studentName = 'Maria Silva';
+  protected studentName = computed(() => this.cacheService.getLocalStorage(cacheToken.student_name) || '');
   notificationCount = 3;
+
+  private readonly cacheService = inject(CacheService);
 
   ngOnInit(): void {
     const win = window as unknown as Record<string, any>;
@@ -34,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   protected getStudentInitials(): string {
-    return this.studentName
+    return (this.studentName() as string)
       .split(' ')
       .map(namePart => namePart.charAt(0).toUpperCase())
       .join('');

@@ -42,6 +42,22 @@ public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRe
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<ClassStudent>> GetClassesWithDetailsByUserIdAsync(Guid userId)
+    {
+        return await _context.ClassStudents
+            .Include(cs => cs.Class)
+                .ThenInclude(c => c.Course)
+                    .ThenInclude(course => course.Category)
+            .Include(cs => cs.Class)
+                .ThenInclude(c => c.Course)
+                    .ThenInclude(course => course.Slides)
+                        .ThenInclude(slide => slide.SlideType)
+            .AsNoTracking()
+            .Where(cs => cs.UserId == userId && cs.Class.Active && cs.Class.Course.Active && cs.User.IsActive)
+            .OrderBy(cs => cs.Class.DateStart)
+            .ToListAsync();
+    }
+
     public async Task<PagedResult<ClassStudent>> GetPagedAsync(PaginationParams pagination, CancellationToken cancellationToken = default)
     {
         var query = _context.ClassStudents

@@ -180,6 +180,25 @@ html, body {
   overflow: hidden;
 }
 
+.course-thumbnail.has-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-size: 0;
+}
+
+.classes-loading,
+.classes-error {
+  padding: 2rem 0;
+  text-align: center;
+  color: #718096;
+  font-size: 1rem;
+}
+
+.classes-error {
+  color: #E53E3E;
+}
+
 .course-thumbnail::after {
   content: '';
   position: absolute;

@@ -173,6 +173,7 @@ namespace Mentora.Infrastructure.Migrations
                     Content = table.Column<string>(type: "varchar", nullable: false),
                     Ordering = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CourseId1 = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -185,6 +186,11 @@ namespace Mentora.Infrastructure.Migrations
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CourseSlides_Courses_CourseId1",
+                        column: x => x.CourseId1,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CourseSlides_SlideTypes_SlideTypeId",
                         column: x => x.SlideTypeId,
@@ -282,6 +288,11 @@ namespace Mentora.Infrastructure.Migrations
                 name: "IX_CourseSlides_CourseId",
                 table: "CourseSlides",
                 column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseSlides_CourseId1",
+                table: "CourseSlides",
+                column: "CourseId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseSlides_SlideTypeId",

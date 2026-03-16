@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListItem } from './responses/shared/list-item.response';
 import { ClassStudentResponse } from './responses/class-student.response';
 import { ClassStudentRequest } from './requests/class-student.request';
+import { StudentClassesResponse } from './responses/student-classes.response';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -35,5 +36,9 @@ export class ClassStudentService {
 
   delete(id: string): Observable<{ success: boolean; message: string }> {
     return this.http.delete<{ success: boolean; message: string }>(`${this.baseUrl}/${id}`);
+  }
+
+  getByStudentId(userId: string): Observable<{ success: boolean; message: string; data: StudentClassesResponse[] }> {
+    return this.http.get<{ success: boolean; message: string; data: StudentClassesResponse[] }>(`${this.baseUrl}/student/${userId}`);
   }
 }

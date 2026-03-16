@@ -45,6 +45,44 @@ public class ClassStudentService(IClassStudentRepository _classStudentRepository
         return await _classStudentRepository.DeleteAsync(id);
     }
 
+    public async Task<IEnumerable<StudentClassesResponse>> GetClassesByStudentIdAsync(Guid userId)
+    {
+        var enrollments = await _classStudentRepository.GetClassesWithDetailsByUserIdAsync(userId);
+        return enrollments.Select(cs => new StudentClassesResponse
+        {
+            ClassId = cs.Class.Id,
+            ClassName = cs.Class.Name,
+            DateStart = cs.Class.DateStart,
+            DateEnd = cs.Class.DateEnd,
+            ClassActive = cs.Class.Active,
+            Course = new CourseDetail
+            {
+                Id = cs.Class.Course.Id,
+                Name = cs.Class.Course.Name,
+                FaceImage = cs.Class.Course.FaceImage,
+                WorkloadHours = cs.Class.Course.WorkloadHours,
+                Active = cs.Class.Course.Active,
+                Category = new CategoryDetail
+                {
+                    Id = cs.Class.Course.Category.Id,
+                    Name = cs.Class.Course.Category.Name
+                },
+                Slides = cs.Class.Course.Slides
+                    .Where(s => s.Active)
+                    .OrderBy(s => s.Ordering)
+                    .Select(s => new SlideDetail
+                    {
+                        Id = s.Id,
+                        Title = s.Title,
+                        Content = s.Content,
+                        SlideTypeName = s.SlideType?.Name ?? string.Empty,
+                        Ordering = s.Ordering,
+                        Active = s.Active
+                    })
+            }
+        });
+    }
+
     private static ClassStudentResponse ToResponse(ClassStudent cs) => new()
     {
         Id = cs.Id,

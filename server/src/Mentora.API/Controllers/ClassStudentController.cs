@@ -40,6 +40,20 @@ public class ClassStudentController(IClassStudentService _classStudentService) :
         }
     }
 
+    [HttpGet("student/{userId:guid}")]
+    public async Task<ActionResult> GetByStudent(Guid userId)
+    {
+        try
+        {
+            var result = await _classStudentService.GetClassesByStudentIdAsync(userId);
+            return Ok(new { success = true, message = "Turmas do aluno recuperadas com sucesso", data = result });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao recuperar turmas do aluno", error = ex.Message });
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult> Create([FromBody] ClassStudentRequest request)
     {
