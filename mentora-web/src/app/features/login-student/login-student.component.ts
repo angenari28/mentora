@@ -10,13 +10,13 @@ import { LoginResponse } from '@services/responses/login.response';
 import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
-  selector: 'app-login-aluno',
+  selector: 'app-login-student',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login-aluno.component.html',
-  styleUrls: ['./login-aluno.component.css']
+  templateUrl: './login-student.component.html',
+  styleUrls: ['./login-student.component.css']
 })
-export class LoginAlunoComponent implements OnInit {
+export class LoginStudentComponent implements OnInit {
   email = '';
   password = '';
   loading = false;
@@ -49,7 +49,7 @@ export class LoginAlunoComponent implements OnInit {
           if (response.success) {
             this.successMessage = response.message;
             this.saveNameUserLocalStorage(response.user?.name || '');
-            this.router.navigate([`/aluno/${response.user?.id}`]);
+            this.router.navigate([`/student/${response.user?.id}`]);
           } else {
             this.errorMessage = response.message || 'Falha ao autenticar.';
           }

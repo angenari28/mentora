@@ -11,13 +11,13 @@ import { LoginAllowedRoles } from '@services/requests/login.request';
 import { LoginResponse } from '@services/responses/login.response';
 
 @Component({
-  selector: 'app-login-gestao',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login-gestao.component.html',
-  styleUrl: './login-gestao.component.css'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class LoginGestaoComponent implements OnInit {
+export class LoginComponent implements OnInit {
   email = '';
   password = '';
   rememberMe = false;
@@ -31,7 +31,7 @@ export class LoginGestaoComponent implements OnInit {
   private readonly titleService = inject(Title);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Login Gestão');
+    this.titleService.setTitle('Login');
   }
 
   onSubmit(): void {
