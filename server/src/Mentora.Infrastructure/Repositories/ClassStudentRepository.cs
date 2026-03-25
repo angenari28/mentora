@@ -9,18 +9,16 @@ namespace Mentora.Infrastructure.Repositories;
 public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRepository
 {
     public async Task<ClassStudent?> GetByIdAsync(Guid id)
-    {
-        return await _context.ClassStudents
+        => await _context.ClassStudents
             .Include(cs => cs.User)
             .Include(cs => cs.Class)
                 .ThenInclude(c => c.Course)
             .AsNoTracking()
             .FirstOrDefaultAsync(cs => cs.Id == id);
-    }
+
 
     public async Task<IEnumerable<ClassStudent>> GetByClassIdAsync(Guid classId)
-    {
-        return await _context.ClassStudents
+        => await _context.ClassStudents
             .Include(cs => cs.User)
             .Include(cs => cs.Class)
                 .ThenInclude(c => c.Course)
@@ -28,11 +26,10 @@ public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRe
             .Where(cs => cs.ClassId == classId)
             .OrderBy(cs => cs.User.Name)
             .ToListAsync();
-    }
+
 
     public async Task<IEnumerable<ClassStudent>> GetByUserIdAsync(Guid userId)
-    {
-        return await _context.ClassStudents
+        => await _context.ClassStudents
             .Include(cs => cs.User)
             .Include(cs => cs.Class)
                 .ThenInclude(c => c.Course)
@@ -40,11 +37,10 @@ public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRe
             .Where(cs => cs.UserId == userId)
             .OrderBy(cs => cs.Class.Name)
             .ToListAsync();
-    }
+
 
     public async Task<IEnumerable<ClassStudent>> GetClassesWithDetailsByUserIdAsync(Guid userId)
-    {
-        return await _context.ClassStudents
+        => await _context.ClassStudents
             .Include(cs => cs.Class)
                 .ThenInclude(c => c.Course)
                     .ThenInclude(course => course.Category)
@@ -52,11 +48,11 @@ public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRe
                 .ThenInclude(c => c.Course)
                     .ThenInclude(course => course.Slides)
                         .ThenInclude(slide => slide.SlideType)
+            .AsSplitQuery()
             .AsNoTracking()
             .Where(cs => cs.UserId == userId && cs.Class.Active && cs.Class.Course.Active && cs.User.IsActive)
             .OrderBy(cs => cs.Class.DateStart)
             .ToListAsync();
-    }
 
     public async Task<PagedResult<ClassStudent>> GetPagedAsync(PaginationParams pagination, CancellationToken cancellationToken = default)
     {

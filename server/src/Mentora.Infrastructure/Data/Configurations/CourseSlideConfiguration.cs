@@ -35,7 +35,7 @@ public class CourseSlideConfiguration : IEntityTypeConfiguration<CourseSlide>
             .IsRequired();
 
         entity.HasOne(e => e.Course)
-            .WithMany()
+            .WithMany(c => c.Slides)
             .HasForeignKey(e => e.CourseId)
             .OnDelete(DeleteBehavior.Restrict);
 

@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = '/login-aluno';
+    window.location.href = '/';
   }
 
   protected getStudentInitials(): string {
