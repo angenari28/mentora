@@ -252,7 +252,7 @@
                     class="course-thumbnail"
                     [class.has-image]="!!item.course.faceImage"
                     [style.backgroundImage]="
-                      item.course.faceImage ? 'url(' + item.course.faceImage + ')' : null
+                      item.course.faceImage ? 'url(' + loadCourseImage(item) + ')' : null
                     "
                   >
                     @if (!item.course.faceImage) {

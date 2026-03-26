@@ -194,4 +194,11 @@ export class StudentComponent implements OnInit {
     if (currentSlideNum) currentSlideNum.textContent = this.currentSlide.toString();
     if (totalSlidesNum) totalSlidesNum.textContent = this.totalSlides.toString();
   }
+
+  protected loadCourseImage(course: StudentClassesResponse): string {
+    if (course.course.faceImage) {
+      return course.course.faceImage.startsWith('data:') ? course.course.faceImage : `data:image/png;base64,${course.course.faceImage}`;
+    }
+    return '';
+  }
 }
