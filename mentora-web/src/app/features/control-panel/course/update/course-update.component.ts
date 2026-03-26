@@ -109,7 +109,7 @@ export class CourseUpdateComponent implements OnInit, IFormReadonly {
             showCertificate: c.showCertificate
           });
           if (c.faceImage) {
-            this.faceImagePreview.set(c.faceImage);
+            this.faceImagePreview.set(c.faceImage.startsWith('data:') ? c.faceImage : `data:image/png;base64,${c.faceImage}`);
             this.faceImageBase64.set(c.faceImage);
           }
         }

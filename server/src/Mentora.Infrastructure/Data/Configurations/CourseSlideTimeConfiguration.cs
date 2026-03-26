@@ -11,9 +11,6 @@ public class CourseSlideTimeConfiguration : IEntityTypeConfiguration<CourseSlide
         entity.ToTable("CourseSlidesTimes");
         entity.HasKey(e => e.Id);
 
-        entity.Property(e => e.UserId)
-            .IsRequired();
-
         entity.Property(e => e.CourseSlideId)
             .IsRequired();
 
@@ -28,11 +25,6 @@ public class CourseSlideTimeConfiguration : IEntityTypeConfiguration<CourseSlide
 
         entity.Property(e => e.UpdatedAt)
             .IsRequired();
-
-        entity.HasOne(e => e.User)
-            .WithMany()
-            .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
 
         entity.HasOne(e => e.CourseSlide)
             .WithMany()

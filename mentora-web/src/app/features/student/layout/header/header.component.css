@@ -14,8 +14,9 @@
 
 .header-logo-section {
   display: flex;
+  flex-flow: column;
   align-items: center;
-  gap: 1rem;
+  gap: .2rem;
 }
 
 .header-brand {
@@ -46,6 +47,13 @@
 .header-subtitle {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 500;
+}
+
+.logo-subtitle {
+  font-size: 0.75rem;
+  color: #cbd5e1;
   margin: 0;
   font-weight: 500;
 }
