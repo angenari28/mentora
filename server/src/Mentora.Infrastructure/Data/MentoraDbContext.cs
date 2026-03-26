@@ -13,6 +13,7 @@ public class MentoraDbContext(DbContextOptions<MentoraDbContext> options) : DbCo
     public DbSet<Workspace> Workspaces { get; set; }
     public DbSet<ClassStudent> ClassStudents { get; set; }
     public DbSet<CourseSlide> CourseSlides { get; set; }
+    public DbSet<CourseSlideTime> CourseSlidesTimes { get; set; }
     public DbSet<SlideType> SlideTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
