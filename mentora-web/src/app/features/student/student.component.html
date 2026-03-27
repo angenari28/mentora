@@ -6,7 +6,9 @@
   <main class="main-content">
     <!-- WELCOME SECTION -->
     <section class="welcome-section">
-      <h2 class="welcome-title">Olá, <span id="student-name-welcome">{{ studentName() }}</span> !</h2>
+      <h2 class="welcome-title">
+        Olá, <span id="student-name-welcome">{{ studentName() }}</span> !
+      </h2>
       <p class="welcome-subtitle" id="welcome-message">
         Continue sua jornada de aprendizado de onde você parou
       </p>
@@ -247,7 +249,7 @@
           <div class="course-carousel">
             <div class="carousel-track">
               @for (item of category.classes; track item.classId) {
-                <div class="course-card">
+                <div class="course-card" (click)="openCourse(item)">
                   <div
                     class="course-thumbnail"
                     [class.has-image]="!!item.course.faceImage"
@@ -270,15 +272,30 @@
                       <div class="course-progress-section">
                         <div class="progress-header">
                           <span class="progress-label">Seu progresso</span>
-                          <span class="progress-percentage">45%</span>
+                          <span class="progress-percentage">{{
+                            loadPercentegeCourse(item).toView | percent
+                          }}</span>
                         </div>
                         <div class="progress-bar-container">
-                          <div class="progress-bar" style="width: 45%"></div>
+                          <div
+                            class="progress-bar"
+                            [style.width.%]="loadPercentegeCourse(item).toStyle"
+                          ></div>
                         </div>
                       </div>
                     }
                     <div class="course-footer">
-                      <button class="btn btn-primary">▶️ Iniciar</button>
+                      @if (loadPercentegeCourse(item).toView === 1) {
+                        @if (item.course.showCertificate) {
+                          <button class="btn btn-primary">🏆 Exibir Certificado</button>
+                        } @else {
+                          <button class="btn btn-primary">▶️ Concluir</button>
+                        }
+                      } @else if (loadPercentegeCourse(item).toView > 0) {
+                        <button class="btn btn-primary">▶️ Continuar</button>
+                      } @else {
+                        <button class="btn btn-primary">▶️ Iniciar</button>
+                      }
                     </div>
                   </div>
                 </div>
@@ -292,4 +309,4 @@
 </div>
 
 <!-- COURSE PLAYER MODAL -->
-<app-course-player />
+<app-course-player [courses]="classes()" [userId]="studentId()" [studentName]="studentName()" (closed)="reloadCourses()" />

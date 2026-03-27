@@ -1,26 +1,14 @@
-<div class="course-player-overlay" id="certificate-view">
-  <div class="course-player">
-    <div class="player-header">
-      <h3 class="player-title">Certificado de Conclusão</h3>
-      <button class="close-player" onclick="closeCertificate()">✕</button>
-    </div>
-    <div class="player-body">
-      <div class="certificate-container show">
-        <div class="certificate-header">
-        </div>
-        <div class="certificate-preview">
-          <div class="certificate-badge">🏆</div>
-          <p class="certificate-text">Este certificado é concedido a</p>
-          <h3 class="certificate-recipient" id="certificate-student-name">{{ studentName }}</h3>
-          <p class="certificate-text">Por completar com êxito o curso</p>
-          <p class="certificate-course">Fundamentos de Cloud Computing</p>
-          <p class="certificate-date">Data de conclusão: 22 de Dezembro de 2024</p>
-        </div>
-        <div class="certificate-actions">
-          <button class="btn btn-secondary">👁️ Visualizar</button>
-          <button class="btn btn-primary">📥 Baixar Certificado</button>
-        </div>
-      </div>
-    </div>
+<div class="certificate-container show">
+  <div class="certificate-preview">
+    <div class="certificate-badge">🏆</div>
+    <p class="certificate-text">Este certificado é concedido a</p>
+    <h3 class="certificate-recipient">{{ studentName() }}</h3>
+    <p class="certificate-text">Por completar com êxito o curso</p>
+    <p class="certificate-course">{{ courseName() }}</p>
+    <p class="certificate-date">Data de conclusão: {{ formattedDate() }}</p>
+  </div>
+  <div class="certificate-actions">
+    <button class="btn btn-secondary">👁️ Visualizar</button>
+    <button class="btn btn-primary">📥 Baixar Certificado</button>
   </div>
 </div>

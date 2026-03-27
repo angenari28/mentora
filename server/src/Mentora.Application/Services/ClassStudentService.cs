@@ -6,7 +6,9 @@ using Mentora.Domain.Interfaces;
 
 namespace Mentora.Application.Services;
 
-public class ClassStudentService(IClassStudentRepository _classStudentRepository) : IClassStudentService
+public class ClassStudentService(
+    IClassStudentRepository _classStudentRepository,
+    ICourseSlideTimeRepository _courseSlideTimeRepository) : IClassStudentService
 {
     public async Task<PagedResult<ClassStudentResponse>> GetPagedAsync(PaginationParams pagination)
     {
@@ -48,6 +50,20 @@ public class ClassStudentService(IClassStudentRepository _classStudentRepository
     public async Task<IEnumerable<StudentClassesResponse>> GetClassesByStudentIdAsync(Guid userId)
     {
         var enrollments = await _classStudentRepository.GetClassesWithDetailsByUserIdAsync(userId);
+
+        var slideIds = enrollments
+            .SelectMany(cs => cs.Class.Course.Slides.Select(s => s.Id))
+            .Distinct();
+
+        var slideTimes = (await _courseSlideTimeRepository.GetBySlideIdsAsync(slideIds, userId))
+            .GroupBy(t => t.CourseSlideId)
+            .ToDictionary(
+                g => g.Key,
+                g => g.OrderByDescending(t => t.DateEnd == null ? 1 : 0)
+                       .ThenByDescending(t => t.DateStart)
+                       .First()
+            );
+
         return enrollments.Select(cs => new StudentClassesResponse
         {
             ClassId = cs.Class.Id,
@@ -62,6 +78,7 @@ public class ClassStudentService(IClassStudentRepository _classStudentRepository
                 FaceImage = cs.Class.Course.FaceImage,
                 WorkloadHours = cs.Class.Course.WorkloadHours,
                 Active = cs.Class.Course.Active,
+                ShowCertificate = cs.Class.Course.ShowCertificate,
                 Category = new CategoryDetail
                 {
                     Id = cs.Class.Course.Category.Id,
@@ -70,14 +87,24 @@ public class ClassStudentService(IClassStudentRepository _classStudentRepository
                 Slides = cs.Class.Course.Slides
                     .Where(s => s.Active)
                     .OrderBy(s => s.Ordering)
-                    .Select(s => new SlideDetail
+                    .Select(s =>
                     {
-                        Id = s.Id,
-                        Title = s.Title,
-                        Content = s.Content,
-                        SlideTypeName = s.SlideType?.Name ?? string.Empty,
-                        Ordering = s.Ordering,
-                        Active = s.Active
+                        slideTimes.TryGetValue(s.Id, out var time);
+                        return new SlideDetail
+                        {
+                            Id = s.Id,
+                            Title = s.Title,
+                            Content = s.Content,
+                            SlideTypeName = s.SlideType?.Name ?? string.Empty,
+                            Ordering = s.Ordering,
+                            Active = s.Active,
+                            CourseSlideTime = time is null ? null : new CourseSlideTimeDetail
+                            {
+                                Id = time.Id,
+                                DateStart = time.DateStart,
+                                DateEnd = time.DateEnd
+                            }
+                        };
                     })
             }
         });

@@ -11,6 +11,9 @@ public class CourseSlideTimeConfiguration : IEntityTypeConfiguration<CourseSlide
         entity.ToTable("CourseSlidesTimes");
         entity.HasKey(e => e.Id);
 
+        entity.Property(e => e.UserId)
+            .IsRequired();
+
         entity.Property(e => e.CourseSlideId)
             .IsRequired();
 
@@ -18,7 +21,7 @@ public class CourseSlideTimeConfiguration : IEntityTypeConfiguration<CourseSlide
             .IsRequired();
 
         entity.Property(e => e.DateEnd)
-            .IsRequired();
+            .IsRequired(false);
 
         entity.Property(e => e.CreatedAt)
             .IsRequired();

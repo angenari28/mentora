@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrl: './details-screen.component.css'
 })
 export class DetailsScreenComponent {
-  constructor(private router: Router) {}
 
   switchScreen(screen: string): void {
     const win = window as any;

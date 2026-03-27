@@ -71,6 +71,7 @@ builder.Services.AddScoped<IClassRepository, ClassRepository>();
 builder.Services.AddScoped<IClassStudentRepository, ClassStudentRepository>();
 builder.Services.AddScoped<ICourseSlideRepository, CourseSlideRepository>();
 builder.Services.AddScoped<ISlideTypeRepository, SlideTypeRepository>();
+builder.Services.AddScoped<ICourseSlideTimeRepository, CourseSlideTimeRepository>();
 
 // Application Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -82,6 +83,7 @@ builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<IClassStudentService, ClassStudentService>();
 builder.Services.AddScoped<ICourseSlideService, CourseSlideService>();
 builder.Services.AddScoped<ISlideTypeService, SlideTypeService>();
+builder.Services.AddScoped<ICourseSlideTimeService, CourseSlideTimeService>();
 
 var app = builder.Build();
 

@@ -226,9 +226,10 @@ namespace Mentora.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     CourseSlideId = table.Column<Guid>(type: "uuid", nullable: false),
                     DateStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DateEnd = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateEnd = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

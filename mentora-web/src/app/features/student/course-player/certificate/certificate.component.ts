@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-certificate',
@@ -6,19 +6,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './certificate.component.html',
   styleUrl: './certificate.component.css'
 })
-export class CertificateComponent implements OnInit {
-  studentName = 'Maria Silva';
+export class CertificateComponent {
+  studentName = input<string>('');
+  courseName = input<string>('');
+  completionDate = input<string>('');
 
-  ngOnInit(): void {
-    const win = window as unknown as Record<string, any>;
-
-    win["closeCertificate"] = () => {
-      this.closeCertificate();
-    };
-  }
-
-  closeCertificate(): void {
-    document.getElementById('certificate-view')?.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
+  protected readonly formattedDate = computed(() => {
+    const raw = this.completionDate();
+    if (!raw) return '';
+    return new Date(raw).toLocaleDateString('pt-BR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  });
 }

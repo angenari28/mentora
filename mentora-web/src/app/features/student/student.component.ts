@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
@@ -7,24 +7,25 @@ import { ClassStudentService } from 'app/services/class-student.service';
 import { StudentClassesResponse } from 'app/services/responses/student-classes.response';
 import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
 import { CacheService, cacheToken } from '@services/cache.service';
+import { PercentPipe } from '@angular/common';
 
 @Component({
   selector: 'app-aluno',
   standalone: true,
-  imports: [HeaderComponent, CoursePlayerComponent, WorkloadHoursPipe],
+  imports: [HeaderComponent, CoursePlayerComponent, WorkloadHoursPipe, PercentPipe],
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  styleUrls: ['./student.component.css'],
 })
 export class StudentComponent implements OnInit {
-
-  public currentSlide = 0;
-  public totalSlides = 5;
+  @ViewChild(CoursePlayerComponent) private player!: CoursePlayerComponent;
 
   readonly studentId = signal<string>('');
   readonly classes = signal<StudentClassesResponse[]>([]);
   readonly loadingClasses = signal(false);
   readonly loadError = signal<string | null>(null);
-  readonly studentName = computed(() => this.cacheService.getLocalStorage(cacheToken.student_name) || '');
+  readonly studentName = computed(
+    () => (this.cacheService.getLocalStorage(cacheToken.student_name) as string) || '',
+  );
 
   readonly classesByCategory = computed(() => {
     const map = new Map<string, { name: string; classes: StudentClassesResponse[] }>();
@@ -45,7 +46,37 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Aluno');
+    this.getCourses();
 
+    const win = window as unknown as Record<string, any>;
+    win['openCourse'] = (classe: StudentClassesResponse) => this.player.open(classe);
+    win['closeCourse'] = () => this.player.close();
+    win['closeCertificate'] = () => {
+      document.getElementById('certificate-view')?.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    };
+    win['nextSlide'] = () => this.player.next();
+    win['previousSlide'] = () => this.player.previous();
+    win['selectQuizOption'] = (el: HTMLElement, isCorrect: boolean) =>
+      this.player.selectQuizOption(el, isCorrect);
+  }
+
+  ngOnDestroy(): void {
+    const win = window as unknown as Record<string, any>;
+    delete win['openCourse'];
+    delete win['closeCourse'];
+    delete win['closeCertificate'];
+    delete win['nextSlide'];
+    delete win['previousSlide'];
+    delete win['selectQuizOption'];
+    document.body.style.overflow = 'auto';
+  }
+
+  protected reloadCourses(): void {
+    this.getCourses();
+  }
+
+  private getCourses(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.studentId.set(id);
 
@@ -60,145 +91,29 @@ export class StudentComponent implements OnInit {
         error: () => {
           this.loadError.set('Erro ao carregar turmas do aluno.');
           this.loadingClasses.set(false);
-        }
+        },
       });
     }
-    const win = window as unknown as Record<string, any>;
-
-    win["openCourse"] = (courseId: string) => {
-      if (courseId === 'complete') {
-        document.getElementById('certificate-view')?.classList.add('active');
-        return;
-      }
-
-      this.currentSlide = 1;
-      document.getElementById('course-player')?.classList.add('active');
-      this.updateSlideDisplay();
-      document.body.style.overflow = 'hidden';
-    };
-
-    win["closeCourse"] = () => {
-      document.getElementById('course-player')?.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    };
-
-    win["closeCertificate"] = () => {
-      document.getElementById('certificate-view')?.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    };
-
-    win["nextSlide"] = () => {
-      if (this.currentSlide < this.totalSlides) {
-        this.currentSlide++;
-        this.updateSlideDisplay();
-      }
-    };
-
-    win["previousSlide"] = () => {
-      if (this.currentSlide > 1) {
-        this.currentSlide--;
-        this.updateSlideDisplay();
-      }
-    };
-
-    win["selectQuizOption"] = (element: HTMLElement, isCorrect: boolean) => {
-      const options = element.parentElement?.querySelectorAll('.quiz-option');
-      const feedback = document.getElementById('quiz-feedback');
-
-      options?.forEach(opt => {
-        (opt as HTMLElement).style.pointerEvents = 'none';
-      });
-
-      element.classList.add('selected');
-
-      setTimeout(() => {
-        if (isCorrect) {
-          element.classList.add('correct');
-          feedback?.classList.add('correct');
-          if (feedback) {
-            feedback.querySelector('.feedback-icon')!.textContent = '✓';
-            feedback.querySelector('.feedback-title')!.textContent = 'Correto!';
-            feedback.querySelector('.feedback-message')!.textContent = 'Um líder eficaz inspira e capacita sua equipe, criando um ambiente colaborativo onde todos podem contribuir para o sucesso coletivo.';
-          }
-        } else {
-          element.classList.add('incorrect');
-          feedback?.classList.add('incorrect');
-          if (feedback) {
-            feedback.querySelector('.feedback-icon')!.textContent = '✕';
-            feedback.querySelector('.feedback-title')!.textContent = 'Incorreto';
-            feedback.querySelector('.feedback-message')!.textContent = 'A liderança eficaz vai além da autoridade. Tente novamente após revisar o conteúdo.';
-          }
-        }
-        feedback?.classList.add('show');
-      }, 300);
-    };
-
-    // Inicializar progress circle
-    this.updateSlideDisplay();
   }
 
-  ngOnDestroy(): void {
-    const win = window as unknown as Record<string, any>;
-    delete win["openCourse"];
-    delete win["closeCourse"];
-    delete win["closeCertificate"];
-    delete win["nextSlide"];
-    delete win["previousSlide"];
-    delete win["selectQuizOption"];
-    document.body.style.overflow = 'auto';
-  }
-
-  private updateSlideDisplay(): void {
-    // Update slides
-    document.querySelectorAll('.slide').forEach((slide, index) => {
-      slide.classList.remove('active');
-      if (index + 1 === this.currentSlide) {
-        slide.classList.add('active');
-      }
-    });
-
-    // Update indicators
-    document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
-      dot.classList.remove('active');
-      if (index + 1 === this.currentSlide) {
-        dot.classList.add('active');
-      }
-    });
-
-    // Update buttons
-    const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
-    const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
-
-    if (prevBtn) prevBtn.disabled = this.currentSlide === 1;
-
-    if (nextBtn) {
-      if (this.currentSlide === this.totalSlides) {
-        nextBtn.textContent = '✓ Concluir';
-      } else {
-        nextBtn.textContent = 'Próximo →';
-      }
-    }
-
-    // Update progress
-    const progress = Math.round((this.currentSlide / this.totalSlides) * 100);
-    const progressCircle = document.getElementById('progress-circle');
-    if (progressCircle) {
-      progressCircle.setAttribute('data-progress', progress.toString());
-      const degrees = (progress / 100) * 360;
-      progressCircle.style.background = `conic-gradient(#1C2340 ${degrees}deg, #E5E9F0 ${degrees}deg)`;
-    }
-
-    // Update slide counter
-    const currentSlideNum = document.getElementById('current-slide-number');
-    const totalSlidesNum = document.getElementById('total-slides');
-    if (currentSlideNum) currentSlideNum.textContent = this.currentSlide.toString();
-    if (totalSlidesNum) totalSlidesNum.textContent = this.totalSlides.toString();
+  protected openCourse(classe: StudentClassesResponse): void {
+    this.player.open(classe);
   }
 
   protected loadCourseImage(course: StudentClassesResponse): string {
     if (course.course.faceImage) {
-      return course.course.faceImage.startsWith('data:') ? course.course.faceImage : `data:image/png;base64,${course.course.faceImage}`;
+      return course.course.faceImage.startsWith('data:')
+        ? course.course.faceImage
+        : `data:image/png;base64,${course.course.faceImage}`;
     }
     return '';
+  }
+
+  protected loadPercentegeCourse(classes: StudentClassesResponse): {toView: number, toStyle: number} {
+    const totalSlides = classes.course.slides.length;
+    const totalSlideCompleted = classes.course.slides.filter(s => s.courseSlideTime?.dateEnd).length;
+    if (totalSlides === 0) return { toView: 0, toStyle: 0 };
+    const percentage = totalSlideCompleted / totalSlides;
+    return { toView: percentage, toStyle: percentage * 100 };
   }
 }

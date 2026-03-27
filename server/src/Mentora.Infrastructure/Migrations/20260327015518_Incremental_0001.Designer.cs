@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Mentora.Infrastructure.Migrations
 {
     [DbContext(typeof(MentoraDbContext))]
-    [Migration("20260326162815_Incremental_0001")]
+    [Migration("20260327015518_Incremental_0001")]
     partial class Incremental_0001
     {
         /// <inheritdoc />
@@ -344,7 +344,7 @@ namespace Mentora.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DateEnd")
+                    b.Property<DateTime?>("DateEnd")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DateStart")
@@ -352,6 +352,9 @@ namespace Mentora.Infrastructure.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

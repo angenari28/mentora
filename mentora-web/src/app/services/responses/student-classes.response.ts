@@ -13,6 +13,7 @@ export interface CourseDetail {
   faceImage: string;
   workloadHours: number;
   active: boolean;
+  showCertificate: boolean;
   category: CategoryDetail;
   slides: SlideDetail[];
 }
@@ -29,4 +30,11 @@ export interface SlideDetail {
   slideTypeName: string;
   ordering: number;
   active: boolean;
+  courseSlideTime: CourseSlideTimeDetail | null;
+}
+
+export interface CourseSlideTimeDetail {
+  id: string;
+  dateStart: string;
+  dateEnd: string | null;
 }

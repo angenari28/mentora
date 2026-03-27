@@ -1,137 +1,64 @@
-<!-- COURSE PLAYER MODAL -->
 <div class="course-player-overlay" id="course-player">
   <div class="course-player">
     <div class="player-header">
-      <h3 class="player-title" id="player-course-title">Fundamentos de Liderança</h3>
+      <h3 class="player-title" id="player-course-title">{{ courseName() }}</h3>
       <div class="player-progress-mini">
-        <div class="progress-circle" id="progress-circle" data-progress="65"></div>
+        <div class="progress-circle" id="progress-circle"></div>
         <span style="font-size: 0.875rem; color: #64748B; font-weight: 600;">
-          Aula <span id="current-slide-number">3</span> de <span id="total-slides">5</span>
+          Aula <span id="current-slide-number">{{ currentSlide() }}</span> de <span id="total-slides">{{ activeSlides().length }}</span>
         </span>
       </div>
       <button class="close-player" onclick="closeCourse()">✕</button>
     </div>
     <div class="player-body">
       <div class="slide-container">
-        <!-- Slide 1: Text Content -->
-        <div class="slide active" data-slide="1">
-          <span class="slide-type-badge">📖 Conteúdo</span>
-          <h2 class="slide-title">O que é Liderança?</h2>
-          <div class="slide-content">
-            <p>Liderança é a capacidade de influenciar, motivar e habilitar outras pessoas a contribuírem para a efetividade e o sucesso das organizações das quais são membros.</p>
-            <p>Um líder eficaz não apenas dirige, mas inspira sua equipe a alcançar objetivos comuns através de:</p>
-            <ul>
-              <li><strong>Visão Clara:</strong> Estabelecer e comunicar objetivos inspiradores</li>
-              <li><strong>Empatia:</strong> Compreender e valorizar as perspectivas da equipe</li>
-              <li><strong>Integridade:</strong> Agir com ética e transparência</li>
-              <li><strong>Capacitação:</strong> Desenvolver e empoderar os membros da equipe</li>
-            </ul>
-            <p>Neste curso, você aprenderá os pilares fundamentais para se tornar um líder transformador em sua organização.</p>
+        @if (showingCertificate()) {
+          <div class="slide active slide-certificate">
+            <app-certificate
+              [studentName]="studentName()"
+              [courseName]="courseName()"
+              [completionDate]="courseCompletionDate()" />
           </div>
-        </div>
-
-        <!-- Slide 2: Image Content -->
-        <div class="slide" data-slide="2">
-          <span class="slide-type-badge">🖼️ Ilustração</span>
-          <h2 class="slide-title">Os Quatro Pilares da Liderança</h2>
-          <div class="slide-content">
-            <p>Visualize os pilares fundamentais que sustentam uma liderança eficaz:</p>
-          </div>
-          <div class="slide-image">📊</div>
-          <div class="slide-content">
-            <p>Cada pilar representa um aspecto essencial que você desenvolverá ao longo deste curso. A combinação harmoniosa destes elementos forma a base de uma liderança transformadora.</p>
-          </div>
-        </div>
-
-        <!-- Slide 3: Video Content -->
-        <div class="slide" data-slide="3">
-          <span class="slide-type-badge">🎥 Vídeo</span>
-          <h2 class="slide-title">Liderança na Prática</h2>
-          <div class="slide-content">
-            <p>Assista ao vídeo onde especialistas compartilham insights práticos sobre liderança no ambiente corporativo moderno:</p>
-          </div>
-          <div class="slide-video">▶️</div>
-          <div class="slide-content">
-            <p><strong>Pontos-chave do vídeo:</strong></p>
-            <ul>
-              <li>Como identificar seu estilo de liderança natural</li>
-              <li>Estratégias para engajar equipes remotas</li>
-              <li>Ferramentas para tomada de decisão eficaz</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Slide 4: Quiz -->
-        <div class="slide" data-slide="4">
-          <span class="slide-type-badge">❓ Quiz</span>
-          <h2 class="slide-title">Teste seus Conhecimentos</h2>
-          <div class="slide-content">
-            <p>Responda à questão abaixo para validar seu aprendizado:</p>
-          </div>
-          <div class="quiz-container">
-            <p class="quiz-question">Qual das seguintes características é mais importante para um líder eficaz?</p>
-            <div class="quiz-options">
-              <div class="quiz-option" onclick="selectQuizOption(this, false)">
-                <div class="option-indicator">A</div>
-                <span>Tomar todas as decisões sozinho para mostrar autoridade</span>
-              </div>
-              <div class="quiz-option" onclick="selectQuizOption(this, true)">
-                <div class="option-indicator">B</div>
-                <span>Inspirar e capacitar a equipe a alcançar objetivos comuns</span>
-              </div>
-              <div class="quiz-option" onclick="selectQuizOption(this, false)">
-                <div class="option-indicator">C</div>
-                <span>Evitar conflitos a qualquer custo</span>
-              </div>
-              <div class="quiz-option" onclick="selectQuizOption(this, false)">
-                <div class="option-indicator">D</div>
-                <span>Manter distância da equipe para preservar autoridade</span>
-              </div>
+        } @else {
+          @for (slide of activeSlides(); track slide.id; let i = $index) {
+            <div class="slide" [class.active]="i + 1 === currentSlide()">
+              <h2 class="slide-title">{{ slide.title }}</h2>
+              <div class="slide-content" [innerHTML]="slide.content"></div>
             </div>
-            <div class="quiz-feedback" id="quiz-feedback">
-              <div class="feedback-icon">✓</div>
-              <div class="feedback-text">
-                <p class="feedback-title">Correto!</p>
-                <p class="feedback-message">Um líder eficaz inspira e capacita sua equipe, criando um ambiente colaborativo onde todos podem contribuir para o sucesso coletivo.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 5: Conclusion -->
-        <div class="slide" data-slide="5">
-          <span class="slide-type-badge">✅ Conclusão</span>
-          <h2 class="slide-title">Parabéns! Módulo Concluído</h2>
-          <div class="slide-content">
-            <p style="font-size: 1.15rem;">Você completou o primeiro módulo sobre Fundamentos de Liderança! 🎉</p>
-            <div style="background: rgba(28, 35, 64, 0.05); border-left: 4px solid #1C2340; padding: 1.5rem; border-radius: 12px; margin: 2rem 0;">
-              <p style="margin: 0 0 1rem 0; font-weight: 600; color: #1C2340;">Principais aprendizados:</p>
-              <ul style="margin: 0; padding-left: 1.5rem;">
-                <li>Compreendeu o conceito de liderança transformadora</li>
-                <li>Identificou os quatro pilares da liderança eficaz</li>
-                <li>Explorou práticas de liderança no ambiente corporativo</li>
-                <li>Validou seus conhecimentos com sucesso</li>
-              </ul>
-            </div>
-            <p>Continue avançando no curso para aprofundar ainda mais suas habilidades de liderança!</p>
-          </div>
-        </div>
+          }
+        }
       </div>
     </div>
-    <div class="player-footer">
-      <div class="slide-navigation">
-        <button class="nav-btn nav-btn-secondary" id="prev-btn" onclick="previousSlide()">← Anterior</button>
-        <button class="nav-btn nav-btn-primary" id="next-btn" onclick="nextSlide()">Próximo →</button>
+    @if (!showingCertificate()) {
+      <div class="player-footer">
+        <div class="slide-navigation">
+          <button class="nav-btn nav-btn-secondary" id="prev-btn" onclick="previousSlide()">← Anterior</button>
+          <button class="nav-btn nav-btn-primary" id="next-btn" onclick="nextSlide()">Próximo →</button>
+          @if (currentSlide() === activeSlides().length && courseShowCertificate()) {
+            <button class="nav-btn nav-btn-certificate" (click)="openCertificateSlide()">🏆 Concluir e Exibir Certificado</button>
+          }
+        </div>
+        <div class="slide-indicator" id="slide-indicators">
+          @for (slide of activeSlides(); track slide.id; let i = $index) {
+            <div class="indicator-dot" [class.active]="i + 1 === currentSlide()"></div>
+          }
+        </div>
       </div>
-      <div class="slide-indicator" id="slide-indicators">
-        <div class="indicator-dot active"></div>
-        <div class="indicator-dot"></div>
-        <div class="indicator-dot"></div>
-        <div class="indicator-dot"></div>
-        <div class="indicator-dot"></div>
-      </div>
-    </div>
+    }
   </div>
 </div>
 
-<app-certificate />
+<div class="course-player-overlay" id="certificate-view">
+  <div class="course-player">
+    <div class="player-header">
+      <h3 class="player-title">Certificado de Conclusão</h3>
+      <button class="close-player" onclick="closeCertificate()">✕</button>
+    </div>
+    <div class="player-body">
+      <app-certificate
+        [studentName]="studentName()"
+        [courseName]="courseName()"
+        [completionDate]="courseCompletionDate()" />
+    </div>
+  </div>
+</div>
