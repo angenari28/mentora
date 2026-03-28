@@ -9,16 +9,19 @@ import { ListItem } from '@services/responses/shared/list-item.response';
 import { TableComponent } from '@components/table/table.component';
 
 @Component({
-  selector: 'app-student',
+  selector: 'app-student-list',
   standalone: true,
   imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule, TableComponent],
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  templateUrl: './student.list.component.html',
+  styleUrls: ['./student.list.component.css'],
 })
-export class StudentComponent {
+export class StudentListComponent {
   private readonly studentService = inject(StudentService);
 
-  students = signal<ListItem<User>>({ items: [], meta: { totalCount: 0, pageNumber: 1, pageSize: 10, totalPages: 0, hasPrevious: false, hasNext: false } });
+  students = signal<ListItem<User>>({
+    items: [],
+    meta: { totalCount: 0, pageNumber: 1, pageSize: 10, totalPages: 0, hasPrevious: false, hasNext: false },
+  });
   loading = signal(false);
   error = signal('');
   currentPage = signal(1);
@@ -40,7 +43,7 @@ export class StudentComponent {
         this.error.set('Erro ao carregar alunos');
         this.loading.set(false);
         console.error('Erro ao buscar alunos:', err);
-      }
+      },
     });
   }
 

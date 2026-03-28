@@ -1,49 +1,47 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { form, required, FormRoot, FormField, maxLength, minLength } from '@angular/forms/signals';
+import { form, FormRoot, FormField } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { UserService } from '@services/user.service';
 import { Workspace } from '@services/responses/workspace.response';
-
-interface IStudent {
-  name: string;
-  email: string;
-  password: string;
-  isActive: boolean;
-}
+import { studentModel, IFormReadonly, IStudentCourseReset } from '../shared/student.model';
+import { validate } from '../shared/student.validation';
 
 @Component({
   selector: 'app-student-create',
   standalone: true,
   imports: [CommonModule, FormsModule, FormRoot, FormField],
-  templateUrl: './student-create.component.html',
-  styleUrls: ['./student-create.component.css']
+  templateUrl: '../shared/student-shared.component.html',
+  styleUrls: ['../shared/student-shared.component.css'],
 })
-export class StudentCreateComponent {
+export class StudentCreateComponent implements IFormReadonly, IStudentCourseReset {
+  readonly = signal(false);
+
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
 
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
+  readonly modalTitle = signal('Novo Aluno');
+  readonly submitLabel = signal('Criar');
 
-  private readonly model = signal<IStudent>({
-    name: '',
-    email: '',
-    password: '',
-    isActive: true
-  });
+  // IStudentCourseReset — sem aluno criado ainda, lista vazia
+  readonly showCourseReset = signal(false);
+  readonly studentCourses = signal<{ id: string; name: string }[]>([]);
+  readonly selectedCourseId = signal('');
+  readonly resettingCourse = signal(false);
+  resetCourseSlideTime(): void { /* n/a no modo criação */ }
+
+  private readonly model = studentModel;
+
+  constructor() {
+    this.model.set({ name: '', email: '', password: '', isActive: true });
+  }
 
   protected readonly studentForm = form(
     this.model,
-    (s) => {
-      required(s.name, { message: 'O campo Nome é obrigatório.' });
-      maxLength(s.name, 100);
-      required(s.email, { message: 'O campo E-mail é obrigatório.' });
-      maxLength(s.email, 200);
-      required(s.password, { message: 'O campo Senha é obrigatório.' });
-      minLength(s.password, 6, { message: 'A senha deve ter no mínimo 6 caracteres.' });
-    },
+    validate,
     {
       submission: {
         action: async (f) => {

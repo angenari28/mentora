@@ -53,7 +53,6 @@ export class StudentComponent implements OnInit {
     win['closeCourse'] = () => this.player.close();
     win['closeCertificate'] = () => {
       document.getElementById('certificate-view')?.classList.remove('active');
-      document.body.style.overflow = 'auto';
     };
     win['nextSlide'] = () => this.player.next();
     win['previousSlide'] = () => this.player.previous();
@@ -69,7 +68,6 @@ export class StudentComponent implements OnInit {
     delete win['nextSlide'];
     delete win['previousSlide'];
     delete win['selectQuizOption'];
-    document.body.style.overflow = 'auto';
   }
 
   protected reloadCourses(): void {

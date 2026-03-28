@@ -8,4 +8,5 @@ public interface ICourseSlideTimeRepository
     Task<CourseSlideTime> CreateAsync(CourseSlideTime entity);
     Task<CourseSlideTime?> GetByIdAsync(Guid id);
     Task<CourseSlideTime> UpdateAsync(CourseSlideTime entity);
+    Task<int> DeleteByCourseAndUserAsync(Guid courseId, Guid userId);
 }

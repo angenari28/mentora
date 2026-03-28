@@ -1,4 +1,4 @@
-import { Component, inject, input, OnDestroy, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { CertificateComponent } from './certificate/certificate.component';
 import { StudentClassesResponse, SlideDetail } from '@services/responses/student-classes.response';
 import { CourseSlideTimeService } from '@services/course-slide-time.service';
@@ -10,7 +10,7 @@ import { CourseSlideTimeService } from '@services/course-slide-time.service';
   templateUrl: './course-player.component.html',
   styleUrl: './course-player.component.css'
 })
-export class CoursePlayerComponent implements OnDestroy {
+export class CoursePlayerComponent {
   courses = input<StudentClassesResponse[]>([]);
   userId = input<string>('');
   studentName = input<string>('');
@@ -19,6 +19,7 @@ export class CoursePlayerComponent implements OnDestroy {
   protected readonly activeSlides = signal<SlideDetail[]>([]);
   protected readonly currentSlide = signal(1);
   protected readonly courseName = signal('');
+  protected readonly courseDuration = signal(0);
   protected readonly showingCertificate = signal(false);
   protected readonly courseShowCertificate = signal(false);
   protected readonly courseCompletionDate = signal<string>('');
@@ -29,6 +30,7 @@ export class CoursePlayerComponent implements OnDestroy {
 
   open(classe: StudentClassesResponse): void {
     const completedSlides = classe.course.slides.filter(s => s.courseSlideTime?.dateEnd);
+    this.courseDuration.set(classe.course.workloadHours);
     if (completedSlides.length === classe.course.slides.length && classe.course.slides.length > 0) {
       this.courseName.set(classe.course.name);
       const lastSlide = completedSlides[completedSlides.length - 1];
@@ -74,7 +76,6 @@ export class CoursePlayerComponent implements OnDestroy {
     this.onSlideLeave(() => {
       this.showingCertificate.set(false);
       document.getElementById('course-player')?.classList.remove('active');
-      document.body.style.overflow = 'auto';
       this.closed.emit();
     });
   }
@@ -92,7 +93,6 @@ export class CoursePlayerComponent implements OnDestroy {
     this.showingCertificate.set(false);
     this.currentSlideTimeId = null;
     document.getElementById('course-player')?.classList.remove('active');
-    document.body.style.overflow = 'auto';
     this.closed.emit();
   }
 
@@ -150,10 +150,6 @@ export class CoursePlayerComponent implements OnDestroy {
       }
       feedback?.classList.add('show');
     }, 300);
-  }
-
-  ngOnDestroy(): void {
-    document.body.style.overflow = 'auto';
   }
 
   private onSlideEnter(): void {

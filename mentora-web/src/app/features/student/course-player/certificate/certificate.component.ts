@@ -9,6 +9,7 @@ import { Component, computed, input } from '@angular/core';
 export class CertificateComponent {
   studentName = input<string>('');
   courseName = input<string>('');
+  courseDuration = input<number>(0);
   completionDate = input<string>('');
 
   protected readonly formattedDate = computed(() => {

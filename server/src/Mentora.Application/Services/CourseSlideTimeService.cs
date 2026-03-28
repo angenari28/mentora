@@ -36,6 +36,9 @@ public class CourseSlideTimeService(ICourseSlideTimeRepository _repository) : IC
         return ToResponse(updated);
     }
 
+    public async Task<int> ResetByCourseAndUserAsync(Guid userId, Guid courseId)
+        => await _repository.DeleteByCourseAndUserAsync(courseId, userId);
+
     private static CourseSlideTimeResponse ToResponse(CourseSlideTime e) => new()
     {
         Id = e.Id,

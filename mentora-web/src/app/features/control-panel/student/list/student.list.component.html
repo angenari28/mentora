@@ -141,12 +141,14 @@
                     <button
                       class="btn btn-sm btn-ghost"
                       [disabled]="!student.isActive"
+                      [routerLink]="['/control-panel/student', student.id, 'delete']"
                     >
-                      Ver
+                      Excluir
                     </button>
                     <button
                       class="btn btn-sm btn-ghost"
                       [disabled]="!student.isActive"
+                      [routerLink]="['/control-panel/student', student.id, 'edit']"
                     >
                       Editar
                     </button>

@@ -10,8 +10,10 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryCreateComponent } from './category/create/category-create.component';
 import { ClassComponent } from './class/class.component';
 import { ClassCreateComponent } from './class/create/class-create.component';
-import { StudentComponent } from './student/student.component';
+import { StudentListComponent } from './student/list/student.list.component';
 import { StudentCreateComponent } from './student/create/student-create.component';
+import { StudentUpdateComponent } from './student/update/student-update.component';
+import { StudentDeleteComponent } from './student/delete/student-delete.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { RegistrationCreateComponent } from './registration/create/registration-create.component';
 import { CourseSlideComponent } from './course-slide/course-slide.component';
@@ -32,7 +34,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'class/create', component: ClassCreateComponent },
       { path: 'class', pathMatch: 'full', component: ClassComponent },
       { path: 'student/create', component: StudentCreateComponent },
-      { path: 'student', pathMatch: 'full', component: StudentComponent },
+      { path: 'student/:id/edit', component: StudentUpdateComponent },
+      { path: 'student/:id/delete', component: StudentDeleteComponent },
+      { path: 'student', pathMatch: 'full', component: StudentListComponent },
       { path: 'registration/create', component: RegistrationCreateComponent },
       { path: 'registration', pathMatch: 'full', component: RegistrationComponent },
       { path: 'course-slide/create', component: CourseSlideCreateComponent },

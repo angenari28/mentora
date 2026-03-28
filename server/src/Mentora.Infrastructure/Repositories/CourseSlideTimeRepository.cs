@@ -29,4 +29,20 @@ public class CourseSlideTimeRepository(MentoraDbContext _context) : ICourseSlide
         await _context.SaveChangesAsync();
         return entity;
     }
+
+    public async Task<int> DeleteByCourseAndUserAsync(Guid courseId, Guid userId)
+    {
+        var slideIds = await _context.CourseSlides
+            .Where(s => s.CourseId == courseId)
+            .Select(s => s.Id)
+            .ToListAsync();
+
+        var toDelete = await _context.CourseSlidesTimes
+            .Where(t => t.UserId == userId && slideIds.Contains(t.CourseSlideId))
+            .ToListAsync();
+
+        _context.CourseSlidesTimes.RemoveRange(toDelete);
+        await _context.SaveChangesAsync();
+        return toDelete.Count;
+    }
 }

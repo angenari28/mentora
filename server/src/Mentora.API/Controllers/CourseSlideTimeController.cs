@@ -38,4 +38,18 @@ public class CourseSlideTimeController(ICourseSlideTimeService _courseSlideTimeS
             return StatusCode(500, new { success = false, message = "Erro ao encerrar registro de tempo", error = ex.Message });
         }
     }
+
+    [HttpDelete("reset/user/{userId:guid}/course/{courseId:guid}")]
+    public async Task<ActionResult> Reset(Guid userId, Guid courseId)
+    {
+        try
+        {
+            var deleted = await _courseSlideTimeService.ResetByCourseAndUserAsync(userId, courseId);
+            return Ok(new { success = true, message = $"{deleted} registro(s) de tempo removido(s) com sucesso", data = deleted });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao reiniciar progresso do aluno", error = ex.Message });
+        }
+    }
 }

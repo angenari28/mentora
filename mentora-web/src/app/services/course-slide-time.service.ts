@@ -25,4 +25,10 @@ export class CourseSlideTimeService {
       request
     );
   }
+
+  reset(userId: string, courseId: string): Observable<{ success: boolean; message: string; data: number }> {
+    return this.http.delete<{ success: boolean; message: string; data: number }>(
+      `${this.baseUrl}/reset/user/${userId}/course/${courseId}`
+    );
+  }
 }

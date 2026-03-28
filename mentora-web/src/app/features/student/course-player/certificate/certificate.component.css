@@ -1,4 +1,7 @@
-/* COURSE PLAYER OVERLAY */
+:host {
+  width: 90%;
+}
+
 .course-player-overlay {
   display: none;
   position: fixed;
