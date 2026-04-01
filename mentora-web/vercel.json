@@ -1,12 +1,33 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:pt",
-  "outputDirectory": "dist/mentora-web/browser/pt",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/mentora-web/browser",
   "framework": "angular",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{"type": "header", "key": "accept-language", "value": "^en"}],
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/pt/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
+      "source": "/en/(.*)",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/pt/(.*)",
+      "destination": "/pt/index.html"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/pt/index.html"
     }
   ],
   "headers": [

@@ -35,10 +35,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": {
-          "code": "pt",
-          "baseHref": "/"
-        },
+        "sourceLocale": "pt",
         "locales": {
           "en": {
             "translation": "src/locale/messages.en.xlf"
