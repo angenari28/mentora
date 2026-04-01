@@ -1,15 +1,15 @@
 <div class="content-wrapper">
   <div class="page-header">
-    <h1 class="page-title">Turmas</h1>
-    <p class="page-subtitle">Gerencie as turmas dos cursos.</p>
+    <h1 class="page-title" i18n="@@cp_class_title">Turmas</h1>
+    <p class="page-subtitle" i18n="@@cp_class_subtitle">Gerencie as turmas dos cursos.</p>
   </div>
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">🎓 Lista de Turmas ({{ pagedClasses().meta.totalCount }})</h3>
+      <h3 class="card-title" i18n="@@cp_class_list_title">🎓 Lista de Turmas ({{ pagedClasses().meta.totalCount }})</h3>
       <div class="card-actions">
-        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
-        <button class="btn btn-sm btn-primary" routerLink="/control-panel/class/create">
+        <button class="btn btn-sm btn-ghost" i18n="@@cp_btn_export">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/class/create" i18n="@@cp_class_btn_new">
           ➕ Nova Turma
         </button>
       </div>
@@ -19,12 +19,12 @@
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Curso</th>
-              <th>Início</th>
-              <th>Término</th>
-              <th>Ativa</th>
-              <th>Ações</th>
+              <th i18n="@@cp_col_name">Nome</th>
+              <th i18n="@@cp_col_course">Curso</th>
+              <th i18n="@@cp_col_start">Início</th>
+              <th i18n="@@cp_col_end">Término</th>
+              <th i18n="@@cp_col_active_f">Ativa</th>
+              <th i18n="@@cp_col_actions">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +53,7 @@
             @if (!loading() && !error() && pagedClasses().meta.totalCount === 0) {
               <tr>
                 <td colspan="6" class="table-state">
-                  <p>Nenhuma turma encontrada</p>
+                  <p i18n="@@cp_class_empty">Nenhuma turma encontrada</p>
                 </td>
               </tr>
             }
@@ -65,22 +65,29 @@
                 <td>{{ formatDate(item.dateEnd) }}</td>
                 <td>
                   <span class="badge" [ngClass]="item.active ? 'badge-success' : 'badge-warning'">
-                    {{ item.active ? '✓ Ativa' : '⏸ Inativa' }}
+                    @if (item.active) {
+                      <ng-container i18n="@@cp_badge_active_f">✓ Ativa</ng-container>
+                    } @else {
+                      <ng-container i18n="@@cp_badge_inactive_f">⏸ Inativa</ng-container>
+                    }
                   </span>
                 </td>
                 <td>
                   <button
                     class="btn btn-sm btn-ghost"
                     [routerLink]="['/control-panel/class/edit', item.id]"
-                  >
-                    Editar
-                  </button>
+                    i18n="@@cp_btn_edit"
+                  >Editar</button>
                   <button
                     class="btn btn-sm btn-danger"
                     [disabled]="deletingId() === item.id"
                     (click)="deleteClass(item.id)"
                   >
-                    {{ deletingId() === item.id ? '...' : 'Excluir' }}
+                    @if (deletingId() === item.id) {
+                      ...
+                    } @else {
+                      <ng-container i18n="@@cp_btn_delete">Excluir</ng-container>
+                    }
                   </button>
                 </td>
               </tr>

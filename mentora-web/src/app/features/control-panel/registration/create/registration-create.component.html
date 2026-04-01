@@ -1,7 +1,7 @@
 <div class="modal-overlay active">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h3 class="modal-title">Nova Matrícula</h3>
+      <h3 class="modal-title" i18n="@@cp_reg_create_title">Nova Matrícula</h3>
       <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
     </div>
 
@@ -9,14 +9,14 @@
       <div class="modal-body">
         @if (registrationForm().pending()) {
           <div class="loading-overlay">
-            <div class="spinner">carregando...</div>
+            <div class="spinner" i18n="@@cp_loading">carregando...</div>
           </div>
         }
 
         <!-- Turma -->
         <div class="form-group">
           <label class="form-label" for="classId">
-            Turma
+            <ng-container i18n="@@cp_nav_class">Turma</ng-container>
             @if (registrationForm.classId().required()) {
               <span class="required">*</span>
             }
@@ -28,7 +28,11 @@
             [formField]="registrationForm.classId"
           >
             <option value="">
-              {{ loadingClasses() ? 'Carregando turmas...' : 'Selecione uma turma' }}
+              @if (loadingClasses()) {
+                <ng-container i18n="@@cp_reg_loading_classes">Carregando turmas...</ng-container>
+              } @else {
+                <ng-container i18n="@@cp_reg_select_class">Selecione uma turma</ng-container>
+              }
             </option>
             @for (class of classes(); track class.id) {
               <option [value]="class.id">{{ class.name }} — {{ class.courseName }}</option>
@@ -44,7 +48,7 @@
         <!-- Aluno -->
         <div class="form-group">
           <label class="form-label" for="userId">
-            Aluno
+            <ng-container i18n="@@cp_col_student">Aluno</ng-container>
             @if (registrationForm.userId().required()) {
               <span class="required">*</span>
             }
@@ -56,7 +60,11 @@
             [formField]="registrationForm.userId"
           >
             <option value="">
-              {{ loadingStudents() ? 'Carregando alunos...' : 'Selecione um aluno' }}
+              @if (loadingStudents()) {
+                <ng-container i18n="@@cp_reg_loading_students">Carregando alunos...</ng-container>
+              } @else {
+                <ng-container i18n="@@cp_reg_select_student">Selecione um aluno</ng-container>
+              }
             </option>
             @for (student of students(); track student.id) {
               <option [value]="student.id">{{ student.name }} — {{ student.email }}</option>
@@ -71,11 +79,11 @@
 
         <!-- Opções -->
         <div class="form-group form-group-inline">
-          <label class="form-label">Opções</label>
+          <label class="form-label" i18n="@@cp_label_options">Opções</label>
           <div class="options-grid">
             <label class="checkbox">
               <input type="checkbox" [formField]="registrationForm.active" />
-              <span>Matrícula ativa</span>
+              <span i18n="@@cp_reg_active_check">Matrícula ativa</span>
             </label>
           </div>
         </div>
@@ -86,9 +94,13 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+        <button type="button" class="btn btn-ghost" (click)="close()" i18n="@@cp_btn_cancel">Cancelar</button>
         <button type="submit" class="btn btn-primary" [disabled]="submitting()">
-          {{ submitting() ? 'Matriculando...' : 'Matricular' }}
+          @if (submitting()) {
+            <ng-container i18n="@@cp_reg_submitting">Matriculando...</ng-container>
+          } @else {
+            <ng-container i18n="@@cp_reg_submit">Matricular</ng-container>
+          }
         </button>
       </div>
     </form>

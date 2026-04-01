@@ -4,8 +4,8 @@
   </div>
   <div class="login-card">
     <div class="login-header">
-      <h1 class="login-title">Plataforma de aprendizagem</h1>
-      <p class="login-subtitle">Entre na sua conta para continuar aprendendo</p>
+      <h1 class="login-title" i18n="@@login_student_title">Plataforma de aprendizagem</h1>
+      <p class="login-subtitle" i18n="@@login_student_subtitle">Entre na sua conta para continuar aprendendo</p>
     </div>
 
     @if (errorMessage) {
@@ -22,12 +22,13 @@
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
-        <label for="email" class="form-label">E-mail</label>
+        <label for="email" class="form-label" i18n="@@label_email">E-mail</label>
         <input
           type="email"
           id="email"
           name="email"
           class="form-input"
+          i18n-placeholder="@@placeholder_email"
           placeholder="seu@email.com"
           required
           [(ngModel)]="email"
@@ -35,12 +36,13 @@
       </div>
 
       <div class="form-group">
-        <label for="password" class="form-label">Senha</label>
+        <label for="password" class="form-label" i18n="@@label_password">Senha</label>
         <input
           type="password"
           id="password"
           name="password"
           class="form-input"
+          i18n-placeholder="@@placeholder_password"
           placeholder="Digite sua senha"
           required
           [(ngModel)]="password"
@@ -48,14 +50,18 @@
       </div>
 
       <button type="submit" class="btn btn-primary" [disabled]="loading || loginForm.invalid">
-        {{ loading ? 'Entrando...' : 'Entrar' }}
+        @if (loading) {
+          <span i18n="@@login_loading">Entrando...</span>
+        } @else {
+          <span i18n="@@login_submit">Entrar</span>
+        }
       </button>
     </form>
 
     <div class="login-links">
-      <a href="#" (click)="$event.preventDefault()" class="login-link">Esqueceu a senha?</a>
+      <a href="#" (click)="$event.preventDefault()" class="login-link" i18n="@@forgot_password">Esqueceu a senha?</a>
       <span class="login-divider">•</span>
-      <a href="#" (click)="$event.preventDefault()" class="login-link">Criar nova conta</a>
+      <a href="#" (click)="$event.preventDefault()" class="login-link" i18n="@@create_account">Criar nova conta</a>
     </div>
   </div>
 </div>

@@ -1,0 +1,1481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="pt">
+  <file id="ngi18n" original="ng.template">
+    <unit id="cp_cat_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Categorias</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Gerencie as categorias dos cursos.</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>🏷️ Lista de Categorias (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCategories().meta.totalCount }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_export">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:11,12</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:11,12</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:11,12</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:13,14</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:52,53</note>
+      </notes>
+      <segment>
+        <source>📥 Exportar</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:13,14</note>
+      </notes>
+      <segment>
+        <source> ➕ Nova Categoria </source>
+      </segment>
+    </unit>
+    <unit id="cp_col_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:22,23</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:22,23</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:22,23</note>
+      </notes>
+      <segment>
+        <source>Nome</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_active_f">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:23,24</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:26,27</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:31,32</note>
+      </notes>
+      <segment>
+        <source>Ativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_actions">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:24,26</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:27,29</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:27,29</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:32,34</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:72,74</note>
+      </notes>
+      <segment>
+        <source>Ações</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:50,51</note>
+      </notes>
+      <segment>
+        <source>Nenhuma categoria encontrada</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_active_f">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:63,64</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:69,70</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:73,74</note>
+      </notes>
+      <segment>
+        <source>✓ Ativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_inactive_f">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:65,66</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:71,72</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:75,76</note>
+      </notes>
+      <segment>
+        <source>⏸ Inativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_edit">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/category.component.html:70,71</note>
+        <note category="location">src/app/features/control-panel/class/class.component.html:80,81</note>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:97,98</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:78,79</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:156,157</note>
+      </notes>
+      <segment>
+        <source>Editar</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_create_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Nova Categoria</source>
+      </segment>
+    </unit>
+    <unit id="cp_loading">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:17,18</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:12,13</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:12,13</note>
+      </notes>
+      <segment>
+        <source>carregando...</source>
+      </segment>
+    </unit>
+    <unit id="cp_label_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:17,18</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:19,20</note>
+      </notes>
+      <segment>
+        <source>Nome</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_placeholder_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:27,28</note>
+      </notes>
+      <segment>
+        <source>Digite o nome da categoria</source>
+      </segment>
+    </unit>
+    <unit id="cp_label_options">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:39,40</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:119,120</note>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:160,161</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:122,123</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:122,123</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:122,123</note>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:82,83</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:97,98</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:97,98</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:97,98</note>
+      </notes>
+      <segment>
+        <source>Opções</source>
+      </segment>
+    </unit>
+    <unit id="cp_cat_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:43,45</note>
+      </notes>
+      <segment>
+        <source>Categoria ativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_cancel">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:50,51</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:134,135</note>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:171,173</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:137,138</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:137,138</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:137,138</note>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:97,98</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:137,138</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:137,138</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:137,138</note>
+      </notes>
+      <segment>
+        <source>Cancelar</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_create">
+      <notes>
+        <note category="location">src/app/features/control-panel/category/create/category-create.component.html:51,53</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:139,140</note>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:193,195</note>
+      </notes>
+      <segment>
+        <source>Criar</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Turmas</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Gerencie as turmas dos cursos.</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>🎓 Lista de Turmas (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedClasses().meta.totalCount }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source> ➕ Nova Turma </source>
+      </segment>
+    </unit>
+    <unit id="cp_col_course">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:23,24</note>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:43,44</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:30,31</note>
+      </notes>
+      <segment>
+        <source>Curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_start">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Início</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_end">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Término</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:56,58</note>
+      </notes>
+      <segment>
+        <source>Nenhuma turma encontrada</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_delete">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/class.component.html:89,90</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:79,80</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:88,89</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:150,151</note>
+      </notes>
+      <segment>
+        <source>Excluir</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_create_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Nova Turma</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_placeholder_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:29,30</note>
+      </notes>
+      <segment>
+        <source>Digite o nome da turma</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_loading_courses">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:56,57</note>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:33,34</note>
+      </notes>
+      <segment>
+        <source>Carregando cursos...</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_select_course">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:58,60</note>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:35,37</note>
+      </notes>
+      <segment>
+        <source>Selecione um curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_label_date_start">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:76,77</note>
+      </notes>
+      <segment>
+        <source>Data de Início</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_label_date_end">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:97,98</note>
+      </notes>
+      <segment>
+        <source>Data de Término</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:123,125</note>
+      </notes>
+      <segment>
+        <source>Turma ativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_class_creating">
+      <notes>
+        <note category="location">src/app/features/control-panel/class/create/class-create.component.html:137,138</note>
+      </notes>
+      <segment>
+        <source>Criando...</source>
+      </segment>
+    </unit>
+    <unit id="cp_sidebar_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:11,15</note>
+      </notes>
+      <segment>
+        <source>Painel de Controle</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_main">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:17,18</note>
+      </notes>
+      <segment>
+        <source>Principal</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_dashboard">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>Dashboard</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_config">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:21,22</note>
+      </notes>
+      <segment>
+        <source>Configuração</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_category">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:23,24</note>
+      </notes>
+      <segment>
+        <source>Categoria</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_course">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_slides">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:29,30</note>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Slides</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_admin">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:31,32</note>
+      </notes>
+      <segment>
+        <source>Administração</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_students">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:33,34</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:6,8</note>
+      </notes>
+      <segment>
+        <source>Alunos</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_class">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:36,37</note>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:19,20</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:29,30</note>
+      </notes>
+      <segment>
+        <source>Turma</source>
+      </segment>
+    </unit>
+    <unit id="cp_nav_registration">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:39,41</note>
+      </notes>
+      <segment>
+        <source>Matrícula</source>
+      </segment>
+    </unit>
+    <unit id="cp_user_role_admin">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:49,51</note>
+      </notes>
+      <segment>
+        <source>Administrador</source>
+      </segment>
+    </unit>
+    <unit id="logout_label">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:51,53</note>
+        <note category="location">src/app/features/student/layout/header/header.component.html:23,25</note>
+      </notes>
+      <segment>
+        <source>Sair</source>
+      </segment>
+    </unit>
+    <unit id="cp_search_placeholder">
+      <notes>
+        <note category="location">src/app/features/control-panel/control-panel.component.html:63,64</note>
+      </notes>
+      <segment>
+        <source>Pesquisar por alunos, workspaces, turmas...</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Gerencie os slides dos cursos.</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>🖼️ Slides (<ph id="0" equiv="INTERPOLATION" disp="{{ slides().length }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:18,20</note>
+      </notes>
+      <segment>
+        <source> ➕ Novo Slide </source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_filter_label">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>Filtrar por Curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:74,75</note>
+      </notes>
+      <segment>
+        <source>Nenhum slide encontrado para este curso.</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_active_m">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:85,86</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:60,61</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:135,136</note>
+      </notes>
+      <segment>
+        <source>✓ Ativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_inactive_m">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:87,88</note>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:62,63</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:137,138</note>
+      </notes>
+      <segment>
+        <source>⏸ Inativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_remove">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:98,99</note>
+      </notes>
+      <segment>
+        <source>Remover</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_select_course_hint">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/course-slide.component.html:105,109</note>
+      </notes>
+      <segment>
+        <source>Selecione um curso para visualizar os slides.</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_breadcrumb_label">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:27,28</note>
+      </notes>
+      <segment>
+        <source>Slides:</source>
+      </segment>
+    </unit>
+    <unit id="cp_loading_cap">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:30,31</note>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:117,118</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:54,55</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:54,55</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:54,55</note>
+      </notes>
+      <segment>
+        <source>Carregando...</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_new_breadcrumb_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:47,49</note>
+      </notes>
+      <segment>
+        <source>Novo slide</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:57,58</note>
+      </notes>
+      <segment>
+        <source>Título</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:67,68</note>
+      </notes>
+      <segment>
+        <source>Digite o título do slide</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_ordering">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:82,83</note>
+      </notes>
+      <segment>
+        <source>Ordenação</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_type">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:104,105</note>
+      </notes>
+      <segment>
+        <source>Tipo de Slide</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_select_type">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:119,120</note>
+      </notes>
+      <segment>
+        <source>Selecione um tipo</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_content">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:137,138</note>
+      </notes>
+      <segment>
+        <source>Conteúdo</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_content">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:147,148</note>
+      </notes>
+      <segment>
+        <source>Digite o conteúdo do slide</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:164,166</note>
+      </notes>
+      <segment>
+        <source>Slide ativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_save">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:177,178</note>
+      </notes>
+      <segment>
+        <source> Salvar </source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_save_close">
+      <notes>
+        <note category="location">src/app/features/control-panel/course-slide/create/course-slide-create.component.html:180,181</note>
+      </notes>
+      <segment>
+        <source> Salvar e fechar </source>
+      </segment>
+    </unit>
+    <unit id="cp_course_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Cursos</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Gerencie os cursos do painel de controle.</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>📚 Lista de Cursos (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCourses().meta.totalCount }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source> ➕ Novo Curso </source>
+      </segment>
+    </unit>
+    <unit id="cp_col_category">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:23,24</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:41,42</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:41,42</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:41,42</note>
+      </notes>
+      <segment>
+        <source>Categoria</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_active_m">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Ativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_show_cert">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Mostrar Certificado</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_duration">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Duração</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:50,51</note>
+      </notes>
+      <segment>
+        <source>Nenhum curso encontrado.</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_yes">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:69,70</note>
+      </notes>
+      <segment>
+        <source>✓ Sim</source>
+      </segment>
+    </unit>
+    <unit id="cp_badge_no">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:71,72</note>
+      </notes>
+      <segment>
+        <source>⏸ Não</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_view">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/list/course.list.component.html:77,78</note>
+      </notes>
+      <segment>
+        <source>Visualizar</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_placeholder_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:28</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:28</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Digite o nome do curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_select_cat">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:56,57</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:56,57</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:56,57</note>
+      </notes>
+      <segment>
+        <source>Selecione uma categoria</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_label_duration">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:72,73</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:72,73</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:72,73</note>
+      </notes>
+      <segment>
+        <source>Duração (horas)</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_placeholder_workload">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:82,83</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:82,83</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:82,83</note>
+      </notes>
+      <segment>
+        <source>Ex.: 20</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_label_image">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:96,97</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:96,97</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:96,97</note>
+      </notes>
+      <segment>
+        <source>Imagem do curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_image_click">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:103,104</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:103,104</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:103,104</note>
+      </notes>
+      <segment>
+        <source>Clique para selecionar</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:126,128</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:126,128</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:126,128</note>
+      </notes>
+      <segment>
+        <source>Curso ativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_cert_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:130,132</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:130,132</note>
+        <note category="location">src/app/features/control-panel/course/shared/course-shared.component.html:130,132</note>
+      </notes>
+      <segment>
+        <source>Mostrar certificado</source>
+      </segment>
+    </unit>
+    <unit id="cp_dash_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Control Panel</source>
+      </segment>
+    </unit>
+    <unit id="cp_dash_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Bem-vindo de volta! Aqui está o resumo de hoje.</source>
+      </segment>
+    </unit>
+    <unit id="cp_dash_overview_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:12,14</note>
+      </notes>
+      <segment>
+        <source>📊 Visão Geral</source>
+      </segment>
+    </unit>
+    <unit id="cp_dash_indicators">
+      <notes>
+        <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:17,19</note>
+      </notes>
+      <segment>
+        <source>Indicadores consolidados do painel</source>
+      </segment>
+    </unit>
+    <unit id="cp_dash_activities_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:24,26</note>
+      </notes>
+      <segment>
+        <source>🔔 Atividades Recentes</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_create_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Nova Matrícula</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_loading_classes">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:32,33</note>
+      </notes>
+      <segment>
+        <source>Carregando turmas...</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_select_class">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:34,36</note>
+      </notes>
+      <segment>
+        <source>Selecione uma turma</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_student">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:51,52</note>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:27,28</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:68,69</note>
+      </notes>
+      <segment>
+        <source>Aluno</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_loading_students">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:64,65</note>
+      </notes>
+      <segment>
+        <source>Carregando alunos...</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_select_student">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:66,68</note>
+      </notes>
+      <segment>
+        <source>Selecione um aluno</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:86,88</note>
+      </notes>
+      <segment>
+        <source>Matrícula ativa</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_submitting">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:100,101</note>
+      </notes>
+      <segment>
+        <source>Matriculando...</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_submit">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/create/registration-create.component.html:102,103</note>
+      </notes>
+      <segment>
+        <source>Matricular</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Matrículas</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Gerencie as matrículas de alunos nas turmas.</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source> 📋 Lista de Matrículas (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedRegistrations().meta.totalCount }}"/>) </source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:15,16</note>
+      </notes>
+      <segment>
+        <source> ➕ Nova Matrícula </source>
+      </segment>
+    </unit>
+    <unit id="label_email">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:28,29</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:47,48</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:47,48</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:47,48</note>
+        <note category="location">src/app/features/login-student/login-student.component.html:25,27</note>
+        <note category="location">src/app/features/login/login.component.html:14,15</note>
+      </notes>
+      <segment>
+        <source>E-mail</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:60,62</note>
+      </notes>
+      <segment>
+        <source>Nenhuma matrícula encontrada</source>
+      </segment>
+    </unit>
+    <unit id="cp_reg_deleting">
+      <notes>
+        <note category="location">src/app/features/control-panel/registration/registration.component.html:86,87</note>
+      </notes>
+      <segment>
+        <source>Excluindo...</source>
+      </segment>
+    </unit>
+    <unit id="cp_breadcrumb_home">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Home</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Alunos</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_subtitle">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>Gerencie todos os alunos do sistema</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_filters">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:14,16</note>
+      </notes>
+      <segment>
+        <source>🔽 Filtros</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_status">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_all">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:26,27</note>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Todos</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_active">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:27,28</note>
+      </notes>
+      <segment>
+        <source>Ativos</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_inactive">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:28,30</note>
+      </notes>
+      <segment>
+        <source>Inativos</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_period">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:32,33</note>
+      </notes>
+      <segment>
+        <source>Período</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_month">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:34,35</note>
+      </notes>
+      <segment>
+        <source>Último mês</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_3months">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:35,36</note>
+      </notes>
+      <segment>
+        <source>Últimos 3 meses</source>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_year">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:36,37</note>
+      </notes>
+      <segment>
+        <source>Último ano</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_apply">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:41,43</note>
+      </notes>
+      <segment>
+        <source>Aplicar</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_list_title">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:50,51</note>
+      </notes>
+      <segment>
+        <source>🎓 Lista de Alunos (<ph id="0" equiv="INTERPOLATION" disp="{{ students().meta.totalCount }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_btn_new">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:53,55</note>
+      </notes>
+      <segment>
+        <source>➕ Novo Aluno</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_status">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:69,70</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_registration_date">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:70,71</note>
+      </notes>
+      <segment>
+        <source>Cadastro</source>
+      </segment>
+    </unit>
+    <unit id="cp_col_last_access">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:71,72</note>
+      </notes>
+      <segment>
+        <source>Último Acesso</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_empty">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/list/student.list.component.html:103,105</note>
+      </notes>
+      <segment>
+        <source>Nenhum aluno encontrado</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_placeholder_name">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:33,34</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:33,34</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:33,34</note>
+      </notes>
+      <segment>
+        <source>Digite o nome completo</source>
+      </segment>
+    </unit>
+    <unit id="cp_placeholder_email">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:58,59</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:58,59</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:58,59</note>
+      </notes>
+      <segment>
+        <source>Digite o e-mail</source>
+      </segment>
+    </unit>
+    <unit id="label_password">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:72,73</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:72,73</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:72,73</note>
+        <note category="location">src/app/features/login-student/login-student.component.html:39,41</note>
+        <note category="location">src/app/features/login/login.component.html:27,29</note>
+      </notes>
+      <segment>
+        <source>Senha</source>
+      </segment>
+    </unit>
+    <unit id="cp_placeholder_password">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:83,84</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:83,84</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:83,84</note>
+      </notes>
+      <segment>
+        <source>Mínimo 6 caracteres</source>
+      </segment>
+    </unit>
+    <unit id="cp_student_active_check">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:101,103</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:101,103</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:101,103</note>
+      </notes>
+      <segment>
+        <source>Aluno ativo</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_reset_label">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:108,109</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:108,109</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:108,109</note>
+      </notes>
+      <segment>
+        <source>Reiniciar progresso por curso</source>
+      </segment>
+    </unit>
+    <unit id="cp_course_reset_select_placeholder">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:114,115</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:114,115</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:114,115</note>
+      </notes>
+      <segment>
+        <source>Selecione um curso...</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_reset_waiting">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:126,127</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:126,127</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:126,127</note>
+      </notes>
+      <segment>
+        <source>Aguarde...</source>
+      </segment>
+    </unit>
+    <unit id="cp_btn_reset">
+      <notes>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:128,129</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:128,129</note>
+        <note category="location">src/app/features/control-panel/student/shared/student-shared.component.html:128,129</note>
+      </notes>
+      <segment>
+        <source>⚠ Reiniciar</source>
+      </segment>
+    </unit>
+    <unit id="login_student_title">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:7,8</note>
+      </notes>
+      <segment>
+        <source>Plataforma de aprendizagem</source>
+      </segment>
+    </unit>
+    <unit id="login_student_subtitle">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:8,11</note>
+      </notes>
+      <segment>
+        <source>Entre na sua conta para continuar aprendendo</source>
+      </segment>
+    </unit>
+    <unit id="placeholder_email">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:32,34</note>
+        <note category="location">src/app/features/login/login.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>seu@email.com</source>
+      </segment>
+    </unit>
+    <unit id="placeholder_password">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:46,48</note>
+        <note category="location">src/app/features/login/login.component.html:34,36</note>
+      </notes>
+      <segment>
+        <source>Digite sua senha</source>
+      </segment>
+    </unit>
+    <unit id="login_loading">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:54,56</note>
+        <note category="location">src/app/features/login/login.component.html:61,62</note>
+      </notes>
+      <segment>
+        <source>Entrando...</source>
+      </segment>
+    </unit>
+    <unit id="login_submit">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:56,58</note>
+        <note category="location">src/app/features/login/login.component.html:63,65</note>
+      </notes>
+      <segment>
+        <source>Entrar</source>
+      </segment>
+    </unit>
+    <unit id="forgot_password">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:62,63</note>
+        <note category="location">src/app/features/login/login.component.html:51,53</note>
+      </notes>
+      <segment>
+        <source>Esqueceu a senha?</source>
+      </segment>
+    </unit>
+    <unit id="create_account">
+      <notes>
+        <note category="location">src/app/features/login-student/login-student.component.html:64,67</note>
+      </notes>
+      <segment>
+        <source>Criar nova conta</source>
+      </segment>
+    </unit>
+    <unit id="login_management_subtitle">
+      <notes>
+        <note category="location">src/app/features/login/login.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>Sistema de Gestão</source>
+      </segment>
+    </unit>
+    <unit id="remember_me">
+      <notes>
+        <note category="location">src/app/features/login/login.component.html:48,49</note>
+      </notes>
+      <segment>
+        <source>Lembrar-me</source>
+      </segment>
+    </unit>
+    <unit id="social_login_text">
+      <notes>
+        <note category="location">src/app/features/login/login.component.html:74,75</note>
+      </notes>
+      <segment>
+        <source>Ou entre com</source>
+      </segment>
+    </unit>
+    <unit id="signup_text">
+      <notes>
+        <note category="location">src/app/features/login/login.component.html:81,86</note>
+      </notes>
+      <segment>
+        <source> Não tem uma conta? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a href=&quot;#&quot; (click)=&quot;$event.preventDefault()&quot; class=&quot;signup-link&quot;
+          &gt;" dispEnd="&lt;/a
+        &gt;">Cadastre-se</pc></source>
+      </segment>
+    </unit>
+    <unit id="slide_counter">
+      <notes>
+        <note category="location">src/app/features/student/course-player/course-player.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source> Aula <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;current-slide-number&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ currentSlide() }}"/></pc> de <pc id="2" equivStart="START_TAG_SPAN_1" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;total-slides&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="3" equiv="INTERPOLATION_1" disp="{{ activeSlides().length }}"/></pc></source>
+      </segment>
+    </unit>
+    <unit id="btn_prev_slide">
+      <notes>
+        <note category="location">src/app/features/student/course-player/course-player.component.html:36,37</note>
+      </notes>
+      <segment>
+        <source>← Anterior</source>
+      </segment>
+    </unit>
+    <unit id="btn_next_slide">
+      <notes>
+        <note category="location">src/app/features/student/course-player/course-player.component.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Próximo →</source>
+      </segment>
+    </unit>
+    <unit id="btn_complete_course">
+      <notes>
+        <note category="location">src/app/features/student/course-player/course-player.component.html:39,41</note>
+      </notes>
+      <segment>
+        <source>🏆 Concluir e Exibir Certificado</source>
+      </segment>
+    </unit>
+    <unit id="certificate_title">
+      <notes>
+        <note category="location">src/app/features/student/course-player/course-player.component.html:55,56</note>
+      </notes>
+      <segment>
+        <source>Certificado de Conclusão</source>
+      </segment>
+    </unit>
+    <unit id="platform_tagline">
+      <notes>
+        <note category="location">src/app/features/student/layout/header/header.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>Plataforma de aprendizagem</source>
+      </segment>
+    </unit>
+    <unit id="role_student">
+      <notes>
+        <note category="location">src/app/features/student/layout/header/header.component.html:17,19</note>
+      </notes>
+      <segment>
+        <source>Aluno</source>
+      </segment>
+    </unit>
+    <unit id="hello_greeting">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source> Olá, <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;student-name-welcome&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ studentName() }}"/></pc> ! </source>
+      </segment>
+    </unit>
+    <unit id="welcome_subtitle">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:12,14</note>
+      </notes>
+      <segment>
+        <source> Continue sua jornada de aprendizado de onde você parou </source>
+      </segment>
+    </unit>
+    <unit id="loading_courses">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:235,236</note>
+      </notes>
+      <segment>
+        <source>Carregando cursos...</source>
+      </segment>
+    </unit>
+    <unit id="progress_label">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:273,274</note>
+      </notes>
+      <segment>
+        <source>Seu progresso</source>
+      </segment>
+    </unit>
+    <unit id="btn_show_certificate">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:289,290</note>
+      </notes>
+      <segment>
+        <source>🏆 Exibir Certificado</source>
+      </segment>
+    </unit>
+    <unit id="btn_complete">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:291,292</note>
+      </notes>
+      <segment>
+        <source>▶️ Concluir</source>
+      </segment>
+    </unit>
+    <unit id="btn_continue">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:294,295</note>
+      </notes>
+      <segment>
+        <source>▶️ Continuar</source>
+      </segment>
+    </unit>
+    <unit id="btn_start">
+      <notes>
+        <note category="location">src/app/features/student/student.component.html:296,297</note>
+      </notes>
+      <segment>
+        <source>▶️ Iniciar</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

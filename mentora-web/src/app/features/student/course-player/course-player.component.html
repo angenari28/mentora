@@ -4,7 +4,7 @@
       <h3 class="player-title" id="player-course-title">{{ courseName() }}</h3>
       <div class="player-progress-mini">
         <div class="progress-circle" id="progress-circle"></div>
-        <span style="font-size: 0.875rem; color: #64748B; font-weight: 600;">
+        <span i18n="@@slide_counter" style="font-size: 0.875rem; color: #64748B; font-weight: 600;">
           Aula <span id="current-slide-number">{{ currentSlide() }}</span> de <span id="total-slides">{{ activeSlides().length }}</span>
         </span>
       </div>
@@ -33,10 +33,10 @@
     @if (!showingCertificate()) {
       <div class="player-footer">
         <div class="slide-navigation">
-          <button class="nav-btn nav-btn-secondary" id="prev-btn" onclick="previousSlide()">← Anterior</button>
-          <button class="nav-btn nav-btn-primary" id="next-btn" onclick="nextSlide()">Próximo →</button>
+          <button class="nav-btn nav-btn-secondary" id="prev-btn" onclick="previousSlide()" i18n="@@btn_prev_slide">← Anterior</button>
+          <button class="nav-btn nav-btn-primary" id="next-btn" onclick="nextSlide()" i18n="@@btn_next_slide">Próximo →</button>
           @if (currentSlide() === activeSlides().length && courseShowCertificate()) {
-            <button class="nav-btn nav-btn-certificate" (click)="openCertificateSlide()">🏆 Concluir e Exibir Certificado</button>
+            <button class="nav-btn nav-btn-certificate" (click)="openCertificateSlide()" i18n="@@btn_complete_course">🏆 Concluir e Exibir Certificado</button>
           }
         </div>
         <div class="slide-indicator" id="slide-indicators">
@@ -52,7 +52,7 @@
 <div class="course-player-overlay" id="certificate-view">
   <div class="course-player">
     <div class="player-header">
-      <h3 class="player-title">Certificado de Conclusão</h3>
+      <h3 class="player-title" i18n="@@certificate_title">Certificado de Conclusão</h3>
       <button class="close-player" onclick="closeCertificate()">✕</button>
     </div>
     <div class="player-body">

@@ -9,7 +9,7 @@
       <div class="modal-body">
         @if (studentForm().pending()) {
           <div class="loading-overlay">
-            <div class="spinner">carregando...</div>
+            <div class="spinner" i18n="@@cp_loading">carregando...</div>
           </div>
         }
 
@@ -31,6 +31,7 @@
             autocomplete="off"
             [class.input-error]="studentForm.name().invalid() && studentForm.name().touched()"
             placeholder="Digite o nome completo"
+            i18n-placeholder="@@cp_student_placeholder_name"
             [formField]="studentForm.name"
           />
           @if (studentForm.name().invalid() && studentForm.name().touched()) {
@@ -43,11 +44,11 @@
         <div class="form-row-half">
           <div class="form-group">
             <label class="form-label" for="email">
-              E-mail
-              @if (studentForm.email().required()) {
-                <span class="required">*</span>
-              }
-            </label>
+                <ng-container i18n="@@label_email">E-mail</ng-container>
+                @if (studentForm.email().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
             <input
               id="email"
               type="email"
@@ -55,6 +56,7 @@
               autocomplete="off"
               [class.input-error]="studentForm.email().invalid() && studentForm.email().touched()"
               placeholder="Digite o e-mail"
+              i18n-placeholder="@@cp_placeholder_email"
               [formField]="studentForm.email"
             />
             @if (studentForm.email().invalid() && studentForm.email().touched()) {
@@ -67,7 +69,7 @@
           @if (!readonly()) {
             <div class="form-group">
               <label class="form-label" for="password">
-                Senha
+                <ng-container i18n="@@label_password">Senha</ng-container>
                 @if (studentForm.password().required()) {
                   <span class="required">*</span>
                 }
@@ -79,6 +81,7 @@
                 autocomplete="current-password"
                 [class.input-error]="studentForm.password().invalid() && studentForm.password().touched()"
                 placeholder="Mínimo 6 caracteres"
+              i18n-placeholder="@@cp_placeholder_password"
                 [formField]="studentForm.password"
               />
               @if (studentForm.password().invalid() && studentForm.password().touched()) {
@@ -91,24 +94,24 @@
         </div>
 
         <div class="form-group form-group-inline">
-          <label class="form-label">Opções</label>
+          <label class="form-label" i18n="@@cp_label_options">Opções</label>
           <div class="options-grid">
             <label class="checkbox">
               <input type="checkbox" [formField]="studentForm.isActive" autocomplete="off" />
-              <span>Aluno ativo</span>
+              <span i18n="@@cp_student_active_check">Aluno ativo</span>
             </label>
           </div>
         </div>
 
         @if (showCourseReset() && studentCourses().length > 0) {
           <div class="form-group">
-            <label class="form-label">Reiniciar progresso por curso</label>
+            <label class="form-label" i18n="@@cp_course_reset_label">Reiniciar progresso por curso</label>
             <div class="course-reset-row">
               <select
                 class="form-input"
                 (change)="selectedCourseId.set($any($event.target).value)"
               >
-                <option value="">Selecione um curso...</option>
+                <option value="" i18n="@@cp_course_reset_select_placeholder">Selecione um curso...</option>
                 @for (course of studentCourses(); track course.id) {
                   <option [value]="course.id">{{ course.name }}</option>
                 }
@@ -119,7 +122,11 @@
                 [disabled]="!selectedCourseId() || resettingCourse()"
                 (click)="resetCourseSlideTime()"
               >
-                {{ resettingCourse() ? 'Aguarde...' : '⚠ Reiniciar' }}
+                @if (resettingCourse()) {
+                  <ng-container i18n="@@cp_btn_reset_waiting">Aguarde...</ng-container>
+                } @else {
+                  <ng-container i18n="@@cp_btn_reset">⚠ Reiniciar</ng-container>
+                }
               </button>
             </div>
           </div>
@@ -127,7 +134,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+        <button type="button" class="btn btn-ghost" (click)="close()" i18n="@@cp_btn_cancel">Cancelar</button>
         <button type="submit" class="btn btn-primary" [disabled]="submitting()">
           {{ submitting() ? 'Aguarde...' : submitLabel() }}
         </button>

@@ -5,10 +5,10 @@
   <main class="main-content">
     <!-- WELCOME SECTION -->
     <section class="welcome-section">
-      <h2 class="welcome-title">
+      <h2 class="welcome-title" i18n="@@hello_greeting">
         Olá, <span id="student-name-welcome">{{ studentName() }}</span> !
       </h2>
-      <p class="welcome-subtitle" id="welcome-message">
+      <p class="welcome-subtitle" id="welcome-message" i18n="@@welcome_subtitle">
         Continue sua jornada de aprendizado de onde você parou
       </p>
     </section>
@@ -232,7 +232,7 @@
 
     <!-- TURMAS ATIVAS DO ALUNO -->
     @if (loadingClasses()) {
-      <div class="classes-loading"><p>Carregando cursos...</p></div>
+      <div class="classes-loading"><p i18n="@@loading_courses">Carregando cursos...</p></div>
     } @else if (loadError()) {
       <div class="classes-error">
         <p>{{ loadError() }}</p>
@@ -270,7 +270,7 @@
                     @if (item.course.slides.length > 0) {
                       <div class="course-progress-section">
                         <div class="progress-header">
-                          <span class="progress-label">Seu progresso</span>
+                          <span class="progress-label" i18n="@@progress_label">Seu progresso</span>
                           <span class="progress-percentage">{{
                             loadPercentegeCourse(item).toView | percent
                           }}</span>
@@ -286,14 +286,14 @@
                     <div class="course-footer">
                       @if (loadPercentegeCourse(item).toView === 1) {
                         @if (item.course.showCertificate) {
-                          <button class="btn btn-primary">🏆 Exibir Certificado</button>
+                          <button class="btn btn-primary" i18n="@@btn_show_certificate">🏆 Exibir Certificado</button>
                         } @else {
-                          <button class="btn btn-primary">▶️ Concluir</button>
+                          <button class="btn btn-primary" i18n="@@btn_complete">▶️ Concluir</button>
                         }
                       } @else if (loadPercentegeCourse(item).toView > 0) {
-                        <button class="btn btn-primary">▶️ Continuar</button>
+                        <button class="btn btn-primary" i18n="@@btn_continue">▶️ Continuar</button>
                       } @else {
-                        <button class="btn btn-primary">▶️ Iniciar</button>
+                        <button class="btn btn-primary" i18n="@@btn_start">▶️ Iniciar</button>
                       }
                     </div>
                   </div>

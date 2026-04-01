@@ -1,15 +1,15 @@
 <div class="content-wrapper">
   <div class="page-header">
-    <h1 class="page-title">Categorias</h1>
-    <p class="page-subtitle">Gerencie as categorias dos cursos.</p>
+    <h1 class="page-title" i18n="@@cp_cat_title">Categorias</h1>
+    <p class="page-subtitle" i18n="@@cp_cat_subtitle">Gerencie as categorias dos cursos.</p>
   </div>
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">🏷️ Lista de Categorias ({{ pagedCategories().meta.totalCount }})</h3>
+      <h3 class="card-title" i18n="@@cp_cat_list_title">🏷️ Lista de Categorias ({{ pagedCategories().meta.totalCount }})</h3>
       <div class="card-actions">
-        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
-        <button class="btn btn-sm btn-primary" routerLink="/control-panel/category/create">
+        <button class="btn btn-sm btn-ghost" i18n="@@cp_btn_export">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/category/create" i18n="@@cp_cat_btn_new">
           ➕ Nova Categoria
         </button>
       </div>
@@ -19,9 +19,9 @@
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Ativa</th>
-              <th>Ações</th>
+              <th i18n="@@cp_col_name">Nome</th>
+              <th i18n="@@cp_col_active_f">Ativa</th>
+              <th i18n="@@cp_col_actions">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +47,7 @@
             @if (!loading() && !error() && pagedCategories().meta.totalCount === 0) {
               <tr>
                 <td colspan="3" class="table-state">
-                  <p>Nenhuma categoria encontrada</p>
+                  <p i18n="@@cp_cat_empty">Nenhuma categoria encontrada</p>
                 </td>
               </tr>
             }
@@ -59,11 +59,15 @@
                     class="badge"
                     [ngClass]="category.active ? 'badge-success' : 'badge-warning'"
                   >
-                    {{ category.active ? '✓ Ativa' : '⏸ Inativa' }}
+                    @if (category.active) {
+                      <ng-container i18n="@@cp_badge_active_f">✓ Ativa</ng-container>
+                    } @else {
+                      <ng-container i18n="@@cp_badge_inactive_f">⏸ Inativa</ng-container>
+                    }
                   </span>
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-ghost">Editar</button>
+                  <button class="btn btn-sm btn-ghost" i18n="@@cp_btn_edit">Editar</button>
                 </td>
               </tr>
             }

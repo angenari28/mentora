@@ -1,7 +1,7 @@
 <div class="modal-overlay active">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h3 class="modal-title">Nova Categoria</h3>
+      <h3 class="modal-title" i18n="@@cp_cat_create_title">Nova Categoria</h3>
       <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
     </div>
 
@@ -9,12 +9,12 @@
       <div class="modal-body">
         @if (categoryForm().pending()) {
           <div class="loading-overlay">
-            <div class="spinner">carregando...</div>
+            <div class="spinner" i18n="@@cp_loading">carregando...</div>
           </div>
         }
         <div class="form-group">
           <label class="form-label" for="nome"
-            >Nome
+            ><ng-container i18n="@@cp_label_name">Nome</ng-container>
             @if (categoryForm.name().required()) {
               <span class="required">*</span>
             }
@@ -25,6 +25,7 @@
             class="form-input"
             [class.input-error]="categoryForm.name().invalid() && categoryForm.name().touched()"
             placeholder="Digite o nome da categoria"
+            i18n-placeholder="@@cp_cat_placeholder_name"
             [formField]="categoryForm.name"
           />
           @if (categoryForm.name().invalid() && categoryForm.name().touched()) {
@@ -35,19 +36,19 @@
         </div>
 
         <div class="form-group form-group-inline">
-          <label class="form-label">Opções</label>
+          <label class="form-label" i18n="@@cp_label_options">Opções</label>
           <div class="options-grid">
             <label class="checkbox">
               <input type="checkbox" [formField]="categoryForm.active" />
-              <span>Categoria ativa</span>
+              <span i18n="@@cp_cat_active_check">Categoria ativa</span>
             </label>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Criar</button>
+        <button type="button" class="btn btn-ghost" (click)="close()" i18n="@@cp_btn_cancel">Cancelar</button>
+        <button type="submit" class="btn btn-primary" i18n="@@cp_btn_create">Criar</button>
       </div>
     </form>
   </div>

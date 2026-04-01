@@ -1,18 +1,19 @@
 <div class="content-wrapper">
   <div class="page-header">
-    <h1 class="page-title">Slides</h1>
-    <p class="page-subtitle">Gerencie os slides dos cursos.</p>
+    <h1 class="page-title" i18n="@@cp_nav_slides">Slides</h1>
+    <p class="page-subtitle" i18n="@@cp_slide_subtitle">Gerencie os slides dos cursos.</p>
   </div>
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">🖼️ Slides ({{ slides().length }})</h3>
+      <h3 class="card-title" i18n="@@cp_slide_list_title">🖼️ Slides ({{ slides().length }})</h3>
       <div class="card-actions">
         <button
           class="btn btn-sm btn-primary"
           [disabled]="!selectedCourseId()"
           [routerLink]="['/control-panel/course-slide/create']"
           [queryParams]="{ courseId: selectedCourseId() }"
+          i18n="@@cp_slide_btn_new"
         >
           ➕ Novo Slide
         </button>
@@ -21,14 +22,18 @@
 
     <div class="card-body card-body-compact">
       <div class="form-group" style="margin-bottom: 1rem;">
-        <label class="form-label" for="courseFilter">Filtrar por Curso</label>
+        <label class="form-label" for="courseFilter" i18n="@@cp_slide_filter_label">Filtrar por Curso</label>
         <select
           id="courseFilter"
           class="form-input"
           (change)="onCourseChange($event)"
         >
           <option value="">
-            {{ loadingCourses() ? 'Carregando cursos...' : 'Selecione um curso' }}
+            @if (loadingCourses()) {
+              <ng-container i18n="@@cp_class_loading_courses">Carregando cursos...</ng-container>
+            } @else {
+              <ng-container i18n="@@cp_class_select_course">Selecione um curso</ng-container>
+            }
           </option>
           @for (course of courses(); track course.id) {
             <option [value]="course.id">{{ course.name }}</option>
@@ -66,7 +71,7 @@
               }
               @if (!loading() && !error() && slides().length === 0) {
                 <tr>
-                  <td colspan="5" class="table-state"><p>Nenhum slide encontrado para este curso.</p></td>
+                  <td colspan="5" class="table-state"><p i18n="@@cp_slide_empty">Nenhum slide encontrado para este curso.</p></td>
                 </tr>
               }
               @for (slide of slides(); track trackById($index, slide)) {
@@ -76,7 +81,11 @@
                   <td>{{ slide.slideTypeName }}</td>
                   <td>
                     <span class="badge" [ngClass]="slide.active ? 'badge-success' : 'badge-warning'">
-                      {{ slide.active ? '✓ Ativo' : '⏸ Inativo' }}
+                    @if (slide.active) {
+                      <ng-container i18n="@@cp_badge_active_m">✓ Ativo</ng-container>
+                    } @else {
+                      <ng-container i18n="@@cp_badge_inactive_m">⏸ Inativo</ng-container>
+                    }
                     </span>
                   </td>
                   <td>
@@ -84,15 +93,16 @@
                       class="btn btn-sm btn-ghost"
                       [routerLink]="['/control-panel/course-slide/create']"
                       [queryParams]="{ courseId: slide.courseId, editId: slide.id }"
+                      i18n="@@cp_btn_edit"
                     >Editar</button>
-                    <button class="btn btn-sm btn-ghost btn-danger" (click)="deleteSlide(slide.id)">Remover</button>
+                    <button class="btn btn-sm btn-ghost btn-danger" (click)="deleteSlide(slide.id)" i18n="@@cp_btn_remove">Remover</button>
                   </td>
                 </tr>
               }
             </tbody>
         </app-table>
       } @else {
-        <p class="table-state">Selecione um curso para visualizar os slides.</p>
+        <p class="table-state" i18n="@@cp_slide_select_course_hint">Selecione um curso para visualizar os slides.</p>
       }
     </div>
   </div>

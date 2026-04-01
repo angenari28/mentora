@@ -9,7 +9,7 @@
       <div class="modal-body">
         @if (courseForm().pending()) {
           <div class="loading-overlay">
-            <div class="spinner">carregando...</div>
+            <div class="spinner" i18n="@@cp_loading">carregando...</div>
           </div>
         }
 
@@ -25,8 +25,7 @@
             type="text"
             class="form-input"
             [class.input-error]="courseForm.name().invalid() && courseForm.name().touched()"
-            placeholder="Digite o nome do curso"
-            [formField]="courseForm.name"
+            placeholder="Digite o nome do curso"              i18n-placeholder="@@cp_course_placeholder_name"            [formField]="courseForm.name"
           />
           @if (courseForm.name().invalid() && courseForm.name().touched()) {
             @for (error of courseForm.name().errors(); track $index) {
@@ -39,7 +38,7 @@
           <div class="form-col-left">
             <div class="form-group">
               <label class="form-label" for="categoryId">
-                Categoria
+                <ng-container i18n="@@cp_col_category">Categoria</ng-container>
                 @if (courseForm.categoryId().required()) {
                   <span class="required">*</span>
                 }
@@ -51,7 +50,11 @@
                 [formField]="courseForm.categoryId"
               >
                 <option value="">
-                  {{ loadingCategories() ? 'Carregando...' : 'Selecione uma categoria' }}
+                  @if (loadingCategories()) {
+                    <ng-container i18n="@@cp_loading_cap">Carregando...</ng-container>
+                  } @else {
+                    <ng-container i18n="@@cp_course_select_cat">Selecione uma categoria</ng-container>
+                  }
                 </option>
                 @for (cat of categories(); track cat.id) {
                   <option [value]="cat.id">{{ cat.name }}</option>
@@ -66,7 +69,7 @@
 
             <div class="form-group">
               <label class="form-label" for="workloadHours">
-                Duração (horas)
+                <ng-container i18n="@@cp_course_label_duration">Duração (horas)</ng-container>
                 @if (courseForm.workloadHours().required()) {
                   <span class="required">*</span>
                 }
@@ -77,6 +80,7 @@
                 class="form-input"
                 [class.input-error]="courseForm.workloadHours().invalid() && courseForm.workloadHours().touched()"
                 placeholder="Ex.: 20"
+              i18n-placeholder="@@cp_course_placeholder_workload"
                 [formField]="courseForm.workloadHours"
               />
               @if (courseForm.workloadHours().invalid() && courseForm.workloadHours().touched()) {
@@ -89,14 +93,14 @@
 
           <div class="form-col-right">
             <div class="form-group">
-              <label class="form-label" for="imageCourse">Imagem do curso</label>
+              <label class="form-label" for="imageCourse" i18n="@@cp_course_label_image">Imagem do curso</label>
               <div class="image-picker" (click)="triggerImageInput()">
                 @if (faceImagePreview()) {
                   <img [src]="faceImagePreview()" alt="Imagem do curso" class="image-preview" [ngClass]="{ 'readonly': readonly() }" />
                 } @else {
                   <div class="image-placeholder">
                     <span class="image-placeholder-icon">🖼️</span>
-                    <span class="image-placeholder-text">Clique para selecionar</span>
+                    <span class="image-placeholder-text" i18n="@@cp_course_image_click">Clique para selecionar</span>
                     <span class="image-size-hint">340 × 180 px</span>
                   </div>
                 }
@@ -115,22 +119,22 @@
         </div>
 
         <div class="form-group form-group-inline">
-          <label class="form-label">Opções</label>
+          <label class="form-label" i18n="@@cp_label_options">Opções</label>
           <div class="options-grid">
             <label class="checkbox">
               <input type="checkbox" [formField]="courseForm.active" />
-              <span>Curso ativo</span>
+              <span i18n="@@cp_course_active_check">Curso ativo</span>
             </label>
             <label class="checkbox">
               <input type="checkbox" [formField]="courseForm.showCertificate" />
-              <span>Mostrar certificado</span>
+              <span i18n="@@cp_course_cert_check">Mostrar certificado</span>
             </label>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+        <button type="button" class="btn btn-ghost" (click)="close()" i18n="@@cp_btn_cancel">Cancelar</button>
         <button type="submit" class="btn btn-primary">{{ submitLabel() }}</button>
       </div>
     </form>

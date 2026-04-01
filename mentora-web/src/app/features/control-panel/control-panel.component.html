@@ -8,35 +8,35 @@
           width="179px"
           height="50px"
         />
-        <p class="logo-subtitle">Painel de Controle</p>
+        <p class="logo-subtitle" i18n="@@cp_sidebar_subtitle">Painel de Controle</p>
       </div>
     </div>
 
     <nav class="sidebar-nav">
       <div class="nav-section">
-        <h3 class="nav-section-title">Principal</h3>
+        <h3 class="nav-section-title" i18n="@@cp_nav_section_main">Principal</h3>
         <a class="nav-item" routerLink="." routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <span class="nav-icon">📊</span> Dashboard
+          <span class="nav-icon">📊</span> <ng-container i18n="@@cp_nav_dashboard">Dashboard</ng-container>
         </a>
-        <h3 class="nav-section-title">Configuração</h3>
+        <h3 class="nav-section-title" i18n="@@cp_nav_section_config">Configuração</h3>
         <a class="nav-item" routerLink="category" routerLinkActive="active">
-          <span class="nav-icon">🏷️</span> Categoria
+          <span class="nav-icon">🏷️</span> <ng-container i18n="@@cp_nav_category">Categoria</ng-container>
         </a>
         <a class="nav-item" routerLink="course" routerLinkActive="active">
-          <span class="nav-icon">📘</span> Curso
+          <span class="nav-icon">📘</span> <ng-container i18n="@@cp_nav_course">Curso</ng-container>
         </a>
         <a class="nav-item nav-subitem" routerLink="course-slide" routerLinkActive="active">
-          <span class="nav-icon">🖼️</span> Slides
+          <span class="nav-icon">🖼️</span> <ng-container i18n="@@cp_nav_slides">Slides</ng-container>
         </a>
-        <h3 class="nav-section-title">Administração</h3>
+        <h3 class="nav-section-title" i18n="@@cp_nav_section_admin">Administração</h3>
         <a class="nav-item" routerLink="student" routerLinkActive="active">
-          <span class="nav-icon">👨‍🎓</span> Alunos
+          <span class="nav-icon">👨‍🎓</span> <ng-container i18n="@@cp_nav_students">Alunos</ng-container>
         </a>
         <a class="nav-item" routerLink="class" routerLinkActive="active">
-          <span class="nav-icon">🎓</span> Turma
+          <span class="nav-icon">🎓</span> <ng-container i18n="@@cp_nav_class">Turma</ng-container>
         </a>
         <a class="nav-item" routerLink="registration" routerLinkActive="active">
-          <span class="nav-icon">📋</span> Matrícula
+          <span class="nav-icon">📋</span> <ng-container i18n="@@cp_nav_registration">Matrícula</ng-container>
         </a>
       </div>
     </nav>
@@ -46,9 +46,9 @@
         <div class="user-avatar">AS</div>
         <div class="user-info">
           <p class="user-name">Admin Silva</p>
-          <p class="user-role">Administrador</p>
+          <p class="user-role" i18n="@@cp_user_role_admin">Administrador</p>
         </div>
-        <a href="#" class="logout-link" (click)="logout($event)">Sair</a>
+        <a href="#" class="logout-link" (click)="logout($event)" i18n="@@logout_label">Sair</a>
       </div>
     </div>
   </aside>
@@ -61,6 +61,7 @@
           type="search"
           class="search-input"
           placeholder="Pesquisar por alunos, workspaces, turmas..."
+          i18n-placeholder="@@cp_search_placeholder"
         />
       </div>
       <div class="navbar-actions">

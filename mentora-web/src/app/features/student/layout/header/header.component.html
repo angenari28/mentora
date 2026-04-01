@@ -1,7 +1,7 @@
 <header class="platform-header">
   <div class="header-logo-section">
     <div class="header-brand"></div>
-        <p class="logo-subtitle">Plataforma de aprendizagem</p>
+        <p class="logo-subtitle" i18n="@@platform_tagline">Plataforma de aprendizagem</p>
 
   </div>
   <div class="header-user-section">
@@ -14,13 +14,13 @@
       </div>
       <div class="user-info">
         <p class="user-name" id="student-name-header">{{ studentName() }}</p>
-        <p class="user-role">Aluno</p>
+        <p class="user-role" i18n="@@role_student">Aluno</p>
       </div>
     </div>
     <div class="user-dropdown-menu" id="user-dropdown-menu">
       <button class="dropdown-item logout-btn" (click)="logout()">
         <span class="dropdown-icon">🚪</span>
-        Sair
+        <span i18n="@@logout_label">Sair</span>
       </button>
     </div>
   </div>

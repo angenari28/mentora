@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="pt-BR" trgLang="en">
+  <file id="ngi18n" original="ng.template">
+    <unit id="login_student_title">
+      <segment state="translated">
+        <source>Plataforma de aprendizagem</source>
+        <target>Learning Platform</target>
+      </segment>
+    </unit>
+    <unit id="login_student_subtitle">
+      <segment state="translated">
+        <source>Entre na sua conta para continuar aprendendo</source>
+        <target>Sign in to your account to continue learning</target>
+      </segment>
+    </unit>
+    <unit id="label_email">
+      <segment state="translated">
+        <source>E-mail</source>
+        <target>E-mail</target>
+      </segment>
+    </unit>
+    <unit id="placeholder_email">
+      <segment state="translated">
+        <source>seu@email.com</source>
+        <target>your@email.com</target>
+      </segment>
+    </unit>
+    <unit id="label_password">
+      <segment state="translated">
+        <source>Senha</source>
+        <target>Password</target>
+      </segment>
+    </unit>
+    <unit id="placeholder_password">
+      <segment state="translated">
+        <source>Digite sua senha</source>
+        <target>Enter your password</target>
+      </segment>
+    </unit>
+    <unit id="login_loading">
+      <segment state="translated">
+        <source>Entrando...</source>
+        <target>Signing in...</target>
+      </segment>
+    </unit>
+    <unit id="login_submit">
+      <segment state="translated">
+        <source>Entrar</source>
+        <target>Sign In</target>
+      </segment>
+    </unit>
+    <unit id="forgot_password">
+      <segment state="translated">
+        <source>Esqueceu a senha?</source>
+        <target>Forgot your password?</target>
+      </segment>
+    </unit>
+    <unit id="create_account">
+      <segment state="translated">
+        <source>Criar nova conta</source>
+        <target>Create new account</target>
+      </segment>
+    </unit>
+    <unit id="login_management_subtitle">
+      <segment state="translated">
+        <source>Sistema de Gestão</source>
+        <target>Management System</target>
+      </segment>
+    </unit>
+    <unit id="remember_me">
+      <segment state="translated">
+        <source>Lembrar-me</source>
+        <target>Remember me</target>
+      </segment>
+    </unit>
+    <unit id="social_login_text">
+      <segment state="translated">
+        <source>Ou entre com</source>
+        <target>Or sign in with</target>
+      </segment>
+    </unit>
+    <unit id="signup_text">
+      <segment state="translated">
+        <source> Não tem uma conta? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a href=&quot;#&quot; (click)=&quot;$event.preventDefault()&quot; class=&quot;signup-link&quot;
+          &gt;" dispEnd="&lt;/a
+        &gt;">Cadastre-se</pc></source>
+        <target> Don't have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a href=&quot;#&quot; (click)=&quot;$event.preventDefault()&quot; class=&quot;signup-link&quot;
+          &gt;" dispEnd="&lt;/a
+        &gt;">Sign up</pc></target>
+      </segment>
+    </unit>
+    <unit id="slide_counter">
+      <segment state="translated">
+        <source> Aula <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;current-slide-number&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ currentSlide() }}"/></pc> de <pc id="2" equivStart="START_TAG_SPAN_1" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;total-slides&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="3" equiv="INTERPOLATION_1" disp="{{ activeSlides().length }}"/></pc></source>
+        <target> Lesson <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;current-slide-number&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ currentSlide() }}"/></pc> of <pc id="2" equivStart="START_TAG_SPAN_1" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;total-slides&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="3" equiv="INTERPOLATION_1" disp="{{ activeSlides().length }}"/></pc></target>
+      </segment>
+    </unit>
+    <unit id="btn_prev_slide">
+      <segment state="translated">
+        <source>← Anterior</source>
+        <target>← Previous</target>
+      </segment>
+    </unit>
+    <unit id="btn_next_slide">
+      <segment state="translated">
+        <source>Próximo →</source>
+        <target>Next →</target>
+      </segment>
+    </unit>
+    <unit id="btn_complete_course">
+      <segment state="translated">
+        <source>🏆 Concluir e Exibir Certificado</source>
+        <target>🏆 Complete and Show Certificate</target>
+      </segment>
+    </unit>
+    <unit id="certificate_title">
+      <segment state="translated">
+        <source>Certificado de Conclusão</source>
+        <target>Certificate of Completion</target>
+      </segment>
+    </unit>
+    <unit id="platform_tagline">
+      <segment state="translated">
+        <source>Plataforma de aprendizagem</source>
+        <target>Learning Platform</target>
+      </segment>
+    </unit>
+    <unit id="role_student">
+      <segment state="translated">
+        <source>Aluno</source>
+        <target>Student</target>
+      </segment>
+    </unit>
+    <unit id="logout_label">
+      <segment state="translated">
+        <source>Sair</source>
+        <target>Sign Out</target>
+      </segment>
+    </unit>
+    <unit id="hello_greeting">
+      <segment state="translated">
+        <source> Olá, <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;student-name-welcome&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ studentName() }}"/></pc> ! </source>
+        <target> Hello, <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span id=&quot;student-name-welcome&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ studentName() }}"/></pc> ! </target>
+      </segment>
+    </unit>
+    <unit id="welcome_subtitle">
+      <segment state="translated">
+        <source> Continue sua jornada de aprendizado de onde você parou </source>
+        <target> Continue your learning journey from where you left off </target>
+      </segment>
+    </unit>
+    <unit id="loading_courses">
+      <segment state="translated">
+        <source>Carregando cursos...</source>
+        <target>Loading courses...</target>
+      </segment>
+    </unit>
+    <unit id="progress_label">
+      <segment state="translated">
+        <source>Seu progresso</source>
+        <target>Your progress</target>
+      </segment>
+    </unit>
+    <unit id="btn_show_certificate">
+      <segment state="translated">
+        <source>🏆 Exibir Certificado</source>
+        <target>🏆 Show Certificate</target>
+      </segment>
+    </unit>
+    <unit id="btn_complete">
+      <segment state="translated">
+        <source>▶️ Concluir</source>
+        <target>▶️ Complete</target>
+      </segment>
+    </unit>
+    <unit id="btn_continue">
+      <segment state="translated">
+        <source>▶️ Continuar</source>
+        <target>▶️ Continue</target>
+      </segment>
+    </unit>
+    <unit id="btn_start">
+      <segment state="translated">
+        <source>▶️ Iniciar</source>
+        <target>▶️ Start</target>
+      </segment>
+    </unit>
+    <!-- Control Panel Navigation -->
+    <unit id="cp_sidebar_subtitle">
+      <segment state="translated">
+        <source>Painel de Controle</source>
+        <target>Control Panel</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_main">
+      <segment state="translated">
+        <source>Principal</source>
+        <target>Main</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_config">
+      <segment state="translated">
+        <source>Configuração</source>
+        <target>Configuration</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_section_admin">
+      <segment state="translated">
+        <source>Administração</source>
+        <target>Administration</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_dashboard">
+      <segment state="translated">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_category">
+      <segment state="translated">
+        <source>Categoria</source>
+        <target>Category</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_course">
+      <segment state="translated">
+        <source>Curso</source>
+        <target>Course</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_slides">
+      <segment state="translated">
+        <source>Slides</source>
+        <target>Slides</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_students">
+      <segment state="translated">
+        <source>Alunos</source>
+        <target>Students</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_class">
+      <segment state="translated">
+        <source>Turma</source>
+        <target>Class</target>
+      </segment>
+    </unit>
+    <unit id="cp_nav_registration">
+      <segment state="translated">
+        <source>Matrícula</source>
+        <target>Enrollment</target>
+      </segment>
+    </unit>
+    <unit id="cp_user_role_admin">
+      <segment state="translated">
+        <source>Administrador</source>
+        <target>Administrator</target>
+      </segment>
+    </unit>
+    <unit id="cp_search_placeholder">
+      <segment state="translated">
+        <source>Pesquisar por alunos, workspaces, turmas...</source>
+        <target>Search for students, workspaces, classes...</target>
+      </segment>
+    </unit>
+    <!-- Dashboard -->
+    <unit id="cp_dash_title">
+      <segment state="translated">
+        <source>Control Panel</source>
+        <target>Control Panel</target>
+      </segment>
+    </unit>
+    <unit id="cp_dash_subtitle">
+      <segment state="translated">
+        <source>Bem-vindo de volta! Aqui está o resumo de hoje.</source>
+        <target>Welcome back! Here's today's summary.</target>
+      </segment>
+    </unit>
+    <unit id="cp_dash_overview_title">
+      <segment state="translated">
+        <source>📊 Visão Geral</source>
+        <target>📊 Overview</target>
+      </segment>
+    </unit>
+    <unit id="cp_dash_indicators">
+      <segment state="translated">
+        <source>Indicadores consolidados do painel</source>
+        <target>Consolidated panel indicators</target>
+      </segment>
+    </unit>
+    <unit id="cp_dash_activities_title">
+      <segment state="translated">
+        <source>🔔 Atividades Recentes</source>
+        <target>🔔 Recent Activities</target>
+      </segment>
+    </unit>
+    <!-- Common / Shared -->
+    <unit id="cp_loading">
+      <segment state="translated">
+        <source>carregando...</source>
+        <target>loading...</target>
+      </segment>
+    </unit>
+    <unit id="cp_loading_cap">
+      <segment state="translated">
+        <source>Carregando...</source>
+        <target>Loading...</target>
+      </segment>
+    </unit>
+    <unit id="cp_label_name">
+      <segment state="translated">
+        <source>Nome</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="cp_label_options">
+      <segment state="translated">
+        <source>Opções</source>
+        <target>Options</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_cancel">
+      <segment state="translated">
+        <source>Cancelar</source>
+        <target>Cancel</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_edit">
+      <segment state="translated">
+        <source>Editar</source>
+        <target>Edit</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_delete">
+      <segment state="translated">
+        <source>Excluir</source>
+        <target>Delete</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_export">
+      <segment state="translated">
+        <source>📥 Exportar</source>
+        <target>📥 Export</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_create">
+      <segment state="translated">
+        <source>Criar</source>
+        <target>Create</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_view">
+      <segment state="translated">
+        <source>Visualizar</source>
+        <target>View</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_remove">
+      <segment state="translated">
+        <source>Remover</source>
+        <target>Remove</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_apply">
+      <segment state="translated">
+        <source>Aplicar</source>
+        <target>Apply</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_filters">
+      <segment state="translated">
+        <source>🔽 Filtros</source>
+        <target>🔽 Filters</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_save">
+      <segment state="translated">
+        <source>Salvar</source>
+        <target>Save</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_save_close">
+      <segment state="translated">
+        <source>Salvar e fechar</source>
+        <target>Save and close</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_reset">
+      <segment state="translated">
+        <source>⚠ Reiniciar</source>
+        <target>⚠ Reset</target>
+      </segment>
+    </unit>
+    <unit id="cp_btn_reset_waiting">
+      <segment state="translated">
+        <source>Aguarde...</source>
+        <target>Please wait...</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_name">
+      <segment state="translated">
+        <source>Nome</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_actions">
+      <segment state="translated">
+        <source>Ações</source>
+        <target>Actions</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_active_f">
+      <segment state="translated">
+        <source>Ativa</source>
+        <target>Active</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_active_m">
+      <segment state="translated">
+        <source>Ativo</source>
+        <target>Active</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_category">
+      <segment state="translated">
+        <source>Categoria</source>
+        <target>Category</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_course">
+      <segment state="translated">
+        <source>Curso</source>
+        <target>Course</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_duration">
+      <segment state="translated">
+        <source>Duração</source>
+        <target>Duration</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_show_cert">
+      <segment state="translated">
+        <source>Mostrar Certificado</source>
+        <target>Show Certificate</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_student">
+      <segment state="translated">
+        <source>Aluno</source>
+        <target>Student</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_status">
+      <segment state="translated">
+        <source>Status</source>
+        <target>Status</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_registration_date">
+      <segment state="translated">
+        <source>Cadastro</source>
+        <target>Registered</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_last_access">
+      <segment state="translated">
+        <source>Último Acesso</source>
+        <target>Last Access</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_start">
+      <segment state="translated">
+        <source>Início</source>
+        <target>Start</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_end">
+      <segment state="translated">
+        <source>Término</source>
+        <target>End</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_active_f">
+      <segment state="translated">
+        <source>✓ Ativa</source>
+        <target>✓ Active</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_inactive_f">
+      <segment state="translated">
+        <source>⏸ Inativa</source>
+        <target>⏸ Inactive</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_active_m">
+      <segment state="translated">
+        <source>✓ Ativo</source>
+        <target>✓ Active</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_inactive_m">
+      <segment state="translated">
+        <source>⏸ Inativo</source>
+        <target>⏸ Inactive</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_yes">
+      <segment state="translated">
+        <source>✓ Sim</source>
+        <target>✓ Yes</target>
+      </segment>
+    </unit>
+    <unit id="cp_badge_no">
+      <segment state="translated">
+        <source>⏸ Não</source>
+        <target>⏸ No</target>
+      </segment>
+    </unit>
+    <unit id="cp_breadcrumb_home">
+      <segment state="translated">
+        <source>Home</source>
+        <target>Home</target>
+      </segment>
+    </unit>
+    <unit id="cp_placeholder_email">
+      <segment state="translated">
+        <source>Digite o e-mail</source>
+        <target>Enter email</target>
+      </segment>
+    </unit>
+    <unit id="cp_placeholder_password">
+      <segment state="translated">
+        <source>Mínimo 6 caracteres</source>
+        <target>Minimum 6 characters</target>
+      </segment>
+    </unit>
+    <!-- Category -->
+    <unit id="cp_cat_title">
+      <segment state="translated">
+        <source>Categorias</source>
+        <target>Categories</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_subtitle">
+      <segment state="translated">
+        <source>Gerencie as categorias dos cursos.</source>
+        <target>Manage course categories.</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_list_title">
+      <segment state="translated">
+        <source>🏷️ Lista de Categorias (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCategories().meta.totalCount }}" />)</source>
+        <target>🏷️ Category List (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCategories().meta.totalCount }}" />)</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_btn_new">
+      <segment state="translated">
+        <source>➕ Nova Categoria</source>
+        <target>➕ New Category</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_empty">
+      <segment state="translated">
+        <source>Nenhuma categoria encontrada</source>
+        <target>No categories found</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_create_title">
+      <segment state="translated">
+        <source>Nova Categoria</source>
+        <target>New Category</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_placeholder_name">
+      <segment state="translated">
+        <source>Digite o nome da categoria</source>
+        <target>Enter category name</target>
+      </segment>
+    </unit>
+    <unit id="cp_cat_active_check">
+      <segment state="translated">
+        <source>Categoria ativa</source>
+        <target>Active category</target>
+      </segment>
+    </unit>
+    <!-- Course -->
+    <unit id="cp_course_title">
+      <segment state="translated">
+        <source>Cursos</source>
+        <target>Courses</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_subtitle">
+      <segment state="translated">
+        <source>Gerencie os cursos do painel de controle.</source>
+        <target>Manage courses in the control panel.</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_list_title">
+      <segment state="translated">
+        <source>📚 Lista de Cursos (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCourses().meta.totalCount }}" />)</source>
+        <target>📚 Course List (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedCourses().meta.totalCount }}" />)</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_btn_new">
+      <segment state="translated">
+        <source>➕ Novo Curso</source>
+        <target>➕ New Course</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_empty">
+      <segment state="translated">
+        <source>Nenhum curso encontrado.</source>
+        <target>No courses found.</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_placeholder_name">
+      <segment state="translated">
+        <source>Digite o nome do curso</source>
+        <target>Enter course name</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_label_duration">
+      <segment state="translated">
+        <source>Duração (horas)</source>
+        <target>Duration (hours)</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_placeholder_workload">
+      <segment state="translated">
+        <source>Ex.: 20</source>
+        <target>E.g.: 20</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_label_image">
+      <segment state="translated">
+        <source>Imagem do curso</source>
+        <target>Course image</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_image_click">
+      <segment state="translated">
+        <source>Clique para selecionar</source>
+        <target>Click to select</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_select_cat">
+      <segment state="translated">
+        <source>Selecione uma categoria</source>
+        <target>Select a category</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_active_check">
+      <segment state="translated">
+        <source>Curso ativo</source>
+        <target>Active course</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_cert_check">
+      <segment state="translated">
+        <source>Mostrar certificado</source>
+        <target>Show certificate</target>
+      </segment>
+    </unit>
+    <!-- Student List -->
+    <unit id="cp_student_title">
+      <segment state="translated">
+        <source>Alunos</source>
+        <target>Students</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_subtitle">
+      <segment state="translated">
+        <source>Gerencie todos os alunos do sistema</source>
+        <target>Manage all students in the system</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_list_title">
+      <segment state="translated">
+        <source>🎓 Lista de Alunos (<ph id="0" equiv="INTERPOLATION" disp="{{ students().meta.totalCount }}" />)</source>
+        <target>🎓 Student List (<ph id="0" equiv="INTERPOLATION" disp="{{ students().meta.totalCount }}" />)</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_btn_new">
+      <segment state="translated">
+        <source>➕ Novo Aluno</source>
+        <target>➕ New Student</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_empty">
+      <segment state="translated">
+        <source>Nenhum aluno encontrado</source>
+        <target>No students found</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_placeholder_name">
+      <segment state="translated">
+        <source>Digite o nome completo</source>
+        <target>Enter full name</target>
+      </segment>
+    </unit>
+    <unit id="cp_student_active_check">
+      <segment state="translated">
+        <source>Aluno ativo</source>
+        <target>Active student</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_reset_label">
+      <segment state="translated">
+        <source>Reiniciar progresso por curso</source>
+        <target>Reset progress by course</target>
+      </segment>
+    </unit>
+    <unit id="cp_course_reset_select_placeholder">
+      <segment state="translated">
+        <source>Selecione um curso...</source>
+        <target>Select a course...</target>
+      </segment>
+    </unit>
+    <!-- Filters -->
+    <unit id="cp_btn_filters">
+      <segment state="translated">
+        <source>🔽 Filtros</source>
+        <target>🔽 Filters</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_status">
+      <segment state="translated">
+        <source>Status</source>
+        <target>Status</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_period">
+      <segment state="translated">
+        <source>Período</source>
+        <target>Period</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_all">
+      <segment state="translated">
+        <source>Todos</source>
+        <target>All</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_active">
+      <segment state="translated">
+        <source>Ativos</source>
+        <target>Active</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_inactive">
+      <segment state="translated">
+        <source>Inativos</source>
+        <target>Inactive</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_month">
+      <segment state="translated">
+        <source>Último mês</source>
+        <target>Last month</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_3months">
+      <segment state="translated">
+        <source>Últimos 3 meses</source>
+        <target>Last 3 months</target>
+      </segment>
+    </unit>
+    <unit id="cp_filter_last_year">
+      <segment state="translated">
+        <source>Último ano</source>
+        <target>Last year</target>
+      </segment>
+    </unit>
+    <!-- Class -->
+    <unit id="cp_class_title">
+      <segment state="translated">
+        <source>Turmas</source>
+        <target>Classes</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_subtitle">
+      <segment state="translated">
+        <source>Gerencie as turmas dos cursos.</source>
+        <target>Manage course classes.</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_list_title">
+      <segment state="translated">
+        <source>🎓 Lista de Turmas (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedClasses().meta.totalCount }}" />)</source>
+        <target>🎓 Class List (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedClasses().meta.totalCount }}" />)</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_btn_new">
+      <segment state="translated">
+        <source>➕ Nova Turma</source>
+        <target>➕ New Class</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_empty">
+      <segment state="translated">
+        <source>Nenhuma turma encontrada</source>
+        <target>No classes found</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_create_title">
+      <segment state="translated">
+        <source>Nova Turma</source>
+        <target>New Class</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_placeholder_name">
+      <segment state="translated">
+        <source>Digite o nome da turma</source>
+        <target>Enter class name</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_loading_courses">
+      <segment state="translated">
+        <source>Carregando cursos...</source>
+        <target>Loading courses...</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_select_course">
+      <segment state="translated">
+        <source>Selecione um curso</source>
+        <target>Select a course</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_label_date_start">
+      <segment state="translated">
+        <source>Data de Início</source>
+        <target>Start Date</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_label_date_end">
+      <segment state="translated">
+        <source>Data de Término</source>
+        <target>End Date</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_active_check">
+      <segment state="translated">
+        <source>Turma ativa</source>
+        <target>Active class</target>
+      </segment>
+    </unit>
+    <unit id="cp_class_creating">
+      <segment state="translated">
+        <source>Criando...</source>
+        <target>Creating...</target>
+      </segment>
+    </unit>
+    <!-- Registration -->
+    <unit id="cp_reg_title">
+      <segment state="translated">
+        <source>Matrículas</source>
+        <target>Enrollments</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_subtitle">
+      <segment state="translated">
+        <source>Gerencie as matrículas de alunos nas turmas.</source>
+        <target>Manage student enrollments in classes.</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_list_title">
+      <segment state="translated">
+        <source> 📋 Lista de Matrículas (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedRegistrations().meta.totalCount }}" />) </source>
+        <target> 📋 Enrollment List (<ph id="0" equiv="INTERPOLATION" disp="{{ pagedRegistrations().meta.totalCount }}" />) </target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_btn_new">
+      <segment state="translated">
+        <source>➕ Nova Matrícula</source>
+        <target>➕ New Enrollment</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_empty">
+      <segment state="translated">
+        <source>Nenhuma matrícula encontrada</source>
+        <target>No enrollments found</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_create_title">
+      <segment state="translated">
+        <source>Nova Matrícula</source>
+        <target>New Enrollment</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_loading_classes">
+      <segment state="translated">
+        <source>Carregando turmas...</source>
+        <target>Loading classes...</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_select_class">
+      <segment state="translated">
+        <source>Selecione uma turma</source>
+        <target>Select a class</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_loading_students">
+      <segment state="translated">
+        <source>Carregando alunos...</source>
+        <target>Loading students...</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_select_student">
+      <segment state="translated">
+        <source>Selecione um aluno</source>
+        <target>Select a student</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_active_check">
+      <segment state="translated">
+        <source>Matrícula ativa</source>
+        <target>Active enrollment</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_submitting">
+      <segment state="translated">
+        <source>Matriculando...</source>
+        <target>Enrolling...</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_submit">
+      <segment state="translated">
+        <source>Matricular</source>
+        <target>Enroll</target>
+      </segment>
+    </unit>
+    <unit id="cp_reg_deleting">
+      <segment state="translated">
+        <source>Excluindo...</source>
+        <target>Deleting...</target>
+      </segment>
+    </unit>
+    <!-- Course Slides -->
+    <unit id="cp_slide_subtitle">
+      <segment state="translated">
+        <source>Gerencie os slides dos cursos.</source>
+        <target>Manage course slides.</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_list_title">
+      <segment state="translated">
+        <source>🖼️ Slides (<ph id="0" equiv="INTERPOLATION" disp="{{ slides().length }}" />)</source>
+        <target>🖼️ Slides (<ph id="0" equiv="INTERPOLATION" disp="{{ slides().length }}" />)</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_btn_new">
+      <segment state="translated">
+        <source>➕ Novo Slide</source>
+        <target>➕ New Slide</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_filter_label">
+      <segment state="translated">
+        <source>Filtrar por Curso</source>
+        <target>Filter by Course</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_slide_title">
+      <segment state="translated">
+        <source>Título</source>
+        <target>Title</target>
+      </segment>
+    </unit>
+    <unit id="cp_col_slide_type">
+      <segment state="translated">
+        <source>Tipo</source>
+        <target>Type</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_empty">
+      <segment state="translated">
+        <source>Nenhum slide encontrado para este curso.</source>
+        <target>No slides found for this course.</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_select_course_hint">
+      <segment state="translated">
+        <source>Selecione um curso para visualizar os slides.</source>
+        <target>Select a course to view its slides.</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_select_type">
+      <segment state="translated">
+        <source>Selecione um tipo</source>
+        <target>Select a type</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_breadcrumb_label">
+      <segment state="translated">
+        <source>Slides:</source>
+        <target>Slides:</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_new_breadcrumb_title">
+      <segment state="translated">
+        <source>Novo slide</source>
+        <target>New slide</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_title">
+      <segment state="translated">
+        <source>Título</source>
+        <target>Title</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_title">
+      <segment state="translated">
+        <source>Digite o título do slide</source>
+        <target>Enter slide title</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_ordering">
+      <segment state="translated">
+        <source>Ordenação</source>
+        <target>Order</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_type">
+      <segment state="translated">
+        <source>Tipo de Slide</source>
+        <target>Slide Type</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_label_content">
+      <segment state="translated">
+        <source>Conteúdo</source>
+        <target>Content</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_content">
+      <segment state="translated">
+        <source>Digite o conteúdo do slide</source>
+        <target>Enter slide content</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_active_check">
+      <segment state="translated">
+        <source>Slide ativo</source>
+        <target>Active slide</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

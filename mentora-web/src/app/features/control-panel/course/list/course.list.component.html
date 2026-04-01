@@ -1,15 +1,15 @@
 <div class="content-wrapper">
   <div class="page-header">
-    <h1 class="page-title">Cursos</h1>
-    <p class="page-subtitle">Gerencie os cursos do painel de controle.</p>
+    <h1 class="page-title" i18n="@@cp_course_title">Cursos</h1>
+    <p class="page-subtitle" i18n="@@cp_course_subtitle">Gerencie os cursos do painel de controle.</p>
   </div>
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">📚 Lista de Cursos ({{ pagedCourses().meta.totalCount }})</h3>
+      <h3 class="card-title" i18n="@@cp_course_list_title">📚 Lista de Cursos ({{ pagedCourses().meta.totalCount }})</h3>
       <div class="card-actions">
-        <button class="btn btn-sm btn-ghost">📥 Exportar</button>
-        <button class="btn btn-sm btn-primary" routerLink="/control-panel/course/create">
+        <button class="btn btn-sm btn-ghost" i18n="@@cp_btn_export">📥 Exportar</button>
+        <button class="btn btn-sm btn-primary" routerLink="/control-panel/course/create" i18n="@@cp_course_btn_new">
           ➕ Novo Curso
         </button>
       </div>
@@ -19,12 +19,12 @@
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Categoria</th>
-              <th>Ativo</th>
-              <th>Mostrar Certificado</th>
-              <th>Duração</th>
-              <th>Ações</th>
+              <th i18n="@@cp_col_name">Nome</th>
+              <th i18n="@@cp_col_category">Categoria</th>
+              <th i18n="@@cp_col_active_m">Ativo</th>
+              <th i18n="@@cp_col_show_cert">Mostrar Certificado</th>
+              <th i18n="@@cp_col_duration">Duração</th>
+              <th i18n="@@cp_col_actions">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +47,7 @@
             }
             @if (!loading() && !error() && pagedCourses().meta.totalCount === 0) {
               <tr>
-                <td colspan="6" class="table-state"><p>Nenhum curso encontrado.</p></td>
+                <td colspan="6" class="table-state"><p i18n="@@cp_course_empty">Nenhum curso encontrado.</p></td>
               </tr>
             }
             @for (course of pagedCourses().items; track trackById($index, course)) {
@@ -56,19 +56,27 @@
                 <td>{{ course.categoryName }}</td>
                 <td>
                   <span class="badge" [ngClass]="course.active ? 'badge-success' : 'badge-warning'">
-                    {{ course.active ? '✓ Ativo' : '⏸ Inativo' }}
+                    @if (course.active) {
+                      <ng-container i18n="@@cp_badge_active_m">✓ Ativo</ng-container>
+                    } @else {
+                      <ng-container i18n="@@cp_badge_inactive_m">⏸ Inativo</ng-container>
+                    }
                   </span>
                 </td>
                 <td>
                   <span class="badge" [ngClass]="course.showCertificate ? 'badge-success' : 'badge-warning'">
-                    {{ course.showCertificate ? '✓ Sim' : '⏸ Não' }}
+                    @if (course.showCertificate) {
+                      <ng-container i18n="@@cp_badge_yes">✓ Sim</ng-container>
+                    } @else {
+                      <ng-container i18n="@@cp_badge_no">⏸ Não</ng-container>
+                    }
                   </span>
                 </td>
                 <td>{{ course.workloadHours | workloadHours }}</td>
                 <td>
-                  <button class="btn btn-sm btn-ghost" [disabled]="!course.active">Visualizar</button>
-                  <button class="btn btn-sm btn-ghost" [routerLink]="['/control-panel/course', course.id, 'edit']">Editar</button>
-                  <button class="btn btn-sm btn-danger" [routerLink]="['/control-panel/course', course.id, 'delete']">Excluir</button>
+                  <button class="btn btn-sm btn-ghost" [disabled]="!course.active" i18n="@@cp_btn_view">Visualizar</button>
+                  <button class="btn btn-sm btn-ghost" [routerLink]="['/control-panel/course', course.id, 'edit']" i18n="@@cp_btn_edit">Editar</button>
+                  <button class="btn btn-sm btn-danger" [routerLink]="['/control-panel/course', course.id, 'delete']" i18n="@@cp_btn_delete">Excluir</button>
                 </td>
               </tr>
             }
