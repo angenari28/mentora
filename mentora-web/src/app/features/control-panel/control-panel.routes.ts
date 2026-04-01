@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { ControlPanelDashboardComponent } from './dashboard/control-panel-dashboard.component';
 import { ControlPanelComponent } from './control-panel.component';
 import { CourseCreateComponent } from './course/create/course-create.component';
+import { controlPanelGuard } from '../../guards/control-panel.guard';
 import { CourseUpdateComponent } from './course/update/course-update.component';
 import { CourseDeleteComponent } from './course/delete/course-delete.component';
 import { CourseListComponent } from './course/list/course.list.component';
@@ -23,6 +24,7 @@ export const CONTROL_PANEL_ROUTES: Routes = [
   {
     path: 'control-panel',
     component: ControlPanelComponent,
+    canActivate: [controlPanelGuard],
     children: [
       { path: '', pathMatch: 'full', component: ControlPanelDashboardComponent },
       { path: 'course/create', component: CourseCreateComponent },

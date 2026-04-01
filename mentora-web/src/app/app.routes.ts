@@ -4,6 +4,7 @@ import { LoginStudentComponent } from './features/login-student/login-student.co
 import { LoginComponent } from './features/login/login.component';
 import { CONTROL_PANEL_ROUTES } from './features/control-panel/control-panel.routes';
 import { BACKOFFICE_ROUTES } from './features/backoffice/backoffice.routes';
+import { studentGuard } from './guards/student.guard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login-student' },
@@ -11,6 +12,6 @@ export const routes: Routes = [
   { path: 'login-student', component: LoginStudentComponent },
   ...BACKOFFICE_ROUTES,
   ...CONTROL_PANEL_ROUTES,
-  { path: 'student/:id', component: StudentComponent },
+  { path: 'student/:id', component: StudentComponent, canActivate: [studentGuard] },
   { path: '**', redirectTo: 'login' },
 ];

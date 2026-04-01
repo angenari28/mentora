@@ -9,6 +9,7 @@ import { WorkspaceService } from '@services/workspace.service';
 import { Workspace } from '@services/responses/workspace.response';
 import { LoginAllowedRoles } from '@services/requests/login.request';
 import { LoginResponse } from '@services/responses/login.response';
+import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   private readonly authService = inject(AuthService);
   private readonly workspaceService = inject(WorkspaceService);
+  private readonly cacheService = inject(CacheService);
   private readonly router = inject(Router);
   private readonly titleService = inject(Title);
 
@@ -52,8 +54,10 @@ export class LoginComponent implements OnInit {
             this.successMessage = response.message;
             const role = response.user?.role?.toLowerCase();
             if (role === 'master') {
+              this.cacheService.addLocalStorage(cacheToken.user_role, 'master');
               this.router.navigate(['/backoffice']);
             } else if (role === 'administrator') {
+              this.cacheService.addLocalStorage(cacheToken.user_role, 'administrator');
               this.addWorkspaceToLocalStorage(response.user!.workspace!);
               this.router.navigate(['/control-panel']);
             }

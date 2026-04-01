@@ -1,5 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 export class SidebarComponent {
   public subtitle = input<string>('');
   private readonly router = inject(Router);
+  private readonly cacheService = inject(CacheService);
 
   toggleUserMenu(event: Event): void {
     event.stopPropagation();
@@ -21,7 +23,8 @@ export class SidebarComponent {
   logout(event: Event): void {
     event.preventDefault();
     localStorage.removeItem('user_authenticated');
+    this.cacheService.removeLocalStorage(cacheToken.user_role);
     sessionStorage.clear();
-    this.router.navigate(['/login-gestao']);
+    this.router.navigate(['/login']);
   }
 }
