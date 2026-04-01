@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/mentora-web/browser",
+  "buildCommand": "npm run build:pt",
+  "outputDirectory": "dist/mentora-web/browser/pt",
   "framework": "angular",
   "rewrites": [
     {
