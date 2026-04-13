@@ -1,10 +1,13 @@
+using Mentora.Application.DTOs;
 using Mentora.Domain.Common;
-using Mentora.Domain.Entities;
 
 namespace Mentora.Application.Interfaces;
 
 public interface IWorkspaceService
 {
-    Task<PagedResult<Workspace>> GetPagedResultAsync(PaginationParams pagination);
-    Task<Workspace?> GetWorkspaceByIdAsync(Guid id);
+    Task<PagedResult<WorkspaceResponse>> GetPagedResultAsync(PaginationParams pagination);
+    Task<WorkspaceResponse?> GetWorkspaceByIdAsync(Guid id);
+    Task<WorkspaceResponse> CreateAsync(WorkspaceRequest request);
+    Task<WorkspaceResponse?> UpdateAsync(Guid id, WorkspaceRequest request);
+    Task<bool> DeleteAsync(Guid id);
 }

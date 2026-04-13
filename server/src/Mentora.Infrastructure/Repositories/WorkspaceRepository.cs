@@ -39,10 +39,34 @@ public class WorkspaceRepository(MentoraDbContext _context) : IWorkspaceReposito
             Items = items,
             Meta = new PaginationMeta
             {
-            TotalCount = totalCount,
+                TotalCount = totalCount,
                 PageNumber = pagination.PageNumber,
                 PageSize = pagination.PageSize
             }
         };
+    }
+
+    public async Task<Workspace> CreateAsync(Workspace workspace)
+    {
+        _context.Workspaces.Add(workspace);
+        await _context.SaveChangesAsync();
+        return workspace;
+    }
+
+    public async Task<Workspace> UpdateAsync(Workspace workspace)
+    {
+        _context.Workspaces.Update(workspace);
+        await _context.SaveChangesAsync();
+        return workspace;
+    }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var workspace = await _context.Workspaces.FindAsync(id);
+        if (workspace is null) return false;
+
+        _context.Workspaces.Remove(workspace);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

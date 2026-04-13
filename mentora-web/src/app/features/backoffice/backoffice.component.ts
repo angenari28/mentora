@@ -16,6 +16,6 @@ export class BackofficeComponent implements OnInit {
   private readonly titleService = inject(Title);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Backoffice');
+    this.titleService.setTitle($localize`:@@backoffice_page_title:Backoffice`);
   }
 }

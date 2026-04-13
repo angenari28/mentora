@@ -120,7 +120,7 @@
                 </td>
                 <td>
                   <div class="user-cell">
-                    <div class="table-avatar">{{ user.name.substring(0, 2).toUpperCase() }}</div>
+                    <div class="table-avatar">{{ user.name | userInitials }}</div>
                     <div class="user-details">
                       <p class="user-name">{{ user.name }}</p>
                       <p class="user-email">{{ user.email }}</p>

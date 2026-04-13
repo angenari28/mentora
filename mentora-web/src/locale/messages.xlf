@@ -1482,5 +1482,25 @@
         <source>Aluno</source>
       </segment>
     </unit>
+    <unit id="login_student_page_title">
+      <segment>
+        <source>Login Aluno</source>
+      </segment>
+    </unit>
+    <unit id="backoffice_page_title">
+      <segment>
+        <source>Backoffice</source>
+      </segment>
+    </unit>
+    <unit id="login_page_title">
+      <segment>
+        <source>Login</source>
+      </segment>
+    </unit>
+    <unit id="control_panel_page_title">
+      <segment>
+        <source>Painel de Controle</source>
+      </segment>
+    </unit>
   </file>
 </xliff>

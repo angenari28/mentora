@@ -140,15 +140,27 @@
               }
             </label>
             @if (!isImageType()) {
-              <textarea
-                id="content"
-                class="form-input"
-                rows="8"
-                [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
-                placeholder="Digite o conteúdo do slide"
-                i18n-placeholder="@@cp_slide_placeholder_content"
-                [formField]="slideForm.content"
-              ></textarea>
+              <div class="rich-editor-wrapper" [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()">
+                <div class="rich-editor-toolbar">
+                  <button type="button" class="rte-btn" title="Negrito" i18n-title="@@cp_rte_bold"
+                    (mousedown)="$event.preventDefault(); execFormat('bold')"><b>N</b></button>
+                  <button type="button" class="rte-btn" title="Itálico" i18n-title="@@cp_rte_italic"
+                    (mousedown)="$event.preventDefault(); execFormat('italic')"><i>I</i></button>
+                  <button type="button" class="rte-btn" title="Riscado" i18n-title="@@cp_rte_strike"
+                    (mousedown)="$event.preventDefault(); execFormat('strikeThrough')"><s>T</s></button>
+                  <span class="rte-separator"></span>
+                  <button type="button" class="rte-btn" title="Quebra de linha" i18n-title="@@cp_rte_linebreak"
+                    (mousedown)="$event.preventDefault(); insertLineBreak()">↵</button>
+                </div>
+                <div
+                  #richEditor
+                  class="rich-editor-body"
+                  contenteditable="true"
+                  data-placeholder="Digite o conteúdo do slide"
+                  (input)="onEditorInput()"
+                  (blur)="slideForm.content().markAsTouched()"
+                ></div>
+              </div>
             } @else {
               <div class="image-upload-area">
                 <div class="image-url-row">

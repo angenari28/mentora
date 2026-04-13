@@ -1,0 +1,136 @@
+<form (ngSubmit)="submit()" #workspaceForm="ngForm">
+  <div class="modal-header">
+    <h3 class="modal-title">{{ isEditing ? 'Editar Workspace' : 'Novo Workspace' }}</h3>
+    <button type="button" class="modal-close" aria-label="Fechar" (click)="cancel()">×</button>
+  </div>
+
+  <div class="modal-body">
+    @if (submitError()) {
+      <div class="alert-error">{{ submitError() }}</div>
+    }
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="ws-name">Nome <span class="required">*</span></label>
+        <input
+          id="ws-name"
+          type="text"
+          class="form-input"
+          placeholder="Nome do workspace"
+          [(ngModel)]="form.name"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-url">URL <span class="required">*</span></label>
+        <input
+          id="ws-url"
+          type="text"
+          class="form-input"
+          placeholder="ex: minha-empresa"
+          [(ngModel)]="form.url"
+          name="url"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="ws-primary-color">Cor Primária</label>
+        <div class="color-input-wrapper">
+          <input
+            id="ws-primary-color"
+            type="color"
+            class="color-picker"
+            [(ngModel)]="form.primaryColor"
+            name="primaryColor"
+          />
+          <input
+            type="text"
+            class="form-input"
+            [(ngModel)]="form.primaryColor"
+            name="primaryColorText"
+            placeholder="#1C2340"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-secondary-color">Cor Secundária</label>
+        <div class="color-input-wrapper">
+          <input
+            id="ws-secondary-color"
+            type="color"
+            class="color-picker"
+            [(ngModel)]="form.secondaryColor"
+            name="secondaryColor"
+          />
+          <input
+            type="text"
+            class="form-input"
+            [(ngModel)]="form.secondaryColor"
+            name="secondaryColorText"
+            placeholder="#4A6CF7"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="ws-logo">Logo (URL)</label>
+        <input
+          id="ws-logo"
+          type="text"
+          class="form-input"
+          placeholder="https://..."
+          [(ngModel)]="form.logo"
+          name="logo"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-big-banner">Banner Grande (URL)</label>
+        <input
+          id="ws-big-banner"
+          type="text"
+          class="form-input"
+          placeholder="https://..."
+          [(ngModel)]="form.bigBanner"
+          name="bigBanner"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="ws-small-banner">Banner Pequeno (URL)</label>
+        <input
+          id="ws-small-banner"
+          type="text"
+          class="form-input"
+          placeholder="https://..."
+          [(ngModel)]="form.smallBanner"
+          name="smallBanner"
+        />
+      </div>
+    </div>
+
+    <div class="form-group form-group-inline">
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="form.active" name="active" />
+        <span>Workspace ativo</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ghost" (click)="cancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+      {{ submitting() ? (isEditing ? 'Salvando...' : 'Criando...') : (isEditing ? 'Salvar' : 'Criar') }}
+    </button>
+  </div>
+</form>

@@ -4,13 +4,14 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../services/responses/user.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
+import { UserInitialsPipe } from 'app/pipes/user-initials.pipe';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, UserInitialsPipe],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
   private readonly userService = inject(UserService);

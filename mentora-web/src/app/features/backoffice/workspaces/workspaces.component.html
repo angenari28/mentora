@@ -16,8 +16,7 @@
         <p class="page-subtitle">Gerencie todos os workspaces do sistema</p>
       </div>
       <div class="page-actions">
-        <button class="btn btn-ghost">🔽 Filtros</button>
-        <button class="btn btn-primary">➕ Novo Workspace</button>
+        <button class="btn btn-primary" (click)="openCreateModal()">➕ Novo Workspace</button>
       </div>
     </div>
   </div>
@@ -100,7 +99,7 @@
                 </td>
               </tr>
             }
-            @for (workspace of workspaces().items; track $index) {
+            @for (workspace of workspaces().items; track workspace.id) {
               <tr>
                 <td>
                   <div
@@ -135,8 +134,8 @@
                 <td>{{ workspace.createdAt | date: 'dd/MM/yyyy' }}</td>
                 <td>
                   <div class="workspace-actions">
-                    <button class="btn btn-sm btn-ghost">Ver</button>
-                    <button class="btn btn-sm btn-ghost">Editar</button>
+                    <button class="btn btn-sm btn-ghost" (click)="openEditModal(workspace)">Editar</button>
+                    <button class="btn btn-sm btn-danger" (click)="openDeleteModal(workspace)">Excluir</button>
                   </div>
                 </td>
               </tr>
@@ -157,6 +156,43 @@
         }
         <button class="pagination-btn" [disabled]="!workspaces().meta.hasNext">›</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CRIAR / EDITAR -->
+<div class="modal-overlay" [class.active]="showFormModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <app-workspace-form
+      [workspace]="editingWorkspace()"
+      (saved)="onFormSaved()"
+      (cancelled)="closeFormModal()"
+    />
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAR EXCLUSÃO -->
+<div class="modal-overlay" [class.active]="showDeleteModal()">
+  <div class="modal modal-sm" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Excluir Workspace</h3>
+      <button type="button" class="modal-close" (click)="closeDeleteModal()">×</button>
+    </div>
+    <div class="modal-body">
+      @if (deleteError()) {
+        <div class="alert-error">{{ deleteError() }}</div>
+      }
+      <p class="delete-message">
+        Tem certeza que deseja excluir o workspace
+        <strong>{{ deletingWorkspace()?.name }}</strong>?
+        Esta ação não pode ser desfeita.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost" (click)="closeDeleteModal()">Cancelar</button>
+      <button type="button" class="btn btn-danger" [disabled]="deleting()" (click)="confirmDelete()">
+        {{ deleting() ? 'Excluindo...' : 'Excluir' }}
+      </button>
     </div>
   </div>
 </div>

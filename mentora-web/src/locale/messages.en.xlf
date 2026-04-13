@@ -1053,5 +1053,29 @@
         <target>Student</target>
       </segment>
     </unit>
+    <unit id="login_student_page_title">
+      <segment state="translated">
+        <source>Login Aluno</source>
+        <target>Student Login</target>
+      </segment>
+    </unit>
+    <unit id="backoffice_page_title">
+      <segment state="translated">
+        <source>Backoffice</source>
+        <target>Backoffice</target>
+      </segment>
+    </unit>
+    <unit id="login_page_title">
+      <segment state="translated">
+        <source>Login</source>
+        <target>Login</target>
+      </segment>
+    </unit>
+    <unit id="control_panel_page_title">
+      <segment state="translated">
+        <source>Painel de Controle</source>
+        <target>Control Panel</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -21,7 +21,7 @@ export class ControlPanelComponent implements OnInit {
   protected readonly userName = signal<string>(this.cacheService.getLocalStorage(cacheToken.user_name)?.toString() || 'User');
 
   ngOnInit(): void {
-    this.titleService.setTitle('Control Panel');
+    this.titleService.setTitle($localize`:@@control_panel_page_title:Painel de Controle`);
   }
 
   protected logout(event: Event): void {

@@ -29,7 +29,7 @@ export class LoginStudentComponent implements OnInit {
   private readonly cacheService = inject(CacheService);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Login Aluno');
+    this.titleService.setTitle($localize`:@@login_student_page_title:Login Aluno`);
   }
 
   onSubmit(): void {

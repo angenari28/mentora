@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, computed, effect, inject, signal, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { form, required, FormRoot, FormField, maxLength } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +33,7 @@ export class CourseSlideCreateComponent implements OnInit {
 
   @ViewChild('formEl') private readonly formEl!: ElementRef<HTMLFormElement>;
   @ViewChild('slideImageInput') private readonly slideImageInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('richEditor') private readonly richEditor?: ElementRef<HTMLDivElement>;
 
   readonly courses = signal<CourseResponse[]>([]);
   readonly loadingCourses = signal(false);
@@ -102,6 +103,14 @@ export class CourseSlideCreateComponent implements OnInit {
         this.activeBreadcrumbId.set(null);
       }
     }, { allowSignalWrites: true });
+
+    effect(() => {
+      const isImg = this.isImageType();
+      if (!isImg) {
+        const content = untracked(() => this.model().content);
+        this.refreshEditor(content);
+      }
+    });
   }
 
   private loadSlideBreadcrumb(courseId: string): void {
@@ -210,6 +219,7 @@ export class CourseSlideCreateComponent implements OnInit {
               active: res.data.active
             });
             this.initImageDisplayName(res.data.content);
+            this.refreshEditor(res.data.content);
           }
         }
       });
@@ -267,6 +277,7 @@ export class CourseSlideCreateComponent implements OnInit {
       active: slide.active
     });
     this.initImageDisplayName(slide.content);
+    this.refreshEditor(slide.content);
     this.submitError.set(null);
   }
 
@@ -288,6 +299,7 @@ export class CourseSlideCreateComponent implements OnInit {
       ordering: maxOrdering + 1,
       active: true
     });
+    this.refreshEditor('');
   }
 
   triggerSlideImageInput(): void {
@@ -327,5 +339,54 @@ export class CourseSlideCreateComponent implements OnInit {
       });
     };
     reader.readAsDataURL(file);
+  }
+
+  execFormat(command: 'bold' | 'italic' | 'strikeThrough'): void {
+    document.execCommand(command, false);
+    this.richEditor?.nativeElement.focus();
+    this.syncEditorToModel();
+  }
+
+  insertLineBreak(): void {
+    const editor = this.richEditor?.nativeElement;
+    if (!editor) return;
+    editor.focus();
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    const br = document.createElement('br');
+    range.insertNode(br);
+    range.setStartAfter(br);
+    range.setEndAfter(br);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    this.syncEditorToModel();
+  }
+
+  onEditorInput(): void {
+    this.syncEditorToModel();
+  }
+
+  private syncEditorToModel(): void {
+    const rawHtml = this.richEditor?.nativeElement?.innerHTML ?? '';
+    const html = /^(<br\s*\/?>\s*)+$/.test(rawHtml) ? '' : rawHtml;
+    const currentValue = this.slideForm().value();
+    this.model.set({
+      courseId: currentValue.courseId as string,
+      slideTypeId: currentValue.slideTypeId as string,
+      title: currentValue.title as string,
+      content: html,
+      ordering: Number(currentValue.ordering),
+      active: Boolean(currentValue.active),
+    });
+  }
+
+  private refreshEditor(content: string): void {
+    setTimeout(() => {
+      if (this.richEditor?.nativeElement) {
+        this.richEditor.nativeElement.innerHTML = content;
+      }
+    });
   }
 }

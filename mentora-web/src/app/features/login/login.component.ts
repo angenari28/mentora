@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   private readonly titleService = inject(Title);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Login');
+    this.titleService.setTitle($localize`:@@login_page_title:Login`);
   }
 
   onSubmit(): void {
