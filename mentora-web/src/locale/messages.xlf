@@ -1477,5 +1477,10 @@
         <source>▶️ Iniciar</source>
       </segment>
     </unit>
+    <unit id="student_page_title">
+      <segment>
+        <source>Aluno</source>
+      </segment>
+    </unit>
   </file>
 </xliff>

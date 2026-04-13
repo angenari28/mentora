@@ -1,16 +1,17 @@
-import { Component, computed, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { PercentPipe } from '@angular/common';
+
 import { HeaderComponent } from './layout/header/header.component';
 import { CoursePlayerComponent } from './course-player/course-player.component';
 import { ClassStudentService } from 'app/services/class-student.service';
 import { StudentClassesResponse } from 'app/services/responses/student-classes.response';
 import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
 import { CacheService, cacheToken } from '@services/cache.service';
-import { PercentPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-aluno',
+  selector: 'app-student',
   standalone: true,
   imports: [HeaderComponent, CoursePlayerComponent, WorkloadHoursPipe, PercentPipe],
   templateUrl: './student.component.html',
@@ -24,8 +25,7 @@ export class StudentComponent implements OnInit {
   readonly loadingClasses = signal(false);
   readonly loadError = signal<string | null>(null);
   readonly studentName = computed(
-    () => (this.cacheService.getLocalStorage(cacheToken.student_name) as string) || '',
-  );
+    () => (this.cacheService.getLocalStorage(cacheToken.user_name) as string) || '');
 
   readonly classesByCategory = computed(() => {
     const map = new Map<string, { name: string; classes: StudentClassesResponse[] }>();
@@ -45,7 +45,7 @@ export class StudentComponent implements OnInit {
   private readonly cacheService = inject(CacheService);
 
   ngOnInit(): void {
-    this.titleService.setTitle('Aluno');
+    this.titleService.setTitle($localize`:@@student_page_title:Aluno`);
     this.getCourses();
 
     const win = window as unknown as Record<string, any>;

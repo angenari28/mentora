@@ -63,6 +63,6 @@ export class LoginStudentComponent implements OnInit {
   }
 
   saveNameUserLocalStorage(name: string): void {
-    this.cacheService.addLocalStorage(cacheToken.student_name, name);
+    this.cacheService.addLocalStorage(cacheToken.user_name, name);
   }
 }

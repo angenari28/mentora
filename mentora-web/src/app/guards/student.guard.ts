@@ -6,9 +6,9 @@ export const studentGuard: CanActivateFn = () => {
   const cacheService = inject(CacheService);
   const router = inject(Router);
 
-  const studentName = cacheService.getLocalStorage(cacheToken.student_name);
+  const userName = cacheService.getLocalStorage(cacheToken.user_name);
 
-  if (studentName) {
+  if (userName) {
     return true;
   }
 

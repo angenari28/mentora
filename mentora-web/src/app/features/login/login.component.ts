@@ -16,7 +16,7 @@ import { CacheService, cacheToken } from '@services/cache.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   email = '';
@@ -47,12 +47,17 @@ export class LoginComponent implements OnInit {
     this.successMessage = '';
 
     this.authService
-      .login({ email: this.email.trim(), password: this.password, role: LoginAllowedRoles.Management })
+      .login({
+        email: this.email.trim(),
+        password: this.password,
+        role: LoginAllowedRoles.Management,
+      })
       .subscribe({
         next: (response: LoginResponse) => {
           if (response.success) {
             this.successMessage = response.message;
             const role = response.user?.role?.toLowerCase();
+            this.cacheService.addLocalStorage(cacheToken.user_name, response.user?.name || 'User');
             if (role === 'master') {
               this.cacheService.addLocalStorage(cacheToken.user_role, 'master');
               this.router.navigate(['/backoffice']);
@@ -69,7 +74,7 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           this.errorMessage = error.error?.message || 'Erro ao conectar com o servidor.';
           this.loading = false;
-        }
+        },
       });
   }
 

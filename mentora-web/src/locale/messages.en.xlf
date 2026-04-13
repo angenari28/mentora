@@ -1047,5 +1047,11 @@
         <target>Active slide</target>
       </segment>
     </unit>
+    <unit id="student_page_title">
+      <segment state="translated">
+        <source>Aluno</source>
+        <target>Student</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -52,10 +52,10 @@
       (click)="toggleUserMenu($event)"
       style="cursor: pointer; position: relative;"
     >
-      <div class="user-avatar">AS</div>
+      <div class="user-avatar">{{ userName() | userInitials }}</div>
       <div class="user-info">
-        <p class="user-name">Admin Silva</p>
-        <p class="user-role">Administrador</p>
+        <p class="user-name">{{ userName() }}</p>
+        <p class="user-role">{{ userRole() }}</p>
       </div>
       <!-- User Menu Dropdown -->
       <div class="user-menu-dropdown" id="userMenuDropdown">

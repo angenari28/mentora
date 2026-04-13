@@ -20,6 +20,6 @@ export class CacheService {
 }
 
 export const enum cacheToken {
-  student_name = 'student_name',
+  user_name = 'user_name',
   user_role = 'user_role',
 }

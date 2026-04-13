@@ -1,4 +1,5 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
+
 import { CacheService, cacheToken } from '@services/cache.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { CacheService, cacheToken } from '@services/cache.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  protected studentName = computed(() => this.cacheService.getLocalStorage(cacheToken.student_name) || '');
+  protected studentName = computed(() => this.cacheService.getLocalStorage(cacheToken.user_name) || '');
   notificationCount = 3;
 
   private readonly cacheService = inject(CacheService);
