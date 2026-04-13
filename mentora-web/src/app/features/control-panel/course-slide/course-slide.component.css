@@ -5,3 +5,35 @@
 .btn-danger:hover {
   background-color: rgba(220, 38, 38, 0.08);
 }
+
+.drag-col {
+  width: 2rem;
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--color-text-muted, #9ca3af);
+  font-size: 1.1rem;
+  text-align: center;
+  user-select: none;
+}
+
+.drag-row {
+  cursor: default;
+}
+
+.drag-row:hover .drag-handle {
+  color: var(--color-text, #374151);
+}
+
+.drag-row.dragging {
+  opacity: 1;
+  outline: 2px dashed var(--color-primary, #6366f1);
+  background-color: var(--color-surface-hover, #f3f4f6);
+}
+
+.saving-indicator {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #9ca3af);
+  align-self: center;
+}

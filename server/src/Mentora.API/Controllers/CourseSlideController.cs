@@ -87,4 +87,18 @@ public class CourseSlideController(ICourseSlideService _courseSlideService) : Co
             return StatusCode(500, new { success = false, message = "Erro ao remover slide", error = ex.Message });
         }
     }
+
+    [HttpPut("reorder")]
+    public async Task<ActionResult> Reorder([FromBody] CourseSlideReorderRequest request)
+    {
+        try
+        {
+            await _courseSlideService.ReorderAsync(request);
+            return Ok(new { success = true, message = "Sequência atualizada com sucesso" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao reordenar slides", error = ex.Message });
+        }
+    }
 }

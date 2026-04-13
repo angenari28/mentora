@@ -48,4 +48,14 @@ public class CourseSlideRepository(MentoraDbContext _context) : ICourseSlideRepo
         await _context.SaveChangesAsync();
         return true;
     }
+
+    public async Task ReorderAsync(IEnumerable<(Guid id, int ordering)> items)
+    {
+        foreach (var (id, ordering) in items)
+        {
+            await _context.CourseSlides
+                .Where(s => s.Id == id)
+                .ExecuteUpdateAsync(s => s.SetProperty(p => p.Ordering, ordering));
+        }
+    }
 }

@@ -1,0 +1,139 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ modalTitle() }}</h3>
+      <button type="button" class="modal-close" aria-label="Close" (click)="close()">×</button>
+    </div>
+
+    <form [formRoot]="classForm">
+      <div class="modal-body">
+        @if (classForm().pending()) {
+          <div class="loading-overlay">
+            <div class="spinner" i18n="@@cp_loading">carregando...</div>
+          </div>
+        }
+
+        <!-- Nome -->
+        <div class="form-group">
+          <label class="form-label" for="name">
+            <ng-container i18n="@@cp_label_name">Nome</ng-container>
+            @if (classForm.name().required()) {
+              <span class="required">*</span>
+            }
+          </label>
+          <input
+            id="name"
+            type="text"
+            class="form-input"
+            [class.input-error]="classForm.name().invalid() && classForm.name().touched()"
+            placeholder="Digite o nome da turma"
+            i18n-placeholder="@@cp_class_placeholder_name"
+            [formField]="classForm.name"
+          />
+          @if (classForm.name().invalid() && classForm.name().touched()) {
+            @for (error of classForm.name().errors(); track $index) {
+              <span class="error-msg">{{ error.message }}</span>
+            }
+          }
+        </div>
+
+        <!-- Curso -->
+        <div class="form-group">
+          <label class="form-label" for="courseId">
+            <ng-container i18n="@@cp_col_course">Curso</ng-container>
+            @if (classForm.courseId().required()) {
+              <span class="required">*</span>
+            }
+          </label>
+          <select
+            id="courseId"
+            class="form-input"
+            [class.input-error]="classForm.courseId().invalid() && classForm.courseId().touched()"
+            [formField]="classForm.courseId"
+          >
+            <option value="">
+              @if (loadingCourses()) {
+                <ng-container i18n="@@cp_class_loading_courses">Carregando cursos...</ng-container>
+              } @else {
+                <ng-container i18n="@@cp_class_select_course">Selecione um curso</ng-container>
+              }
+            </option>
+            @for (course of courses(); track course.id) {
+              <option [value]="course.id">{{ course.name }}</option>
+            }
+          </select>
+          @if (classForm.courseId().invalid() && classForm.courseId().touched()) {
+            @for (error of classForm.courseId().errors(); track $index) {
+              <span class="error-msg">{{ error.message }}</span>
+            }
+          }
+        </div>
+
+        <!-- Datas -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="dateStart">
+              <ng-container i18n="@@cp_class_label_date_start">Data de Início</ng-container>
+              @if (classForm.dateStart().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <input
+              id="dateStart"
+              type="date"
+              class="form-input"
+              [class.input-error]="classForm.dateStart().invalid() && classForm.dateStart().touched()"
+              [formField]="classForm.dateStart"
+            />
+            @if (classForm.dateStart().invalid() && classForm.dateStart().touched()) {
+              @for (error of classForm.dateStart().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dateEnd">
+              <ng-container i18n="@@cp_class_label_date_end">Data de Término</ng-container>
+              @if (classForm.dateEnd().required()) {
+                <span class="required">*</span>
+              }
+            </label>
+            <input
+              id="dateEnd"
+              type="date"
+              class="form-input"
+              [class.input-error]="classForm.dateEnd().invalid() && classForm.dateEnd().touched()"
+              [formField]="classForm.dateEnd"
+            />
+            @if (classForm.dateEnd().invalid() && classForm.dateEnd().touched()) {
+              @for (error of classForm.dateEnd().errors(); track $index) {
+                <span class="error-msg">{{ error.message }}</span>
+              }
+            }
+          </div>
+        </div>
+
+        <!-- Opções -->
+        <div class="form-group form-group-inline">
+          <label class="form-label" i18n="@@cp_label_options">Opções</label>
+          <div class="options-grid">
+            <label class="checkbox">
+              <input type="checkbox" [formField]="classForm.active" />
+              <span i18n="@@cp_class_active_check">Turma ativa</span>
+            </label>
+          </div>
+        </div>
+
+        @if (submitError()) {
+          <div class="alert alert-error">{{ submitError() }}</div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" (click)="close()" i18n="@@cp_btn_cancel">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="submitting()">{{ submitLabel() }}</button>
+      </div>
+    </form>
+  </div>
+</div>

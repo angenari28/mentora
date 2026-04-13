@@ -25,6 +25,10 @@ export class CourseSlideComponent implements OnInit {
   loading = signal(false);
   loadingCourses = signal(false);
   error = signal<string | null>(null);
+  savingOrder = signal(false);
+
+  private dragIndex: number | null = null;
+  private draggingRow: HTMLTableRowElement | null = null;
 
   ngOnInit(): void {
     this.loadingCourses.set(true);
@@ -69,6 +73,72 @@ export class CourseSlideComponent implements OnInit {
         }
       },
       error: () => this.error.set('Erro ao remover slide.')
+    });
+  }
+
+  onDragStart(event: DragEvent, index: number): void {
+    this.dragIndex = index;
+    const row = event.currentTarget as HTMLTableRowElement;
+    const originalTable = row.closest('table');
+
+    // Wrap the cloned <tr> in a proper <table><tbody> so it renders with correct width
+    const ghostTable = document.createElement('table');
+    ghostTable.style.cssText = `position:fixed;top:-9999px;left:0;border-collapse:collapse;background:#fff;width:${originalTable?.offsetWidth ?? row.offsetWidth}px;`;
+    const tbody = document.createElement('tbody');
+    const clone = row.cloneNode(true) as HTMLTableRowElement;
+    tbody.appendChild(clone);
+    ghostTable.appendChild(tbody);
+    document.body.appendChild(ghostTable);
+
+    event.dataTransfer?.setDragImage(ghostTable, event.offsetX, event.offsetY);
+
+    // After the drag snapshot is taken, style the original row as a placeholder
+    setTimeout(() => {
+      document.body.removeChild(ghostTable);
+      row.style.opacity = '0.3';
+      row.style.outline = '2px dashed var(--color-primary, #6366f1)';
+    }, 0);
+
+    this.draggingRow = row;
+  }
+
+  onDragOver(event: DragEvent, index: number): void {
+    event.preventDefault();
+    if (this.dragIndex === null || this.dragIndex === index) return;
+
+    const list = [...this.slides()];
+    const [moved] = list.splice(this.dragIndex, 1);
+    list.splice(index, 0, moved);
+    this.dragIndex = index;
+    this.slides.set(list);
+  }
+
+  onDragEnd(): void {
+    if (this.draggingRow) {
+      this.draggingRow.style.opacity = '';
+      this.draggingRow.style.outline = '';
+      this.draggingRow = null;
+    }
+    this.dragIndex = null;
+    this.saveOrder();
+  }
+
+  private saveOrder(): void {
+    this.savingOrder.set(true);
+    const items = this.slides().map((s, i) => ({ id: s.id, ordering: i + 1 }));
+    this.courseSlideService.reorder(items).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.slides.update(list => list.map((s, i) => ({ ...s, ordering: i + 1 })));
+        } else {
+          this.error.set('Erro ao salvar a sequência.');
+        }
+        this.savingOrder.set(false);
+      },
+      error: () => {
+        this.error.set('Erro ao salvar a sequência.');
+        this.savingOrder.set(false);
+      }
     });
   }
 

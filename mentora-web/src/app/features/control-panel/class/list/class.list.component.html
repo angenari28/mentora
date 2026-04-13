@@ -80,15 +80,9 @@
                   >Editar</button>
                   <button
                     class="btn btn-sm btn-danger"
-                    [disabled]="deletingId() === item.id"
-                    (click)="deleteClass(item.id)"
-                  >
-                    @if (deletingId() === item.id) {
-                      ...
-                    } @else {
-                      <ng-container i18n="@@cp_btn_delete">Excluir</ng-container>
-                    }
-                  </button>
+                    [routerLink]="['/control-panel/class', item.id, 'delete']"
+                    i18n="@@cp_btn_delete"
+                  >Excluir</button>
                 </td>
               </tr>
             }

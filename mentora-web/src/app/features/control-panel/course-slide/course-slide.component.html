@@ -8,6 +8,9 @@
     <div class="card-header">
       <h3 class="card-title" i18n="@@cp_slide_list_title">🖼️ Slides ({{ slides().length }})</h3>
       <div class="card-actions">
+        @if (savingOrder()) {
+          <span class="saving-indicator" i18n="@@cp_slide_saving_order">Salvando sequência...</span>
+        }
         <button
           class="btn btn-sm btn-primary"
           [disabled]="!selectedCourseId()"
@@ -45,6 +48,7 @@
         <app-table [meta]="{ totalCount: slides().length, pageNumber: 1, pageSize: slides().length, totalPages: 1, hasPrevious: false, hasNext: false }" [loading]="loading()">
             <thead>
               <tr>
+                <th class="drag-col"></th>
                 <th>#</th>
                 <th>Título</th>
                 <th>Tipo</th>
@@ -56,6 +60,7 @@
               @if (loading()) {
                 @for (i of [1, 2, 3]; track i) {
                   <tr>
+                    <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '20px', margin: '0' }" /></td>
                     <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '30px', margin: '0' }" /></td>
                     <td><ngx-skeleton-loader [theme]="{ height: '20px', margin: '0' }" /></td>
                     <td><ngx-skeleton-loader [theme]="{ height: '20px', width: '80px', margin: '0' }" /></td>
@@ -66,19 +71,35 @@
               }
               @if (!loading() && error()) {
                 <tr>
-                  <td colspan="5" class="table-state table-state-error"><p>{{ error() }}</p></td>
+                  <td colspan="6" class="table-state table-state-error"><p>{{ error() }}</p></td>
                 </tr>
               }
               @if (!loading() && !error() && slides().length === 0) {
                 <tr>
-                  <td colspan="5" class="table-state"><p i18n="@@cp_slide_empty">Nenhum slide encontrado para este curso.</p></td>
+                  <td colspan="6" class="table-state"><p i18n="@@cp_slide_empty">Nenhum slide encontrado para este curso.</p></td>
                 </tr>
               }
-              @for (slide of slides(); track trackById($index, slide)) {
-                <tr>
+              @for (slide of slides(); track trackById($index, slide); let i = $index) {
+                <tr
+                  class="drag-row"
+                  draggable="true"
+                  (dragstart)="onDragStart($event, i)"
+                  (dragover)="onDragOver($event, i)"
+                  (dragend)="onDragEnd()"
+                >
+                  <td class="drag-handle" title="Arrastar para reordenar">⠿</td>
                   <td>{{ slide.ordering }}</td>
                   <td>{{ slide.title }}</td>
-                  <td>{{ slide.slideTypeName }}</td>
+                  <td>
+                    @switch (slide.slideTypeName) {
+                      @case ('Texto') { 📝 }
+                      @case ('Imagem') { 🖼️ }
+                      @case ('PPT') { 📊 }
+                      @case ('Vídeo') { 🎬 }
+                      @default { 📄 }
+                    }
+                    {{ slide.slideTypeName }}
+                  </td>
                   <td>
                     <span class="badge" [ngClass]="slide.active ? 'badge-success' : 'badge-warning'">
                     @if (slide.active) {

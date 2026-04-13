@@ -9,8 +9,10 @@ import { CourseDeleteComponent } from './course/delete/course-delete.component';
 import { CourseListComponent } from './course/list/course.list.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryCreateComponent } from './category/create/category-create.component';
-import { ClassComponent } from './class/class.component';
+import { ClassListComponent } from './class/list/class.list.component';
 import { ClassCreateComponent } from './class/create/class-create.component';
+import { ClassUpdateComponent } from './class/update/class-update.component';
+import { ClassDeleteComponent } from './class/delete/class-delete.component';
 import { StudentListComponent } from './student/list/student.list.component';
 import { StudentCreateComponent } from './student/create/student-create.component';
 import { StudentUpdateComponent } from './student/update/student-update.component';
@@ -34,7 +36,9 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'category/create', component: CategoryCreateComponent },
       { path: 'category', pathMatch: 'full', component: CategoryComponent },
       { path: 'class/create', component: ClassCreateComponent },
-      { path: 'class', pathMatch: 'full', component: ClassComponent },
+      { path: 'class/:id/edit', component: ClassUpdateComponent },
+      { path: 'class/:id/delete', component: ClassDeleteComponent },
+      { path: 'class', pathMatch: 'full', component: ClassListComponent },
       { path: 'student/create', component: StudentCreateComponent },
       { path: 'student/:id/edit', component: StudentUpdateComponent },
       { path: 'student/:id/delete', component: StudentDeleteComponent },

@@ -60,6 +60,12 @@ public class CourseSlideService(ICourseSlideRepository _courseSlideRepository) :
         return await _courseSlideRepository.DeleteAsync(id);
     }
 
+    public async Task ReorderAsync(CourseSlideReorderRequest request)
+    {
+        var items = request.Items.Select(i => (i.Id, i.Ordering));
+        await _courseSlideRepository.ReorderAsync(items);
+    }
+
     private static CourseSlideResponse ToResponse(CourseSlide s) => new()
     {
         Id = s.Id,

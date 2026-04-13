@@ -9,4 +9,5 @@ public interface ICourseSlideService
     Task<CourseSlideResponse> CreateAsync(CourseSlideRequest request);
     Task<CourseSlideResponse?> UpdateAsync(Guid id, CourseSlideRequest request);
     Task<bool> DeleteAsync(Guid id);
+    Task ReorderAsync(CourseSlideReorderRequest request);
 }

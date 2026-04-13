@@ -49,4 +49,8 @@ export class CourseSlideService {
   delete(id: string): Observable<{ success: boolean; message: string }> {
     return this.http.delete<{ success: boolean; message: string }>(`${this.baseUrl}/${id}`);
   }
+
+  reorder(items: { id: string; ordering: number }[]): Observable<{ success: boolean; message: string }> {
+    return this.http.put<{ success: boolean; message: string }>(`${this.baseUrl}/reorder`, { items });
+  }
 }

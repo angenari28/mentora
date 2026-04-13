@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { form, FormRoot, FormField } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from 'app/services/class.service';
 import { CourseService } from 'app/services/course.service';
 import { CourseResponse } from 'app/services/responses/course.response';
@@ -11,25 +11,28 @@ import { classModel, IFormReadonly } from '../shared/class.model';
 import { validate } from '../shared/class.validation';
 
 @Component({
-  selector: 'app-class-create',
+  selector: 'app-class-update',
   standalone: true,
   imports: [CommonModule, FormsModule, FormRoot, FormField],
   templateUrl: '../shared/class-shared.component.html',
   styleUrls: ['../shared/class-shared.component.css'],
 })
-export class ClassCreateComponent implements OnInit, IFormReadonly {
+export class ClassUpdateComponent implements OnInit, IFormReadonly {
   readonly = signal(false);
 
   private readonly classService = inject(ClassService);
   private readonly courseService = inject(CourseService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
   readonly courses = signal<CourseResponse[]>([]);
   readonly loadingCourses = signal(false);
-  readonly modalTitle = signal('Nova Turma');
-  readonly submitLabel = signal('Criar');
+  readonly modalTitle = signal('Editar Turma');
+  readonly submitLabel = signal('Salvar');
+
+  private classId = '';
 
   private readonly model = classModel;
 
@@ -50,7 +53,7 @@ export class ClassCreateComponent implements OnInit, IFormReadonly {
 
           return new Promise<void>((resolve, reject) => {
             this.classService
-              .create({
+              .update(this.classId, {
                 workspaceId,
                 courseId: value.courseId,
                 name: value.name,
@@ -66,7 +69,7 @@ export class ClassCreateComponent implements OnInit, IFormReadonly {
                 },
                 error: (err) => {
                   this.submitting.set(false);
-                  this.submitError.set('Erro ao criar turma. Tente novamente.');
+                  this.submitError.set('Erro ao atualizar turma. Tente novamente.');
                   console.error(err);
                   reject(err);
                 },
@@ -81,8 +84,23 @@ export class ClassCreateComponent implements OnInit, IFormReadonly {
   );
 
   ngOnInit(): void {
-    this.model.set({ courseId: '', name: '', dateStart: '', dateEnd: '', active: true });
+    this.classId = this.route.snapshot.paramMap.get('id') ?? '';
     this.loadCourses();
+
+    this.classService.getById(this.classId).subscribe({
+      next: (res) => {
+        if (res.success) {
+          const c = res.data;
+          this.model.set({
+            courseId: c.courseId,
+            name: c.name,
+            dateStart: c.dateStart.substring(0, 10),
+            dateEnd: c.dateEnd.substring(0, 10),
+            active: c.active,
+          });
+        }
+      },
+    });
   }
 
   loadCourses(): void {
@@ -102,3 +120,4 @@ export class ClassCreateComponent implements OnInit, IFormReadonly {
     this.router.navigate(['/control-panel/class']);
   }
 }
+
