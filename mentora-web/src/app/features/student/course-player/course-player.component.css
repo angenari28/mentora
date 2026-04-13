@@ -137,6 +137,29 @@
   display: block;
 }
 
+.slide.active.slide-image-type {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.slide-content-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.slide-image-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
 @keyframes fadeInSlide {
   from {
     opacity: 0;

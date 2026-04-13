@@ -32,6 +32,7 @@ export class CourseSlideCreateComponent implements OnInit {
   private readonly courseSlideService = inject(CourseSlideService);
 
   @ViewChild('formEl') private readonly formEl!: ElementRef<HTMLFormElement>;
+  @ViewChild('slideImageInput') private readonly slideImageInput!: ElementRef<HTMLInputElement>;
 
   readonly courses = signal<CourseResponse[]>([]);
   readonly loadingCourses = signal(false);
@@ -67,6 +68,29 @@ export class CourseSlideCreateComponent implements OnInit {
     const id = this.model().courseId;
     return this.courses().find(c => c.id === id)?.name ?? '';
   });
+
+  protected readonly isImageType = computed(() => {
+    const selectedId = (this.slideForm().value()?.slideTypeId ?? '') as string;
+    const type = this.slideTypes().find(t => t.id === selectedId);
+    return type?.name === 'Imagem';
+  });
+
+  protected readonly imagePreviewUrl = computed(() => {
+    const content = (this.slideForm().value()?.content ?? '') as string;
+    return content || '';
+  });
+
+  readonly imageDisplayName = signal<string>('');
+
+  private initImageDisplayName(content: string): void {
+    if (!content) {
+      this.imageDisplayName.set('');
+    } else if (content.startsWith('data:')) {
+      this.imageDisplayName.set('Imagem enviada');
+    } else {
+      this.imageDisplayName.set(content);
+    }
+  }
 
   constructor() {
     effect(() => {
@@ -185,6 +209,7 @@ export class CourseSlideCreateComponent implements OnInit {
               ordering: res.data.ordering,
               active: res.data.active
             });
+            this.initImageDisplayName(res.data.content);
           }
         }
       });
@@ -241,6 +266,7 @@ export class CourseSlideCreateComponent implements OnInit {
       ordering: slide.ordering,
       active: slide.active
     });
+    this.initImageDisplayName(slide.content);
     this.submitError.set(null);
   }
 
@@ -253,6 +279,7 @@ export class CourseSlideCreateComponent implements OnInit {
     this.isEdit.set(false);
     this.activeBreadcrumbId.set(null);
     this.submitError.set(null);
+    this.imageDisplayName.set('');
     this.model.set({
       courseId,
       slideTypeId: '',
@@ -261,5 +288,44 @@ export class CourseSlideCreateComponent implements OnInit {
       ordering: maxOrdering + 1,
       active: true
     });
+  }
+
+  triggerSlideImageInput(): void {
+    this.slideImageInput.nativeElement.click();
+  }
+
+  onImageUrlInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.imageDisplayName.set(value);
+    const currentValue = this.slideForm().value();
+    this.model.set({
+      courseId: currentValue.courseId as string,
+      slideTypeId: currentValue.slideTypeId as string,
+      title: currentValue.title as string,
+      content: value,
+      ordering: Number(currentValue.ordering),
+      active: Boolean(currentValue.active),
+    });
+  }
+
+  onSlideImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+    const file = input.files[0];
+    this.imageDisplayName.set(file.name);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target?.result as string;
+      const currentValue = this.slideForm().value();
+      this.model.set({
+        courseId: currentValue.courseId as string,
+        slideTypeId: currentValue.slideTypeId as string,
+        title: currentValue.title as string,
+        content: dataUrl,
+        ordering: Number(currentValue.ordering),
+        active: Boolean(currentValue.active),
+      });
+    };
+    reader.readAsDataURL(file);
   }
 }

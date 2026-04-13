@@ -139,15 +139,46 @@
                 <span class="required">*</span>
               }
             </label>
-            <textarea
-              id="content"
-              class="form-input"
-              rows="8"
-              [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
-              placeholder="Digite o conteúdo do slide"
-              i18n-placeholder="@@cp_slide_placeholder_content"
-              [formField]="slideForm.content"
-            ></textarea>
+            @if (!isImageType()) {
+              <textarea
+                id="content"
+                class="form-input"
+                rows="8"
+                [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
+                placeholder="Digite o conteúdo do slide"
+                i18n-placeholder="@@cp_slide_placeholder_content"
+                [formField]="slideForm.content"
+              ></textarea>
+            } @else {
+              <div class="image-upload-area">
+                <div class="image-url-row">
+                  <input
+                    id="content"
+                    type="text"
+                    class="form-input"
+                    [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
+                    placeholder="URL da imagem"
+                    i18n-placeholder="@@cp_slide_placeholder_image_url"
+                    [value]="imageDisplayName()"
+                    (input)="onImageUrlInput($event)"
+                    (blur)="slideForm.content().markAsTouched()"
+                  />
+                  <button type="button" class="btn btn-secondary btn-upload" (click)="triggerSlideImageInput()" i18n="@@cp_slide_btn_upload">Upload</button>
+                </div>
+                <input
+                  #slideImageInput
+                  type="file"
+                  accept="image/*"
+                  style="display:none"
+                  (change)="onSlideImageSelected($event)"
+                />
+                @if (imagePreviewUrl()) {
+                  <div class="slide-image-preview-container">
+                    <img [src]="imagePreviewUrl()" alt="Preview" class="slide-image-preview" />
+                  </div>
+                }
+              </div>
+            }
             @if (slideForm.content().invalid() && slideForm.content().touched()) {
               @for (error of slideForm.content().errors(); track $index) {
                 <span class="error-msg">{{ error.message }}</span>
