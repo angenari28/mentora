@@ -43,7 +43,7 @@ export class UsersComponent {
   }
 
   navigateToCreate(): void {
-    this.router.navigate(['/backoffice/usuarios/create']);
+    this.router.navigate(['/backoffice/users/create']);
   }
 
   switchScreen(screenId: string): void {

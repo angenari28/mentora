@@ -96,7 +96,7 @@ export class UserCreateComponent implements OnInit {
             }).subscribe({
               next: () => {
                 this.submitting.set(false);
-                this.router.navigate(['/backoffice/usuarios']);
+                this.router.navigate(['/backoffice/users']);
                 resolve();
               },
               error: (err) => {
@@ -124,6 +124,6 @@ export class UserCreateComponent implements OnInit {
   }
 
   close(): void {
-    this.router.navigate(['/backoffice/usuarios']);
+    this.router.navigate(['/backoffice/users']);
   }
 }
