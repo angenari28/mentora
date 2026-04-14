@@ -5,16 +5,6 @@ form {
   overflow: hidden;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.form-row.form-row-full {
-  grid-template-columns: 1fr;
-}
-
 .form-row .form-group:has(#ordering) {
   align-self: start;
 }

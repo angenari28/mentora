@@ -1059,6 +1059,54 @@
         <target>Student Login</target>
       </segment>
     </unit>
+    <unit id="cp_slide_saving_order">
+      <segment state="translated">
+        <source>Salvando sequência...</source>
+        <target>Saving order...</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_video_url">
+      <segment state="translated">
+        <source>URL do vídeo (YouTube ou Vimeo)</source>
+        <target>Video URL (YouTube or Vimeo)</target>
+      </segment>
+    </unit>
+    <unit id="cp_rte_bold">
+      <segment state="translated">
+        <source>Negrito</source>
+        <target>Bold</target>
+      </segment>
+    </unit>
+    <unit id="cp_rte_italic">
+      <segment state="translated">
+        <source>Itálico</source>
+        <target>Italic</target>
+      </segment>
+    </unit>
+    <unit id="cp_rte_strike">
+      <segment state="translated">
+        <source>Riscado</source>
+        <target>Strikethrough</target>
+      </segment>
+    </unit>
+    <unit id="cp_rte_linebreak">
+      <segment state="translated">
+        <source>Quebra de linha</source>
+        <target>Line break</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_image_url">
+      <segment state="translated">
+        <source>URL da imagem</source>
+        <target>Image URL</target>
+      </segment>
+    </unit>
+    <unit id="cp_slide_btn_upload">
+      <segment state="translated">
+        <source>Upload</source>
+        <target>Upload</target>
+      </segment>
+    </unit>
     <unit id="backoffice_page_title">
       <segment state="translated">
         <source>Backoffice</source>

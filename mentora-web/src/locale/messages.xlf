@@ -1487,6 +1487,46 @@
         <source>Login Aluno</source>
       </segment>
     </unit>
+    <unit id="cp_slide_saving_order">
+      <segment>
+        <source>Salvando sequência...</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_video_url">
+      <segment>
+        <source>URL do vídeo (YouTube ou Vimeo)</source>
+      </segment>
+    </unit>
+    <unit id="cp_rte_bold">
+      <segment>
+        <source>Negrito</source>
+      </segment>
+    </unit>
+    <unit id="cp_rte_italic">
+      <segment>
+        <source>Itálico</source>
+      </segment>
+    </unit>
+    <unit id="cp_rte_strike">
+      <segment>
+        <source>Riscado</source>
+      </segment>
+    </unit>
+    <unit id="cp_rte_linebreak">
+      <segment>
+        <source>Quebra de linha</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_placeholder_image_url">
+      <segment>
+        <source>URL da imagem</source>
+      </segment>
+    </unit>
+    <unit id="cp_slide_btn_upload">
+      <segment>
+        <source>Upload</source>
+      </segment>
+    </unit>
     <unit id="backoffice_page_title">
       <segment>
         <source>Backoffice</source>
