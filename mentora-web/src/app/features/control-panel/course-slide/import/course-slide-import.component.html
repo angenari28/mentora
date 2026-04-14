@@ -1,0 +1,82 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h3 class="modal-title">📥 Importar Apresentação</h3>
+        @if (loadingCourse()) {
+          <p class="modal-subtitle">Carregando curso...</p>
+        } @else if (course()) {
+          <p class="modal-subtitle">Curso: {{ course()!.name }}</p>
+        }
+      </div>
+      <button type="button" class="modal-close" aria-label="Fechar" (click)="cancel()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <p class="import-hint">
+        Cada página da apresentação será convertida em uma imagem e adicionada como slide ao curso acima.
+        Formatos suportados: <strong>.ppt</strong> e <strong>.pptx</strong>.
+      </p>
+
+      @if (importError()) {
+        <div class="alert alert-error">{{ importError() }}</div>
+      }
+      @if (importSuccess()) {
+        <div class="alert alert-success">{{ importSuccess() }}</div>
+      }
+
+
+      <div class="form-row form-row-full">
+        <div class="form-group">
+          <label class="form-label" for="pptxFile">Arquivo de apresentação <span class="required">*</span></label>
+          <div class="file-drop-area" [class.has-file]="selectedFile()">
+            <input
+              id="pptxFile"
+              type="file"
+              class="file-input"
+              accept=".ppt,.pptx"
+              [disabled]="importing()"
+              (change)="onFileSelected($event)"
+            />
+            @if (selectedFile()) {
+              <div class="file-selected">
+                <span class="file-icon">📊</span>
+                <span class="file-name">{{ selectedFile()!.name }}</span>
+                <span class="file-size">({{ (selectedFile()!.size / 1024 / 1024).toFixed(1) }} MB)</span>
+              </div>
+            } @else {
+              <div class="file-placeholder">
+                <span class="file-placeholder-icon">📂</span>
+                <span>Clique ou arraste o arquivo aqui</span>
+                <span class="file-placeholder-hint">.ppt, .pptx</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      @if (importing()) {
+        <div class="progress-area">
+          <div class="spinner"></div>
+          <span>Convertendo slides, aguarde...</span>
+        </div>
+      }
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost" [disabled]="importing()" (click)="cancel()">
+        Cancelar
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!canSubmit()"
+        (click)="submit()"
+      >
+        @if (importing()) { ⏳ Importando... } @else { 📥 Importar Slides }
+      </button>
+    </div>
+
+  </div>
+</div>

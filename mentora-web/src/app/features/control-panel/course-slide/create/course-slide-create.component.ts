@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild, computed, effect, inject, sig
 import { FormsModule } from '@angular/forms';
 import { form, required, FormRoot, FormField, maxLength } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'environments/environment';
 import { CourseService } from 'app/services/course.service';
 import { CourseSlideService } from 'app/services/course-slide.service';
 import { CourseResponse } from 'app/services/responses/course.response';
@@ -76,9 +77,17 @@ export class CourseSlideCreateComponent implements OnInit {
     return type?.name === 'Imagem';
   });
 
+  protected readonly isVideoType = computed(() => {
+    const selectedId = (this.slideForm().value()?.slideTypeId ?? '') as string;
+    const type = this.slideTypes().find(t => t.id === selectedId);
+    return type?.name === 'Vídeo';
+  });
+
   protected readonly imagePreviewUrl = computed(() => {
     const content = (this.slideForm().value()?.content ?? '') as string;
-    return content || '';
+    if (!content) return '';
+    if (content.startsWith('/uploads/')) return `${environment.serverUrl}${content}`;
+    return content;
   });
 
   readonly imageDisplayName = signal<string>('');
@@ -106,7 +115,8 @@ export class CourseSlideCreateComponent implements OnInit {
 
     effect(() => {
       const isImg = this.isImageType();
-      if (!isImg) {
+      const isVid = this.isVideoType();
+      if (!isImg && !isVid) {
         const content = untracked(() => this.model().content);
         this.refreshEditor(content);
       }

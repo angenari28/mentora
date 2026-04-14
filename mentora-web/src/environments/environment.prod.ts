@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://stellar-encouragement-production.up.railway.app/api'
+  apiUrl: 'https://stellar-encouragement-production.up.railway.app/api',
+  serverUrl: 'https://stellar-encouragement-production.up.railway.app'
 };

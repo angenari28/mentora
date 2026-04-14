@@ -53,4 +53,19 @@ export class CourseSlideService {
   reorder(items: { id: string; ordering: number }[]): Observable<{ success: boolean; message: string }> {
     return this.http.put<{ success: boolean; message: string }>(`${this.baseUrl}/reorder`, { items });
   }
+
+  importPptx(
+    courseId: string,
+    slideTypeId: string,
+    file: File
+  ): Observable<{ success: boolean; message: string; data: CourseSlideResponse[] }> {
+    const form = new FormData();
+    form.append('courseId', courseId);
+    form.append('slideTypeId', slideTypeId);
+    form.append('file', file, file.name);
+    return this.http.post<{ success: boolean; message: string; data: CourseSlideResponse[] }>(
+      `${this.baseUrl}/import-pptx`,
+      form
+    );
+  }
 }

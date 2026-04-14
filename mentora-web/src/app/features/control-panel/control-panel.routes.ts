@@ -21,6 +21,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { RegistrationCreateComponent } from './registration/create/registration-create.component';
 import { CourseSlideComponent } from './course-slide/course-slide.component';
 import { CourseSlideCreateComponent } from './course-slide/create/course-slide-create.component';
+import { CourseSlideImportComponent } from './course-slide/import/course-slide-import.component';
 
 export const CONTROL_PANEL_ROUTES: Routes = [
   {
@@ -46,6 +47,7 @@ export const CONTROL_PANEL_ROUTES: Routes = [
       { path: 'registration/create', component: RegistrationCreateComponent },
       { path: 'registration', pathMatch: 'full', component: RegistrationComponent },
       { path: 'course-slide/create', component: CourseSlideCreateComponent },
+      { path: 'course-slide/import', component: CourseSlideImportComponent },
       { path: 'course-slide', pathMatch: 'full', component: CourseSlideComponent }
     ]
   }

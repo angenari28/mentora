@@ -25,5 +25,16 @@ WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
+# LibreOffice headless para conversão de PPTX → PNG
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libreoffice-impress \
+    libreoffice-common \
+    fonts-liberation \
+    fonts-dejavu-core \
+    && rm -rf /var/lib/apt/lists/*
+
+# Pasta persistente para imagens geradas na importação de PPTX
+VOLUME ["/app/wwwroot/uploads"]
+
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Mentora.API.dll"]

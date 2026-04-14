@@ -1,7 +1,9 @@
 import { Component, inject, input, output, signal } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CertificateComponent } from './certificate/certificate.component';
 import { StudentClassesResponse, SlideDetail } from '@services/responses/student-classes.response';
 import { CourseSlideTimeService } from '@services/course-slide-time.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-course-player',
@@ -27,6 +29,30 @@ export class CoursePlayerComponent {
   private currentSlideTimeId: string | null = null;
 
   private readonly courseSlideTimeService = inject(CourseSlideTimeService);
+  private readonly sanitizer = inject(DomSanitizer);
+
+  getImageUrl(content: string): string {
+    if (content?.startsWith('/uploads/')) {
+      return `${environment.serverUrl}${content}`;
+    }
+    return content;
+  }
+
+  getVideoEmbedUrl(url: string): SafeResourceUrl {
+    let embedUrl = url;
+    const ytMatch = url.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/
+    );
+    if (ytMatch) {
+      embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}`;
+    } else {
+      const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+      if (vimeoMatch) {
+        embedUrl = `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+      }
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
 
   open(classe: StudentClassesResponse): void {
     const completedSlides = classe.course.slides.filter(s => s.courseSlideTime?.dateEnd);

@@ -22,10 +22,22 @@
           </div>
         } @else {
           @for (slide of activeSlides(); track slide.id; let i = $index) {
-            <div class="slide" [class.active]="i + 1 === currentSlide()" [class.slide-image-type]="slide.slideTypeName === 'Imagem'">
+            <div class="slide" [class.active]="i + 1 === currentSlide()" [class.slide-image-type]="slide.slideTypeName === 'Imagem'" [class.slide-video-type]="slide.slideTypeName === 'Vídeo'">
               @if (slide.slideTypeName === 'Imagem') {
                 <div class="slide-content-image">
-                  <img [src]="slide.content" [alt]="slide.title" class="slide-image-content" />
+                  <img [src]="getImageUrl(slide.content)" [alt]="slide.title" class="slide-image-content" />
+                </div>
+              } @else if (slide.slideTypeName === 'Vídeo') {
+                <h2 class="slide-title">{{ slide.title }}</h2>
+                <div class="slide-content-video">
+                  <iframe
+                    [src]="getVideoEmbedUrl(slide.content)"
+                    class="slide-video-iframe"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    [title]="slide.title"
+                  ></iframe>
                 </div>
               } @else {
                 <h2 class="slide-title">{{ slide.title }}</h2>

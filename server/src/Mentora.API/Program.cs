@@ -4,6 +4,7 @@ using Mentora.Domain.Interfaces;
 using Mentora.Infrastructure.Data;
 using Mentora.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -84,6 +85,7 @@ builder.Services.AddScoped<IClassStudentService, ClassStudentService>();
 builder.Services.AddScoped<ICourseSlideService, CourseSlideService>();
 builder.Services.AddScoped<ISlideTypeService, SlideTypeService>();
 builder.Services.AddScoped<ICourseSlideTimeService, CourseSlideTimeService>();
+builder.Services.AddScoped<IPptxImportService, PptxImportService>();
 
 var app = builder.Build();
 
@@ -94,6 +96,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowFrontend");
+
+var wwwrootPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+Directory.CreateDirectory(wwwrootPath);
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(wwwrootPath),
+    RequestPath = string.Empty
+});
 
 if (!app.Environment.IsProduction())
     app.UseHttpsRedirection();

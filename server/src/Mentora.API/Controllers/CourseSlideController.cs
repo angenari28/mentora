@@ -6,7 +6,10 @@ namespace Mentora.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CourseSlideController(ICourseSlideService _courseSlideService) : ControllerBase
+public class CourseSlideController(
+    ICourseSlideService _courseSlideService,
+    IPptxImportService _pptxImportService,
+    IWebHostEnvironment _env) : ControllerBase
 {
     [HttpGet("course/{courseId:guid}")]
     public async Task<ActionResult> GetByCourse(Guid courseId)
@@ -99,6 +102,36 @@ public class CourseSlideController(ICourseSlideService _courseSlideService) : Co
         catch (Exception ex)
         {
             return StatusCode(500, new { success = false, message = "Erro ao reordenar slides", error = ex.Message });
+        }
+    }
+
+    [HttpPost("import-pptx")]
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult> ImportFromPptx(
+        [FromForm] Guid courseId,
+        [FromForm] Guid slideTypeId,
+        IFormFile file)
+    {
+        try
+        {
+            if (file is null || file.Length == 0)
+                return BadRequest(new { success = false, message = "Arquivo não fornecido" });
+
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (ext != ".ppt" && ext != ".pptx")
+                return BadRequest(new { success = false, message = "Apenas arquivos .ppt e .pptx são suportados" });
+
+            var uploadsPath = Path.Combine(_env.ContentRootPath, "wwwroot");
+            Directory.CreateDirectory(uploadsPath);
+
+            using var stream = file.OpenReadStream();
+            var slides = await _pptxImportService.ImportFromPptxAsync(stream, courseId, slideTypeId, uploadsPath);
+
+            return Ok(new { success = true, message = $"{slides.Count()} slides importados com sucesso", data = slides });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "Erro ao importar apresentação", error = ex.Message });
         }
     }
 }

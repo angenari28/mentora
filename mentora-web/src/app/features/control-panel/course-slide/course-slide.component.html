@@ -12,6 +12,15 @@
           <span class="saving-indicator" i18n="@@cp_slide_saving_order">Salvando sequência...</span>
         }
         <button
+          class="btn btn-sm btn-secondary"
+          [disabled]="!selectedCourseId()"
+          [routerLink]="['/control-panel/course-slide/import']"
+          [queryParams]="{ courseId: selectedCourseId() }"
+          title="Importar slides de um arquivo .pptx"
+        >
+          📥 Importar PPTX
+        </button>
+        <button
           class="btn btn-sm btn-primary"
           [disabled]="!selectedCourseId()"
           [routerLink]="['/control-panel/course-slide/create']"

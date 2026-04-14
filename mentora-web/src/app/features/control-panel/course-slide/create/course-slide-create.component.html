@@ -139,7 +139,20 @@
                 <span class="required">*</span>
               }
             </label>
-            @if (!isImageType()) {
+            @if (isVideoType()) {
+              <div class="video-url-area">
+                <input
+                  id="content"
+                  type="url"
+                  class="form-input"
+                  [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()"
+                  placeholder="URL do vídeo (YouTube ou Vimeo)"
+                  i18n-placeholder="@@cp_slide_placeholder_video_url"
+                  [formField]="slideForm.content"
+                  (blur)="slideForm.content().markAsTouched()"
+                />
+              </div>
+            } @else if (!isImageType()) {
               <div class="rich-editor-wrapper" [class.input-error]="slideForm.content().invalid() && slideForm.content().touched()">
                 <div class="rich-editor-toolbar">
                   <button type="button" class="rte-btn" title="Negrito" i18n-title="@@cp_rte_bold"
