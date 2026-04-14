@@ -9,4 +9,5 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   lastLoginAt?: string | null;
+  workspace?: { id: string; name: string };
 }

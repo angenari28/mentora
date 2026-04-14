@@ -6,6 +6,7 @@ import { CategoryService } from 'app/services/category.service';
 import { CategoryResponse } from 'app/services/responses/category.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-category',
@@ -16,6 +17,7 @@ import { TableComponent } from '@components/table/table.component';
 })
 export class CategoryComponent implements OnInit {
   private readonly categoryService = inject(CategoryService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly pagedCategories = signal<ListItem<CategoryResponse>>({
     items: [],
@@ -34,7 +36,7 @@ export class CategoryComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    this.categoryService.getAll(this.currentPage(), this.pageSize).subscribe({
+    this.categoryService.getAll(this.currentPage(), this.pageSize, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.pagedCategories.set(res.data);
         this.loading.set(false);

@@ -1,0 +1,229 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ modalTitle() }}</h3>
+      <button type="button" class="modal-close" aria-label="Fechar" (click)="close()">×</button>
+    </div>
+
+    @if (loading()) {
+      <div class="modal-body">
+        <p class="loading-text">Carregando dados do usuário...</p>
+      </div>
+    } @else {
+      <form [formRoot]="userForm">
+        <div class="modal-body">
+          @if (userForm().pending()) {
+            <div class="loading-overlay">
+              <div class="spinner">carregando...</div>
+            </div>
+          }
+
+          @if (submitError()) {
+            <div class="alert-error">{{ submitError() }}</div>
+          }
+
+          <!-- Nome e E-mail -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nome">
+                Nome
+                @if (userForm.name().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <input
+                id="nome"
+                type="text"
+                class="form-input"
+                [class.input-error]="userForm.name().invalid() && userForm.name().touched()"
+                placeholder="Digite o nome completo"
+                [formField]="userForm.name"
+                autocomplete="off"
+              />
+              @if (userForm.name().invalid() && userForm.name().touched()) {
+                @for (error of userForm.name().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">
+                E-mail
+                @if (userForm.email().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <input
+                id="email"
+                type="email"
+                class="form-input"
+                [class.input-error]="userForm.email().invalid() && userForm.email().touched()"
+                placeholder="Digite o e-mail"
+                [formField]="userForm.email"
+                autocomplete="off"
+              />
+              @if (userForm.email().invalid() && userForm.email().touched()) {
+                @for (error of userForm.email().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+          </div>
+
+          <!-- Senha -->
+          @if (isEditMode()) {
+            <div class="form-group">
+              <label class="form-label" for="password">
+                Nova Senha <span class="optional">(opcional — deixe em branco para manter a atual)</span>
+              </label>
+              <div class="input-password-wrapper">
+                <input
+                  id="password"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  class="form-input"
+                  placeholder="Deixe em branco para manter a senha atual"
+                  [formField]="userForm.password"
+                />
+                <button type="button" class="toggle-password" (click)="togglePassword()">
+                  {{ showPassword() ? '🙈' : '👁️' }}
+                </button>
+              </div>
+            </div>
+          } @else {
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="password">
+                  Senha
+                  @if (userForm.password().required()) {
+                    <span class="required">*</span>
+                  }
+                </label>
+                <div class="input-password-wrapper">
+                  <input
+                    id="password"
+                    [type]="showPassword() ? 'text' : 'password'"
+                    class="form-input"
+                    [class.input-error]="userForm.password().invalid() && userForm.password().touched()"
+                    placeholder="Mínimo 6 caracteres"
+                    [formField]="userForm.password"
+                  />
+                  <button type="button" class="toggle-password" (click)="togglePassword()">
+                    {{ showPassword() ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+                @if (userForm.password().invalid() && userForm.password().touched()) {
+                  @for (error of userForm.password().errors(); track $index) {
+                    <span class="error-msg">{{ error.message }}</span>
+                  }
+                }
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword">
+                  Confirmar Senha
+                  @if (userForm.confirmPassword().required()) {
+                    <span class="required">*</span>
+                  }
+                </label>
+                <div class="input-password-wrapper">
+                  <input
+                    id="confirmPassword"
+                    [type]="showConfirmPassword() ? 'text' : 'password'"
+                    class="form-input"
+                    [class.input-error]="(userForm.confirmPassword().invalid() && userForm.confirmPassword().touched()) || passwordMismatch()"
+                    placeholder="Repita a senha"
+                    [formField]="userForm.confirmPassword"
+                  />
+                  <button type="button" class="toggle-password" (click)="toggleConfirmPassword()">
+                    {{ showConfirmPassword() ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+                @if (userForm.confirmPassword().invalid() && userForm.confirmPassword().touched()) {
+                  @for (error of userForm.confirmPassword().errors(); track $index) {
+                    <span class="error-msg">{{ error.message }}</span>
+                  }
+                }
+                @if (passwordMismatch()) {
+                  <span class="error-msg">As senhas não coincidem.</span>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Função e Workspace -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="role">
+                Função
+                @if (userForm.role().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <select
+                id="role"
+                class="form-input form-select"
+                [class.input-error]="userForm.role().invalid() && userForm.role().touched()"
+                [formField]="userForm.role"
+              >
+                <option value="Student">Aluno</option>
+                <option value="Administrator">Administrador</option>
+                <option value="Master">Master</option>
+              </select>
+              @if (userForm.role().invalid() && userForm.role().touched()) {
+                @for (error of userForm.role().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="workspaceId">
+                Workspace
+                @if (userForm.workspaceId().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <select
+                id="workspaceId"
+                class="form-input form-select"
+                [class.input-error]="userForm.workspaceId().invalid() && userForm.workspaceId().touched()"
+                [formField]="userForm.workspaceId"
+              >
+                <option value="">
+                  {{ loadingWorkspaces() ? 'Carregando...' : 'Selecione um workspace' }}
+                </option>
+                @for (ws of workspaces(); track ws.id) {
+                  <option [value]="ws.id">{{ ws.name }}</option>
+                }
+              </select>
+              @if (userForm.workspaceId().invalid() && userForm.workspaceId().touched()) {
+                @for (error of userForm.workspaceId().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+          </div>
+
+          <!-- Opções -->
+          <div class="form-group form-group-inline">
+            <label class="form-label">Opções</label>
+            <div class="options-grid">
+              <label class="checkbox">
+                <input type="checkbox" [formField]="userForm.isActive" />
+                <span>Usuário ativo</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+            {{ submitting() ? submittingLabel() : submitLabel() }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>

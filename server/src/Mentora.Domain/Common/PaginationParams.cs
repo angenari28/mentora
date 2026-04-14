@@ -27,4 +27,5 @@ public class PaginationParams
 
     public string? SortBy { get; set; }
     public bool SortDescending { get; set; }
+    public Guid? WorkspaceId { get; set; }
 }

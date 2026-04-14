@@ -10,6 +10,7 @@ import { CourseService } from 'app/services/course.service';
 import { Workspace } from 'app/services/responses/workspace.response';
 import { courseModel, IFormReadonly } from '../shared/course.model';
 import { validate }  from '../shared/course.validation';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-course-update',
@@ -26,6 +27,7 @@ export class CourseUpdateComponent implements OnInit, IFormReadonly {
   private readonly route = inject(ActivatedRoute);
   private readonly categoryService = inject(CategoryService);
   private readonly courseService = inject(CourseService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly categories = signal<CategoryResponse[]>([]);
   readonly loadingCategories = signal(false);
@@ -89,7 +91,7 @@ export class CourseUpdateComponent implements OnInit, IFormReadonly {
     this.courseId = this.route.snapshot.paramMap.get('id') ?? '';
 
     this.loadingCategories.set(true);
-    this.categoryService.getAll(1, 100).subscribe({
+    this.categoryService.getAll(1, 100, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         if (res.success) this.categories.set(res.data.items);
         this.loadingCategories.set(false);

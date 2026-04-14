@@ -62,6 +62,9 @@ public class ClassStudentRepository(MentoraDbContext _context) : IClassStudentRe
                 .ThenInclude(c => c.Course)
             .AsNoTracking();
 
+        if (pagination.WorkspaceId.HasValue)
+            query = query.Where(cs => cs.Class.WorkspaceId == pagination.WorkspaceId.Value);
+
         query = (pagination.SortBy?.ToLowerInvariant(), pagination.SortDescending) switch
         {
             ("username", false) => query.OrderBy(cs => cs.User.Name),

@@ -2,29 +2,32 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { form, FormRoot, FormField } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { forkJoin } from 'rxjs';
 import { UserService } from 'app/services/user.service';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/services/responses/workspace.response';
 import { userModel } from '../shared/user.model';
-import { createValidate } from '../shared/user.validation';
+import { editValidate } from '../shared/user.validation';
 
 @Component({
-  selector: 'app-user-create',
+  selector: 'app-user-edit',
   standalone: true,
   imports: [CommonModule, FormsModule, FormRoot, FormField],
   templateUrl: '../shared/user-shared.component.html',
   styleUrls: ['../shared/user-shared.component.css'],
 })
-export class UserCreateComponent implements OnInit {
+export class UserEditComponent implements OnInit {
   private readonly userService = inject(UserService);
   private readonly workspaceService = inject(WorkspaceService);
+  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  readonly isEditMode = signal(false);
-  readonly modalTitle = signal('Novo Usuário');
-  readonly submitLabel = signal('Criar');
-  readonly submittingLabel = signal('Criando...');
+  readonly isEditMode = signal(true);
+  readonly modalTitle = signal('Editar Usuário');
+  readonly submitLabel = signal('Salvar Alterações');
+  readonly submittingLabel = signal('Salvando...');
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
   readonly passwordMismatch = signal(false);
@@ -32,27 +35,21 @@ export class UserCreateComponent implements OnInit {
   readonly showConfirmPassword = signal(false);
   readonly workspaces = signal<Workspace[]>([]);
   readonly loadingWorkspaces = signal(false);
-  readonly loading = signal(false);
+  readonly loading = signal(true);
 
+  private userId = '';
   private readonly model = userModel;
 
-  protected readonly userForm = form(this.model, createValidate, {
+  protected readonly userForm = form(this.model, editValidate, {
     submission: {
       action: async (f) => {
         this.submitError.set(null);
-        this.passwordMismatch.set(false);
-
-        const values = f().value();
-        if (values.password !== values.confirmPassword) {
-          this.passwordMismatch.set(true);
-          return Promise.reject('Senhas não coincidem');
-        }
-
         this.submitting.set(true);
 
+        const values = f().value();
         return new Promise<void>((resolve, reject) => {
           this.userService
-            .create({
+            .update(this.userId, {
               name: values.name,
               email: values.email,
               password: values.password,
@@ -68,7 +65,7 @@ export class UserCreateComponent implements OnInit {
               },
               error: (err) => {
                 this.submitting.set(false);
-                this.submitError.set('Erro ao criar usuário. Tente novamente.');
+                this.submitError.set('Erro ao atualizar usuário. Tente novamente.');
                 console.error(err);
                 reject(err);
               },
@@ -82,23 +79,29 @@ export class UserCreateComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.model.set({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: 'Student',
-      workspaceId: '',
-      isActive: true,
-    });
+    this.userId = this.route.snapshot.paramMap.get('id') ?? '';
 
-    this.loadingWorkspaces.set(true);
-    this.workspaceService.getAll(1, 100).subscribe({
-      next: (res) => {
-        this.workspaces.set(res.data.items);
-        this.loadingWorkspaces.set(false);
+    forkJoin({
+      workspaces: this.workspaceService.getAll(1, 100),
+      user: this.userService.getById(this.userId),
+    }).subscribe({
+      next: ({ workspaces, user }) => {
+        this.workspaces.set(workspaces.data.items);
+        const u = user.data;
+        this.model.set({
+          name: u.name,
+          email: u.email,
+          password: '',
+          confirmPassword: '',
+          role: u.role,
+          workspaceId: u.workspace?.id ?? '',
+          isActive: u.isActive,
+        });
+        this.loading.set(false);
       },
-      error: () => this.loadingWorkspaces.set(false),
+      error: () => {
+        this.router.navigate(['/backoffice/users']);
+      },
     });
   }
 
@@ -114,3 +117,4 @@ export class UserCreateComponent implements OnInit {
     this.router.navigate(['/backoffice/users']);
   }
 }
+

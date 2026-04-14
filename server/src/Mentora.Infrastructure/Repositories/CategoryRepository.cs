@@ -26,6 +26,9 @@ public class CategoryRepository(MentoraDbContext _context) : ICategoryRepository
     {
         var query = _context.Categories.AsNoTracking();
 
+        if (pagination.WorkspaceId.HasValue)
+            query = query.Where(c => c.WorkspaceId == pagination.WorkspaceId.Value);
+
         query = (pagination.SortBy?.ToLowerInvariant(), pagination.SortDescending) switch
         {
             ("name", false) => query.OrderBy(c => c.Name),

@@ -3,6 +3,7 @@ using Mentora.Domain.Common;
 using Mentora.Domain.Entities;
 using Mentora.Domain.Interfaces;
 using Mentora.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Mentora.Infrastructure.Repositories;
 
@@ -32,8 +33,11 @@ public class CourseRepository(MentoraDbContext _context) : ICourseRepository
 
     public async Task<PagedResult<Course>> GetPagedAsync(PaginationParams pagination, CancellationToken cancellationToken = default)
     {
-        var query = _context.Courses.AsNoTracking()
+        IQueryable<Course> query = _context.Courses.AsNoTracking()
             .Include(c => c.Category);
+
+        if (pagination.WorkspaceId.HasValue)
+            query = query.Where(c => c.WorkspaceId == pagination.WorkspaceId.Value);
 
         var ordered = (pagination.SortBy?.ToLowerInvariant(), pagination.SortDescending) switch
         {

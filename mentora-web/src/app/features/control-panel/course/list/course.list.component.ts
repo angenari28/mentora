@@ -9,6 +9,7 @@ import { CourseResponse } from 'app/services/responses/course.response';
 import { ListItem } from 'app/services/responses/shared/list-item.response';
 import { WorkloadHoursPipe } from 'app/pipes/workload-hours.pipe';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-course-list',
@@ -19,6 +20,7 @@ import { TableComponent } from '@components/table/table.component';
 })
 export class CourseListComponent implements OnInit {
   private readonly courseService = inject(CourseService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   pagedCourses = signal<ListItem<CourseResponse>>({
     items: [],
@@ -36,7 +38,7 @@ export class CourseListComponent implements OnInit {
   loadCourses(): void {
     this.loading.set(true);
     this.error.set(null);
-    this.courseService.getAll(this.currentPage(), this.pageSize).subscribe({
+    this.courseService.getAll(this.currentPage(), this.pageSize, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         if (res.success) this.pagedCourses.set(res.data);
         else this.error.set(res.message);

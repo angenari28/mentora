@@ -9,6 +9,7 @@ export interface StudentPaginationParams {
   pageSize?: number;
   sortBy?: string;
   sortDescending?: boolean;
+  workspaceId?: string;
 }
 
 @Injectable({
@@ -26,6 +27,7 @@ export class StudentService {
       if (params.pageSize !== undefined) parts.push(`pageSize=${params.pageSize}`);
       if (params.sortBy) parts.push(`sortBy=${encodeURIComponent(params.sortBy)}`);
       if (params.sortDescending !== undefined) parts.push(`sortDescending=${params.sortDescending}`);
+      if (params.workspaceId) parts.push(`workspaceId=${encodeURIComponent(params.workspaceId)}`);
       if (parts.length > 0) queryString = `?${parts.join('&')}`;
     }
     return this.http.get<UserListResponse>(`${this.baseUrl}/user/students${queryString}`);

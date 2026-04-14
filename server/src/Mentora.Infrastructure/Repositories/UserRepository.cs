@@ -58,6 +58,9 @@ public class UserRepository(MentoraDbContext _context) : IUserRepository
     {
         var query = _context.Users.AsNoTracking().Where(u => u.Role == role);
 
+        if (pagination.WorkspaceId.HasValue)
+            query = query.Where(u => u.WorkspaceId == pagination.WorkspaceId.Value);
+
         query = (pagination.SortBy?.ToLowerInvariant(), pagination.SortDescending) switch
         {
             ("name", false) => query.OrderBy(u => u.Name),

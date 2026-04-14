@@ -7,6 +7,7 @@ import { StudentService } from '@services/student.service';
 import { User } from '@services/responses/user.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-student-list',
@@ -17,6 +18,7 @@ import { TableComponent } from '@components/table/table.component';
 })
 export class StudentListComponent {
   private readonly studentService = inject(StudentService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   students = signal<ListItem<User>>({
     items: [],
@@ -34,7 +36,7 @@ export class StudentListComponent {
     this.loading.set(true);
     this.error.set('');
 
-    this.studentService.getStudents({ pageNumber: page }).subscribe({
+    this.studentService.getStudents({ pageNumber: page, workspaceId: this.workspaceService.getCurrentWorkspaceId() ?? undefined }).subscribe({
       next: (response) => {
         this.students.set(response.data);
         this.loading.set(false);

@@ -8,6 +8,7 @@ import { ClassService } from 'app/services/class.service';
 import { StudentService } from 'app/services/student.service';
 import { ClassResponse } from 'app/services/responses/class.response';
 import { User } from 'app/services/responses/user.response';
+import { WorkspaceService } from '@services/workspace.service';
 
 interface IRegistration {
   classId: string;
@@ -27,6 +28,7 @@ export class RegistrationCreateComponent implements OnInit {
   private readonly classService = inject(ClassService);
   private readonly studentService = inject(StudentService);
   private readonly router = inject(Router);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
@@ -91,7 +93,7 @@ export class RegistrationCreateComponent implements OnInit {
 
   loadClasses(): void {
     this.loadingClasses.set(true);
-    this.classService.getAll(1, 200).subscribe({
+    this.classService.getAll(1, 200, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.classes.set(res.data.items);
         this.loadingClasses.set(false);
@@ -104,7 +106,7 @@ export class RegistrationCreateComponent implements OnInit {
 
   loadStudents(): void {
     this.loadingStudents.set(true);
-    this.studentService.getStudents({ pageNumber: 1, pageSize: 200 }).subscribe({
+    this.studentService.getStudents({ pageNumber: 1, pageSize: 200, workspaceId: this.workspaceService.getCurrentWorkspaceId() ?? undefined }).subscribe({
       next: (res) => {
         this.students.set(res.data.items);
         this.loadingStudents.set(false);

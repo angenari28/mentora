@@ -40,5 +40,15 @@ export class WorkspaceService {
   addLocalStorage(workspace: Workspace): void {
     localStorage.setItem('current_workspace', JSON.stringify(workspace));
   }
+
+  getCurrentWorkspaceId(): string | null {
+    const workspace = localStorage.getItem('current_workspace');
+    if (!workspace) return null;
+    try {
+      return (JSON.parse(workspace) as Workspace).id ?? null;
+    } catch {
+      return null;
+    }
+  }
 }
 

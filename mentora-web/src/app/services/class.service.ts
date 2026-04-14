@@ -13,10 +13,11 @@ export class ClassService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.apiUrl}/class`;
 
-  getAll(page: number = 1, pageSize: number = 10, sortBy?: string, sortDescending?: boolean): Observable<{ success: boolean; message: string; data: ListItem<ClassResponse> }> {
+  getAll(page: number = 1, pageSize: number = 10, sortBy?: string, sortDescending?: boolean, workspaceId?: string): Observable<{ success: boolean; message: string; data: ListItem<ClassResponse> }> {
     let url = `${this.baseUrl}?pageNumber=${page}&pageSize=${pageSize}`;
     if (sortBy) url += `&sortBy=${sortBy}`;
     if (sortDescending !== undefined) url += `&sortDescending=${sortDescending}`;
+    if (workspaceId) url += `&workspaceId=${workspaceId}`;
     return this.http.get<{ success: boolean; message: string; data: ListItem<ClassResponse> }>(url);
   }
 

@@ -8,6 +8,7 @@ import { CourseService } from 'app/services/course.service';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { classModel, IFormReadonly } from '../shared/class.model';
 import { readonly } from '../shared/class.validation';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-class-delete',
@@ -23,6 +24,7 @@ export class ClassDeleteComponent implements OnInit, IFormReadonly {
   private readonly courseService = inject(CourseService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
@@ -66,7 +68,7 @@ export class ClassDeleteComponent implements OnInit, IFormReadonly {
   ngOnInit(): void {
     this.classId = this.route.snapshot.paramMap.get('id') ?? '';
 
-    this.courseService.getAll(1, 200).subscribe({
+    this.courseService.getAll(1, 200, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.courses.set(res.data.items);
       },

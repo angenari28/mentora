@@ -18,11 +18,13 @@ export class ClassStudentService {
     page: number = 1,
     pageSize: number = 10,
     sortBy?: string,
-    sortDescending?: boolean
+    sortDescending?: boolean,
+    workspaceId?: string
   ): Observable<{ success: boolean; message: string; data: ListItem<ClassStudentResponse> }> {
     let url = `${this.baseUrl}?pageNumber=${page}&pageSize=${pageSize}`;
     if (sortBy) url += `&sortBy=${sortBy}`;
     if (sortDescending !== undefined) url += `&sortDescending=${sortDescending}`;
+    if (workspaceId) url += `&workspaceId=${workspaceId}`;
     return this.http.get<{ success: boolean; message: string; data: ListItem<ClassStudentResponse> }>(url);
   }
 

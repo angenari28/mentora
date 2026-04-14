@@ -1,28 +1,26 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { WorkspaceService } from '@services/workspace.service';
 import { Workspace } from '@services/responses/workspace.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
-import { WorkspaceFormComponent } from './workspace-form/workspace-form.component';
 
 @Component({
   selector: 'app-workspaces',
   standalone: true,
-  imports: [CommonModule, WorkspaceFormComponent],
+  imports: [CommonModule],
   templateUrl: './workspaces.component.html',
   styleUrls: ['./workspaces.component.css']
 })
 export class WorkspacesComponent {
   private readonly workspaceService = inject(WorkspaceService);
+  private readonly router = inject(Router);
 
   workspaces = signal<ListItem<Workspace>>({ items: [], meta: {totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false }});
   loading = signal(false);
   error = signal('');
   currentPage = signal(1);
-
-  showFormModal = signal(false);
-  editingWorkspace = signal<Workspace | null>(null);
 
   showDeleteModal = signal(false);
   deletingWorkspace = signal<Workspace | null>(null);
@@ -50,24 +48,12 @@ export class WorkspacesComponent {
     });
   }
 
-  openCreateModal(): void {
-    this.editingWorkspace.set(null);
-    this.showFormModal.set(true);
+  navigateToCreate(): void {
+    this.router.navigate(['/backoffice/workspaces/create']);
   }
 
-  openEditModal(workspace: Workspace): void {
-    this.editingWorkspace.set(workspace);
-    this.showFormModal.set(true);
-  }
-
-  closeFormModal(): void {
-    this.showFormModal.set(false);
-    this.editingWorkspace.set(null);
-  }
-
-  onFormSaved(): void {
-    this.closeFormModal();
-    this.loadWorkspaces();
+  navigateToEdit(id: string): void {
+    this.router.navigate(['/backoffice/workspaces/edit', id]);
   }
 
   openDeleteModal(workspace: Workspace): void {

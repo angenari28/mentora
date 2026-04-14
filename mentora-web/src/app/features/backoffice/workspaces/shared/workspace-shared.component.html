@@ -1,0 +1,169 @@
+<div class="modal-overlay active">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ modalTitle() }}</h3>
+      <button type="button" class="modal-close" aria-label="Fechar" (click)="close()">×</button>
+    </div>
+
+    @if (loading()) {
+      <div class="modal-body">
+        <p class="loading-text">Carregando dados do workspace...</p>
+      </div>
+    } @else {
+      <form [formRoot]="workspaceForm">
+        <div class="modal-body">
+          @if (workspaceForm().pending()) {
+            <div class="loading-overlay">
+              <div class="spinner">carregando...</div>
+            </div>
+          }
+
+          @if (submitError()) {
+            <div class="alert-error">{{ submitError() }}</div>
+          }
+
+          <!-- Nome e URL -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ws-name">
+                Nome
+                @if (workspaceForm.name().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <input
+                id="ws-name"
+                type="text"
+                class="form-input"
+                [class.input-error]="workspaceForm.name().invalid() && workspaceForm.name().touched()"
+                placeholder="Nome do workspace"
+                [formField]="workspaceForm.name"
+                autocomplete="off"
+              />
+              @if (workspaceForm.name().invalid() && workspaceForm.name().touched()) {
+                @for (error of workspaceForm.name().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ws-url">
+                URL
+                @if (workspaceForm.url().required()) {
+                  <span class="required">*</span>
+                }
+              </label>
+              <input
+                id="ws-url"
+                type="text"
+                class="form-input"
+                [class.input-error]="workspaceForm.url().invalid() && workspaceForm.url().touched()"
+                placeholder="ex: minha-empresa"
+                [formField]="workspaceForm.url"
+                autocomplete="off"
+              />
+              @if (workspaceForm.url().invalid() && workspaceForm.url().touched()) {
+                @for (error of workspaceForm.url().errors(); track $index) {
+                  <span class="error-msg">{{ error.message }}</span>
+                }
+              }
+            </div>
+          </div>
+
+          <!-- Cores -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ws-primary-color">Cor Primária</label>
+              <div class="color-input-wrapper">
+                <input
+                  id="ws-primary-color"
+                  type="color"
+                  class="color-picker"
+                  [formField]="workspaceForm.primaryColor"
+                />
+                <input
+                  type="text"
+                  class="form-input"
+                  [formField]="workspaceForm.primaryColor"
+                  placeholder="#1C2340"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ws-secondary-color">Cor Secundária</label>
+              <div class="color-input-wrapper">
+                <input
+                  id="ws-secondary-color"
+                  type="color"
+                  class="color-picker"
+                  [formField]="workspaceForm.secondaryColor"
+                />
+                <input
+                  type="text"
+                  class="form-input"
+                  [formField]="workspaceForm.secondaryColor"
+                  placeholder="#4A6CF7"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- URLs de imagens -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ws-logo">Logo (URL)</label>
+              <input
+                id="ws-logo"
+                type="text"
+                class="form-input"
+                placeholder="https://..."
+                [formField]="workspaceForm.logo"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ws-big-banner">Banner Grande (URL)</label>
+              <input
+                id="ws-big-banner"
+                type="text"
+                class="form-input"
+                placeholder="https://..."
+                [formField]="workspaceForm.bigBanner"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ws-small-banner">Banner Pequeno (URL)</label>
+              <input
+                id="ws-small-banner"
+                type="text"
+                class="form-input"
+                placeholder="https://..."
+                [formField]="workspaceForm.smallBanner"
+              />
+            </div>
+          </div>
+
+          <!-- Ativo -->
+          <div class="form-group form-group-inline">
+            <label class="checkbox">
+              <input type="checkbox" [formField]="workspaceForm.active" />
+              <span>Workspace ativo</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+            {{ submitting() ? submittingLabel() : submitLabel() }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>

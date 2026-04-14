@@ -20,6 +20,8 @@ export class UsersComponent {
   users = signal<ListItem<User>>({ items: [], meta: { totalCount: 0, pageNumber: 0, pageSize: 0, totalPages: 0, hasPrevious: false, hasNext: false } });
   loading = signal(false);
   error = signal('');
+  confirmDeleteId = signal<string | null>(null);
+  deleting = signal(false);
 
   constructor() {
     this.loadUsers();
@@ -44,6 +46,38 @@ export class UsersComponent {
 
   navigateToCreate(): void {
     this.router.navigate(['/backoffice/users/create']);
+  }
+
+  editUser(id: string): void {
+    this.router.navigate(['/backoffice/users/edit', id]);
+  }
+
+  requestDelete(id: string): void {
+    this.confirmDeleteId.set(id);
+  }
+
+  cancelDelete(): void {
+    this.confirmDeleteId.set(null);
+  }
+
+  confirmDelete(): void {
+    const id = this.confirmDeleteId();
+    if (!id) return;
+
+    this.deleting.set(true);
+    this.userService.delete(id).subscribe({
+      next: () => {
+        this.deleting.set(false);
+        this.confirmDeleteId.set(null);
+        this.loadUsers();
+      },
+      error: (err) => {
+        this.deleting.set(false);
+        this.confirmDeleteId.set(null);
+        this.error.set('Erro ao deletar usuário');
+        console.error('Erro ao deletar usuário:', err);
+      },
+    });
   }
 
   switchScreen(screenId: string): void {

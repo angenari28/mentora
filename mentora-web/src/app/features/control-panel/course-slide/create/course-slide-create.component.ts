@@ -9,6 +9,7 @@ import { CourseSlideService } from 'app/services/course-slide.service';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { CourseSlideResponse } from 'app/services/responses/course-slide.response';
 import { SlideTypeResponse } from 'app/services/responses/slide-type.response';
+import { WorkspaceService } from '@services/workspace.service';
 
 interface ICourseSlide {
   courseId: string;
@@ -31,6 +32,7 @@ export class CourseSlideCreateComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly courseService = inject(CourseService);
   private readonly courseSlideService = inject(CourseSlideService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   @ViewChild('formEl') private readonly formEl!: ElementRef<HTMLFormElement>;
   @ViewChild('slideImageInput') private readonly slideImageInput!: ElementRef<HTMLInputElement>;
@@ -238,7 +240,7 @@ export class CourseSlideCreateComponent implements OnInit {
     }
 
     this.loadingCourses.set(true);
-    this.courseService.getAll(1, 100).subscribe({
+    this.courseService.getAll(1, 100, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         if (res.success) this.courses.set(res.data.items);
         this.loadingCourses.set(false);

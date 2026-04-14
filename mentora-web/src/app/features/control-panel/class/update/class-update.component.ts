@@ -9,6 +9,7 @@ import { CourseResponse } from 'app/services/responses/course.response';
 import { Workspace } from 'app/services/responses/workspace.response';
 import { classModel, IFormReadonly } from '../shared/class.model';
 import { validate } from '../shared/class.validation';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-class-update',
@@ -24,6 +25,7 @@ export class ClassUpdateComponent implements OnInit, IFormReadonly {
   private readonly courseService = inject(CourseService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly submitting = signal(false);
   readonly submitError = signal<string | null>(null);
@@ -105,7 +107,7 @@ export class ClassUpdateComponent implements OnInit, IFormReadonly {
 
   loadCourses(): void {
     this.loadingCourses.set(true);
-    this.courseService.getAll(1, 200).subscribe({
+    this.courseService.getAll(1, 200, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.courses.set(res.data.items);
         this.loadingCourses.set(false);

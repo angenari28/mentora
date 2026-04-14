@@ -6,6 +6,7 @@ import { ClassService } from 'app/services/class.service';
 import { ClassResponse } from 'app/services/responses/class.response';
 import { ListItem } from 'app/services/responses/shared/list-item.response';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-class-list',
@@ -16,6 +17,7 @@ import { TableComponent } from '@components/table/table.component';
 })
 export class ClassListComponent implements OnInit {
   private readonly classService = inject(ClassService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly pagedClasses = signal<ListItem<ClassResponse>>({
     items: [],
@@ -34,7 +36,7 @@ export class ClassListComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    this.classService.getAll(this.currentPage(), this.pageSize).subscribe({
+    this.classService.getAll(this.currentPage(), this.pageSize, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.pagedClasses.set(res.data);
         this.loading.set(false);

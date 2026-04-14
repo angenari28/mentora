@@ -6,6 +6,7 @@ import { ClassStudentService } from 'app/services/class-student.service';
 import { ClassStudentResponse } from 'app/services/responses/class-student.response';
 import { ListItem } from '@services/responses/shared/list-item.response';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-registration',
@@ -16,6 +17,7 @@ import { TableComponent } from '@components/table/table.component';
 })
 export class RegistrationComponent implements OnInit {
   private readonly classStudentService = inject(ClassStudentService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   readonly pagedRegistrations = signal<ListItem<ClassStudentResponse>>({
     items: [],
@@ -35,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    this.classStudentService.getAll(this.currentPage(), this.pageSize).subscribe({
+    this.classStudentService.getAll(this.currentPage(), this.pageSize, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         this.pagedRegistrations.set(res.data);
         this.loading.set(false);

@@ -7,6 +7,7 @@ import { CourseService } from 'app/services/course.service';
 import { CourseSlideResponse } from 'app/services/responses/course-slide.response';
 import { CourseResponse } from 'app/services/responses/course.response';
 import { TableComponent } from '@components/table/table.component';
+import { WorkspaceService } from '@services/workspace.service';
 
 @Component({
   selector: 'app-course-slide',
@@ -18,6 +19,7 @@ import { TableComponent } from '@components/table/table.component';
 export class CourseSlideComponent implements OnInit {
   private readonly courseSlideService = inject(CourseSlideService);
   private readonly courseService = inject(CourseService);
+  private readonly workspaceService = inject(WorkspaceService);
 
   courses = signal<CourseResponse[]>([]);
   selectedCourseId = signal<string>('');
@@ -32,7 +34,7 @@ export class CourseSlideComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingCourses.set(true);
-    this.courseService.getAll(1, 100).subscribe({
+    this.courseService.getAll(1, 100, undefined, undefined, this.workspaceService.getCurrentWorkspaceId() ?? undefined).subscribe({
       next: (res) => {
         if (res.success) this.courses.set(res.data.items);
         this.loadingCourses.set(false);

@@ -16,7 +16,7 @@
         <p class="page-subtitle">Gerencie todos os workspaces do sistema</p>
       </div>
       <div class="page-actions">
-        <button class="btn btn-primary" (click)="openCreateModal()">➕ Novo Workspace</button>
+        <button class="btn btn-primary" (click)="navigateToCreate()">➕ Novo Workspace</button>
       </div>
     </div>
   </div>
@@ -134,7 +134,7 @@
                 <td>{{ workspace.createdAt | date: 'dd/MM/yyyy' }}</td>
                 <td>
                   <div class="workspace-actions">
-                    <button class="btn btn-sm btn-ghost" (click)="openEditModal(workspace)">Editar</button>
+                    <button class="btn btn-sm btn-ghost" (click)="navigateToEdit(workspace.id)">Editar</button>
                     <button class="btn btn-sm btn-danger" (click)="openDeleteModal(workspace)">Excluir</button>
                   </div>
                 </td>
@@ -157,17 +157,6 @@
         <button class="pagination-btn" [disabled]="!workspaces().meta.hasNext">›</button>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- MODAL CRIAR / EDITAR -->
-<div class="modal-overlay" [class.active]="showFormModal()">
-  <div class="modal" (click)="$event.stopPropagation()">
-    <app-workspace-form
-      [workspace]="editingWorkspace()"
-      (saved)="onFormSaved()"
-      (cancelled)="closeFormModal()"
-    />
   </div>
 </div>
 
