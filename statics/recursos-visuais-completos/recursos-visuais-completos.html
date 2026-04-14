@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentora - Sistema de Cores</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #FFFFFF;
+      color: #1C2340;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    .wrapper {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .main-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #1C2340;
+      margin: 0 0 1rem 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #6B7280;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .palette-group {
+      margin-bottom: 5rem;
+    }
+
+    .group-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .group-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .group-description {
+      font-size: 0.95rem;
+      color: #6B7280;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .color-item {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .color-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(28, 35, 64, 0.12);
+      border-color: #1C2340;
+    }
+
+    .color-preview {
+      height: 140px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 1rem;
+    }
+
+    .color-hex {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1C2340;
+      backdrop-filter: blur(10px);
+    }
+
+    .color-info {
+      padding: 1.25rem;
+    }
+
+    .color-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1C2340;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .color-usage {
+      font-size: 0.85rem;
+      color: #6B7280;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .contrast-section {
+      margin-top: 5rem;
+      background: #F9FAFB;
+      padding: 3rem;
+      border-radius: 12px;
+    }
+
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contrast-example {
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 2rem;
+      border: 1px solid #E5E7EB;
+    }
+
+    .contrast-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .contrast-demo {
+      padding: 1.5rem;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 2rem 1.5rem;
+      }
+
+      .main-title {
+        font-size: 2rem;
+      }
+
+      .color-grid, .contrast-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="wrapper">
+   <header class="header-section">
+    <h1 class="main-title" id="main-title">Sistema de Cores Mentora</h1>
+    <p class="subtitle">Paleta corporativa para plataforma de educação digital empresarial</p>
+   </header><!-- CORES PRIMÁRIAS -->
+   <section class="palette-group">
+    <div class="group-header">
+     <h2 class="group-title">Cores Primárias</h2>
+     <p class="group-description">Identidade principal da marca. Uso em branding, headers, CTAs principais e elementos de destaque.</p>
+    </div>
+    <div class="color-grid">
+     <div class="color-item">
+      <div class="color-preview" style="background: #1C2340;"><span class="color-hex">#1C2340</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Navy Premium</h3>
+       <p class="color-usage">Cor principal do logo. Headers, botões primários, navegação principal, títulos importantes.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #2D3A5F;"><span class="color-hex">#2D3A5F</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Navy Medium</h3>
+       <p class="color-usage">Variação intermediária. Hover states, elementos secundários, fundos alternativos.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #3F4D7A;"><span class="color-hex">#3F4D7A</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Navy Light</h3>
+       <p class="color-usage">Versão mais clara. Backgrounds suaves, overlays, elementos desabilitados.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CORES SECUNDÁRIAS -->
+   <section class="palette-group">
+    <div class="group-header">
+     <h2 class="group-title">Cores Secundárias</h2>
+     <p class="group-description">Complementam a identidade. Links, interações, ações secundárias e elementos tecnológicos.</p>
+    </div>
+    <div class="color-grid">
+     <div class="color-item">
+      <div class="color-preview" style="background: #3B82F6;"><span class="color-hex">#3B82F6</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Blue Tech</h3>
+       <p class="color-usage">Links, ícones interativos, ações secundárias, indicadores de progresso.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #60A5FA;"><span class="color-hex">#60A5FA</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Blue Soft</h3>
+       <p class="color-usage">Hover em links, backgrounds de seleção, badges informativos.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #DBEAFE; border: 1px solid #3B82F6;"><span class="color-hex" style="color: #1C2340;">#DBEAFE</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Blue Glacial</h3>
+       <p class="color-usage">Fundos de informação, cards destacados, áreas de notificação.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #10B981;"><span class="color-hex">#10B981</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Success Green</h3>
+       <p class="color-usage">Mensagens de sucesso, conclusões, status positivo, confirmações.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #F59E0B;"><span class="color-hex">#F59E0B</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Warning Amber</h3>
+       <p class="color-usage">Alertas, avisos, prazos, notificações que requerem atenção.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #EF4444;"><span class="color-hex">#EF4444</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Error Red</h3>
+       <p class="color-usage">Erros, validações negativas, ações destrutivas, alertas críticos.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CORES NEUTRAS ESCURAS -->
+   <section class="palette-group">
+    <div class="group-header">
+     <h2 class="group-title">Neutros Escuros</h2>
+     <p class="group-description">Tipografia e elementos estruturais. Garantem hierarquia visual e legibilidade.</p>
+    </div>
+    <div class="color-grid">
+     <div class="color-item">
+      <div class="color-preview" style="background: #0F172A;"><span class="color-hex">#0F172A</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Black Corporate</h3>
+       <p class="color-usage">Títulos principais, textos de alta prioridade, máximo contraste.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #1E293B;"><span class="color-hex">#1E293B</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Slate Dark</h3>
+       <p class="color-usage">Subtítulos, texto de corpo principal, navegação secundária.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #334155;"><span class="color-hex">#334155</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Slate Medium</h3>
+       <p class="color-usage">Texto secundário, labels, descrições, metadados.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #64748B;"><span class="color-hex">#64748B</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Slate</h3>
+       <p class="color-usage">Placeholders, texto desabilitado, informações terciárias.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CORES NEUTRAS CLARAS -->
+   <section class="palette-group">
+    <div class="group-header">
+     <h2 class="group-title">Neutros Claros</h2>
+     <p class="group-description">Backgrounds, bordas e elementos estruturais. Criam espaço e organização visual.</p>
+    </div>
+    <div class="color-grid">
+     <div class="color-item">
+      <div class="color-preview" style="background: #94A3B8; border: 1px solid #64748B;"><span class="color-hex" style="color: #0F172A;">#94A3B8</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Slate Light</h3>
+       <p class="color-usage">Bordas ativas, divisores destacados, ícones secundários.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #CBD5E1; border: 1px solid #94A3B8;"><span class="color-hex" style="color: #0F172A;">#CBD5E1</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Gray Border</h3>
+       <p class="color-usage">Bordas de cards, campos de input, separadores visuais.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #E2E8F0; border: 1px solid #CBD5E1;"><span class="color-hex" style="color: #0F172A;">#E2E8F0</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Gray Divider</h3>
+       <p class="color-usage">Divisores sutis, bordas desabilitadas, linhas de tabela.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #F1F5F9; border: 1px solid #E2E8F0;"><span class="color-hex" style="color: #0F172A;">#F1F5F9</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Gray Background</h3>
+       <p class="color-usage">Fundos secundários, áreas desabilitadas, containers alternativos.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #F8FAFC; border: 1px solid #E2E8F0;"><span class="color-hex" style="color: #0F172A;">#F8FAFC</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">Off White</h3>
+       <p class="color-usage">Background principal da aplicação, base da interface.</p>
+      </div>
+     </div>
+     <div class="color-item">
+      <div class="color-preview" style="background: #FFFFFF; border: 1px solid #CBD5E1;"><span class="color-hex" style="color: #0F172A;">#FFFFFF</span>
+      </div>
+      <div class="color-info">
+       <h3 class="color-name">White Pure</h3>
+       <p class="color-usage">Cards, modais, menus dropdown, áreas de conteúdo principal.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- EXEMPLOS DE CONTRASTE -->
+   <section class="contrast-section">
+    <div class="group-header">
+     <h2 class="group-title">Combinações de Contraste</h2>
+     <p class="group-description">Exemplos de uso adequado para interfaces corporativas. Todos atendem WCAG AA.</p>
+    </div>
+    <div class="contrast-grid">
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Primário sobre Branco
+      </div>
+      <div class="contrast-demo" style="background: #FFFFFF; color: #1C2340; border: 1px solid #E2E8F0;">
+       Texto em Navy Premium
+      </div>
+     </div>
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Branco sobre Primário
+      </div>
+      <div class="contrast-demo" style="background: #1C2340; color: #FFFFFF;">
+       Botão Principal
+      </div>
+     </div>
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Secundário sobre Branco
+      </div>
+      <div class="contrast-demo" style="background: #FFFFFF; color: #3B82F6; border: 1px solid #E2E8F0;">
+       Link Interativo
+      </div>
+     </div>
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Branco sobre Secundário
+      </div>
+      <div class="contrast-demo" style="background: #3B82F6; color: #FFFFFF;">
+       Botão Secundário
+      </div>
+     </div>
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Escuro sobre Claro
+      </div>
+      <div class="contrast-demo" style="background: #F8FAFC; color: #0F172A;">
+       Corpo de Texto
+      </div>
+     </div>
+     <div class="contrast-example">
+      <div class="contrast-label">
+       Médio sobre Claro
+      </div>
+      <div class="contrast-demo" style="background: #F8FAFC; color: #64748B;">
+       Texto Secundário
+      </div>
+     </div>
+    </div>
+   </section>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Sistema de Cores Mentora",
+      primary_color: "#1C2340",
+      secondary_color: "#3B82F6",
+      background_color: "#FFFFFF",
+      text_color: "#0F172A",
+      border_color: "#E2E8F0",
+      font_family: "",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = '"Montserrat", sans-serif';
+      const fontFamily = customFont ? `${customFont}, ${baseFontStack}` : baseFontStack;
+
+      document.body.style.fontFamily = fontFamily;
+
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const borderColor = config.border_color || defaultConfig.border_color;
+
+      document.body.style.background = backgroundColor;
+      document.body.style.color = textColor;
+
+      document.querySelectorAll('.group-title, .color-name').forEach(el => {
+        el.style.color = primaryColor;
+      });
+
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+
+      document.querySelector('.main-title').style.fontSize = `${baseSize * 3}px`;
+      document.querySelector('.subtitle').style.fontSize = `${baseSize * 1.1}px`;
+      document.querySelectorAll('.group-title').forEach(el => {
+        el.style.fontSize = `${baseSize * 1.5}px`;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.border_color || defaultConfig.border_color,
+            set: (value) => {
+              config.border_color = value;
+              window.elementSdk.setConfig({ border_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a21c56997f4f233',t:'MTc2Mzc0NDcxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

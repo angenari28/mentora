@@ -1,0 +1,235 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #F5F7FA;
+  color: #2D3748;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Login Container */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e5e9f0 100%);
+  padding: 2rem;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(28, 35, 64, 0.15);
+  max-width: 480px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Login Header */
+.login-header {
+  background: linear-gradient(135deg, #1c2340 0%, #2a3356 100%);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.login-subtitle {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Login Form */
+.login-form-container {
+  padding: 3rem 2.5rem;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.625rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  border: 2px solid #E5E9F0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: #FFFFFF;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #1C2340;
+  box-shadow: 0 0 0 4px rgba(28, 35, 64, 0.08);
+}
+
+/* Checkbox */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #E5E9F0;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox.checked {
+  background: #1C2340;
+  border-color: #1C2340;
+  color: #FFFFFF;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.875rem 1.75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #1C2340;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(28, 35, 64, 0.2);
+}
+
+.btn-primary:hover {
+  background: #2A3356;
+  box-shadow: 0 4px 16px rgba(28, 35, 64, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: #F8FAFC;
+  color: #64748B;
+  border: 1px solid #E5E9F0;
+}
+
+.btn-ghost:hover {
+  background: #FFFFFF;
+  color: #1C2340;
+  border-color: #CBD5E1;
+}
+
+/* Login Form Controls */
+.login-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.forgot-password {
+  color: #1c2340;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Social Login */
+.social-login {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e9f0;
+  text-align: center;
+}
+
+.social-login-text {
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-buttons .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Sign Up Link */
+.signup-section {
+  text-align: center;
+  color: #94a3b8;
+  margin: 2rem 0 0 0;
+  font-size: 0.85rem;
+}
+
+.signup-link {
+  color: #1c2340;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-card {
+    border-radius: 16px;
+  }
+
+  .login-header {
+    padding: 2rem 1.5rem;
+  }
+
+  .login-form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .login-form-title {
+    font-size: 1.5rem;
+  }
+}

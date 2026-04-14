@@ -839,7 +839,7 @@
         <note category="location">src/app/features/control-panel/dashboard/control-panel-dashboard.component.html:3,4</note>
       </notes>
       <segment>
-        <source>Control Panel</source>
+        <source>Painel de controle</source>
       </segment>
     </unit>
     <unit id="cp_dash_subtitle">

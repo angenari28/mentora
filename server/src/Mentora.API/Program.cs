@@ -64,6 +64,7 @@ builder.Services.AddCors(options =>
 });
 
 // Repositories
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -75,6 +76,7 @@ builder.Services.AddScoped<ISlideTypeRepository, SlideTypeRepository>();
 builder.Services.AddScoped<ICourseSlideTimeRepository, CourseSlideTimeRepository>();
 
 // Application Services
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWorkspaceService, WorkspaceService>();

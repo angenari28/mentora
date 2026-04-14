@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Mentora</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login-site-aluno.css">
+ </head>
+ <body>
+  <div class="login-container">
+   <div class="logo-background">
+     <img src="../../images/mentora-logo.png" alt="Mentora Logo" class="login-logo">
+   </div>
+   <div class="login-card">
+    <div class="login-header">
+     <h1 class="login-title">Plataforma de aprendizagem</h1>
+     <p class="login-subtitle">Entre na sua conta para continuar aprendendo</p>
+    </div>
+
+    <div id="error-message" class="error-message">
+     E-mail ou senha incorretos. Tente novamente.
+    </div>
+
+    <div id="success-message" class="success-message">
+     Login realizado com sucesso! Redirecionando...
+    </div>
+
+    <form id="login-form" action="#" method="post">
+     <div class="form-group">
+      <label for="email" class="form-label">E-mail</label>
+      <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required>
+     </div>
+
+     <div class="form-group">
+      <label for="password" class="form-label">Senha</label>
+      <input type="password" id="password" name="password" class="form-input" placeholder="Digite sua senha" required>
+     </div>
+
+     <button type="submit" class="btn btn-primary">
+      Entrar na Plataforma
+     </button>
+    </form>
+
+    <div class="login-links">
+     <a href="#" class="login-link">Esqueceu a senha?</a>
+     <span class="login-divider">•</span>
+     <a href="#" class="login-link">Criar nova conta</a>
+    </div>
+   </div>
+  </div>
+
+  <script>
+    // Simulação básica de validação de login
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      const successMessage = document.getElementById('success-message');
+
+      // Esconder mensagens anteriores
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+
+      // Simulação de validação (substitua por sua lógica real)
+      if (email && password) {
+        // Simular login bem-sucedido
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          // Redirecionar para dashboard (substitua pela URL real)
+          window.location.href = '../../aluno/site-aluno.html';
+        }, 1500);
+      } else {
+        // Mostrar erro
+        errorMessage.style.display = 'block';
+      }
+    });
+  </script>
+ </body>
+</html>

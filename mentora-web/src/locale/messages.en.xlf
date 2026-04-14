@@ -267,7 +267,7 @@
     <!-- Dashboard -->
     <unit id="cp_dash_title">
       <segment state="translated">
-        <source>Control Panel</source>
+        <source>Painel de controle</source>
         <target>Control Panel</target>
       </segment>
     </unit>
